@@ -326,6 +326,7 @@ function renderThermometer(container, value, onChange){
   setVal(value);
 }
 const SETTINGS_KEY = 'tapping_settings_v1';
+const STORAGE_KEY = 'tapping_history_v1';
 function loadHistory(){ try{ return JSON.parse(localStorage.getItem(STORAGE_KEY)) || []; }catch(e){ return []; } }
 function saveHistory(list){ localStorage.setItem(STORAGE_KEY, JSON.stringify(list)); }
 function loadSettings(){ try{ return {...{seconds:9}, ...JSON.parse(localStorage.getItem(SETTINGS_KEY))}; }catch(e){ return {seconds:9}; } }
@@ -711,6 +712,7 @@ function renderPlayerMain(){
 function renderBreath(){
   const cat = state.category;
   const wrap = el('div',{class:'session-wrap'});
+  wrap.appendChild(topBar(()=>goto('home')));
   wrap.appendChild(el('div',{class:'cat-tag'},cat.name));
   wrap.appendChild(el('h2',{},'Respira'));
   wrap.appendChild(el('p',{class:'stage-copy'},'Haz 3 respiraciones lentas. Piensa otra vez en lo mismo y valora cómo lo sientes ahora.'));
@@ -722,6 +724,7 @@ function renderBreath(){
 function renderSudAfter(){
   const cat = state.category;
   const wrap = el('div',{class:'session-wrap'});
+  wrap.appendChild(topBar(()=>goto('home')));
   wrap.appendChild(el('div',{class:'cat-tag'},cat.name));
   wrap.appendChild(el('h2',{},'¿Cómo te sientes ahora?'));
 
@@ -735,7 +738,7 @@ function renderSudAfter(){
       const hist = loadHistory();
       hist.unshift({date:new Date().toISOString(), category:cat.name, before:state.sudBefore, after:state.sudAfter});
       saveHistory(hist.slice(0,200));
-      goto('done');
+      goto('home');
     }},'Guardar y terminar'));
   } else {
     wrap.appendChild(el('p',{class:'stage-copy',style:'font-size:13.5px;'},'¿Ha bajado la intensidad?'));
