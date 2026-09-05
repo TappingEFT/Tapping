@@ -31,13 +31,13 @@
   .home-header h1{font-size:36px;}
   .home-header p{color:var(--ink-soft);font-size:18px;line-height:1.55;margin-top:10px;max-width:34ch;}
 
-  .grid{padding:16px 20px 8px;display:flex;flex-direction:column;gap:14px;}
-  .cat-card{position:relative;border-radius:10px;overflow:hidden;height:120px;cursor:pointer;display:flex;align-items:flex-end;border:1px solid var(--line);}
+  .grid{padding:16px 20px 8px;display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+  .cat-card{position:relative;border-radius:10px;overflow:hidden;height:150px;cursor:pointer;display:flex;align-items:flex-end;border:1px solid var(--line);}
   .cat-card:active{transform:scale(0.98);}
-  .cat-card .cat-overlay{position:absolute;inset:0;background:linear-gradient(0deg, rgba(0,0,0,0.62) 0%, rgba(0,0,0,0.15) 55%, rgba(0,0,0,0.05) 100%);}
-  .cat-card .cat-text{position:relative;padding:14px 16px;color:#fff;width:100%;}
-  .cat-card .cat-text h3{font-size:19px;color:#fff;margin-bottom:3px;}
-  .cat-card .cat-text span{font-size:14px;color:rgba(255,255,255,0.88);}
+  .cat-card .cat-overlay{position:absolute;inset:0;background:linear-gradient(0deg, rgba(0,0,0,0.68) 0%, rgba(0,0,0,0.2) 55%, rgba(0,0,0,0.05) 100%);}
+  .cat-card .cat-text{position:relative;padding:12px 12px;color:#fff;width:100%;}
+  .cat-card .cat-text h3{font-size:16px;color:#fff;margin-bottom:2px;line-height:1.15;}
+  .cat-card .cat-text span{font-size:12.5px;color:rgba(255,255,255,0.88);}
 
   .intro-card{margin:0 20px 4px;padding:18px;border:2px solid var(--line);border-radius:10px;background:var(--card);display:flex;align-items:center;gap:14px;cursor:pointer;}
   .intro-card:active{background:var(--stone-deep);}
@@ -154,7 +154,7 @@ function R(title, phrases){ return {title, phrases}; } // phrases: array of 8, m
 
 const CATEGORIES = [
   {
-    id:'abundancia', name:'Abundancia', color:'#8F2F0E',
+    id:'abundancia', name:'Abundancia', color:'#8F2F0E', photo:'abundancia.jpg',
     desc:'Independencia económica y creencias con el dinero.',
     karate:'Aunque estoy harta de aguantar esta situación, aunque no soy feliz y siento que estoy atrapada porque dependo económicamente de mi marido, y aunque me aterra pensar que si me voy puedo quedarme sin dinero y que a mi hija y a mi madre les falte lo necesario, me acepto completamente y acepto todo lo que estoy sintiendo ahora mismo.',
     rounds:[
@@ -167,7 +167,7 @@ const CATEGORIES = [
     cierre:['Puedo decidir dónde vivir.','Puedo cuidar de mi hija.','Puedo cuidar de mi madre.','Puedo construir mi propia vida.','Puedo encontrar mi camino.','Puedo crear nuevas posibilidades.','Ya no quiero sentirme atrapada.','Me permito avanzar hacia mi libertad.'],
   },
   {
-    id:'ansiedad', name:'Ansiedad', color:'#4A2442',
+    id:'ansiedad', name:'Ansiedad', color:'#4A2442', photo:'ansiedad.jpg',
     desc:'Para bajar la activación cuando aprieta.',
     karate:'Aunque siento esta ansiedad que no me deja en paz, aunque siento el pecho apretado y la cabeza acelerada, me acepto completamente y acepto todo lo que estoy sintiendo ahora mismo.',
     rounds:[
@@ -179,7 +179,7 @@ const CATEGORIES = [
     cierre:['Puedo respirar despacio.','Puedo estar presente en este momento.','Puedo confiar en mí misma.','Puedo con lo que venga.','Puedo pedir ayuda si la necesito.','Puedo sentirme más tranquila.','Ya no necesito estar en alerta todo el tiempo.','Me permito sentirme en calma.'],
   },
   {
-    id:'cabeza', name:'Dolores de cabeza', color:'#354A24',
+    id:'cabeza', name:'Dolores de cabeza', color:'#354A24', photo:'dolores_de_cabeza.jpg',
     desc:'Ronda orientada al dolor de cabeza.',
     note:'Si el dolor es intenso, recurrente o va acompañado de otros síntomas, consulta con un profesional de salud.',
     karate:'Aunque tengo este dolor de cabeza, y aunque no sé exactamente de dónde viene toda esta tensión, me acepto completamente y acepto este dolor tal y como es ahora mismo.',
@@ -192,7 +192,7 @@ const CATEGORIES = [
     cierre:['Puedo relajar mi cabeza.','Puedo soltar esta tensión.','Puedo darle descanso a mis ojos.','Puedo aflojar mi mandíbula.','Puedo relajar mi cuello.','Puedo sentir alivio.','Ya no necesito sostener esta tensión.','Me permito sentirme mejor.'],
   },
   {
-    id:'menstrual', name:'Dolores menstruales', color:'#742E0E',
+    id:'menstrual', name:'Dolores menstruales', color:'#742E0E', photo:'dolores_mestruales.jpg',
     desc:'Acompaña el dolor y da permiso al cuerpo de soltar.',
     note:'Si el dolor es muy intenso o inhabitual, consulta con un profesional de salud.',
     karate:'Aunque tengo este dolor menstrual, y aunque mi cuerpo está pidiendo tregua, me acepto completamente y le doy permiso a mi cuerpo para sentir lo que necesite sentir.',
@@ -205,7 +205,7 @@ const CATEGORIES = [
     cierre:['Puedo cuidar de mi cuerpo hoy.','Puedo ir más despacio.','Puedo relajar mi vientre.','Puedo pedir lo que necesito.','Puedo sentir alivio.','Puedo darle tregua a mi cuerpo.','Ya no necesito aguantar en silencio.','Me permito sentirme mejor.'],
   },
   {
-    id:'espalda', name:'Dolores de espalda', color:'#354A24',
+    id:'espalda', name:'Dolores de espalda', color:'#354A24', photo:'dolores_de_espalda.jpg',
     desc:'Tensión y peso acumulado en la espalda.',
     note:'Si el dolor es intenso, persistente o viene de una lesión, consulta con un profesional de salud.',
     karate:'Aunque tengo esta tensión y este dolor en la espalda, y aunque siento que cargo con demasiado, me acepto completamente y acepto todo lo que mi cuerpo está sosteniendo.',
@@ -218,7 +218,7 @@ const CATEGORIES = [
     cierre:['Puedo soltar peso de mis hombros.','Puedo pedir ayuda cuando la necesito.','Puedo cuidar de mi espalda.','Puedo descansar sin culpa.','Puedo relajar mi cuerpo.','Puedo sentirme más ligera.','Ya no tengo que cargar con todo yo sola.','Me permito sentir alivio.'],
   },
   {
-    id:'jornada', name:'Fin de jornada', color:'#8F2F0E',
+    id:'jornada', name:'Fin de jornada', color:'#8F2F0E', photo:'fin_de_jornada.jpg',
     desc:'Soltar el cansancio al terminar de trabajar.',
     karate:'Aunque termino el día cargada de cansancio y de tensión, y aunque siento que no he podido soltar todavía, me acepto completamente y me permito empezar a soltar ahora.',
     rounds:[
@@ -230,7 +230,7 @@ const CATEGORIES = [
     cierre:['Puedo cerrar el día aquí.','Puedo soltar lo que ya pasó.','Puedo descansar mi mente.','Puedo descansar mi cuerpo.','Puedo desconectar sin culpa.','Puedo recargar energía para mañana.','Ya no tengo que sostener el día.','Me permito descansar en paz.'],
   },
   {
-    id:'estres', name:'Estrés', color:'#4A2442',
+    id:'estres', name:'Estrés', color:'#4A2442', photo:'estres.jpg',
     desc:'Ronda general para bajar el estrés acumulado.',
     karate:'Aunque siento este estrés acumulado, y aunque siento que todo se me junta al mismo tiempo, me acepto completamente y acepto todo lo que estoy sintiendo ahora mismo.',
     rounds:[
@@ -242,7 +242,7 @@ const CATEGORIES = [
     cierre:['Puedo priorizar lo importante.','Puedo pedir ayuda cuando la necesito.','Puedo bajar el ritmo.','Puedo respirar con calma.','Puedo soltar lo que no depende de mí.','Puedo sentirme más tranquila.','Ya no tengo que sostenerlo todo sola.','Me permito sentirme en paz.'],
   },
   {
-    id:'centro', name:'Volver a mi centro', color:'#354A24',
+    id:'centro', name:'Volver a mi centro', color:'#354A24', photo:'volver_a_mi_centro.jpg',
     desc:'Para cuando todo explota alrededor.',
     karate:'Aunque todo esto ha explotado a mi alrededor y siento que pierdo mi centro, y aunque en casa esto pasa una y otra vez, me acepto completamente y elijo volver a mi calma ahora.',
     rounds:[
