@@ -78,6 +78,10 @@
 
   .diagram-wrap{position:relative;width:190px;margin:0 auto 8px;border-radius:10px;overflow:hidden;}
   .diagram-wrap img{width:100%;display:block;}
+
+  .thermo-h-block{display:flex;flex-direction:column;align-items:center;gap:6px;width:100%;max-width:260px;margin:14px auto 0;}
+  .thermo-h-native{width:100%;accent-color:var(--sienna);height:6px;}
+  .thermo-h-labels{display:flex;justify-content:space-between;width:100%;font-size:13px;color:var(--ink-soft);font-weight:600;}
   .pt-dot{position:absolute;width:13px;height:13px;border-radius:50%;background:rgba(255,255,255,0.55);border:2px solid rgba(255,255,255,0.85);transform:translate(-50%,-50%);}
   .pt-dot.active{width:16px;height:16px;background:var(--sienna);border:2px solid #fff;animation:ptpulse 1.3s ease-out infinite;}
   @keyframes ptpulse{
@@ -173,7 +177,7 @@ const POINT_META = [
 const KARATE_META = {key:'karate', name:'Canto de la mano', where:'lado exterior de la mano, bajo el meñique', x:49, y:70};
 const DIAGRAM_IMG = 'mujer-tapping.jpg';
 
-function R(title, phrases){ return {title, phrases}; } // phrases: array of 8, matching POINT_META order
+function R(title, phrases, transition){ return {title, phrases, transition}; } // phrases: array of 8, matching POINT_META order; transition: optional line spoken before the round starts, with no point attached
 
 const PRIMERA_SESION = {
   id:'primera-sesion', name:'Tu primera sesión', color:'#8F2F0E',
@@ -186,6 +190,28 @@ const PRIMERA_SESION = {
 };
 
 const CATEGORIES = [
+  {
+    id:'resistencias', name:'Liberar resistencias', color:'#354A24', photo:'desbordada.jpg',
+    audio:{file:'LIBERAR_RESISTENCIAS.mp3', hasIntro:true, hasOutro:true, timestamps:[0,31.0141,62.8974,68.1661,73.6587,78.6494,82.8272,87.533,92.9078,98.4016,104.482,109.287,117.534,122.711,126.601,131.833,137.021,141.771,148.009,154.485,159.953,178.318,182.038,186.752,190.955,194.322,197.683,200.984,206.069,210.333,213.774,216.627,220.011,224.382,227.927,231.222,235.566,239.195]},
+    intro:'A veces hay una parte nuestra que se resiste, casi sin darnos cuenta, a recibir lo bueno que queremos. Esta sesión es un espacio para soltar esa resistencia interna y abrirte a la abundancia con más calma.',
+    desc:'Para soltar bloqueos internos y abrirte a la abundancia.',
+    introScript:'Vamos a empezar cerrando los ojos y vamos a hacer unas respiraciones profundas, tranquilas. Este es un momento para ti, solo para ti. Vamos a relajar la mente consciente, el exceso de pensamientos. Vamos a relajar también esa parte crítica, analítica, que juzga, que compara. Vamos simplemente a relajarnos y a disfrutar de esta experiencia para liberar cualquier posible resistencia que te esté impidiendo manifestar la abundancia que deseas. Comenzamos.',
+    karate:'Empezamos haciendo tapping en el punto karate. Aunque puede ser que tengas alguna resistencia interna, tú eliges aceptarte y amarte completa y profundamente. Aunque puede ser que tengas alguna resistencia interna de la que quizá ni siquiera eres consciente, tú eliges liberar cualquier bloqueo y eliges abrirte a la abundancia. Aunque puede ser que tengas algún miedo, alguna preocupación, alguna necesidad de controlar que te está impidiendo tener ese estado de relajación y de apertura necesarios para atraer la abundancia, tú eliges liberarte.',
+    outroScript:'Y tu único trabajo aquí es hacerte estos ejercicios y permitir esta elevación de tu vibración para sentirte mejor y para atraer más y más abundancia cada día. Muy bien, ahora dejamos de hacer tapping. No importa en qué punto te hayas quedado, igual has hecho tres rondas, cuatro, lo que sea, no importa. Si quieres puedes terminar en el punto de la cabeza, como tú prefieras. Entonces, dejamos de hacerlo. Si estabas con los ojos abiertos, ahora sería el momento de cerrarlos y vamos a respirar. Y vamos simplemente a observar, a permitir esta liberación que va a seguir su curso durante las próximas horas, durante los próximos días. Cuanto más lo hacemos, más nos vamos limpiando por dentro y más nos vamos conectando con el campo de la abundancia.',
+    rounds:[
+      R('Reconocer las resistencias',
+        ['Empezamos en la base de la ceja, estas posibles resistencias.','Al lado del ojo, estas posibles resistencias internas.','Debajo del ojo, esta parte de ti que duda.','Debajo de la nariz, esta parte de ti que quizá se queja.','Barbilla, esta parte de ti que critica o juzga a otras personas.','Clavícula, esta parte de ti que tiene esos pensamientos negativos.','Debajo del brazo, esta parte de ti que te hace estar a veces con una vibración baja.','Punto de la cabeza, estas posibles resistencias.'],
+        'Muy bien, ahora empezamos a hacer el tapping en todos los puntos.'),
+      R('Liberar',
+        ['En la base de la ceja, eliges soltar todo esto de tu interior.','Al lado del ojo, eliges liberarlo.','Debajo del ojo, quizá esto te venga de experiencias pasadas.','Debajo de la nariz, quizá incluso te venga de otras personas.','Barbilla, o quizá de tu propia interpretación de la realidad.','Clavícula, pero en cualquier caso, eliges liberar cualquier resistencia interna.','Debajo del brazo, eliges ser libre para poder conectarte con la abundancia que te rodea.','Punto de la cabeza, eliges simplemente disfrutar de este proceso.'],
+        'Muy bien, ahora pasamos a la segunda ronda. Aquí vamos a empezar a liberar, a soltar todo esto.'),
+      R('Soltar bloqueos profundos',
+        ['Eliges soltar bloqueos profundos.','Eliges dejar de analizar, de juzgar, de comparar.','Todo eso son simplemente procesos mentales.','Todo eso viene de la distracción.','Quizá queremos sentirnos mejor.','Quizá queremos aliviar un miedo.','Es mucho más fácil darnos permiso para soltar ese miedo interno.','Nos damos permiso para soltar ese miedo interno.'],
+        'Pasamos a la tercera ronda. Ahora ya no decimos el nombre de los puntos, sino que cambiamos más o menos una frase en cada punto, pero puedes ir a tu propio ritmo. Simplemente disfrútalo, no hay reglas. Venga, empezamos en la base de la ceja.'),
+    ],
+    apertura:[],
+    cierre:['Vamos notando esta liberación.','El cuerpo se relaja.','Ya no tienes tanta preocupación.','Ya no te fijas tanto en lo que hacen otras personas.','Estás en un estado más positivo.','Puedes disfrutar más de la vida.','Empiezas a ver posibilidades que antes no veías.','Las cosas empiezan a fluir mejor.'],
+  },
   {
     id:'abundancia', name:'Abundancia', color:'#8F2F0E', photo:'abundancia.jpg',
     intro:'El dinero puede convertirse en una fuente constante de miedo sin que nos demos cuenta. Esta sesión te acompaña a soltar esa tensión, punto a punto, hasta que la idea de la abundancia deje de sentirse como una batalla.',
@@ -270,23 +296,8 @@ const CATEGORIES = [
     cierre:['Puedo soltar esta preocupación, un poco más cada vez.','Puedo volver al presente cuando mi mente se va.','Puedo confiar en mi capacidad de resolver las cosas.','Puedo pensar con más calma.','Puedo ocuparme de lo que sí está en mis manos.','Puedo descansar la mente sin culpa.','Ya no necesito anticiparme a todo.','Elijo sentirme más tranquila con esto.'],
   },
   {
-    id:'desbordada', name:'Me siento desbordada', color:'#354A24', photo:'desbordada.jpg',
-    intro:'Hay días en que la lista de cosas pendientes pesa más que las horas que tienes. Esta sesión no resuelve la lista, pero sí baja la sensación de estar ahogándote en ella.',
-    desc:'Cuando sientes que tienes demasiado encima.',
-    karate:'Aunque me siento desbordada por todo lo que tengo encima, aunque siento que no llego a todo, me acepto completamente y acepto todo lo que estoy sintiendo ahora mismo.',
-    rounds:[
-      R('Reconocer', ['Reconozco que me siento desbordada.','Reconozco que tengo demasiado encima.','Reconozco que siento que no llego a todo.','Reconozco este agobio.','Reconozco este cansancio de sostener tanto.','Reconozco toda esta carga.','Reconozco que necesito un respiro.','Reconozco cómo me siento, ahora mismo.']),
-      R('Profundizar', ['Esta sensación de que todo depende de mí.','Este miedo a que si paro, algo se cae.','Esta exigencia de hacerlo todo bien.','Esta dificultad para pedir ayuda.','Este cansancio de estar siempre disponible.','Todo este peso que cargo sola.','Todo este agotamiento acumulado.','Todo lo que esto me está costando.']),
-      R('Permitir', ['Me permito sentirme desbordada sin culpa.','Me permito no poder con todo.','Me permito pedir ayuda.','Me permito soltar algo de la exigencia.','Me permito parar un momento.','Me permito no tener todo bajo control.','Me permito descansar sin sentirme culpable.','Me permito estar bien, aunque no llegue a todo.']),
-      R('Regular', ['Elijo priorizar lo que de verdad importa.','Elijo soltar lo que puede esperar.','Elijo pedir ayuda cuando la necesito.','Elijo bajar el ritmo, aunque sea un poco.','Elijo cuidar de mí en medio de todo esto.','Elijo sentirme más ligera.','Elijo respirar antes de seguir.','Elijo sentirme más en calma, ahora.']),
-      R('Nueva dirección', ['Puedo hacerlo de a poco, no todo a la vez.','Puedo soltar lo que no depende de mí hoy.','Puedo pedir ayuda sin que eso signifique fallar.','Puedo cuidar de mí mientras cuido lo demás.','Puedo confiar en que no todo tiene que salir perfecto.','Puedo aligerar esta carga poco a poco.','Puedo descansar sin que todo se derrumbe.','Me abro a sentirme menos desbordada.']),
-    ],
-    apertura:['Me permito organizar esto de a poco.','Me permito soltar lo que no es urgente.','Me permito pedir ayuda sin culpa.','Me permito respirar entre tarea y tarea.','Me permito sentirme más ligera.','Me permito confiar en que puedo con esto, a mi ritmo.','Me permito parar cuando lo necesito.','Me permito sentirme más en paz con todo esto.'],
-    cierre:['Puedo priorizar lo que de verdad importa.','Puedo pedir ayuda cuando la necesito.','Puedo soltar lo que puede esperar.','Puedo cuidar de mí sin sentirme culpable.','Puedo avanzar a mi ritmo.','Puedo sentirme más ligera.','Ya no tengo que sostenerlo todo yo sola.','Elijo sentirme más en calma con todo lo que tengo encima.'],
-  },
-  {
     id:'dormir', name:'Dormir', color:'#8F2F0E', photo:'dormir.jpg',
-    audio:{file:'dormir.mp3', hasIntro:true, timestamps:[0,27.7301,36.0036,39.9699,45.5279,51.2749,57.1229,61.4313,66.6177,72.591,79.9956,84.6579,89.6399,96.2749,103.779,109.239,114.162,122.127,126.412,131.434,139.2,145.955,150.891,155.127,159.69,164.775,172.852,176.818,182.736,188.027,194.979,200.319,205.938,212.343,218.308,223.354,228.408,233.291,239.523,244.647,249.282,254.799]},
+    audio:{file:'dormir.mp3', hasIntro:true, introAsksRating:true, timestamps:[0,27.7301,36.0036,39.9699,45.5279,51.2749,57.1229,61.4313,66.6177,72.591,79.9956,84.6579,89.6399,96.2749,103.779,109.239,114.162,122.127,126.412,131.434,139.2,145.955,150.891,155.127,159.69,164.775,172.852,176.818,182.736,188.027,194.979,200.319,205.938,212.343,218.308,223.354,228.408,233.291,239.523,244.647,249.282,254.799]},
     intro:'Hay noches en que el cuerpo está agotado pero la mente sigue trabajando horas extra. Vamos a hablarle directamente a esa parte tuya que no se apaga, hasta que empiece a soltar.',
     desc:'Para soltar el día y bajar el ritmo mental antes de dormir.',
     introScript:'Antes de empezar, vamos a conectar un momento con cómo te sientes ahora mismo. Inhala profundo por la nariz. Y exhala por la boca, soltando el cansancio del día. Vuelve a inhalar. Y exhala, soltando cualquier tensión que estés cargando en el cuerpo. Ahora, antes de seguir, valora en la pantalla del cero al diez cuánto te está costando conciliar el sueño esta noche. Comenzamos.',
@@ -425,6 +436,19 @@ function renderThermometer(container, value, onChange){
   container.appendChild(wrap);
   setVal(value);
 }
+
+function renderThermometerHorizontal(container, value, onChange){
+  container.innerHTML = '';
+  const wrap = el('div',{class:'thermo-h-block'});
+  const valueEl = el('div',{class:'thermo-value'}, String(value));
+  const slider = el('input',{type:'range', min:'0', max:'10', value:String(value), class:'thermo-h-native',
+    oninput:(e)=>{ const v=Number(e.target.value); valueEl.textContent=String(v); onChange(v); }});
+  const labels = el('div',{class:'thermo-h-labels'},[el('span',{},'0'), el('span',{},'10')]);
+  wrap.appendChild(valueEl);
+  wrap.appendChild(slider);
+  wrap.appendChild(labels);
+  container.appendChild(wrap);
+}
 const SETTINGS_KEY = 'tapping_settings_v1';
 const STORAGE_KEY = 'tapping_history_v1';
 const FAVORITES_KEY = 'tapping_favorites_v1';
@@ -491,12 +515,16 @@ function goto(screen, patch={}){
 
 /* =================== Build full step sequence for a category =================== */
 function buildSequence(cat){
+  if(cat.segments){ return buildFreeformSteps(cat); }
   const steps = [];
   // karate phase: 4 reps
   for(let i=0;i<4;i++){
     steps.push({phase:'karate', repIndex:i, repTotal:4, key:KARATE_META.key, name:KARATE_META.name, where:KARATE_META.where, phrase:cat.karate});
   }
   cat.rounds.forEach((round)=>{
+    if(round.transition){
+      steps.push({phase:'transition', key:null, name:round.title, where:'', phrase:round.transition});
+    }
     round.phrases.forEach((phrase, idx)=>{
       steps.push({phase:'round', roundTitle:round.title, pointIndex:idx, key:POINT_META[idx].key, name:POINT_META[idx].name, where:POINT_META[idx].where, phrase});
     });
@@ -525,19 +553,30 @@ function buildQuickSequence(cat){
   return steps;
 }
 
+function buildFreeformSteps(cat){
+  return cat.segments.map(seg => ({phase:'freeform', key:null, name:seg.title, where:'', phrase:seg.text}));
+}
+
 function buildAudioSteps(cat){
+  if(cat.segments){ return buildFreeformSteps(cat); }
   const steps = [];
   if(cat.audio && cat.audio.hasIntro && cat.introScript){
     steps.push({phase:'intro', key:'intro', name:'Introducción', where:'', phrase:cat.introScript});
   }
   steps.push({phase:'karate', key:KARATE_META.key, name:KARATE_META.name, where:KARATE_META.where, phrase:cat.karate});
   cat.rounds.forEach((round)=>{
+    if(round.transition){
+      steps.push({phase:'transition', key:null, name:round.title, where:'', phrase:round.transition});
+    }
     round.phrases.forEach((phrase, idx)=>{
       steps.push({phase:'round', roundTitle:round.title, key:POINT_META[idx].key, name:POINT_META[idx].name, where:POINT_META[idx].where, phrase});
     });
   });
   steps.push(...buildExtraSequence(cat.apertura,'apertura'));
   steps.push(...buildExtraSequence(cat.cierre,'cierre'));
+  if(cat.audio && cat.audio.hasOutro && cat.outroScript){
+    steps.push({phase:'outro', key:'outro', name:'Cierre de la sesión', where:'', phrase:cat.outroScript});
+  }
   return steps;
 }
 
@@ -630,7 +669,11 @@ function skipPoint(){
   if(playerCtx.mode==='audio'){
     const next = playerCtx.index+1 < playerCtx.timestamps.length ? playerCtx.timestamps[playerCtx.index+1] : playerCtx.sliceEndTime;
     if(next==null){ playerCtx.audioEl.pause(); playerCtx.onFinish(); }
-    else { playerCtx.audioEl.currentTime = next; }
+    else {
+      playerCtx.audioEl.currentTime = next;
+      const p = playerCtx.audioEl.play();
+      if(p && p.catch) p.catch(()=>{});
+    }
   } else {
     advancePlayer();
   }
@@ -662,8 +705,10 @@ function renderPlayerFrame(isFirst){
   top.appendChild(el('button',{class:'exit',onclick:exitPlayer},'×'));
   const phaseLabel = step.phase==='intro' ? 'Introducción'
     : step.phase==='karate' ? 'Preparación'
+    : step.phase==='transition' ? step.name
     : step.phase==='round' ? step.roundTitle
     : step.phase==='apertura' ? 'Ronda de apertura'
+    : step.phase==='outro' ? 'Cierre de la sesión'
     : 'Cierre';
   top.appendChild(el('span',{class:'phase-label'}, phaseLabel));
   top.appendChild(el('span',{style:'width:22px'}));
@@ -680,6 +725,11 @@ function renderPlayerFrame(isFirst){
   mid.appendChild(el('div',{class:'point-name'}, step.name));
   mid.appendChild(el('div',{class:'point-where'}, step.where));
   mid.appendChild(el('div',{class:'point-phrase'}, `"${step.phrase}"`));
+  if(step.phase==='intro' && cat.audio && cat.audio.introAsksRating){
+    const scaleHolder = el('div',{});
+    mid.appendChild(scaleHolder);
+    renderThermometerHorizontal(scaleHolder, state.sudBefore, (v)=>{ state.sudBefore = v; });
+  }
   wrap.appendChild(mid);
 
   const controls = el('div',{class:'player-controls'});
@@ -759,7 +809,7 @@ function renderHome(){
   const quickList = [
     {label:'Necesito calmarme', id:'ansiedad'},
     {label:'Estoy preocupada', id:'preocupacion'},
-    {label:'Estoy muy saturada', id:'desbordada'},
+    {label:'Necesito soltar bloqueos', id:'resistencias'},
     {label:'Necesito desconectar', id:'jornada'},
   ];
   const quickRow = el('div',{class:'quick-row'});
@@ -839,16 +889,22 @@ function renderSudBefore(){
   wrap.appendChild(topBar(()=>goto('home')));
   wrap.appendChild(el('div',{class:'cat-tag'},cat.name));
   wrap.appendChild(el('h2',{},'Antes de empezar'));
-  wrap.appendChild(el('p',{class:'stage-copy'},'¿Cuánto te está afectando esto ahora mismo?'));
 
-  const thermoContainer = el('div',{style:'margin-bottom:20px;'});
-  wrap.appendChild(thermoContainer);
-  renderThermometer(thermoContainer, state.sudBefore, (v)=>{ state.sudBefore = v; });
+  if(cat.audio && state.audioOn===undefined) state.audioOn = true;
+  const skipRatingHere = !!(cat.audio && cat.audio.introAsksRating && state.audioOn);
+
+  if(!skipRatingHere){
+    wrap.appendChild(el('p',{class:'stage-copy'},'¿Cuánto te está afectando esto ahora mismo?'));
+    const thermoContainer = el('div',{style:'margin-bottom:20px;'});
+    wrap.appendChild(thermoContainer);
+    renderThermometer(thermoContainer, state.sudBefore, (v)=>{ state.sudBefore = v; });
+  } else {
+    wrap.appendChild(el('p',{class:'stage-copy'},'Al empezar, la propia sesión te va a pedir que valores del 0 al 10 cuánto te está afectando esto.'));
+  }
 
   if(cat.note) wrap.appendChild(el('p',{class:'stage-copy',style:'font-size:13.5px;'}, cat.note));
 
   if(cat.audio){
-    if(state.audioOn===undefined) state.audioOn = true;
     const audioRow = el('div',{class:'settings-row'});
     audioRow.appendChild(el('span',{}, '🔊 Escuchar con audio'));
     const seg = el('div',{class:'seg'});
