@@ -39,6 +39,15 @@
   .cat-card .cat-text h3{font-size:16px;color:#fff;margin-bottom:2px;line-height:1.15;}
   .cat-card .cat-text span{font-size:12.5px;color:rgba(255,255,255,0.88);}
 
+  .hero-wrap{position:relative;width:100%;height:260px;overflow:hidden;}
+  .hero-wrap img{width:100%;height:100%;object-fit:cover;display:block;}
+  .hero-wrap .hero-fallback{width:100%;height:100%;}
+  .hero-back{position:absolute;top:16px;left:16px;width:38px;height:38px;border-radius:50%;background:rgba(255,255,255,0.9);border:none;display:flex;align-items:center;justify-content:center;font-size:18px;color:var(--ink);cursor:pointer;}
+  .detail-body{padding:22px 24px 30px;}
+  .detail-body h1{font-size:26px;margin-bottom:8px;}
+  .detail-meta{font-size:14.5px;color:var(--ink-soft);margin-bottom:18px;}
+  .detail-desc{font-size:16px;line-height:1.6;color:var(--ink);margin-bottom:26px;}
+
   .intro-card{margin:0 20px 4px;padding:18px;border:2px solid var(--line);border-radius:10px;background:var(--card);display:flex;align-items:center;gap:14px;cursor:pointer;}
   .intro-card:active{background:var(--stone-deep);}
   .intro-card .dot{width:40px;height:40px;border-radius:50%;background:var(--sienna);color:#fff;display:flex;align-items:center;justify-content:center;font-size:18px;flex:none;}
@@ -641,6 +650,29 @@ function renderPlayerFrame(isFirst){
 }
 
 /* =================== Static screens =================== */
+function renderCatDetail(){
+  const cat = state.category;
+  const mins = estimateMinutes(cat, settings.seconds);
+  const wrap = el('div',{});
+  const hero = el('div',{class:'hero-wrap'});
+  if(cat.photo){
+    hero.appendChild(el('img',{src:cat.photo, alt:cat.name}));
+  } else {
+    hero.appendChild(el('div',{class:'hero-fallback', style:`background:linear-gradient(135deg, ${cat.color}, ${cat.color}CC)`}));
+  }
+  hero.appendChild(el('button',{class:'hero-back', onclick:()=>goto('home')},'‹'));
+  wrap.appendChild(hero);
+
+  const body = el('div',{class:'detail-body'});
+  body.appendChild(el('h1',{}, cat.name));
+  body.appendChild(el('div',{class:'detail-meta'}, `${mins} min · sesión guiada`));
+  body.appendChild(el('p',{class:'detail-desc'}, cat.desc || ''));
+  body.appendChild(el('button',{class:'btn btn-primary',onclick:()=>{ state.quickMode=false; goto('sud-before',{category:cat, sudBefore:5}); }},'Comenzar'));
+  wrap.appendChild(body);
+
+  app.replaceChildren(wrap);
+}
+
 function renderHome(){
   const header = el('div',{class:'home-header'},[
     el('div',{class:'eyebrow'},'Tu práctica diaria'),
@@ -679,7 +711,7 @@ function renderHome(){
     const mins = estimateMinutes(cat, settings.seconds);
     const overlay = el('div',{class:'cat-overlay'});
     const text = el('div',{class:'cat-text'},[ el('h3',{},cat.name), el('span',{},`${mins} min · ${cat.desc}`) ]);
-    const card = el('div',{class:'cat-card', style:`background:${cat.photo?`url('${cat.photo}') center/cover`:`linear-gradient(135deg, ${cat.color}, ${cat.color}CC)`}`, onclick:()=>{ state.quickMode=false; goto('sud-before',{category:cat, sudBefore:5}); }},[overlay, text]);
+    const card = el('div',{class:'cat-card', style:`background:${cat.photo?`url('${cat.photo}') center/cover`:`linear-gradient(135deg, ${cat.color}, ${cat.color}CC)`}`, onclick:()=>{ state.quickMode=false; goto('cat-detail',{category:cat}); }},[overlay, text]);
     return card;
   });
 
@@ -895,6 +927,7 @@ function renderHistory(){
 function render(){
   switch(state.screen){
     case 'home': return renderHome();
+    case 'cat-detail': return renderCatDetail();
     case 'intro': return renderIntro();
     case 'sud-before': return renderSudBefore();
     case 'player-main': return renderPlayerMain();
