@@ -619,8 +619,11 @@ function renderHome(){
     el('span',{},'›')
   ]);
 
-  app.replaceChildren(header, primera, intro, quickBlock, el('div',{class:'grid'}, cards), secRowBuilder(), histLink,
-    el('div',{class:'footer-note'},'Esta app es un apoyo personal de autoayuda, no sustituye la atención médica o psicológica profesional. No diagnostica ni trata ninguna condición médica o psicológica.'));
+  const footer = el('div',{class:'footer-note'},[
+    'Esta app es un apoyo personal de autoayuda, no sustituye la atención médica o psicológica profesional. No diagnostica ni trata ninguna condición médica o psicológica. ',
+    el('a',{href:'legal.html', style:'color:var(--sienna-deep);'}, 'Privacidad y términos'),
+  ]);
+  app.replaceChildren(header, primera, intro, quickBlock, el('div',{class:'grid'}, cards), secRowBuilder(), histLink, footer);
 }
 
 function secRowBuilder(){
