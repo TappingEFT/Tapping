@@ -47,6 +47,13 @@
   .detail-body h1{font-size:26px;margin-bottom:8px;}
   .detail-meta{font-size:14.5px;color:var(--ink-soft);margin-bottom:18px;}
   .detail-desc{font-size:16px;line-height:1.6;color:var(--ink);margin-bottom:26px;}
+  .action-row{display:flex;border-top:1px solid var(--line);border-bottom:1px solid var(--line);margin-bottom:22px;}
+  .action-item{flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;padding:14px 0;cursor:pointer;border-right:1px solid var(--line);background:none;border-top:none;border-bottom:none;font-family:'Source Sans 3',Arial,sans-serif;}
+  .action-item:last-child{border-right:none;}
+  .action-item .icon{font-size:19px;}
+  .action-item .label{font-size:12px;color:var(--ink-soft);letter-spacing:0.02em;text-transform:uppercase;}
+  .action-item.active .icon, .action-item.active .label{color:var(--sienna);}
+  .action-toast{text-align:center;font-size:13.5px;color:var(--ink-soft);margin:-14px 0 20px;min-height:16px;}
 
   .intro-card{margin:0 20px 4px;padding:18px;border:2px solid var(--line);border-radius:10px;background:var(--card);display:flex;align-items:center;gap:14px;cursor:pointer;}
   .intro-card:active{background:var(--stone-deep);}
@@ -180,6 +187,7 @@ const PRIMERA_SESION = {
 const CATEGORIES = [
   {
     id:'abundancia', name:'Abundancia', color:'#8F2F0E', photo:'abundancia.jpg',
+    intro:'En este tapping vamos a dar golpecitos para soltar el miedo y la inseguridad que sientes con el dinero. Cuanto más practiques este proceso, más vas a entrenar tu mente para relacionarte con la abundancia desde la calma y no desde el miedo.',
     desc:'Miedo y creencias alrededor del dinero.',
     karate:'Aunque siento este miedo a no tener suficiente, aunque a veces me cuesta sentirme segura con el dinero, me acepto completamente y acepto todo lo que estoy sintiendo ahora mismo.',
     rounds:[
@@ -194,6 +202,7 @@ const CATEGORIES = [
   },
   {
     id:'ansiedad', name:'Necesito calmar mi mente', color:'#4A2442', photo:'ansiedad.jpg',
+    intro:'En esta meditación de Tapping, vamos a dar golpecitos para calmar tu mente acelerada, esa parte de tu mente que no para. Cuanto más hagas este proceso, más vas a condicionar a tu mente para que suelte esos pensamientos que van a toda velocidad y más vas a entrenar a tu cuerpo para relajarse.',
     audio:{file:'ansiedad.mp3', timestamps:[0,11.7636,16.6659,21.6239,27.4909,33.1229,38.8953,43.6737,49.119,55.3236,60.5619,66.3119,72.2029,78.0989,83.4393,88.4097,94.239,99.6516,104.722,110.712,116.435,122.619,127.455,133.29,138.903,144.292,149.938,155.424,161.243,167.331,172.959,178.722,185.055,189.94,194.986,200.304,205.163,210.939,216.351,221.706,227.679]},
     desc:'Para bajar la activación cuando aprieta.',
     karate:'Aunque siento esta ansiedad en todo mi cuerpo, aunque mi mente no deja de dar vueltas y no puedo parar de pensar en los problemas, me acepto total y completamente.',
@@ -207,6 +216,7 @@ const CATEGORIES = [
   },
   {
     id:'jornada', name:'Fin de jornada', color:'#8F2F0E', photo:'fin%20de%20jornada.jpg',
+    intro:'En este tapping vamos a dar golpecitos para soltar el cansancio y la tensión que se acumulan durante el día. Cuanto más lo practiques, más le enseñas a tu cuerpo a cerrar la jornada y pasar a modo descanso.',
     desc:'Soltar el cansancio al terminar de trabajar.',
     karate:'Aunque termino el día cargada de cansancio y de tensión, y aunque siento que no he podido soltar todavía, me acepto completamente y me permito empezar a soltar ahora.',
     rounds:[
@@ -219,6 +229,7 @@ const CATEGORIES = [
   },
   {
     id:'estres', name:'Estrés', color:'#4A2442', photo:'estres.jpg',
+    intro:'En este tapping vamos a dar golpecitos para bajar la sensación de estrés y agobio que sientes ahora mismo. Cuanto más practiques este proceso, más vas a entrenar a tu cuerpo para volver a la calma incluso en los días más cargados.',
     desc:'Ronda general para bajar el estrés acumulado.',
     karate:'Aunque siento este estrés acumulado, y aunque siento que todo se me junta al mismo tiempo, me acepto completamente y acepto todo lo que estoy sintiendo ahora mismo.',
     rounds:[
@@ -231,6 +242,7 @@ const CATEGORIES = [
   },
   {
     id:'centro', name:'Volver a mi centro', color:'#354A24', photo:'volver%20a%20mi%20centro.jpg',
+    intro:'En este tapping vamos a dar golpecitos para recuperar la calma cuando todo se siente caótico alrededor. Cuanto más lo practiques, más rápido vas a poder volver a tu centro, pase lo que pase a tu alrededor.',
     desc:'Para cuando todo explota alrededor.',
     karate:'Aunque todo esto ha explotado a mi alrededor y siento que pierdo mi centro, y aunque en casa esto pasa una y otra vez, me acepto completamente y elijo volver a mi calma ahora.',
     rounds:[
@@ -243,6 +255,7 @@ const CATEGORIES = [
   },
   {
     id:'preocupacion', name:'Preocupación', color:'#4A2442', photo:'preocupacion.jpg',
+    intro:'En este tapping vamos a dar golpecitos para soltar esa preocupación que le da vueltas y vueltas a tu cabeza. Cuanto más practiques este proceso, más vas a entrenar a tu mente para soltar lo que no depende de ti.',
     desc:'Para cuando la mente no deja de dar vueltas a lo mismo.',
     karate:'Aunque tengo esta preocupación dando vueltas en mi cabeza, aunque no puedo dejar de pensar en lo que podría pasar, me acepto completamente y acepto todo lo que estoy sintiendo ahora mismo.',
     rounds:[
@@ -257,6 +270,7 @@ const CATEGORIES = [
   },
   {
     id:'desbordada', name:'Me siento desbordada', color:'#354A24', photo:'desbordada.jpg',
+    intro:'En este tapping vamos a dar golpecitos para aliviar esa sensación de tener demasiado encima. Cuanto más lo practiques, más vas a entrenar a tu mente y tu cuerpo para priorizar y soltar, en vez de cargar con todo a la vez.',
     desc:'Cuando sientes que tienes demasiado encima.',
     karate:'Aunque me siento desbordada por todo lo que tengo encima, aunque siento que no llego a todo, me acepto completamente y acepto todo lo que estoy sintiendo ahora mismo.',
     rounds:[
@@ -271,6 +285,7 @@ const CATEGORIES = [
   },
   {
     id:'dormir', name:'Dormir', color:'#8F2F0E', photo:'dormir.jpg',
+    intro:'En esta meditación de Tapping, vamos a dar golpecitos para calmar tu mente acelerada, esa parte de tu mente que no para y no te deja dormir. Cuanto más hagas este proceso, más vas a condicionar a tu mente para que suelte esos pensamientos que van a toda velocidad y más vas a entrenar a tu cuerpo para que se relaje y duerma profundamente.',
     desc:'Para soltar el día y bajar el ritmo mental antes de dormir.',
     karate:'Aunque me cuesta desconectar la mente para dormir, aunque siento que los pensamientos no paran, me acepto completamente y me permito empezar a soltar el día.',
     rounds:[
@@ -285,6 +300,7 @@ const CATEGORIES = [
   },
   {
     id:'miedo', name:'Miedo', color:'#742E0E', photo:'miedo.jpg',
+    intro:'En este tapping vamos a dar golpecitos para acompañar el miedo que sientes ahora mismo. Cuanto más practiques este proceso, más vas a entrenar a tu cuerpo para sentirse seguro, incluso cuando el miedo aparece.',
     desc:'Para cuando el miedo se siente grande o paralizante.',
     karate:'Aunque siento este miedo, aunque a veces me paraliza, me acepto completamente y acepto todo lo que estoy sintiendo ahora mismo.',
     rounds:[
@@ -299,6 +315,7 @@ const CATEGORIES = [
   },
   {
     id:'repetitivos', name:'Pensamientos repetitivos', color:'#4A2442', photo:'repetidos.jpg',
+    intro:'En este tapping vamos a dar golpecitos para soltar ese pensamiento que se repite una y otra vez en tu cabeza. Cuanto más lo practiques, más vas a entrenar a tu mente para dejarlo pasar en vez de quedarte atrapada en él.',
     desc:'Para cuando una idea da vueltas sin parar.',
     karate:'Aunque tengo este pensamiento que se repite una y otra vez, aunque no logro sacármelo de la cabeza, me acepto completamente y acepto todo lo que estoy sintiendo ahora mismo.',
     rounds:[
@@ -313,6 +330,7 @@ const CATEGORIES = [
   },
   {
     id:'agotamiento', name:'Agotamiento', color:'#354A24', photo:'agotamiento.jpg',
+    intro:'En este tapping vamos a dar golpecitos para acompañar el cansancio que sientes en el cuerpo y en la mente. Cuanto más practiques este proceso, más vas a entrenar a tu cuerpo para reconocer cuándo necesita parar y descansar de verdad.',
     desc:'Para cuando el cuerpo y la mente piden una pausa.',
     karate:'Aunque siento este agotamiento en el cuerpo y en la mente, aunque siento que no me queda energía, me acepto completamente y acepto todo lo que estoy sintiendo ahora mismo.',
     rounds:[
@@ -327,6 +345,7 @@ const CATEGORIES = [
   },
   {
     id:'confianza', name:'Confianza en mí', color:'#8F2F0E', photo:'confianza_en_mi.jpg',
+    intro:'En este tapping vamos a dar golpecitos para soltar la inseguridad y fortalecer la confianza en ti misma. Cuanto más lo practiques, más vas a entrenar tu mente para hablarte con más amabilidad y confiar en tu propio criterio.',
     desc:'Para cuando cuesta confiar en las propias capacidades.',
     karate:'Aunque a veces dudo de mí misma, aunque me cuesta confiar en mis propias capacidades, me acepto completamente y acepto todo lo que estoy sintiendo ahora mismo.',
     rounds:[
@@ -341,6 +360,7 @@ const CATEGORIES = [
   },
   {
     id:'relaciones', name:'Relaciones', color:'#4A2442', photo:'relaciones.jpg',
+    intro:'En este tapping vamos a dar golpecitos para acompañar la dificultad que sientes en esta relación. Cuanto más practiques este proceso, más vas a entrenar tu mente y tu cuerpo para comunicarte y poner límites desde la calma.',
     desc:'Para dificultades o distancia en una relación importante.',
     karate:'Aunque tengo esta dificultad en mis relaciones, aunque a veces me siento incomprendida o distanciada de alguien importante, me acepto completamente y acepto todo lo que estoy sintiendo ahora mismo.',
     rounds:[
@@ -406,6 +426,16 @@ function renderThermometer(container, value, onChange){
 }
 const SETTINGS_KEY = 'tapping_settings_v1';
 const STORAGE_KEY = 'tapping_history_v1';
+const FAVORITES_KEY = 'tapping_favorites_v1';
+function loadFavorites(){ try{ return JSON.parse(localStorage.getItem(FAVORITES_KEY)) || []; }catch(e){ return []; } }
+function saveFavorites(list){ localStorage.setItem(FAVORITES_KEY, JSON.stringify(list)); }
+function isFavorite(id){ return loadFavorites().includes(id); }
+function toggleFavorite(id){
+  const favs = loadFavorites();
+  const idx = favs.indexOf(id);
+  if(idx>=0) favs.splice(idx,1); else favs.push(id);
+  saveFavorites(favs);
+}
 function loadHistory(){ try{ return JSON.parse(localStorage.getItem(STORAGE_KEY)) || []; }catch(e){ return []; } }
 function saveHistory(list){ localStorage.setItem(STORAGE_KEY, JSON.stringify(list)); }
 function loadSettings(){ try{ return {...{seconds:9}, ...JSON.parse(localStorage.getItem(SETTINGS_KEY))}; }catch(e){ return {seconds:9}; } }
@@ -666,7 +696,32 @@ function renderCatDetail(){
   const body = el('div',{class:'detail-body'});
   body.appendChild(el('h1',{}, cat.name));
   body.appendChild(el('div',{class:'detail-meta'}, `${mins} min · sesión guiada`));
-  body.appendChild(el('p',{class:'detail-desc'}, cat.desc || ''));
+
+  const toast = el('div',{class:'action-toast'});
+  const favActive = isFavorite(cat.id);
+  const favItem = el('button',{class:'action-item'+(favActive?' active':''), onclick:(e)=>{
+    toggleFavorite(cat.id);
+    const nowActive = isFavorite(cat.id);
+    e.currentTarget.classList.toggle('active', nowActive);
+    toast.textContent = nowActive ? 'Añadida a favoritos' : 'Quitada de favoritos';
+    setTimeout(()=>{ toast.textContent=''; }, 1800);
+  }},[ el('span',{class:'icon'},'★'), el('span',{class:'label'},'Favorito') ]);
+  const dlItem = el('button',{class:'action-item', onclick:()=>{
+    toast.textContent = 'Ya está disponible sin conexión';
+    setTimeout(()=>{ toast.textContent=''; }, 1800);
+  }},[ el('span',{class:'icon'},'⬇'), el('span',{class:'label'},'Descargar') ]);
+  const shareItem = el('button',{class:'action-item', onclick:async ()=>{
+    const shareData = { title: cat.name, text: `Prueba la sesión de "${cat.name}" en Centro Tapping`, url: location.href };
+    try{
+      if(navigator.share){ await navigator.share(shareData); }
+      else { await navigator.clipboard.writeText(location.href); toast.textContent='Enlace copiado'; setTimeout(()=>{ toast.textContent=''; }, 1800); }
+    }catch(e){}
+  }},[ el('span',{class:'icon'},'↗'), el('span',{class:'label'},'Compartir') ]);
+  const actionRow = el('div',{class:'action-row'},[favItem, dlItem, shareItem]);
+  body.appendChild(actionRow);
+  body.appendChild(toast);
+
+  body.appendChild(el('p',{class:'detail-desc'}, cat.intro || cat.desc || ''));
   body.appendChild(el('button',{class:'btn btn-primary',onclick:()=>{ state.quickMode=false; goto('sud-before',{category:cat, sudBefore:5}); }},'Comenzar'));
   wrap.appendChild(body);
 
