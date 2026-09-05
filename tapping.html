@@ -168,6 +168,7 @@ const CATEGORIES = [
   },
   {
     id:'ansiedad', name:'Ansiedad', color:'#4A2442', photo:'ansiedad.jpg',
+    audio:{file:'ansiedad.mp3', timestamps:[0,11.7636,16.6659,21.6239,27.4909,33.1229,38.8953,43.6737,49.119,55.3236,60.5619,66.3119,72.2029,78.0989,83.4393,88.4097,94.239,99.6516,104.722,110.712,116.435,122.619,127.455,133.29,138.903,144.292,149.938,155.424,161.243,167.331,172.959,178.722,185.055,189.94,194.986,200.304,205.163,210.939,216.351,221.706,227.679]},
     desc:'Para bajar la activación cuando aprieta.',
     karate:'Aunque siento esta ansiedad en todo mi cuerpo, aunque mi mente no deja de dar vueltas y no puedo parar de pensar en los problemas, me acepto total y completamente.',
     rounds:[
@@ -375,7 +376,60 @@ function buildExtraSequence(phrases, phaseLabel){
   return phrases.map((phrase, idx)=>({phase:phaseLabel, pointIndex:idx, key:POINT_META[idx].key, name:POINT_META[idx].name, where:POINT_META[idx].where, phrase}));
 }
 
-/* =================== Player (auto-advancing) =================== */
+function buildAudioSteps(cat){
+  const steps = [];
+  steps.push({phase:'karate', key:KARATE_META.key, name:KARATE_META.name, where:KARATE_META.where, phrase:cat.karate});
+  cat.rounds.forEach((round)=>{
+    round.phrases.forEach((phrase, idx)=>{
+      steps.push({phase:'round', roundTitle:round.title, key:POINT_META[idx].key, name:POINT_META[idx].name, where:POINT_META[idx].where, phrase});
+    });
+  });
+  steps.push(...buildExtraSequence(cat.apertura,'apertura'));
+  steps.push(...buildExtraSequence(cat.cierre,'cierre'));
+  return steps;
+}
+
+function startAudioSlice(cat, startIdx, endIdxExclusive, onFinish){
+  const allSteps = buildAudioSteps(cat);
+  const allTs = cat.audio.timestamps;
+  const steps = allSteps.slice(startIdx, endIdxExclusive);
+  const timestamps = allTs.slice(startIdx, endIdxExclusive);
+  const sliceEndTime = allTs[endIdxExclusive] !== undefined ? allTs[endIdxExclusive] : null;
+  clearTimer();
+  const audioEl = new Audio(cat.audio.file);
+  playerCtx = { mode:'audio', steps, timestamps, index:0, paused:false, audioEl, onFinish, sliceEndTime };
+  audioEl.currentTime = timestamps[0];
+  renderPlayerFrame(true);
+  audioEl.ontimeupdate = ()=>{
+    if(!playerCtx || playerCtx.audioEl!==audioEl) return;
+    const t = audioEl.currentTime;
+    if(playerCtx.sliceEndTime!==null && t>=playerCtx.sliceEndTime){
+      audioEl.ontimeupdate = null;
+      audioEl.pause();
+      playerCtx.onFinish();
+      return;
+    }
+    let ni = playerCtx.index;
+    while(ni+1<playerCtx.timestamps.length && t>=playerCtx.timestamps[ni+1]) ni++;
+    if(ni!==playerCtx.index){ playerCtx.index=ni; renderPlayerFrame(false); }
+    updateAudioProgressBar();
+  };
+  audioEl.onended = ()=>{ if(playerCtx && playerCtx.audioEl===audioEl) playerCtx.onFinish(); };
+  audioEl.play();
+}
+
+function updateAudioProgressBar(){
+  const fill = document.getElementById('progFill');
+  if(!fill || !playerCtx || playerCtx.mode!=='audio') return;
+  const cur = playerCtx.timestamps[playerCtx.index];
+  const next = playerCtx.index+1 < playerCtx.timestamps.length ? playerCtx.timestamps[playerCtx.index+1] : playerCtx.sliceEndTime;
+  const t = playerCtx.audioEl.currentTime;
+  if(next==null || next<=cur){ fill.style.width='0%'; return; }
+  const pct = ((t-cur)/(next-cur))*100;
+  fill.style.width = Math.max(0,Math.min(100,pct))+'%';
+}
+
+
 function startPlayer(steps, onFinish){
   ensureAudio();
   playerCtx = { steps, index:0, paused:false, secondsLeft:settings.seconds, onFinish };
@@ -410,12 +464,35 @@ function advancePlayer(){
 }
 function togglePause(){
   if(!playerCtx) return;
-  playerCtx.paused = !playerCtx.paused;
+  if(playerCtx.mode==='audio'){
+    if(playerCtx.audioEl.paused){ playerCtx.audioEl.play(); } else { playerCtx.audioEl.pause(); }
+  } else {
+    playerCtx.paused = !playerCtx.paused;
+  }
   const btn = document.getElementById('pauseBtn');
-  if(btn) btn.textContent = playerCtx.paused ? '▶' : '❚❚';
+  const isPaused = playerCtx.mode==='audio' ? playerCtx.audioEl.paused : playerCtx.paused;
+  if(btn) btn.textContent = isPaused ? '▶' : '❚❚';
 }
-function skipPoint(){ if(playerCtx) advancePlayer(); }
-function exitPlayer(){ clearTimer(); playerCtx=null; goto('home'); }
+function skipPoint(){
+  if(!playerCtx) return;
+  if(playerCtx.mode==='audio'){
+    const next = playerCtx.index+1 < playerCtx.timestamps.length ? playerCtx.timestamps[playerCtx.index+1] : playerCtx.sliceEndTime;
+    if(next==null){ playerCtx.audioEl.pause(); playerCtx.onFinish(); }
+    else { playerCtx.audioEl.currentTime = next; }
+  } else {
+    advancePlayer();
+  }
+}
+function exitPlayer(){
+  clearTimer();
+  if(playerCtx && playerCtx.mode==='audio' && playerCtx.audioEl){
+    playerCtx.audioEl.ontimeupdate = null;
+    playerCtx.audioEl.onended = null;
+    playerCtx.audioEl.pause();
+  }
+  playerCtx=null;
+  goto('home');
+}
 
 function updateProgressBar(){
   const fill = document.getElementById('progFill');
@@ -539,8 +616,20 @@ function renderSudBefore(){
 
   if(cat.note) wrap.appendChild(el('p',{class:'stage-copy',style:'font-size:13.5px;'}, cat.note));
 
+  if(cat.audio){
+    if(state.audioOn===undefined) state.audioOn = true;
+    const audioRow = el('div',{class:'settings-row'});
+    audioRow.appendChild(el('span',{}, '🔊 Escuchar con audio'));
+    const seg = el('div',{class:'seg'});
+    const onBtn = el('button',{class: state.audioOn?'active':'', onclick:()=>{ state.audioOn=true; renderSudBefore(); }}, 'Sí');
+    const offBtn = el('button',{class: !state.audioOn?'active':'', onclick:()=>{ state.audioOn=false; renderSudBefore(); }}, 'Solo texto');
+    seg.appendChild(onBtn); seg.appendChild(offBtn);
+    audioRow.appendChild(seg);
+    wrap.appendChild(audioRow);
+  }
+
   wrap.appendChild(el('div',{class:'phrase-box'}, el('p',{}, cat.karate)));
-  wrap.appendChild(el('p',{class:'stage-copy',style:'margin-top:-10px;'},'Esta es la frase de preparación. Se repetirá 4 veces golpeteando el canto de la mano.'));
+  wrap.appendChild(el('p',{class:'stage-copy',style:'margin-top:-10px;'},'Esta es la frase de preparación para el canto de la mano.'));
 
   wrap.appendChild(el('div',{class:'spacer'}));
   wrap.appendChild(el('button',{class:'btn btn-primary',onclick:()=>{
@@ -552,8 +641,12 @@ function renderSudBefore(){
 
 function renderPlayerMain(){
   const cat = state.category;
-  const seq = buildSequence(cat);
-  startPlayer(seq, ()=> goto('breath'));
+  if(cat.audio && state.audioOn){
+    startAudioSlice(cat, 0, 25, ()=> goto('breath'));
+  } else {
+    const seq = buildSequence(cat);
+    startPlayer(seq, ()=> goto('breath'));
+  }
 }
 
 function renderBreath(){
@@ -588,18 +681,27 @@ function renderSudAfter(){
 
 function renderPlayerApertura(){
   const cat = state.category;
-  const seq = buildExtraSequence(cat.apertura, 'apertura');
-  startPlayer(seq, ()=> goto('player-cierre'));
+  if(cat.audio && state.audioOn){
+    startAudioSlice(cat, 25, 33, ()=> goto('player-cierre'));
+  } else {
+    const seq = buildExtraSequence(cat.apertura, 'apertura');
+    startPlayer(seq, ()=> goto('player-cierre'));
+  }
 }
 function renderPlayerCierre(){
   const cat = state.category;
-  const seq = buildExtraSequence(cat.cierre, 'cierre');
-  startPlayer(seq, ()=>{
+  const finish = ()=>{
     const hist = loadHistory();
     hist.unshift({date:new Date().toISOString(), category:cat.name, before:state.sudBefore, after:state.sudAfter});
     saveHistory(hist.slice(0,200));
     goto('done');
-  });
+  };
+  if(cat.audio && state.audioOn){
+    startAudioSlice(cat, 33, 41, finish);
+  } else {
+    const seq = buildExtraSequence(cat.cierre, 'cierre');
+    startPlayer(seq, finish);
+  }
 }
 
 function renderDone(){
