@@ -45,6 +45,12 @@
   .intro-card h3{font-size:17px;margin-bottom:2px;}
   .intro-card span{font-size:14px;color:var(--ink-soft);}
 
+  .quick-block{margin:14px 20px 4px;}
+  .quick-title{font-size:15px;font-weight:700;margin-bottom:10px;}
+  .quick-row{display:flex;flex-wrap:wrap;gap:8px;}
+  .quick-pill{border:2px solid var(--line);background:var(--card);border-radius:20px;padding:9px 14px;font-size:14px;color:var(--ink);cursor:pointer;font-family:'Source Sans 3',Arial,sans-serif;}
+  .quick-pill:active{background:var(--stone-deep);}
+
   .thermo-block{display:flex;flex-direction:column;align-items:center;gap:14px;}
   .thermo-value{font-size:44px;font-weight:700;}
   .thermo-row{display:flex;align-items:stretch;gap:16px;height:260px;}
@@ -152,22 +158,33 @@ const DIAGRAM_IMG = 'mujer-tapping.jpg';
 
 function R(title, phrases){ return {title, phrases}; } // phrases: array of 8, matching POINT_META order
 
+const PRIMERA_SESION = {
+  id:'primera-sesion', name:'Tu primera sesión', color:'#8F2F0E',
+  desc:'Una práctica corta para empezar, sin experiencia previa.',
+  karate:'Aunque no sé si estoy haciendo esto bien, y aunque es la primera vez que pruebo el tapping, me acepto completamente y me permito aprender a mi ritmo.',
+  rounds:[
+    R('Primeros pasos', ['Estoy probando algo nuevo.','No necesito hacerlo perfecto.','Solo estoy siguiendo el ritmo de la app.','Me permito aprender a mi manera.','Cada vez que toco un punto, me doy un momento de calma.','No hace falta que sienta nada especial todavía.','Solo estoy probando cómo se siente esto.','Me permito estar abierta a lo que sea que esto traiga.']),
+  ],
+  apertura:[], cierre:[],
+};
+
 const CATEGORIES = [
   {
     id:'abundancia', name:'Abundancia', color:'#8F2F0E', photo:'abundancia.jpg',
-    desc:'Independencia económica y creencias con el dinero.',
-    karate:'Aunque estoy harta de aguantar esta situación, aunque no soy feliz y siento que estoy atrapada porque dependo económicamente de mi marido, y aunque me aterra pensar que si me voy puedo quedarme sin dinero y que a mi hija y a mi madre les falte lo necesario, me acepto completamente y acepto todo lo que estoy sintiendo ahora mismo.',
+    desc:'Miedo y creencias alrededor del dinero.',
+    karate:'Aunque siento este miedo a no tener suficiente, aunque a veces me cuesta sentirme segura con el dinero, me acepto completamente y acepto todo lo que estoy sintiendo ahora mismo.',
     rounds:[
-      R('Harta de aguantar', ['Estoy harta de aguantar.','Estoy harta de esta situación.','No soy feliz viviendo así.','Siento que estoy atrapada.','Siento que no puedo salir.','Dependo económicamente de mi marido.','Y eso me hace sentir atrapada.','Tengo miedo de no poder mantenerme por mí misma.']),
-      R('Miedo', ['Tengo miedo de quedarme sin dinero.','Tengo miedo de quedarme en la calle.','Tengo miedo de que a mi hija le falte lo necesario.','Tengo miedo de que a mi madre le falte lo necesario.','Tengo miedo de no poder protegerlas.','Todo este miedo que llevo dentro.','Todo este peso en mi pecho.','Todo este miedo a no tener una salida.']),
-      R('Rabia y cansancio', ['Estoy harta de tener que aguantar.','Estoy harta de que esto siga pasando.','Estoy harta de que el problema siga creciendo.','Estoy harta de sentir que el tiempo pasa y nada cambia.','Estoy harta de sentir que tengo que soportarlo.','Toda esta rabia que tengo.','Todo este cansancio.','Todo este peso que llevo dentro.']),
-      R('Impotencia', ['Siento que no puedo hacer nada.','Siento que no tengo suficiente dinero para irme.','Siento que mi libertad depende del dinero.','Y eso me desespera.','No quiero seguir dependiendo.','Quiero poder decidir por mí misma.','Quiero tener una salida.','Quiero sentir que puedo elegir.']),
+      R('Reconocer', ['Siento este miedo a no tener suficiente.','Siento esta inseguridad con el dinero.','A veces siento que tengo que luchar por todo.','Reconozco esta preocupación económica.','Reconozco que esto me pesa.','Todo este miedo al futuro económico.','Toda esta inseguridad que cargo.','Reconozco cómo me siento con el dinero, ahora mismo.']),
+      R('Profundizar', ['Este miedo a que no me alcance.','Este miedo a perder lo que tengo.','Esta sensación de no tener el control.','Esta creencia de que el dinero es difícil de conseguir.','Esta dificultad para sentirme segura.','Esta dificultad para recibir.','Esta culpa que a veces siento con el dinero.','Todo este peso que llevo con este tema.']),
+      R('Permitir', ['Me permito sentir este miedo sin juzgarme.','Me permito reconocer esta inseguridad.','Me permito soltar la exigencia de tenerlo todo resuelto.','Me permito aceptar cómo me siento hoy con esto.','Me permito bajar la lucha, aunque sea un poco.','Me permito recibir, aunque me cueste.','Me permito soltar parte de esta carga.','Me permito estar en paz con este proceso.']),
+      R('Regular', ['Elijo sentirme más en calma con este tema.','Elijo respirar antes de reaccionar al miedo.','Elijo sentirme más segura, paso a paso.','Elijo un pensamiento más tranquilo sobre el dinero.','Elijo estar presente, no en el miedo futuro.','Elijo confiar en mi capacidad de resolver.','Elijo soltar la urgencia.','Elijo sentir más calma con este tema, hoy.']),
+      R('Nueva dirección', ['Quizás pueda ir construyendo más seguridad con el tiempo.','Quizás existan opciones que todavía no veo.','Puedo aprender a relacionarme distinto con el dinero.','Puedo dar un paso pequeño hacia mi estabilidad.','Puedo abrirme, poco a poco, a recibir.','Puedo soltar la creencia de que todo cuesta luchar.','Puedo confiar en que voy construyendo algo mejor.','Me abro a una relación más tranquila con el dinero.']),
     ],
-    apertura:['Quizás pueda existir una salida que todavía no estoy viendo.','Quizás pueda encontrar nuevas formas de generar dinero.','Me permito descubrir nuevas posibilidades.','Me permito construir poco a poco mi independencia.','Me permito confiar en mi capacidad para salir adelante.','Me permito crear una vida diferente.','Me permito imaginarme libre.','Me permito acercarme a la vida que quiero.'],
-    cierre:['Puedo decidir dónde vivir.','Puedo cuidar de mi hija.','Puedo cuidar de mi madre.','Puedo construir mi propia vida.','Puedo encontrar mi camino.','Puedo crear nuevas posibilidades.','Ya no quiero sentirme atrapada.','Me permito avanzar hacia mi libertad.'],
+    apertura:['Me permito ir sintiendo más seguridad económica.','Me permito ver nuevas posibilidades.','Me permito soltar la creencia de la escasez.','Me permito aprender formas nuevas de manejar el dinero.','Me permito pedir ayuda o información cuando la necesito.','Me permito construir esto paso a paso.','Me permito sentirme más tranquila con mis finanzas.','Me permito confiar en mi propio proceso.'],
+    cierre:['Puedo relacionarme de forma más tranquila con el dinero.','Puedo tomar decisiones económicas con más calma.','Puedo aprender y mejorar con el tiempo.','Puedo sentirme más segura, poco a poco.','Puedo soltar la exigencia de tenerlo todo resuelto ya.','Puedo confiar en mi capacidad de salir adelante.','Ya no tengo que cargar esto sola.','Elijo avanzar hacia más estabilidad y calma.'],
   },
   {
-    id:'ansiedad', name:'Ansiedad', color:'#4A2442', photo:'ansiedad.jpg',
+    id:'ansiedad', name:'Necesito calmar mi mente', color:'#4A2442', photo:'ansiedad.jpg',
     audio:{file:'ansiedad.mp3', timestamps:[0,11.7636,16.6659,21.6239,27.4909,33.1229,38.8953,43.6737,49.119,55.3236,60.5619,66.3119,72.2029,78.0989,83.4393,88.4097,94.239,99.6516,104.722,110.712,116.435,122.619,127.455,133.29,138.903,144.292,149.938,155.424,161.243,167.331,172.959,178.722,185.055,189.94,194.986,200.304,205.163,210.939,216.351,221.706,227.679]},
     desc:'Para bajar la activación cuando aprieta.',
     karate:'Aunque siento esta ansiedad en todo mi cuerpo, aunque mi mente no deja de dar vueltas y no puedo parar de pensar en los problemas, me acepto total y completamente.',
@@ -178,45 +195,6 @@ const CATEGORIES = [
     ],
     apertura:['Quizás pueda sentirme más tranquila de lo que imagino.','Me permito ver un horizonte más claro.','Me permito pensar diferente sobre esto.','Me permito confiar en que todo llega a tiempo.','Me permito volverme más fuerte y clara cada día.','Me permito agradecer esta oportunidad de crecer.','Me permito soltar la prisa y abrazar el presente.','Me permito sentirme en calma.'],
     cierre:['Puedo confiar en que sí puedo resolver esto.','Puedo enfocarme en lo que me da calma.','Puedo sentirme en paz.','Todo lo que necesito llega a mí a tiempo.','Puedo actuar con calma aunque sienta ansiedad.','Puedo confiar en mi cuerpo y en mi proceso.','Ya no necesito cargar con todo yo sola.','Elijo vivir en paz y confianza.'],
-  },
-  {
-    id:'cabeza', name:'Dolores de cabeza', color:'#354A24', photo:'dolores%20de%20cabeza.jpg',
-    desc:'Ronda orientada al dolor de cabeza.',
-    note:'Si el dolor es intenso, recurrente o va acompañado de otros síntomas, consulta con un profesional de salud.',
-    karate:'Aunque tengo este dolor de cabeza, y aunque no sé exactamente de dónde viene toda esta tensión, me acepto completamente y acepto este dolor tal y como es ahora mismo.',
-    rounds:[
-      R('El dolor', ['Este dolor de cabeza.','Esta presión que siento.','Este dolor en las sienes.','Esta tensión detrás de los ojos.','Este peso en la cabeza.','Todo este dolor.','Toda esta presión.','Todo este malestar.']),
-      R('Lo que lo alimenta', ['Toda la tensión que llevo acumulada.','Todo lo que no he soltado hoy.','Todo lo que he estado aguantando.','Todo el cansancio en mis ojos.','Toda la tensión en mi mandíbula.','Toda la tensión en mi cuello.','Toda esta carga.','Todo este peso que sostengo.']),
-      R('Permitir que afloje', ['Permito que esta tensión empiece a aflojar.','Permito que mis sienes se relajen.','Permito que mis ojos descansen.','Permito que mi mandíbula se suelte.','Permito que mi cuello se relaje.','Permito que este dolor vaya bajando.','Permito que mi cuerpo se calme.','Permito que la presión se libere.']),
-    ],
-    apertura:['Quizás este dolor pueda seguir bajando.','Me permito sentir alivio.','Me permito relajar mi rostro.','Me permito soltar esta tensión.','Me permito descansar un momento.','Me permito sentirme más ligera.','Me permito que mi cuerpo se calme.','Me permito sentir bienestar.'],
-    cierre:['Puedo relajar mi cabeza.','Puedo soltar esta tensión.','Puedo darle descanso a mis ojos.','Puedo aflojar mi mandíbula.','Puedo relajar mi cuello.','Puedo sentir alivio.','Ya no necesito sostener esta tensión.','Me permito sentirme mejor.'],
-  },
-  {
-    id:'menstrual', name:'Dolores menstruales', color:'#742E0E', photo:'dolores%20mestruales.jpg',
-    desc:'Acompaña el dolor y da permiso al cuerpo de soltar.',
-    note:'Si el dolor es muy intenso o inhabitual, consulta con un profesional de salud.',
-    karate:'Aunque tengo este dolor menstrual, y aunque mi cuerpo está pidiendo tregua, me acepto completamente y le doy permiso a mi cuerpo para sentir lo que necesite sentir.',
-    rounds:[
-      R('El dolor', ['Este dolor menstrual.','Este dolor en el vientre.','Esta presión abajo.','Este dolor que va y viene.','Esta molestia en la espalda baja.','Todo este dolor.','Todo este malestar.','Todo lo que mi cuerpo está sosteniendo.']),
-      R('Resistencia', ['Estoy cansada de que me duela cada mes.','Estoy cansada de tener que seguir igual con este dolor.','Quisiera que mi cuerpo no tuviera que pasar por esto.','Toda la tensión de intentar aguantar.','Toda la tensión de no poder parar.','Toda esta resistencia al dolor.','Todo este cansancio.','Todo este peso.']),
-      R('Permitir y soltar', ['Le doy permiso a mi cuerpo para relajarse.','Le doy permiso a mi vientre para aflojar.','Permito que este dolor vaya bajando.','Permito que mi cuerpo descanse.','Me doy permiso para ir más despacio hoy.','Me doy permiso para cuidarme.','Permito que mi cuerpo se calme.','Permito sentir alivio.']),
-    ],
-    apertura:['Quizás este dolor pueda seguir bajando.','Me permito sentir alivio poco a poco.','Me permito ir más despacio hoy.','Me permito pedir ayuda o descanso si lo necesito.','Me permito cuidar de mi cuerpo.','Me permito sentirme más cómoda.','Me permito relajar mi vientre.','Me permito sentir bienestar.'],
-    cierre:['Puedo cuidar de mi cuerpo hoy.','Puedo ir más despacio.','Puedo relajar mi vientre.','Puedo pedir lo que necesito.','Puedo sentir alivio.','Puedo darle tregua a mi cuerpo.','Ya no necesito aguantar en silencio.','Me permito sentirme mejor.'],
-  },
-  {
-    id:'espalda', name:'Dolores de espalda', color:'#354A24', photo:'dolores%20de%20espalda.jpg',
-    desc:'Tensión y peso acumulado en la espalda.',
-    note:'Si el dolor es intenso, persistente o viene de una lesión, consulta con un profesional de salud.',
-    karate:'Aunque tengo esta tensión y este dolor en la espalda, y aunque siento que cargo con demasiado, me acepto completamente y acepto todo lo que mi cuerpo está sosteniendo.',
-    rounds:[
-      R('El dolor', ['Este dolor de espalda.','Esta tensión en los hombros.','Este peso en la zona baja.','Esta rigidez que siento.','Este dolor que no se va.','Toda esta tensión.','Todo este dolor.','Todo este peso que cargo.']),
-      R('Lo que cargo', ['Todo lo que sostengo con mi espalda.','Todo lo que cargo sin darme cuenta.','Todas las responsabilidades sobre mis hombros.','Todo lo que llevo sola.','Todo este peso invisible.','Toda esta carga acumulada.','Todo este cansancio en el cuerpo.','Todo lo que necesito soltar.']),
-      R('Soltar el peso', ['Permito que mi espalda se relaje.','Permito que mis hombros bajen.','Suelto parte de este peso.','No tengo que cargar con todo yo sola.','Me permito pedir ayuda.','Me permito soltar tensión.','Me permito descansar.','Permito que mi cuerpo se afloje.']),
-    ],
-    apertura:['Quizás pueda soltar un poco más este peso.','Me permito bajar los hombros.','Me permito pedir ayuda cuando la necesite.','Me permito descansar sin culpa.','Me permito cuidar de mi espalda.','Me permito aflojar la tensión.','Me permito sentirme más ligera.','Me permito sentir alivio.'],
-    cierre:['Puedo soltar peso de mis hombros.','Puedo pedir ayuda cuando la necesito.','Puedo cuidar de mi espalda.','Puedo descansar sin culpa.','Puedo relajar mi cuerpo.','Puedo sentirme más ligera.','Ya no tengo que cargar con todo yo sola.','Me permito sentir alivio.'],
   },
   {
     id:'jornada', name:'Fin de jornada', color:'#8F2F0E', photo:'fin%20de%20jornada.jpg',
@@ -253,6 +231,48 @@ const CATEGORIES = [
     ],
     apertura:['Quizás pueda tener mi centro pase lo que pase alrededor.','Me permito no absorber todo lo que pasa en casa.','Me permito cuidar mi calma primero.','Me permito poner distancia cuando lo necesito.','Me permito responder en lugar de reaccionar.','Me permito proteger mi paz.','Me permito sentirme estable.','Me permito volver a mí, cuantas veces haga falta.'],
     cierre:['Puedo volver a mi centro.','Puedo cuidar mi calma primero.','Puedo poner distancia cuando lo necesito.','Puedo responder en lugar de reaccionar.','Puedo proteger mi paz.','Puedo sentirme estable pase lo que pase.','Ya no tengo que absorber todo el caos.','Me permito estar en paz.'],
+  },
+  {
+    id:'preocupacion', name:'Preocupación', color:'#4A2442',
+    desc:'Para cuando la mente no deja de dar vueltas a lo mismo.',
+    karate:'Aunque tengo esta preocupación dando vueltas en mi cabeza, aunque no puedo dejar de pensar en lo que podría pasar, me acepto completamente y acepto todo lo que estoy sintiendo ahora mismo.',
+    rounds:[
+      R('Reconocer', ['Reconozco esta preocupación.','Reconozco que no puedo dejar de darle vueltas.','Reconozco este pensamiento que se repite.','Reconozco esta sensación en el cuerpo.','Reconozco que esto me está ocupando la mente.','Reconozco todo este ruido mental.','Reconozco lo que estoy sintiendo, sin juzgarlo.','Reconozco que hoy esto pesa.']),
+      R('Profundizar', ['Esta preocupación por lo que podría pasar.','Este pensar y pensar sin llegar a ninguna parte.','Esta necesidad de tener controlado el resultado.','Este miedo a que algo salga mal.','Esta sensación de no poder soltarlo.','Todo este peso de anticiparme a lo que aún no pasa.','Todo este cansancio de darle vueltas.','Todo lo que esta preocupación se lleva de mí.']),
+      R('Permitir', ['Me permito sentir esta preocupación sin pelear con ella.','Me permito no tener la respuesta ahora mismo.','Me permito soltar el control, un poco.','Me permito no anticiparme a todo.','Me permito estar aquí, en este momento.','Me permito bajar el ritmo de mis pensamientos.','Me permito descansar de pensar en esto.','Me permito estar en paz, aunque no esté resuelto.']),
+      R('Regular', ['Elijo respirar antes de seguir pensando en esto.','Elijo volver a este momento presente.','Elijo soltar lo que no depende de mí ahora.','Elijo una mente más tranquila.','Elijo confiar en que puedo manejarlo cuando llegue.','Elijo sentir más calma con esto, hoy.','Elijo aflojar este pensamiento.','Elijo estar más en paz ahora mismo.']),
+      R('Nueva dirección', ['Quizás esto se resuelva mejor de lo que imagino.','Puedo ocuparme de lo que sí depende de mí.','Puedo confiar en mi capacidad de resolver cuando llegue el momento.','No necesito tener todo resuelto hoy.','Puedo dar un paso a la vez.','Puedo soltar un poco el peso de anticiparme.','Puedo permitirme descansar la mente.','Me abro a sentir más tranquilidad con esto.']),
+    ],
+    apertura:['Me permito confiar en que esto se va acomodando.','Me permito pensar en otra cosa un rato.','Me permito soltar un poco más este pensamiento.','Me permito estar tranquila mientras las cosas se resuelven.','Me permito confiar en mi capacidad de adaptarme.','Me permito sentir alivio, aunque sea parcial.','Me permito una mente más despejada.','Me permito sentirme en calma.'],
+    cierre:['Puedo soltar esta preocupación, un poco más cada vez.','Puedo volver al presente cuando mi mente se va.','Puedo confiar en mi capacidad de resolver las cosas.','Puedo pensar con más calma.','Puedo ocuparme de lo que sí está en mis manos.','Puedo descansar la mente sin culpa.','Ya no necesito anticiparme a todo.','Elijo sentirme más tranquila con esto.'],
+  },
+  {
+    id:'desbordada', name:'Me siento desbordada', color:'#354A24',
+    desc:'Cuando sientes que tienes demasiado encima.',
+    karate:'Aunque me siento desbordada por todo lo que tengo encima, aunque siento que no llego a todo, me acepto completamente y acepto todo lo que estoy sintiendo ahora mismo.',
+    rounds:[
+      R('Reconocer', ['Reconozco que me siento desbordada.','Reconozco que tengo demasiado encima.','Reconozco que siento que no llego a todo.','Reconozco este agobio.','Reconozco este cansancio de sostener tanto.','Reconozco toda esta carga.','Reconozco que necesito un respiro.','Reconozco cómo me siento, ahora mismo.']),
+      R('Profundizar', ['Esta sensación de que todo depende de mí.','Este miedo a que si paro, algo se cae.','Esta exigencia de hacerlo todo bien.','Esta dificultad para pedir ayuda.','Este cansancio de estar siempre disponible.','Todo este peso que cargo sola.','Todo este agotamiento acumulado.','Todo lo que esto me está costando.']),
+      R('Permitir', ['Me permito sentirme desbordada sin culpa.','Me permito no poder con todo.','Me permito pedir ayuda.','Me permito soltar algo de la exigencia.','Me permito parar un momento.','Me permito no tener todo bajo control.','Me permito descansar sin sentirme culpable.','Me permito estar bien, aunque no llegue a todo.']),
+      R('Regular', ['Elijo priorizar lo que de verdad importa.','Elijo soltar lo que puede esperar.','Elijo pedir ayuda cuando la necesito.','Elijo bajar el ritmo, aunque sea un poco.','Elijo cuidar de mí en medio de todo esto.','Elijo sentirme más ligera.','Elijo respirar antes de seguir.','Elijo sentirme más en calma, ahora.']),
+      R('Nueva dirección', ['Puedo hacerlo de a poco, no todo a la vez.','Puedo soltar lo que no depende de mí hoy.','Puedo pedir ayuda sin que eso signifique fallar.','Puedo cuidar de mí mientras cuido lo demás.','Puedo confiar en que no todo tiene que salir perfecto.','Puedo aligerar esta carga poco a poco.','Puedo descansar sin que todo se derrumbe.','Me abro a sentirme menos desbordada.']),
+    ],
+    apertura:['Me permito organizar esto de a poco.','Me permito soltar lo que no es urgente.','Me permito pedir ayuda sin culpa.','Me permito respirar entre tarea y tarea.','Me permito sentirme más ligera.','Me permito confiar en que puedo con esto, a mi ritmo.','Me permito parar cuando lo necesito.','Me permito sentirme más en paz con todo esto.'],
+    cierre:['Puedo priorizar lo que de verdad importa.','Puedo pedir ayuda cuando la necesito.','Puedo soltar lo que puede esperar.','Puedo cuidar de mí sin sentirme culpable.','Puedo avanzar a mi ritmo.','Puedo sentirme más ligera.','Ya no tengo que sostenerlo todo yo sola.','Elijo sentirme más en calma con todo lo que tengo encima.'],
+  },
+  {
+    id:'dormir', name:'Dormir', color:'#8F2F0E',
+    desc:'Para soltar el día y bajar el ritmo mental antes de dormir.',
+    karate:'Aunque me cuesta desconectar la mente para dormir, aunque siento que los pensamientos no paran, me acepto completamente y me permito empezar a soltar el día.',
+    rounds:[
+      R('Reconocer', ['Reconozco que me cuesta desconectar.','Reconozco que mi mente sigue activa.','Reconozco estos pensamientos que no paran.','Reconozco este cansancio que no se convierte en sueño.','Reconozco esta inquietud en el cuerpo.','Reconozco todo lo que traigo del día.','Reconozco que necesito descansar.','Reconozco cómo estoy, ahora, antes de dormir.']),
+      R('Profundizar', ['Esta mente que sigue dando vueltas.','Estos pendientes que no se apagan.','Esta dificultad para soltar el día.','Esta tensión que no se va.','Este cuerpo cansado, pero la mente despierta.','Toda esta actividad que no cesa.','Todo este ruido antes de dormir.','Todo lo que necesito dejar aquí, hoy.']),
+      R('Permitir', ['Me permito soltar el día, tal como fue.','Me permito dejar los pendientes para mañana.','Me permito bajar el ritmo de mis pensamientos.','Me permito relajar el cuerpo.','Me permito descansar, aunque la mente siga un poco activa.','Me permito estar tranquila, sin resolver nada más hoy.','Me permito aflojar, poco a poco.','Me permito ir entrando en calma.']),
+      R('Regular', ['Elijo respirar más despacio.','Elijo soltar lo que pasó hoy.','Elijo aquietar la mente, un poco más.','Elijo relajar mi cuerpo.','Elijo estar en calma en este momento.','Elijo permitirme descansar.','Elijo bajar el ritmo del pensamiento.','Elijo sentirme lista para dormir.']),
+      R('Nueva dirección', ['Puedo dejar el día atrás.','Puedo confiar en que mañana seguirá lo que tenga que seguir.','Puedo relajar mi mente poco a poco.','Puedo permitirme un descanso real.','Puedo soltar el control por esta noche.','Puedo sentirme en paz para dormir.','Puedo aflojar cada parte de mi cuerpo.','Me abro a un descanso más profundo.']),
+    ],
+    apertura:['Me permito ir sintiendo más sueño.','Me permito soltar cualquier pensamiento que quede.','Me permito relajar los ojos y la mente.','Me permito respirar más lento.','Me permito aflojar la mandíbula y el cuerpo.','Me permito entregarme al descanso.','Me permito soltar cualquier tensión que quede.','Me permito dormir en calma.'],
+    cierre:['Puedo soltar el día por completo.','Puedo relajar mi mente para dormir.','Puedo confiar en que descansaré bien.','Puedo respirar tranquila.','Puedo aflojar todo mi cuerpo.','Puedo permitirme un sueño reparador.','Ya no necesito seguir pensando.','Me permito dormir en paz.'],
   },
 ];
 
@@ -374,6 +394,18 @@ function buildSequence(cat){
 }
 function buildExtraSequence(phrases, phaseLabel){
   return phrases.map((phrase, idx)=>({phase:phaseLabel, pointIndex:idx, key:POINT_META[idx].key, name:POINT_META[idx].name, where:POINT_META[idx].where, phrase}));
+}
+
+function buildQuickSequence(cat){
+  const steps = [];
+  for(let i=0;i<2;i++){
+    steps.push({phase:'karate', repIndex:i, repTotal:2, key:KARATE_META.key, name:KARATE_META.name, where:KARATE_META.where, phrase:cat.karate});
+  }
+  const round = cat.rounds[0];
+  round.phrases.forEach((phrase, idx)=>{
+    steps.push({phase:'round', roundTitle:round.title, pointIndex:idx, key:POINT_META[idx].key, name:POINT_META[idx].name, where:POINT_META[idx].where, phrase});
+  });
+  return steps;
 }
 
 function buildAudioSteps(cat){
@@ -545,16 +577,38 @@ function renderHome(){
     el('p',{},'Elige qué te está pidiendo atención ahora mismo. La app avanza sola por los puntos — tú solo golpetea.'),
   ]);
 
+  const primera = el('div',{class:'intro-card',onclick:()=>{ state.quickMode=true; goto('sud-before',{category:PRIMERA_SESION, sudBefore:5}); }},[
+    el('div',{class:'dot'},'★'),
+    el('div',{},[el('h3',{},'Tu primera sesión'),el('span',{},'No necesitas saber tapping. Te guiamos paso a paso · 3 min')]),
+  ]);
+
   const intro = el('div',{class:'intro-card',onclick:()=>goto('intro')},[
     el('div',{class:'dot'},'?'),
-    el('div',{},[el('h3',{},'Primeros pasos'),el('span',{},'Cómo funciona la app, en 1 minuto')]),
+    el('div',{},[el('h3',{},'¿Cómo funciona?'),el('span',{},'En 1 minuto')]),
+  ]);
+
+  const quickList = [
+    {label:'Necesito calmarme', id:'ansiedad'},
+    {label:'Estoy preocupada', id:'preocupacion'},
+    {label:'Estoy muy saturada', id:'desbordada'},
+    {label:'Necesito desconectar', id:'jornada'},
+  ];
+  const quickRow = el('div',{class:'quick-row'});
+  quickList.forEach(q=>{
+    const cat = CATEGORIES.find(c=>c.id===q.id);
+    if(!cat) return;
+    quickRow.appendChild(el('button',{class:'quick-pill', onclick:()=>{ state.quickMode=true; goto('sud-before',{category:cat, sudBefore:5}); }}, q.label));
+  });
+  const quickBlock = el('div',{class:'quick-block'},[
+    el('div',{class:'quick-title'},'⚡ Necesito algo rápido'),
+    quickRow,
   ]);
 
   const cards = CATEGORIES.map(cat=>{
     const mins = estimateMinutes(cat, settings.seconds);
     const overlay = el('div',{class:'cat-overlay'});
     const text = el('div',{class:'cat-text'},[ el('h3',{},cat.name), el('span',{},`${mins} min · ${cat.desc}`) ]);
-    const card = el('div',{class:'cat-card', style:`background:${cat.photo?`url('${cat.photo}') center/cover`:`linear-gradient(135deg, ${cat.color}, ${cat.color}CC)`}`, onclick:()=>goto('sud-before',{category:cat, sudBefore:5})},[overlay, text]);
+    const card = el('div',{class:'cat-card', style:`background:${cat.photo?`url('${cat.photo}') center/cover`:`linear-gradient(135deg, ${cat.color}, ${cat.color}CC)`}`, onclick:()=>{ state.quickMode=false; goto('sud-before',{category:cat, sudBefore:5}); }},[overlay, text]);
     return card;
   });
 
@@ -564,16 +618,16 @@ function renderHome(){
     el('span',{},'›')
   ]);
 
-  app.replaceChildren(header, intro, el('div',{class:'grid'}, cards), secRowBuilder(), histLink,
-    el('div',{class:'footer-note'},'Esta app es un apoyo personal de autoayuda, no sustituye la atención médica o psicológica profesional.'));
+  app.replaceChildren(header, primera, intro, quickBlock, el('div',{class:'grid'}, cards), secRowBuilder(), histLink,
+    el('div',{class:'footer-note'},'Esta app es un apoyo personal de autoayuda, no sustituye la atención médica o psicológica profesional. No diagnostica ni trata ninguna condición médica o psicológica.'));
 }
 
 function secRowBuilder(){
   const secRow = el('div',{class:'settings-row'});
   secRow.appendChild(el('span',{}, 'Segundos por punto'));
   const seg = el('div',{class:'seg'});
-  [6,9,12].forEach(sec=>{
-    const b = el('button',{class: settings.seconds===sec?'active':'', onclick:()=>{ settings.seconds=sec; saveSettings(settings); renderHome(); }}, sec+'s');
+  [[6,'Rápida'],[9,'Normal'],[12,'Profunda']].forEach(([sec,label])=>{
+    const b = el('button',{class: settings.seconds===sec?'active':'', onclick:()=>{ settings.seconds=sec; saveSettings(settings); renderHome(); }}, label);
     seg.appendChild(b);
   });
   secRow.appendChild(seg);
@@ -608,7 +662,7 @@ function renderSudBefore(){
   wrap.appendChild(topBar(()=>goto('home')));
   wrap.appendChild(el('div',{class:'cat-tag'},cat.name));
   wrap.appendChild(el('h2',{},'Antes de empezar'));
-  wrap.appendChild(el('p',{class:'stage-copy'},'¿Cuánto sientes esto ahora mismo?'));
+  wrap.appendChild(el('p',{class:'stage-copy'},'¿Cuánto te está afectando esto ahora mismo?'));
 
   const thermoContainer = el('div',{style:'margin-bottom:20px;'});
   wrap.appendChild(thermoContainer);
@@ -641,6 +695,11 @@ function renderSudBefore(){
 
 function renderPlayerMain(){
   const cat = state.category;
+  if(state.quickMode){
+    const seq = buildQuickSequence(cat);
+    startPlayer(seq, ()=> goto('breath'));
+    return;
+  }
   if(cat.audio && state.audioOn){
     startAudioSlice(cat, 0, 25, ()=> goto('breath'));
   } else {
@@ -664,18 +723,27 @@ function renderSudAfter(){
   const cat = state.category;
   const wrap = el('div',{class:'session-wrap'});
   wrap.appendChild(el('div',{class:'cat-tag'},cat.name));
-  wrap.appendChild(el('h2',{},'¿Cuánto sientes esto ahora?'));
+  wrap.appendChild(el('h2',{},'¿Cómo te sientes ahora?'));
 
   const thermoContainer = el('div',{style:'margin-bottom:20px;'});
   wrap.appendChild(thermoContainer);
   renderThermometer(thermoContainer, state.sudAfter, (v)=>{ state.sudAfter = v; });
 
   wrap.appendChild(el('div',{class:'spacer'}));
-  wrap.appendChild(el('p',{class:'stage-copy',style:'font-size:13.5px;'},'¿Ha bajado la intensidad?'));
-  const row = el('div',{class:'choice-row'});
-  row.appendChild(el('button',{class:'btn btn-primary',onclick:()=>{ ensureAudio(); goto('player-apertura'); }},'Sí, seguir'));
-  row.appendChild(el('button',{class:'btn btn-ghost',onclick:()=>{ ensureAudio(); goto('player-cierre'); }},'Ir al cierre'));
-  wrap.appendChild(row);
+  if(state.quickMode){
+    wrap.appendChild(el('button',{class:'btn btn-primary',onclick:()=>{
+      const hist = loadHistory();
+      hist.unshift({date:new Date().toISOString(), category:cat.name, before:state.sudBefore, after:state.sudAfter});
+      saveHistory(hist.slice(0,200));
+      goto('done');
+    }},'Guardar y terminar'));
+  } else {
+    wrap.appendChild(el('p',{class:'stage-copy',style:'font-size:13.5px;'},'¿Ha bajado la intensidad?'));
+    const row = el('div',{class:'choice-row'});
+    row.appendChild(el('button',{class:'btn btn-primary',onclick:()=>{ ensureAudio(); goto('player-apertura'); }},'Sí, seguir'));
+    row.appendChild(el('button',{class:'btn btn-ghost',onclick:()=>{ ensureAudio(); goto('player-cierre'); }},'Terminar por ahora'));
+    wrap.appendChild(row);
+  }
   app.replaceChildren(wrap);
 }
 
@@ -705,6 +773,7 @@ function renderPlayerCierre(){
 }
 
 function renderDone(){
+  const cat = state.category;
   const wrap = el('div',{class:'session-wrap'});
   wrap.appendChild(el('div',{class:'spacer'}));
   const summary = el('div',{class:'end-summary'},[
@@ -712,9 +781,17 @@ function renderDone(){
     el('div',{class:'arrow'},'→'),
     el('div',{class:'num'},[el('strong',{},String(state.sudAfter)), el('span',{},'después')]),
   ]);
-  wrap.appendChild(el('h2',{style:'text-align:center;margin-bottom:8px;'},'Sesión guardada'));
+  wrap.appendChild(el('h2',{style:'text-align:center;margin-bottom:8px;'},'Tu sesión'));
   wrap.appendChild(summary);
-  wrap.appendChild(el('button',{class:'btn btn-primary',onclick:()=>goto('home')},'Volver al inicio'));
+  const diff = state.sudBefore - state.sudAfter;
+  let diffText;
+  if(diff>0) diffText = `Has bajado ${diff} punto${diff===1?'':'s'} en esta sesión.`;
+  else if(diff<0) diffText = `La intensidad subió ${-diff} punto${diff===-1?'':'s'} — a veces pasa, no hay problema en repetir o dejarlo para otro momento.`;
+  else diffText = 'La intensidad se mantuvo igual esta vez.';
+  wrap.appendChild(el('p',{class:'stage-copy',style:'text-align:center;'}, diffText));
+  wrap.appendChild(el('p',{class:'stage-copy',style:'text-align:center;font-size:15px;'},'¿Quieres hacer otra ronda?'));
+  wrap.appendChild(el('button',{class:'btn btn-primary',onclick:()=>goto('sud-before',{category:cat, sudBefore:state.sudAfter})},'Hacer otra ronda'));
+  wrap.appendChild(el('button',{class:'btn btn-ghost',onclick:()=>goto('home')},'Terminar por ahora'));
   wrap.appendChild(el('div',{class:'spacer'}));
   app.replaceChildren(wrap);
 }
