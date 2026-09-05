@@ -262,11 +262,10 @@ function estimateMinutes(cat, seconds){
 
 function buildDiagramHTML(activeKey){
   const allPoints = [...POINT_META, KARATE_META];
-  const dots = allPoints.map(p=>{
-    const isActive = p.key === activeKey;
-    return `<div class="pt-dot${isActive?' active':''}" style="left:${p.x}%;top:${p.y}%;"></div>`;
-  }).join('');
-  return `<div class="diagram-wrap"><img src="${DIAGRAM_IMG}" alt="Puntos de tapping">${dots}</div>`;
+  const p = allPoints.find(pt => pt.key === activeKey);
+  if(!p) return `<div class="diagram-wrap"><img src="${DIAGRAM_IMG}" alt="Puntos de tapping"></div>`;
+  const dot = `<div class="pt-dot active" style="left:${p.x}%;top:${p.y}%;"></div>`;
+  return `<div class="diagram-wrap"><img src="${DIAGRAM_IMG}" alt="Puntos de tapping">${dot}</div>`;
 }
 
 function renderThermometer(container, value, onChange){
