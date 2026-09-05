@@ -53,7 +53,8 @@
   .action-item .icon{font-size:19px;}
   .action-item .label{font-size:12px;color:var(--ink-soft);letter-spacing:0.02em;text-transform:uppercase;}
   .action-item.active .icon, .action-item.active .label{color:var(--sienna);}
-  .action-toast{text-align:center;font-size:13.5px;color:var(--ink-soft);margin:-14px 0 20px;min-height:16px;}
+  .action-toast{text-align:center;font-size:14px;font-weight:600;color:#fff;background:var(--sienna);border-radius:6px;padding:10px;margin:-6px 0 20px;min-height:16px;}
+  .action-toast:empty{background:none;padding:0;margin:-14px 0 20px;}
 
   .intro-card{margin:0 20px 4px;padding:18px;border:2px solid var(--line);border-radius:10px;background:var(--card);display:flex;align-items:center;gap:14px;cursor:pointer;}
   .intro-card:active{background:var(--stone-deep);}
@@ -704,20 +705,16 @@ function renderCatDetail(){
     const nowActive = isFavorite(cat.id);
     e.currentTarget.classList.toggle('active', nowActive);
     toast.textContent = nowActive ? 'Añadida a favoritos' : 'Quitada de favoritos';
-    setTimeout(()=>{ toast.textContent=''; }, 1800);
+    setTimeout(()=>{ toast.textContent=''; }, 3000);
   }},[ el('span',{class:'icon'},'★'), el('span',{class:'label'},'Favorito') ]);
-  const dlItem = el('button',{class:'action-item', onclick:()=>{
-    toast.textContent = 'Ya está disponible sin conexión';
-    setTimeout(()=>{ toast.textContent=''; }, 1800);
-  }},[ el('span',{class:'icon'},'⬇'), el('span',{class:'label'},'Descargar') ]);
   const shareItem = el('button',{class:'action-item', onclick:async ()=>{
     const shareData = { title: cat.name, text: `Prueba la sesión de "${cat.name}" en Centro Tapping`, url: location.href };
     try{
       if(navigator.share){ await navigator.share(shareData); }
-      else { await navigator.clipboard.writeText(location.href); toast.textContent='Enlace copiado'; setTimeout(()=>{ toast.textContent=''; }, 1800); }
+      else { await navigator.clipboard.writeText(location.href); toast.textContent='Enlace copiado'; setTimeout(()=>{ toast.textContent=''; }, 3000); }
     }catch(e){}
   }},[ el('span',{class:'icon'},'↗'), el('span',{class:'label'},'Compartir') ]);
-  const actionRow = el('div',{class:'action-row'},[favItem, dlItem, shareItem]);
+  const actionRow = el('div',{class:'action-row'},[favItem, shareItem]);
   body.appendChild(actionRow);
   body.appendChild(toast);
 
@@ -775,12 +772,17 @@ function renderHome(){
     el('span',{},`Historial · ${hist.length} sesión${hist.length===1?'':'es'}`),
     el('span',{},'›')
   ]);
+  const favCount = loadFavorites().length;
+  const favLink = el('div',{class:'hist-link',onclick:()=>goto('favorites')},[
+    el('span',{},`★ Favoritos · ${favCount}`),
+    el('span',{},'›')
+  ]);
 
   const footer = el('div',{class:'footer-note'},[
     'Esta app es un apoyo personal de autoayuda, no sustituye la atención médica o psicológica profesional. No diagnostica ni trata ninguna condición médica o psicológica. ',
     el('a',{href:'legal.html', style:'color:var(--sienna-deep);'}, 'Privacidad y términos'),
   ]);
-  app.replaceChildren(header, primera, intro, quickBlock, el('div',{class:'grid'}, cards), secRowBuilder(), histLink, footer);
+  app.replaceChildren(header, primera, intro, quickBlock, el('div',{class:'grid'}, cards), secRowBuilder(), favLink, histLink, footer);
 }
 
 function secRowBuilder(){
@@ -904,7 +906,12 @@ function renderSudAfter(){
     wrap.appendChild(el('p',{class:'stage-copy',style:'font-size:13.5px;'},'¿Ha bajado la intensidad?'));
     const row = el('div',{class:'choice-row'});
     row.appendChild(el('button',{class:'btn btn-primary',onclick:()=>{ ensureAudio(); goto('player-apertura'); }},'Sí, seguir'));
-    row.appendChild(el('button',{class:'btn btn-ghost',onclick:()=>{ ensureAudio(); goto('player-cierre'); }},'Terminar por ahora'));
+    row.appendChild(el('button',{class:'btn btn-ghost',onclick:()=>{
+      const hist = loadHistory();
+      hist.unshift({date:new Date().toISOString(), category:cat.name, before:state.sudBefore, after:state.sudAfter});
+      saveHistory(hist.slice(0,200));
+      goto('done');
+    }},'Terminar por ahora'));
     wrap.appendChild(row);
   }
   app.replaceChildren(wrap);
@@ -959,6 +966,25 @@ function renderDone(){
   app.replaceChildren(wrap);
 }
 
+function renderFavorites(){
+  const wrap = el('div',{class:'session-wrap'});
+  wrap.appendChild(topBar(()=>goto('home')));
+  wrap.appendChild(el('h2',{style:'margin-bottom:16px;'},'Favoritos'));
+  const favIds = loadFavorites();
+  const favCats = CATEGORIES.filter(c=>favIds.includes(c.id));
+  if(favCats.length===0){
+    wrap.appendChild(el('div',{class:'empty-hist'},'Aún no has marcado ninguna sesión como favorita. Entra a una sesión y toca la estrella.'));
+  } else {
+    favCats.forEach(cat=>{
+      wrap.appendChild(el('div',{class:'hist-item', style:'cursor:pointer;', onclick:()=>goto('cat-detail',{category:cat})},[
+        el('div',{class:'l'},[el('strong',{},cat.name), el('span',{},cat.desc||'')]),
+        el('div',{class:'r'},'›')
+      ]));
+    });
+  }
+  app.replaceChildren(wrap);
+}
+
 function renderHistory(){
   const wrap = el('div',{class:'session-wrap'});
   wrap.appendChild(topBar(()=>goto('home')));
@@ -991,6 +1017,7 @@ function render(){
     case 'player-apertura': return renderPlayerApertura();
     case 'player-cierre': return renderPlayerCierre();
     case 'done': return renderDone();
+    case 'favorites': return renderFavorites();
     case 'history': return renderHistory();
   }
 }
