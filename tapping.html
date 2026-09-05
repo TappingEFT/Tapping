@@ -791,7 +791,7 @@ function renderDone(){
   wrap.appendChild(el('p',{class:'stage-copy',style:'text-align:center;'}, diffText));
   wrap.appendChild(el('p',{class:'stage-copy',style:'text-align:center;font-size:15px;'},'¿Quieres hacer otra ronda?'));
   wrap.appendChild(el('button',{class:'btn btn-primary',onclick:()=>goto('sud-before',{category:cat, sudBefore:state.sudAfter})},'Hacer otra ronda'));
-  wrap.appendChild(el('button',{class:'btn btn-ghost',onclick:()=>goto('home')},'Terminar por ahora'));
+  wrap.appendChild(el('button',{class:'btn btn-ghost',onclick:()=>goto('home')},'Volver al inicio'));
   wrap.appendChild(el('div',{class:'spacer'}));
   app.replaceChildren(wrap);
 }
