@@ -6,6 +6,13 @@
 <meta name="color-scheme" content="light">
 <meta name="theme-color" content="#FFFFFF">
 <title>Centro · Tapping</title>
+<link rel="icon" href="app-icon.png">
+<link rel="apple-touch-icon" href="app-icon.png">
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Tapping">
+<meta name="mobile-web-app-capable" content="yes">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
@@ -68,6 +75,10 @@
   .points-guide-label{padding:10px 12px 12px;}
   .points-guide-label strong{display:block;font-size:14.5px;color:var(--ink);}
   .points-guide-label span{display:block;font-size:12.5px;color:var(--ink-soft);margin-top:2px;}
+  .points-guide-item img{cursor:zoom-in;}
+  .point-lightbox{position:fixed;inset:0;background:rgba(10,9,8,0.92);display:none;align-items:center;justify-content:center;z-index:500;padding:24px;cursor:zoom-out;}
+  .point-lightbox.open{display:flex;}
+  .point-lightbox img{max-width:100%;max-height:100%;border-radius:14px;object-fit:contain;}
   .detail-meta{font-size:14.5px;color:var(--ink-soft);margin-bottom:18px;}
   .detail-desc{font-size:16px;line-height:1.6;color:var(--ink);margin-bottom:26px;}
   .action-row{display:flex;border-top:1px solid var(--line);border-bottom:1px solid var(--line);margin-bottom:22px;}
@@ -993,15 +1004,20 @@ function renderPointsGuide(){
   const wrap = el('div',{class:'session-wrap'});
   wrap.appendChild(topBar(()=>goto('home')));
   wrap.appendChild(el('h2',{},'Cómo funciona'));
-  wrap.appendChild(el('p',{class:'stage-copy',style:'margin-bottom:18px;'},'Cada sesión te guía paso a paso, tocando suavemente estos 9 puntos del cuerpo con la yema de los dedos. No hace falta memorizarlos: la app te los va mostrando uno a uno mientras avanzas, pero aquí puedes verlos todos de antemano.'));
+  wrap.appendChild(el('p',{class:'stage-copy',style:'margin-bottom:18px;'},'Cada sesión te guía paso a paso, tocando suavemente estos 9 puntos del cuerpo con la yema de los dedos. No hace falta memorizarlos: la app te los va mostrando uno a uno mientras avanzas, pero aquí puedes verlos todos de antemano. Toca cualquier foto para verla más grande.'));
   const grid = el('div',{class:'points-guide-grid'});
+  const lightbox = el('div',{class:'point-lightbox', onclick:()=>{ lightbox.classList.remove('open'); }});
+  const lightboxImg = el('img',{});
+  lightbox.appendChild(lightboxImg);
   POINT_GUIDE.forEach((p,i)=>{
+    const img = el('img',{src:p.photo, alt:p.name, onclick:()=>{ lightboxImg.src=p.photo; lightboxImg.alt=p.name; lightbox.classList.add('open'); }});
     grid.appendChild(el('div',{class:'points-guide-item'},[
-      el('img',{src:p.photo, alt:p.name}),
+      img,
       el('div',{class:'points-guide-label'},[ el('strong',{}, p.name), el('span',{}, p.where) ]),
     ]));
   });
   wrap.appendChild(grid);
+  wrap.appendChild(lightbox);
   app.replaceChildren(wrap);
 }
 
