@@ -53,6 +53,7 @@
   .home-header p{color:var(--ink-soft);font-size:18px;line-height:1.55;margin-top:10px;max-width:34ch;}
 
   .grid{padding:16px 20px 8px;display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+  .group-title{padding:14px 20px 2px;font-size:15px;font-weight:700;color:var(--ink);}
   .cat-card{position:relative;border-radius:10px;overflow:hidden;height:150px;cursor:pointer;display:flex;align-items:flex-end;border:1px solid var(--line);}
   .cat-card:active{transform:scale(0.98);}
   .cat-card .cat-overlay{position:absolute;inset:0;background:linear-gradient(0deg, rgba(0,0,0,0.68) 0%, rgba(0,0,0,0.2) 55%, rgba(0,0,0,0.05) 100%);}
@@ -438,7 +439,7 @@ const CATEGORIES = [
     audio:{file:'Ansiedad.mp3', hasIntro:true, hasOutro:true, timestamps:[0,13.9021,46.2681,50.6464,56.3317,61.5602,66.3352,71.8384,78.0776,83.5445,88.6038,93.9004,104.186,107.759,112.028,116.737,124.393,130.782,140.976,148.8,153.426,156.367,166.83,171.414,175.947,182.329,186.804,195.756,203.953]},
   },
   {
-    id:'dormir', name:'Dormir', color:'#8F2F0E', photo:'dormir.jpg',
+    id:'dormir', name:'Dormir', color:'#8F2F0E', photo:'dormir.jpg', group:'Apoyo para el sueño',
     intro:'Hay noches en que el cuerpo está agotado pero la mente sigue trabajando horas extra. Vamos a hablarle directamente a esa parte tuya que no se apaga, hasta que empiece a soltar.',
     desc:'Para soltar el día y bajar el ritmo mental antes de dormir.',
     introScript:'Vas a centrarte en lo que sientes, en tu cuerpo, en tu propio ser. No respondas a los estímulos de fuera, sino que te regalas este espacio y este tiempo para ti, para soltar, sanar y conectarte con el descanso profundo.',
@@ -457,6 +458,36 @@ const CATEGORIES = [
     apertura:[],
     cierre:[],
     audio:{file:'dormir.mp3', hasIntro:true, hasOutro:true, timestamps:[0,14.4541,46.0521,50.4302,56.7627,63.6488,69.3648,75.2616,81.3416,87.5046,93.3317,98.6284,108.913,112.991,118.892,123.622,130.249,136.639,145.925,150.798,155.835,160.201,164.652,175.321,181.957,185.321]},
+  },
+  {
+    id:'tension_sueno', name:'Liberación de la tensión nerviosa y el estrés', color:'#8F2F0E', photo:'dormir.jpg', group:'Apoyo para el sueño',
+    intro:'Antes de dormir, el cuerpo suele seguir cargando con la tensión y el estrés del día sin que nos demos cuenta del todo. Esta sesión, más larga y detallada, te ayuda a localizarla y disolverla para poder descansar de verdad.',
+    desc:'Sesión completa para soltar la tensión nerviosa y el estrés acumulado antes de dormir.',
+    introScript:'En esta sesión de tapping, nos centraremos en disipar el exceso de tensión nerviosa y de estrés acumulado en tu organismo con el fin de que logres relajarte, abandonarte al descanso y dormir con profundidad. La tensión nerviosa y el estrés se manifiestan en el cuerpo de distintas maneras en cada persona. Mientras sintonizas con tu físico en este preciso instante, observa cómo se experimenta esa tensión nerviosa o ese estrés en ti. Tal vez percibas zonas rígidas o apretadas, o quizás notes partes de tu cuerpo con una sensación de nerviosismo o desgaste. A veces resulta sencillo identificar cuándo nos sentimos mal, pero en ocasiones nos habituamos tanto a un estado determinado, incluso aunque sea negativo, que necesitamos profundizar un poco más para darnos cuenta de lo desequilibrados que en realidad nos encontramos. Conéctate todavía más con tu cuerpo ahora. Presta atención a cualquier resto de tensión nerviosa o estrés que permanezca atrapado en ti y te esté obstaculizando el sueño. Puede que sientas opresión, un zumbido o cualquier otra sensación particular. Limítate a observar lo que percibes y puntúa su intensidad en una escala del cero al diez, donde el diez representa el nivel máximo de incomodidad y el cero significa que te encuentras totalmente a gusto. Registra tu número en la aplicación ahora mismo.',
+    karate:'Comenzaremos tomando una suave inspiración y exhalando con calma. Empieza a realizar el tapping en el lateral de la mano. Dado que esta sesión está ideada para facilitarte el sueño, si en algún momento los golpecitos te resultan demasiado estimulantes, puedes limitarte a presionar o mascular suavemente cada uno de los puntos. Como es habitual, arrancaremos reconociendo lo negativo o la verdad sobre cómo nos sentimos, no con el propósito de fijarlo, sino para admitirlo y permitir su marcha. Prosigue con el tapping en el lateral de la mano y repite las siguientes frases después de mí, ya sea de forma mental o en voz alta. A pesar de que mi cuerpo acumula cierta tensión nerviosa, decido relajarme en este momento. Continuando en el lateral de la mano: aunque haya estrés retenido en mi organismo, elijo relajarme y sentirme a salvo ahora. Una vez más en el lateral de la mano: a pesar de que tengo los nervios destrozados, me acepto por completo y acepto lo que estoy sintiendo.',
+    outroScript:'Para con suavidad los golpecitos de tapping, respira con tranquilidad y deja que todo se vaya. Vuelve a conectar con la tensión nerviosa y el estrés que evaluamos al inicio de nuestra práctica. ¿Qué nivel de intensidad presentan ahora en la escala del cero al diez? Vuelve a marcarlo en la aplicación. Si durante esta meditación afloraron numerosas emociones o recuerdos, procura ponerlos por escrito. Podrás hacerles tapping más adelante o simplemente repetir este ejercicio teniéndolos presentes. Cuanto más practiques este proceso, con mayor facilidad identificarás qué está originando dicha tensión nerviosa y estrés en tu cuerpo, y mejor entrenarás a tu organismo para relajarse y dormir profundamente. En apenas unos pocos minutos de tapping habrás conseguido disminuir los niveles de cortisol y otras hormonas del estrés, preparando el terreno para un descanso profundo. No solo lograrás quedarte dormido con mayor rapidez, sino que tu cuerpo entrará antes en una fase de sueño reparador y regenerativo. Buen trabajo. Utiliza esta meditación tantas veces como desees y contempla cómo tu vida y tu descanso experimentan una profunda transformación.',
+    rounds:[
+      R('Reconocer la tensión y el estrés',
+        ['Toda esta tensión nerviosa en mi cuerpo.','Todo este estrés.','Me estoy aferrando con tanta fuerza.','Y me cuesta tanto dejarlo ir para poder dormir.','Siento las secuelas de lo que ha durado mi día.','Y de mi vida entera.','Todo esto se ha quedado atascado en mi cuerpo.','Toda esta tensión nerviosa y este estrés.'],
+        'Realizando el tapping a través de los puntos.'),
+      R('Profundizar en silencio',
+        [
+          {key:'ladoOjo', phrase:'A medida que sintonizas con esta tensión, pregúntate de qué se trata exactamente. Deja que acuda a tu mente cualquier respuesta que surja. Quizás te acuerdes de algún incidente concreto de la jornada o de varios desafíos de tu vida cotidiana. Si no aparece nada, no pasa nada; sigue haciendo tapping, confía en el proceso y estarás ayudando a tu cuerpo a distenderse, soltar amarras y dormir.'},
+          {key:'debajoOjo', phrase:'Mientras respiras y aplicas el tapping con suavidad, hazte la pregunta otra vez: ¿qué hay detrás de esta tensión?'},
+          {key:'debajoNariz', phrase:'Sintiéndote presente, fuerte y protegido en tu interior, pregúntate: ¿puedo dejar marchar esta tensión? Observa cuál es tu reacción interna. ¿Soy capaz de liberarme de ella?'},
+          {key:'barbilla', phrase:'Si notas resistencia ante la idea de soltarla, consúltate a ti mismo si al menos podrías dejar ir este peso hasta mañana. A veces nos aterra desprendernos de la tensión y el estrés porque nos persuade la falsa idea de que necesitamos retenerlos para resolver los problemas de nuestra existencia. Aunque no sea cierto, si experimentas esa reticencia, abre una pequeña puerta permitiéndote al menos archivar estas cargas hasta el día de mañana.'},
+          {key:'clavicula', phrase:'Si tu cuerpo estuviera libre de tensión, si esta energía nerviosa no te recorriera por dentro, ¿te imaginas cuán distinto se sentiría? Visualiza esas sensaciones ahora. Imagina ese estado de calma y paz, y figúrate soltando estas cargas hasta mañana.'},
+          {key:'brazo', phrase:'Percibe cómo tu cuerpo se afloja, se relaja y halla mayor paz mientras sueltas y liberas por completo toda esta tensión nerviosa y este estrés.'},
+          {key:'coronilla', phrase:'Relájate todavía un poco más. Es seguro abandonarlo. Es seguro distenderse y dormir profundamente.'},
+        ],
+        'Haciendo tapping con delicadeza en la ceja, limítate a escuchar y visualizar mientras sigo guiándote por los puntos. No te preocupes por pronunciar nada en voz alta en este tramo. Ahora que hemos empezado a sintonizar con esta tensión nerviosa y este estrés, reconociendo el dominio que ejercen sobre nuestro cuerpo, profundicemos un poco más para empezar a disolverlos. Vuelve a conectar con tu físico e intenta ubicar exactamente en qué región notas la mayor tensión. Limítate a contemplarla ahora mismo.'),
+      R('Reafirmar lo positivo',
+        ['Elijo liberar cualquier rastro de tensión que quede en mi cuerpo.','Elijo disipar cualquier resto de estrés en mi organismo.','Es completamente seguro dejar marchar esto.','Y conciliar un sueño profundo.','Mi cuerpo se encuentra calmado y en paz.','Soltando y dejando ir.','Sintiéndome a salvo.','Aquí y ahora.'],
+        'Llevemos a cabo una ronda más de tapping reafirmando lo positivo. Repite tras de mí, de manera mental o en voz alta.'),
+    ],
+    apertura:[],
+    cierre:[],
+    audio:{file:'p_20383637_944.mp3', hasIntro:true, hasOutro:true, introAsksRating:true, outroAsksRating:true, timestamps:[0,40.0736,56.1515,86.9113,106.812,117.356,125.413,131.887,148.924,152.679,156.891,164.824,169.954,174.477,182.92,210.721,219.867,245.305,259.043,281.822,300.406,328.981,346.984,357.847,362.916,379.46,389.217,401.74,426.457]},
   },
   {
     id:'miedo', name:'Miedo', color:'#742E0E', photo:'miedo.jpg',
@@ -979,13 +1010,34 @@ function renderHome(){
     quickRow,
   ]);
 
-  const cards = CATEGORIES.map(cat=>{
+  function buildCard(cat){
     const mins = estimateMinutes(cat, settings.seconds);
     const overlay = el('div',{class:'cat-overlay'});
     const text = el('div',{class:'cat-text'},[ el('h3',{},cat.name), el('span',{},`${mins} min · ${cat.desc}`) ]);
-    const card = el('div',{class:'cat-card', style:`background:${cat.photo?`url('${cat.photo}') center/cover`:`linear-gradient(135deg, ${cat.color}, ${cat.color}CC)`}`, onclick:()=>{ state.quickMode=false; goto('cat-detail',{category:cat, sudBefore:5}); }},[overlay, text]);
-    return card;
+    return el('div',{class:'cat-card', style:`background:${cat.photo?`url('${cat.photo}') center/cover`:`linear-gradient(135deg, ${cat.color}, ${cat.color}CC)`}`, onclick:()=>{ state.quickMode=false; goto('cat-detail',{category:cat, sudBefore:5}); }},[overlay, text]);
+  }
+
+  const groups = [];
+  const groupIndex = {};
+  const ungrouped = [];
+  CATEGORIES.forEach(cat=>{
+    if(cat.group){
+      if(!(cat.group in groupIndex)){ groupIndex[cat.group] = groups.length; groups.push({name:cat.group, cats:[]}); }
+      groups[groupIndex[cat.group]].cats.push(cat);
+    } else {
+      ungrouped.push(cat);
+    }
   });
+
+  const sections = [];
+  groups.forEach(g=>{
+    sections.push(el('div',{class:'group-title'}, g.name));
+    sections.push(el('div',{class:'grid'}, g.cats.map(buildCard)));
+  });
+  if(ungrouped.length){
+    if(groups.length) sections.push(el('div',{class:'group-title'}, 'Todas las sesiones'));
+    sections.push(el('div',{class:'grid'}, ungrouped.map(buildCard)));
+  }
 
   const hist = loadHistory();
   const histLink = el('div',{class:'hist-link',onclick:()=>goto('history')},[
@@ -1002,7 +1054,7 @@ function renderHome(){
     'Esta app es un apoyo personal de autoayuda, no sustituye la atención médica o psicológica profesional. No diagnostica ni trata ninguna condición médica o psicológica. ',
     el('a',{href:'legal.html', style:'color:var(--sienna-deep);'}, 'Privacidad y términos'),
   ]);
-  app.replaceChildren(header, guideBtn, primera, quickBlock, el('div',{class:'grid'}, cards), favLink, histLink, footer);
+  app.replaceChildren(header, guideBtn, primera, quickBlock, ...sections, favLink, histLink, footer);
 }
 
 function renderPointsGuide(){
