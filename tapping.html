@@ -38,7 +38,9 @@
   .back-btn{background:none;border:none;color:var(--ink-soft);font-size:15px;font-family:'Source Sans 3',sans-serif;padding:6px 0;cursor:pointer;}
   .back-btn:active{opacity:0.6;}
 
-  .home-header{padding:8px 24px 4px;}
+  .home-header{padding:8px 24px 4px;position:relative;}
+  .settings-btn{position:absolute;top:8px;right:24px;background:none;border:none;font-size:24px;line-height:1;color:var(--ink-soft);cursor:pointer;padding:6px;}
+  .settings-btn:active{opacity:0.6;}
   .home-header .eyebrow{color:var(--sienna-deep);font-size:16px;margin-bottom:6px;font-weight:600;}
   .home-header h1{font-size:36px;}
   .home-header p{color:var(--ink-soft);font-size:18px;line-height:1.55;margin-top:10px;max-width:34ch;}
@@ -56,7 +58,10 @@
   .hero-wrap .hero-fallback{width:100%;height:100%;}
   .hero-back{position:absolute;top:16px;left:16px;width:38px;height:38px;border-radius:50%;background:rgba(255,255,255,0.9);border:none;display:flex;align-items:center;justify-content:center;font-size:18px;color:var(--ink);cursor:pointer;}
   .detail-body{padding:22px 24px 30px;}
-  .detail-body h1{font-size:26px;margin-bottom:8px;}
+  .detail-body h1{font-size:26px;margin-bottom:0;}
+  .detail-title-row{display:flex;align-items:center;justify-content:space-between;gap:12px;}
+  .fav-icon-btn{background:none;border:none;font-size:24px;line-height:1;color:var(--line);cursor:pointer;padding:4px;flex-shrink:0;}
+  .fav-icon-btn.active{color:var(--sienna-deep);}
   .detail-meta{font-size:14.5px;color:var(--ink-soft);margin-bottom:18px;}
   .detail-desc{font-size:16px;line-height:1.6;color:var(--ink);margin-bottom:26px;}
   .action-row{display:flex;border-top:1px solid var(--line);border-bottom:1px solid var(--line);margin-bottom:22px;}
@@ -192,14 +197,25 @@ const DIAGRAM_IMG = 'mujer-tapping.jpg';
 function R(title, phrases, transition){ return {title, phrases, transition}; } // phrases: array of 8, matching POINT_META order; transition: optional line spoken before the round starts, with no point attached
 
 const PRIMERA_SESION = {
-  id:'primera-sesion', name:'Tu primera sesión', color:'#8F2F0E', photo:'mujer-tapping.jpg',
+  id:'primera-sesion', name:'Tu primera sesión', color:'#8F2F0E', photo:'primera_sesion.jpg',
   desc:'Una práctica corta para empezar, sin experiencia previa.',
   noRating:true,
-  karate:'Aunque no sé si estoy haciendo esto bien, y aunque es la primera vez que pruebo el tapping, me acepto completamente y me permito aprender a mi ritmo.',
+  introScript:'Cerramos los ojos, tomamos aire por la nariz y lo exhalamos con suavidad. Vamos a realizar así un par de respiraciones para aquietar la mente y anclarnos por completo en el aquí y en el ahora. Muy bien, así se hace. Tú limítate a seguir mis pasos y a escuchar mis palabras; no es necesario que las repitas en voz alta, ya que el tapping se encarga de hacer el resto del trabajo de liberación y transformación.',
+  karate:'Venga, comenzamos. En el punto kárate y repitiendo tres veces esta frase: aunque este método tal vez sea completamente nuevo para mí, decido abrirme a nuevas alternativas. A pesar de que quizá me resulte un poco extraño, elijo darme una oportunidad. Y aunque este procedimiento pueda parecerme un tanto peculiar y no sepa muy bien qué esperar, por ahora elijo no hacerme expectativas y simplemente permitirme aprovechar esta oportunidad.',
+  outroScript:'Muy bien, pues ahora vamos a realizar un par de respiraciones más; si te apetece, puedes cerrar los ojos y, en lugar de pensar tanto, limitarte a sentir y a conectar profundamente con esta agradable sensación.',
   rounds:[
-    R('Primeros pasos', ['Estoy probando algo nuevo.','No necesito hacerlo perfecto.','Solo estoy siguiendo el ritmo de la app.','Me permito aprender a mi manera.','Cada vez que toco un punto, me doy un momento de calma.','No hace falta que sienta nada especial todavía.','Solo estoy probando cómo se siente esto.','Me permito estar abierta a lo que sea que esto traiga.']),
+    R('Reconocer la experiencia',
+      ['Empezamos en el inicio de la ceja: esta sensación que estoy experimentando ahora mismo.','Al lado del ojo: esto que estoy sintiendo.','Debajo del ojo: la verdad es que no sé muy bien qué pensar de todo esto.','Bajo la nariz: tengo dudas sobre si esto me aportará algún beneficio real.','En la barbilla: esto mismo que estoy percibiendo en mi interior.','En la clavícula: estos pensamientos que pasan por mi mente.','Debajo del brazo: es una sensación bastante curiosa, aunque por algún motivo me hace sentir bien.','Y en la coronilla: todo esto que estoy experimentando en este momento.'],
+      'Perfecto, avanzamos con la primera ronda, recorriendo todos los puntos uno por uno.'),
+    R('Liberar las dudas',
+      ['Comenzamos en el inicio de la ceja: decido dejar ir todas estas dudas.','Al lado del ojo: elijo liberarme de esta inquietud que me acompañaba.','Debajo del ojo: opto por soltar cualquier exceso de pensamientos.','Bajo la nariz: decido despojarme de las ganas de analizarlo todo en exceso.','En la barbilla: elijo soltar todo aquello que me impedía conectar con la paz.','En la clavícula: decido liberar cualquier inseguridad interna para abrirme de par en par a esta vivencia.','Debajo del brazo: elijo dejar atrás cualquier temor o preocupación sobre si esto funcionará o no.','Y en la coronilla: simplemente decido abrirme por completo a esta experiencia.'],
+      'Venga, pasamos a la segunda ronda. Recuerda que en esta fase nos centramos en liberar aquello que nos pesaba o bloqueaba.'),
+    R('Sembrar energía positiva',
+      ['Comenzamos en el inicio de la ceja: decido abrirme por completo a esta vivencia.','Al lado del ojo: ¿y si resulta que esto realmente me ayuda?','Debajo del ojo: ¿y si esto es aquello que llevaba tantos años esperando?','Bajo la nariz: ¿y si se trata de la respuesta que tanto ansiaba encontrar?','En la barbilla: ¿y si tengo la capacidad de dar un vuelco positivo a mi vida?','En la clavícula: elijo abrirme a lo más favorable para mí.','Debajo del brazo: decido recibir las mejores opciones sin aferrarme a expectativas rígidas.','Y en la coronilla: elijo confiar, relajarme y dejarme llevar por este proceso.'],
+      'Magnífico. Ahora avanzamos hacia la tercera ronda, el momento de sembrar una energía positiva y constructiva.'),
   ],
   apertura:[], cierre:[],
+  audio:{file:'p_20362219_820.mp3', hasIntro:true, hasOutro:true, timestamps:[0,25.009,52.2886,58.9505,65.4731,69.6972,75.2631,80.9816,86.0461,91.1531,98.3956,103.825,112.915,118.707,124.176,129.671,135.582,141.505,148.585,155.516,161.413,170.034,176.187,181.105,186.644,192.126,197.669,202.561,209.491,215.84]},
 };
 
 const CATEGORIES = [
@@ -842,20 +858,19 @@ function renderCatDetail(){
   wrap.appendChild(hero);
 
   const body = el('div',{class:'detail-body'});
-  body.appendChild(el('h1',{}, cat.name));
-  body.appendChild(el('div',{class:'detail-meta'}, `${mins} min · sesión guiada`));
 
   const toast = el('div',{class:'action-toast'});
   const favActive = isFavorite(cat.id);
-  const favItem = el('button',{class:'action-item'+(favActive?' active':''), onclick:(e)=>{
+  const favBtn = el('button',{class:'fav-icon-btn'+(favActive?' active':''), onclick:(e)=>{
     toggleFavorite(cat.id);
     const nowActive = isFavorite(cat.id);
     e.currentTarget.classList.toggle('active', nowActive);
     toast.textContent = nowActive ? 'Añadida a favoritos' : 'Quitada de favoritos';
     setTimeout(()=>{ toast.textContent=''; }, 3000);
-  }},[ el('span',{class:'icon'},'★'), el('span',{class:'label'},'Favorito') ]);
-  const actionRow = el('div',{class:'action-row'},[favItem]);
-  body.appendChild(actionRow);
+  }}, '★');
+  const titleRow = el('div',{class:'detail-title-row'},[ el('h1',{}, cat.name), favBtn ]);
+  body.appendChild(titleRow);
+  body.appendChild(el('div',{class:'detail-meta'}, `${mins} min · sesión guiada`));
   body.appendChild(toast);
 
   body.appendChild(el('p',{class:'detail-desc'}, cat.intro || cat.desc || ''));
@@ -864,9 +879,10 @@ function renderCatDetail(){
   const skipRatingHere = !!(cat.audio && cat.audio.introAsksRating && state.audioOn);
 
   if(!skipRatingHere){
-    const thermoContainer = el('div',{style:'margin:6px 0 20px;'});
+    const thermoContainer = el('div',{style:'margin:6px 0 4px;'});
     body.appendChild(thermoContainer);
     renderThermometerHorizontal(thermoContainer, state.sudBefore, (v)=>{ state.sudBefore = v; });
+    body.appendChild(el('p',{class:'stage-copy',style:'font-size:13.5px;margin-top:4px;margin-bottom:20px;'},'Del 0 al 10, cuánto te está afectando esto ahora mismo.'));
   } else {
     body.appendChild(el('p',{class:'stage-copy'},'Al empezar, la propia sesión te va a pedir que valores del 0 al 10 cuánto te está afectando esto.'));
   }
@@ -875,10 +891,10 @@ function renderCatDetail(){
 
   if(cat.audio){
     const audioRow = el('div',{class:'settings-row'});
-    audioRow.appendChild(el('span',{}, '🔊 Escuchar con audio'));
+    audioRow.appendChild(el('span',{}, 'Audio'));
     const seg = el('div',{class:'seg'});
-    const onBtn = el('button',{class: state.audioOn?'active':'', onclick:()=>{ state.audioOn=true; renderCatDetail(); }}, 'Sí');
-    const offBtn = el('button',{class: !state.audioOn?'active':'', onclick:()=>{ state.audioOn=false; renderCatDetail(); }}, 'Solo texto');
+    const onBtn = el('button',{class: state.audioOn?'active':'', onclick:()=>{ state.audioOn=true; renderCatDetail(); }}, 'On');
+    const offBtn = el('button',{class: !state.audioOn?'active':'', onclick:()=>{ state.audioOn=false; renderCatDetail(); }}, 'Off');
     seg.appendChild(onBtn); seg.appendChild(offBtn);
     audioRow.appendChild(seg);
     body.appendChild(audioRow);
@@ -896,6 +912,7 @@ function renderCatDetail(){
 
 function renderHome(){
   const header = el('div',{class:'home-header'},[
+    el('button',{class:'settings-btn', onclick:()=>goto('settings'), 'aria-label':'Ajustes'}, '⚙'),
     el('div',{class:'eyebrow'},'Tu práctica diaria'),
     el('h1',{},'Tapping'),
     el('p',{},'Elige qué te está pidiendo atención ahora mismo. La app avanza sola por los puntos — tú solo golpetea.'),
@@ -920,7 +937,7 @@ function renderHome(){
   quickList.forEach(q=>{
     const cat = CATEGORIES.find(c=>c.id===q.id);
     if(!cat) return;
-    quickRow.appendChild(el('button',{class:'quick-pill', onclick:()=>{ state.quickMode=true; goto('sud-before',{category:cat, sudBefore:5}); }}, q.label));
+    quickRow.appendChild(el('button',{class:'quick-pill', onclick:()=>{ state.quickMode=false; goto('cat-detail',{category:cat, sudBefore:5}); }}, q.label));
   });
   const quickBlock = el('div',{class:'quick-block'},[
     el('div',{class:'quick-title'},'⚡ Necesito algo rápido'),
@@ -950,7 +967,16 @@ function renderHome(){
     'Esta app es un apoyo personal de autoayuda, no sustituye la atención médica o psicológica profesional. No diagnostica ni trata ninguna condición médica o psicológica. ',
     el('a',{href:'legal.html', style:'color:var(--sienna-deep);'}, 'Privacidad y términos'),
   ]);
-  app.replaceChildren(header, primera, intro, quickBlock, el('div',{class:'grid'}, cards), secRowBuilder(), themeRowBuilder(), favLink, histLink, footer);
+  app.replaceChildren(header, primera, intro, quickBlock, el('div',{class:'grid'}, cards), favLink, histLink, footer);
+}
+
+function renderSettings(){
+  const wrap = el('div',{class:'session-wrap'});
+  wrap.appendChild(topBar(()=>goto('home')));
+  wrap.appendChild(el('h2',{},'Ajustes'));
+  wrap.appendChild(secRowBuilder());
+  wrap.appendChild(themeRowBuilder());
+  app.replaceChildren(wrap);
 }
 
 function secRowBuilder(){
@@ -958,7 +984,7 @@ function secRowBuilder(){
   secRow.appendChild(el('span',{}, 'Segundos por punto'));
   const seg = el('div',{class:'seg'});
   [[6,'Rápida'],[9,'Normal'],[12,'Profunda']].forEach(([sec,label])=>{
-    const b = el('button',{class: settings.seconds===sec?'active':'', onclick:()=>{ settings.seconds=sec; saveSettings(settings); renderHome(); }}, label);
+    const b = el('button',{class: settings.seconds===sec?'active':'', onclick:()=>{ settings.seconds=sec; saveSettings(settings); renderSettings(); }}, label);
     seg.appendChild(b);
   });
   secRow.appendChild(seg);
@@ -970,7 +996,7 @@ function themeRowBuilder(){
   row.appendChild(el('span',{}, 'Color de la app'));
   const seg = el('div',{class:'seg'});
   [['light','Claro'],['sepia','Sepia'],['dark','Oscuro']].forEach(([theme,label])=>{
-    const b = el('button',{class: (settings.theme||'light')===theme?'active':'', onclick:()=>{ settings.theme=theme; saveSettings(settings); applyTheme(theme); renderHome(); }}, label);
+    const b = el('button',{class: (settings.theme||'light')===theme?'active':'', onclick:()=>{ settings.theme=theme; saveSettings(settings); applyTheme(theme); renderSettings(); }}, label);
     seg.appendChild(b);
   });
   row.appendChild(seg);
@@ -1159,6 +1185,7 @@ function renderHistory(){
 function render(){
   switch(state.screen){
     case 'home': return renderHome();
+    case 'settings': return renderSettings();
     case 'cat-detail': return renderCatDetail();
     case 'intro': return renderIntro();
     case 'sud-before': return renderSudBefore();
