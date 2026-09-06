@@ -62,6 +62,13 @@
   .detail-title-row{display:flex;align-items:center;justify-content:space-between;gap:12px;}
   .fav-icon-btn{background:none;border:none;font-size:24px;line-height:1;color:var(--line);cursor:pointer;padding:4px;flex-shrink:0;}
   .fav-icon-btn.active{color:var(--sienna-deep);}
+  .points-guide-grid{display:flex;flex-direction:column;gap:14px;}
+  .points-guide-item{display:flex;align-items:center;gap:14px;border:1px solid var(--line);border-radius:14px;overflow:hidden;background:var(--card);}
+  .points-guide-item img{width:96px;height:96px;object-fit:cover;flex-shrink:0;}
+  .points-guide-label{display:flex;align-items:center;gap:10px;padding:10px 14px 10px 0;}
+  .points-guide-num{font-size:13px;font-weight:700;color:var(--sienna-deep);border:1px solid var(--sienna-deep);border-radius:50%;width:22px;height:22px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .points-guide-label strong{display:block;font-size:15.5px;color:var(--ink);}
+  .points-guide-label span{display:block;font-size:13px;color:var(--ink-soft);margin-top:2px;}
   .detail-meta{font-size:14.5px;color:var(--ink-soft);margin-bottom:18px;}
   .detail-desc{font-size:16px;line-height:1.6;color:var(--ink);margin-bottom:26px;}
   .action-row{display:flex;border-top:1px solid var(--line);border-bottom:1px solid var(--line);margin-bottom:22px;}
@@ -193,6 +200,18 @@ const POINT_META = [
 ];
 const KARATE_META = {key:'karate', name:'Canto de la mano', where:'lado exterior de la mano, bajo el meñique', x:49, y:70};
 const DIAGRAM_IMG = 'mujer-tapping.jpg';
+
+const POINT_GUIDE = [
+  {name:'Canto de la mano', where:'lado exterior de la mano, bajo el meñique', photo:'punto_karate.jpg'},
+  {name:'Ceja', where:'inicio de la ceja, junto al puente de la nariz', photo:'punto_ceja.jpg'},
+  {name:'Lado del ojo', where:'hueso de la sien, junto al rabillo del ojo', photo:'punto_lado_ojo.jpg'},
+  {name:'Debajo del ojo', where:'sobre el hueso, bajo la pupila', photo:'punto_debajo_ojo.jpg'},
+  {name:'Debajo de la nariz', where:'entre la nariz y el labio superior', photo:'punto_debajo_nariz.jpg'},
+  {name:'Barbilla', where:'en el pliegue, entre el labio y la barbilla', photo:'punto_barbilla.jpg'},
+  {name:'Clavícula', where:'debajo de la unión de las clavículas', photo:'punto_clavicula.jpg'},
+  {name:'Debajo del brazo', where:'unos 10 cm bajo la axila', photo:'punto_debajo_brazo.jpg'},
+  {name:'Coronilla', where:'centro superior de la cabeza', photo:'punto_coronilla.jpg'},
+];
 
 function R(title, phrases, transition){ return {title, phrases, transition}; } // phrases: array of 8, matching POINT_META order; transition: optional line spoken before the round starts, with no point attached
 
@@ -970,12 +989,36 @@ function renderHome(){
   app.replaceChildren(header, primera, intro, quickBlock, el('div',{class:'grid'}, cards), favLink, histLink, footer);
 }
 
+function renderPointsGuide(){
+  const wrap = el('div',{class:'session-wrap'});
+  wrap.appendChild(topBar(()=>goto('home')));
+  wrap.appendChild(el('h2',{},'Guía de puntos'));
+  wrap.appendChild(el('p',{class:'stage-copy',style:'margin-bottom:18px;'},'Estos son los 9 puntos que vas a tocar en cada sesión. No hace falta memorizarlos: la app te los va mostrando uno a uno mientras avanzas.'));
+  const grid = el('div',{class:'points-guide-grid'});
+  POINT_GUIDE.forEach((p,i)=>{
+    grid.appendChild(el('div',{class:'points-guide-item'},[
+      el('img',{src:p.photo, alt:p.name}),
+      el('div',{class:'points-guide-label'},[
+        el('span',{class:'points-guide-num'}, String(i+1)),
+        el('div',{},[ el('strong',{}, p.name), el('span',{}, p.where) ]),
+      ]),
+    ]));
+  });
+  wrap.appendChild(grid);
+  app.replaceChildren(wrap);
+}
+
 function renderSettings(){
   const wrap = el('div',{class:'session-wrap'});
   wrap.appendChild(topBar(()=>goto('home')));
   wrap.appendChild(el('h2',{},'Ajustes'));
   wrap.appendChild(secRowBuilder());
   wrap.appendChild(themeRowBuilder());
+  const guideLink = el('div',{class:'hist-link',onclick:()=>goto('points-guide')},[
+    el('span',{},'Guía de puntos'),
+    el('span',{},'›')
+  ]);
+  wrap.appendChild(guideLink);
   app.replaceChildren(wrap);
 }
 
@@ -1186,6 +1229,7 @@ function render(){
   switch(state.screen){
     case 'home': return renderHome();
     case 'settings': return renderSettings();
+    case 'points-guide': return renderPointsGuide();
     case 'cat-detail': return renderCatDetail();
     case 'intro': return renderIntro();
     case 'sud-before': return renderSudBefore();
@@ -1198,6 +1242,11 @@ function render(){
   }
 }
 
+const SEEN_GUIDE_KEY = 'tapping_seen_guide_v1';
+if(!localStorage.getItem(SEEN_GUIDE_KEY)){
+  localStorage.setItem(SEEN_GUIDE_KEY, '1');
+  state.screen = 'points-guide';
+}
 render();
 </script>
 </body>
