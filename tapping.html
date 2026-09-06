@@ -15,8 +15,20 @@
     --sienna:#B23D14; --sienna-deep:#8F2F0E; --sage:#3E5A2E; --sage-deep:#2F4522;
     --plum:#5A2E52; --card:#FAF6EE; --line:rgba(20,18,16,0.28);
   }
+  body.theme-dark{
+    color-scheme: dark;
+    --stone:#1C1A17; --stone-deep:#141210; --ink:#F2EEE6; --ink-soft:#C9C2B4;
+    --sienna:#E2703A; --sienna-deep:#F0895A; --sage:#7FA365; --sage-deep:#96B87E;
+    --plum:#B784AC; --card:#26221D; --line:rgba(242,238,230,0.22);
+  }
+  body.theme-sepia{
+    color-scheme: light;
+    --stone:#F3E9D6; --stone-deep:#E8DABE; --ink:#2E2417; --ink-soft:#5C4E38;
+    --sienna:#A8431A; --sienna-deep:#8A360F; --sage:#3E5A2E; --sage-deep:#2F4522;
+    --plum:#5A2E52; --card:#FAF1DD; --line:rgba(46,36,23,0.28);
+  }
   *{box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
-  html{background:#FFFFFF;color-scheme:light;}
+  html{background:var(--stone);}
   html,body{margin:0;padding:0;}
   body{background:var(--stone);color:var(--ink);font-family:'Source Sans 3',Arial,sans-serif;font-size:18px;min-height:100vh;-webkit-font-smoothing:antialiased;}
   h1,h2,h3{font-family:'Source Sans 3',Arial,sans-serif;font-weight:700;margin:0;letter-spacing:0;}
@@ -180,8 +192,9 @@ const DIAGRAM_IMG = 'mujer-tapping.jpg';
 function R(title, phrases, transition){ return {title, phrases, transition}; } // phrases: array of 8, matching POINT_META order; transition: optional line spoken before the round starts, with no point attached
 
 const PRIMERA_SESION = {
-  id:'primera-sesion', name:'Tu primera sesión', color:'#8F2F0E',
+  id:'primera-sesion', name:'Tu primera sesión', color:'#8F2F0E', photo:'mujer-tapping.jpg',
   desc:'Una práctica corta para empezar, sin experiencia previa.',
+  noRating:true,
   karate:'Aunque no sé si estoy haciendo esto bien, y aunque es la primera vez que pruebo el tapping, me acepto completamente y me permito aprender a mi ritmo.',
   rounds:[
     R('Primeros pasos', ['Estoy probando algo nuevo.','No necesito hacerlo perfecto.','Solo estoy siguiendo el ritmo de la app.','Me permito aprender a mi manera.','Cada vez que toco un punto, me doy un momento de calma.','No hace falta que sienta nada especial todavía.','Solo estoy probando cómo se siente esto.','Me permito estar abierta a lo que sea que esto traiga.']),
@@ -518,8 +531,13 @@ function toggleFavorite(id){
 }
 function loadHistory(){ try{ return JSON.parse(localStorage.getItem(STORAGE_KEY)) || []; }catch(e){ return []; } }
 function saveHistory(list){ localStorage.setItem(STORAGE_KEY, JSON.stringify(list)); }
-function loadSettings(){ try{ return {...{seconds:9}, ...JSON.parse(localStorage.getItem(SETTINGS_KEY))}; }catch(e){ return {seconds:9}; } }
+function loadSettings(){ try{ return {...{seconds:9, theme:'light'}, ...JSON.parse(localStorage.getItem(SETTINGS_KEY))}; }catch(e){ return {seconds:9, theme:'light'}; } }
 function saveSettings(s){ localStorage.setItem(SETTINGS_KEY, JSON.stringify(s)); }
+function applyTheme(theme){
+  document.body.classList.remove('theme-dark','theme-sepia');
+  if(theme==='dark') document.body.classList.add('theme-dark');
+  else if(theme==='sepia') document.body.classList.add('theme-sepia');
+}
 
 /* =================== DOM helpers =================== */
 const app = document.getElementById('app');
@@ -556,6 +574,7 @@ function chime(){ beep(660,0.12,0.06); setTimeout(()=>beep(880,0.15,0.05),110); 
 /* =================== State =================== */
 let state = { screen:'home', category:null, sudBefore:5, sudAfter:5 };
 let settings = loadSettings();
+applyTheme(settings.theme);
 let timerHandle = null; // interval id for the running player
 let playerCtx = null;   // holds current sequence/index/paused/etc
 
@@ -882,7 +901,7 @@ function renderHome(){
     el('p',{},'Elige qué te está pidiendo atención ahora mismo. La app avanza sola por los puntos — tú solo golpetea.'),
   ]);
 
-  const primera = el('div',{class:'intro-card',onclick:()=>{ state.quickMode=true; goto('sud-before',{category:PRIMERA_SESION, sudBefore:5}); }},[
+  const primera = el('div',{class:'intro-card',onclick:()=>{ state.quickMode=true; goto('cat-detail',{category:PRIMERA_SESION, sudBefore:5}); }},[
     el('div',{class:'dot'},'★'),
     el('div',{},[el('h3',{},'Tu primera sesión'),el('span',{},'No necesitas saber tapping. Te guiamos paso a paso · 3 min')]),
   ]);
@@ -931,7 +950,7 @@ function renderHome(){
     'Esta app es un apoyo personal de autoayuda, no sustituye la atención médica o psicológica profesional. No diagnostica ni trata ninguna condición médica o psicológica. ',
     el('a',{href:'legal.html', style:'color:var(--sienna-deep);'}, 'Privacidad y términos'),
   ]);
-  app.replaceChildren(header, primera, intro, quickBlock, el('div',{class:'grid'}, cards), secRowBuilder(), favLink, histLink, footer);
+  app.replaceChildren(header, primera, intro, quickBlock, el('div',{class:'grid'}, cards), secRowBuilder(), themeRowBuilder(), favLink, histLink, footer);
 }
 
 function secRowBuilder(){
@@ -944,6 +963,18 @@ function secRowBuilder(){
   });
   secRow.appendChild(seg);
   return secRow;
+}
+
+function themeRowBuilder(){
+  const row = el('div',{class:'settings-row'});
+  row.appendChild(el('span',{}, 'Color de la app'));
+  const seg = el('div',{class:'seg'});
+  [['light','Claro'],['sepia','Sepia'],['dark','Oscuro']].forEach(([theme,label])=>{
+    const b = el('button',{class: (settings.theme||'light')===theme?'active':'', onclick:()=>{ settings.theme=theme; saveSettings(settings); applyTheme(theme); renderHome(); }}, label);
+    seg.appendChild(b);
+  });
+  row.appendChild(seg);
+  return row;
 }
 
 function renderIntro(){
@@ -1039,18 +1070,23 @@ function renderSudAfter(){
   const wrap = el('div',{class:'session-wrap'});
   wrap.appendChild(topBar(()=>goto('home')));
   wrap.appendChild(el('div',{class:'cat-tag'},cat.name));
-  wrap.appendChild(el('h2',{},'¿Cómo te sientes ahora?'));
 
-  const thermoContainer = el('div',{style:'margin-bottom:20px;'});
-  wrap.appendChild(thermoContainer);
-  renderThermometer(thermoContainer, state.sudAfter, (v)=>{ state.sudAfter = v; });
+  if(!cat.noRating){
+    wrap.appendChild(el('h2',{},'¿Cómo te sientes ahora?'));
+    const thermoContainer = el('div',{style:'margin-bottom:20px;'});
+    wrap.appendChild(thermoContainer);
+    renderThermometer(thermoContainer, state.sudAfter, (v)=>{ state.sudAfter = v; });
+  } else {
+    wrap.appendChild(el('h2',{},'Bien hecho'));
+    wrap.appendChild(el('p',{class:'stage-copy'},'Has terminado tu primera sesión de tapping.'));
+  }
 
   wrap.appendChild(el('div',{class:'spacer'}));
   const finishLabel = state.quickMode ? 'Guardar y terminar' : 'Guardar sesión';
   const onFinish = state.quickMode ? 'home' : 'done';
   wrap.appendChild(el('button',{class:'btn btn-primary',onclick:()=>{
     const hist = loadHistory();
-    hist.unshift({date:new Date().toISOString(), category:cat.name, before:state.sudBefore, after:state.sudAfter});
+    hist.unshift({date:new Date().toISOString(), category:cat.name, before:state.sudBefore, after:(cat.noRating?state.sudBefore:state.sudAfter)});
     saveHistory(hist.slice(0,200));
     goto(onFinish);
   }}, finishLabel));
