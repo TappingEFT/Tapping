@@ -165,6 +165,7 @@
   .point-name{font-size:34px;font-weight:700;margin-top:6px;color:var(--ink);}
   .point-where{font-size:17px;color:var(--ink-soft);margin-top:4px;}
   .point-phrase{font-size:18px;color:var(--sienna-deep);font-weight:600;line-height:1.5;margin-top:22px;width:100%;text-align:left;align-self:stretch;}
+  .phrase-more-btn{background:none;border:none;padding:0;font-family:'Source Sans 3',Arial,sans-serif;font-size:15px;font-weight:700;color:var(--ink-soft);text-decoration:underline;cursor:pointer;}
 
   .timer-ring{width:64px;height:64px;border-radius:50%;border:3px solid var(--line);display:flex;align-items:center;justify-content:center;position:relative;margin-bottom:6px;}
   .timer-ring span{font-size:17px;font-weight:700;}
@@ -893,7 +894,25 @@ function renderPlayerFrame(isFirst){
   mid.appendChild(diagramHolder);
   mid.appendChild(el('div',{class:'point-name'}, step.name));
   mid.appendChild(el('div',{class:'point-where'}, step.where));
-  mid.appendChild(el('div',{class:'point-phrase'}, `"${step.phrase}"`));
+  const phraseText = `"${step.phrase}"`;
+  const TRUNC_LEN = 130;
+  if(phraseText.length > TRUNC_LEN){
+    const phraseEl = el('div',{class:'point-phrase'});
+    const short = phraseText.slice(0, TRUNC_LEN).trim() + '…';
+    let expanded = false;
+    const textSpan = el('span',{}, short);
+    const toggleBtn = el('button',{class:'phrase-more-btn', onclick:()=>{
+      expanded = !expanded;
+      textSpan.textContent = expanded ? phraseText : short;
+      toggleBtn.textContent = expanded ? 'menos' : 'más';
+    }}, 'más');
+    phraseEl.appendChild(textSpan);
+    phraseEl.appendChild(el('span',{},' '));
+    phraseEl.appendChild(toggleBtn);
+    mid.appendChild(phraseEl);
+  } else {
+    mid.appendChild(el('div',{class:'point-phrase'}, phraseText));
+  }
   if(step.phase==='intro' && cat.audio && cat.audio.introAsksRating){
     const scaleHolder = el('div',{});
     mid.appendChild(scaleHolder);
