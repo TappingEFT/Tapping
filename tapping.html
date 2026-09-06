@@ -277,6 +277,7 @@ function catGroups(cat){
 
 const GROUP_META = [
   {name:'Abundancia', photo:'abundancia.jpg'},
+  {name:'Bienestar emocional', photo:'ansiedad.jpg'},
   {name:'Dormir', photo:'dormir.jpg'},
   {name:'Aliviar dolores físicos', photo:'dolores%20de%20cabeza.jpg', note:'Esta app es un apoyo para acompañar el malestar físico y no sustituye la atención médica o psicológica profesional. No diagnostica ni trata ninguna condición médica.'},
 ];
@@ -387,7 +388,7 @@ const CATEGORIES = [
     cierre:['Puedo relacionarme de forma más tranquila con el dinero.','Puedo tomar decisiones económicas con más calma.','Puedo aprender y mejorar con el tiempo.','Puedo sentirme más segura, poco a poco.','Puedo soltar la exigencia de tenerlo todo resuelto ya.','Puedo confiar en mi capacidad de salir adelante.','Ya no tengo que cargar esto sola.','Elijo avanzar hacia más estabilidad y calma.'],
   },
   {
-    id:'ansiedad', name:'Empezar el día con energía positiva', color:'#4A2442', photo:'ansiedad.jpg',
+    id:'ansiedad', name:'Empezar el día con energía positiva', color:'#4A2442', photo:'ansiedad.jpg', group:'Bienestar emocional',
     intro:'Cómo empiezas el día marca el tono de todo lo demás. Esta sesión es un ritual corto para arrancar desde la confianza y la energía positiva, en vez de la prisa.',
     desc:'Un ritual corto para empezar el día desde la confianza.',
     introScript:'Lleva una mano al pecho y la otra al abdomen. Inhala profundo y solo por nariz, empezando a entrar en tu respiración. Decide cerrar los ojos para conectar con las latencias de tu pecho, y sigue inhalando y exhalando por nariz, disfrutando de este momento para ti. Ahora decido abrir los ojos.',
@@ -406,7 +407,7 @@ const CATEGORIES = [
     audio:{file:'Empezar_tu_Di_a_con_Energi_a_Positiva.mp3', duration:199.8, hasIntro:true, hasOutro:true, timestamps:[0,20.1901,39.4281,43.8074,52.7557,63.9315,71.0208,81.1259,90.0311,97.8272,104.377,109.668,119.963,124.302,131.81,138.125,145.298,151.946,161.139,166.802,174.281]},
   },
   {
-    id:'jornada', name:'Amor propio', color:'#8F2F0E', photo:'fin%20de%20jornada.jpg',
+    id:'jornada', name:'Amor propio', color:'#8F2F0E', photo:'fin%20de%20jornada.jpg', group:'Bienestar emocional',
     intro:'El amor propio no es algo que se decreta una vez, es algo que se practica. Esta sesión te lleva a reconocerte con más ternura y menos exigencia.',
     desc:'Para practicar el amor propio, sin exigencia.',
     introScript:'Vas a centrarte en lo que sientes, en tu cuerpo, en tu propio ser. No respondas a los estímulos de fuera, sino que te regalas este espacio y este tiempo para ti, para soltar, sanar y conectarte con el amor hacia ti misma. Cierra los ojos, inhala profundo y exhala suavemente, regalándote este instante de presencia.',
@@ -429,7 +430,7 @@ const CATEGORIES = [
     audio:{file:'amor_propio.mp3', duration:252.864, hasIntro:true, hasOutro:true, timestamps:[0,20.8621,51.2361,55.6143,61.3945,65.4253,69.9889,75.4617,81.0058,88.7772,94.897,101.22,111.507,115.794,119.28,124.578,130.314,134.418,140.773,146.546,151.37,154.732,159.266,164.061,167.496,171.125,176.091,181.495,186.383,191.136,196.632,200.643,204.835,208.111,213.791,218.479,222.986]},
   },
   {
-    id:'accion', name:'Acción inspirada', color:'#4A2442', photo:'estres.jpg',
+    id:'accion', name:'Acción inspirada', color:'#4A2442', photo:'estres.jpg', group:'Bienestar emocional',
     intro:'Actuar desde la prisa y la exigencia agota igual que no actuar en absoluto. Esta sesión trabaja esa relación con la acción, para moverte desde la calma en vez de la urgencia.',
     desc:'Para actuar desde la calma en vez de la urgencia o el bloqueo.',
     introScript:'Vas a centrarte en lo que sientes, en tu cuerpo, en tu propio ser. No respondas a los estímulos de fuera, sino que te regalas este espacio y este tiempo para ti, para soltar, sanar y conectarte con el flujo infinito de la abundancia.',
@@ -450,7 +451,7 @@ const CATEGORIES = [
     audio:{file:'ACCIO_N_INSPIRADA.mp3', duration:296.688, hasIntro:true, hasOutro:true, timestamps:[0,15.0781,57.6201,61.9985,67.8716,72.5289,80.7382,87.5495,94.9022,104.832,111.188,118.284,128.566,132.454,137.017,141.186,146.737,153.054,163.245,173.688,182.811,191.093,200.859,205.47,219.725,228.553,235.75,247.314,262.967]},
   },
   {
-    id:'centro', name:'Ansiedad', color:'#354A24', photo:'volver%20a%20mi%20centro.jpg',
+    id:'centro', name:'Ansiedad', color:'#354A24', photo:'volver%20a%20mi%20centro.jpg', group:'Bienestar emocional',
     intro:'Hay noches y momentos en que la ansiedad se instala en el cuerpo entero. Esta sesión te acompaña a bajar esa activación, un punto a la vez.',
     desc:'Para cuando la ansiedad se siente en todo el cuerpo.',
     introScript:'Vas a centrarte en lo que sientes, en tu cuerpo, en tu propio ser. No respondas a los estímulos de fuera, sino que te regalas este espacio y este tiempo para ti, para soltar, sanar y conectarte con la calma.',
@@ -522,7 +523,7 @@ const CATEGORIES = [
     audio:{file:'Liberacio_n_de_la_tensio_n_nerviosa_y_el_estre_s.mp3', duration:432.288, hasIntro:true, hasOutro:true, introAsksRating:true, outroAsksRating:true, timestamps:[0,77.6894,136.19,139.956,144.158,147.643,152.081,157.22,161.922,165.357,170.303,175.261,206.149,231.593,240.429,254.18,281.177,298.961,309.695,320.013,328.789,334.142,339.643,344.709,349.172,353.801,357.501,361.369,364.941]},
   },
   {
-    id:'miedo', name:'Miedo', color:'#742E0E', photo:'miedo.jpg',
+    id:'miedo', name:'Miedo', color:'#742E0E', photo:'miedo.jpg', group:'Bienestar emocional',
     intro:'El miedo no siempre avisa antes de aparecer, y a veces se instala en el cuerpo antes de que la mente entienda por qué. Esta sesión te acompaña a atravesarlo, sin exigirte que desaparezca de golpe.',
     desc:'Para cuando el miedo se siente grande o paralizante.',
     introScript:'Cierra los ojos y empieza a soltar esos hombros. Inhala, lleva los hombros hacia arriba y exhala. Deja que todo ese miedo empiece a sentirse en el cuerpo, visualizando ese momento, esa palabra o esa situación que te genera miedo. Inhala profundo y exhala ese miedo y esa incomodidad, siéntela en el cuerpo. Reconoce, siente y percibe ese miedo; hoy vas a animarte a abrazarlo, a sentir todo lo que pasa en el cuerpo en esa situación.',
@@ -572,8 +573,8 @@ const CATEGORIES = [
       'En esta práctica, nos ocuparemos de cualquier molestia que sientas en la cabeza y examinaremos cómo el estrés puede estar alimentando ese malestar.',
       'Hacer tapping ayuda a disminuir los niveles de cortisol y otras hormonas del estrés en el organismo, abriendo el camino hacia el alivio y la recuperación.',
       'Un apunte importante: si se trata de un dolor nuevo, intenso y sin una causa evidente, acude al médico.',
-      'Comenzamos evaluando el nivel de dolor en una escala del cero al diez, donde el diez es el grado más alto de dolor y el cero equivale a la ausencia total del mismo.',
-      'Identifícalo ahora y registra tu número en la aplicación.',
+      {text:'Comenzamos evaluando el nivel de dolor en una escala del cero al diez, donde el diez es el grado más alto de dolor y el cero equivale a la ausencia total del mismo.', askRating:true},
+      {text:'Identifícalo ahora y registra tu número en la aplicación.', askRating:true},
     ],
     karate:[
       'Toma una suave y profunda inspiración y exhala despacio.',
@@ -587,8 +588,8 @@ const CATEGORIES = [
       'Detén con suavidad los golpecitos, respira hondo y deja marchar la tensión.',
       'Revisa tu cuerpo y el dolor de cabeza.',
       '¿Cómo te encuentras ahora?',
-      '¿Qué número le das en la escala del cero al diez?',
-      'Si te sientes mejor, la cifra será menor; regístrala en la aplicación.',
+      {text:'¿Qué número le das en la escala del cero al diez?', askRating:true},
+      {text:'Si te sientes mejor, la cifra será menor; regístrala en la aplicación.', askRating:true},
       'Cualquier descenso indica que avanzas en el sentido correcto.',
       'Si el número sigue alto, repite esta meditación cuando lo necesites.',
       'En solo unos minutos has reducido las hormonas del estrés, generando calma y confianza para que tu cuerpo sane y descanse cada vez mejor.',
@@ -869,7 +870,12 @@ function buildAudioSteps(cat){
   const steps = [];
   if(cat.audio && cat.audio.hasIntro && cat.introScript){
     const intros = Array.isArray(cat.introScript) ? cat.introScript : [cat.introScript];
-    intros.forEach(s => steps.push({phase:'intro', key:'intro', name:'Introducción', where:'', phrase:s}));
+    const wholePhaseRating = cat.audio.introAsksRating && intros.length===1;
+    intros.forEach(s => {
+      const askRating = wholePhaseRating || (typeof s === 'object' && s.askRating);
+      const text = typeof s === 'object' ? s.text : s;
+      steps.push({phase:'intro', key:'intro', name:'Introducción', where:'', phrase:text, askRating});
+    });
   }
   const karateArr = Array.isArray(cat.karate) ? cat.karate : [cat.karate];
   karateArr.forEach(s => steps.push({phase:'karate', key:KARATE_META.key, name:KARATE_META.name, where:KARATE_META.where, phrase:s}));
@@ -886,7 +892,12 @@ function buildAudioSteps(cat){
   steps.push(...buildExtraSequence(cat.cierre,'cierre'));
   if(cat.audio && cat.audio.hasOutro && cat.outroScript){
     const outros = Array.isArray(cat.outroScript) ? cat.outroScript : [cat.outroScript];
-    outros.forEach(s => steps.push({phase:'outro', key:'outro', name:'Cierre de la sesión', where:'', phrase:s}));
+    const wholePhaseRating = cat.audio.outroAsksRating && outros.length===1;
+    outros.forEach(s => {
+      const askRating = wholePhaseRating || (typeof s === 'object' && s.askRating);
+      const text = typeof s === 'object' ? s.text : s;
+      steps.push({phase:'outro', key:'outro', name:'Cierre de la sesión', where:'', phrase:text, askRating});
+    });
   }
   return steps;
 }
@@ -1058,12 +1069,12 @@ function renderPlayerFrame(isFirst){
   } else {
     mid.appendChild(el('div',{class:'point-phrase'}, phraseText));
   }
-  if(step.phase==='intro' && cat.audio && cat.audio.introAsksRating){
+  if(step.askRating && step.phase==='intro'){
     const scaleHolder = el('div',{});
     mid.appendChild(scaleHolder);
     renderThermometerHorizontal(scaleHolder, state.sudBefore, (v)=>{ state.sudBefore = v; });
   }
-  if(step.phase==='outro' && cat.audio && cat.audio.outroAsksRating){
+  if(step.askRating && step.phase==='outro'){
     const scaleHolder = el('div',{});
     mid.appendChild(scaleHolder);
     renderThermometerHorizontal(scaleHolder, state.sudAfter, (v)=>{ state.sudAfter = v; });
