@@ -539,6 +539,97 @@ const CATEGORIES = [
     cierre:[],
     audio:{file:'SINCRONI_AS_Y_SEN_ALES.mp3', duration:242.616, hasIntro:true, hasOutro:true, timestamps:[0,19.5356,49.5386,55.4426,61.2246,67.6823,73.7096,79.3212,84.7688,90.907,95.5087,105.361,109.201,116.514,120.86,134.658,140.791,157.254,160.853,166.748,173.404,182.688,195.912,203.129,212.028]},
   },
+  {
+    id:'dolor_cabeza', name:'Dolor de cabeza', color:'#8F2F0E', photo:'dolores%20de%20cabeza.jpg', group:'Aliviar dolores físicos',
+    intro:'Cuando el estrés se acumula, muchas veces se instala directo en la cabeza. Esta sesión trabaja ese dolor punto por punto, reconociendo lo que hay detrás de él.',
+    desc:'Para liberar el dolor de cabeza y el estrés que lo alimenta.',
+    note:'Si se trata de un dolor nuevo, intenso y sin causa evidente, acude al médico. Esta app es un apoyo y no sustituye la atención médica profesional.',
+    introScript:[
+      'Te damos la bienvenida a esta sesión de tapping para liberar el dolor de cabeza.',
+      'En esta práctica, nos ocuparemos de cualquier molestia que sientas en la cabeza y examinaremos cómo el estrés puede estar alimentando ese malestar.',
+      'Hacer tapping ayuda a disminuir los niveles de cortisol y otras hormonas del estrés en el organismo, abriendo el camino hacia el alivio y la recuperación.',
+      'Un apunte importante: si se trata de un dolor nuevo, intenso y sin una causa evidente, acude al médico.',
+      'Comenzamos evaluando el nivel de dolor en una escala del cero al diez, donde el diez es el grado más alto de dolor y el cero equivale a la ausencia total del mismo.',
+      'Identifícalo ahora y registra tu número en la aplicación.',
+    ],
+    karate:[
+      'Toma una suave y profunda inspiración y exhala despacio.',
+      'Empieza a realizar el tapping en el lateral de la mano.',
+      'Repite después de mí, ya sea en voz alta o de manera mental.',
+      'A pesar de que siento este dolor de cabeza, elijo relajarme ahora.',
+      'Siguiendo en el lateral de la mano: aunque tengo este dolor y no desaparece, me permito relajarme.',
+      'Y una vez más en el lateral de la mano: a pesar de experimentar frustración con mi cuerpo y con esta molestia, me acepto y acepto lo que estoy sintiendo.',
+    ],
+    outroScript:[
+      'Detén con suavidad los golpecitos, respira hondo y deja marchar la tensión.',
+      'Revisa tu cuerpo y el dolor de cabeza.',
+      '¿Cómo te encuentras ahora?',
+      '¿Qué número le das en la escala del cero al diez?',
+      'Si te sientes mejor, la cifra será menor; regístrala en la aplicación.',
+      'Cualquier descenso indica que avanzas en el sentido correcto.',
+      'Si el número sigue alto, repite esta meditación cuando lo necesites.',
+      'En solo unos minutos has reducido las hormonas del estrés, generando calma y confianza para que tu cuerpo sane y descanse cada vez mejor.',
+      'Sigue adelante, sé que puedes recuperarte.',
+    ],
+    rounds:[
+      R('Reconocer el dolor',
+        ['Este dolor de cabeza.','Se siente tan incómodo.','Y parece que está atascado.','Resulta muy frustrante.','Es estresante encontrarse así.','Reconozco este dolor de cabeza y lo que me hace sentir.','E incluso antes de que se produzca un cambio.','Puedo elegir relajarme y respirar.'],
+        'Realizando el tapping a través de los puntos.'),
+      R('Abrirse a sanar',
+        ['Elijo relajarme aún más en este momento.','Es seguro para mí reconocer este dolor.','Y empezar a dejarlo marchar.','Es seguro para mí admitir cualquier estrés.','Presente en mi cuerpo y en mi vida.','No sé por qué mi organismo tarda en sanar.','Pero me abro a la sanación ahora mismo.','Sintiendo seguridad y relajación en mi interior.']),
+      R('Explorar en silencio',
+        [
+          {key:'ceja', phrase:'Pon tu atención en el dolor de cabeza y pregúntate qué emoción se esconde en esa zona.'},
+          {key:'ceja', phrase:'¿Podría ser ira, tristeza, pena, rabia, ansiedad o agobio?'},
+          {key:'ceja', phrase:'Observa lo que aflore y mantente presente en ello.'},
+          {key:'ladoOjo', phrase:'Repitamos la interrogante sintonizando con lo que brote.'},
+          {key:'ladoOjo', phrase:'Si hubiera una emoción en esta parte de mi cuerpo, ¿cuál sería?'},
+          {key:'debajoOjo', phrase:'¿Tu dolor posee alguna forma, color o recuerdo asociado?'},
+          {key:'debajoOjo', phrase:'Solo observa lo que surja.'},
+          {key:'debajoNariz', phrase:'¿Te acuerdas de cuándo apareció este dolor por primera vez?'},
+          {key:'debajoNariz', phrase:'¿Qué ocurría en ese instante?'},
+          {key:'debajoNariz', phrase:'Si hubo algo que pudo generar tensión o estrés, recuérdalo ahora.'},
+          {key:'barbilla', phrase:'Mientras sigues con el tapping, respira con suavidad y observa el dolor en tu cabeza.'},
+          {key:'barbilla', phrase:'¿Se ha transformado o se ha desplazado hacia otro sitio?'},
+          {key:'barbilla', phrase:'Nota cualquier modificación.'},
+          {key:'barbilla', phrase:'A veces, gracias al tapping, el dolor muta o se mueve conforme el cuerpo se relaja y sana.'},
+          {key:'clavicula', phrase:'Sintiéndote presente, segura y conectada a la tierra a través de tu físico, pregúntate qué te quiere transmitir el cuerpo con esta molestia y qué debes hacer para curarte.'},
+          {key:'clavicula', phrase:'Deja que tu intuición te guíe.'},
+          {key:'clavicula', phrase:'Conforme practicamos, a menudo desbloqueamos ideas y recursos que desconocíamos, por lo que tal vez sientas inspiración para aplicar cambios útiles en tu vida.'},
+          {key:'brazo', phrase:'Ábrete a lo que aparezca.'},
+          {key:'brazo', phrase:'¿Qué te está diciendo el cuerpo?'},
+          {key:'brazo', phrase:'¿Cómo puedes permitirle que sane?'},
+          {key:'coronilla', phrase:'Sintiéndote fuerte, segura y arraigada en ti misma.'},
+        ],
+        ['Regresamos al punto de la ceja, aplicando el tapping con delicadeza mientras te planteo algunas cuestiones.','Limítate a responderlas en tu mente y te iré guiando sobre cuándo cambiar de punto.','No te preocupes por dar con la respuesta perfecta; simplemente continúa haciendo tapping y confía en el proceso de disolver el estrés y, con él, el dolor.']),
+      R('Apoyar la sanación natural',
+        [
+          {key:'ceja', phrase:'Al hacer tapping nos relajamos y activamos los mecanismos innatos de sanación del organismo.'},
+          {key:'ladoOjo', phrase:'Cada vez que tomamos la decisión consciente de sentirnos bien, de soltar y de liberar el estrés corporal y vital, impulsamos nuestra recuperación.'},
+          {key:'debajoOjo', phrase:'La pregunta es qué puedes hacer para potenciar esos momentos y apoyar el proceso natural de sanación de tu cuerpo.'},
+          {key:'debajoNariz', phrase:'Recuerda que rara vez se trata de un único factor.'},
+          {key:'barbilla', phrase:'Los mejores resultados llegan al sumar acciones físicas, como caminar o hacer ejercicio, medidas biológicas, como las pautas del médico, suplementos y nutrición adecuada, y respuestas emocionales, como expresar lo que sentimos y dejar ir los miedos o dolores del pasado.'},
+          {key:'barbilla', phrase:'Al combinar todo esto, dotamos al cuerpo de la capacidad de sanar.'},
+          {key:'brazo', phrase:'Comienza a imaginar ahora la posibilidad real de liberarte por completo de este dolor de cabeza.'},
+          {key:'coronilla', phrase:'¿Estás lista para que esta molestia desaparezca del todo y tu cuerpo se cure?'},
+          {key:'coronilla', phrase:'Toma esa elección en este instante.'},
+        ]),
+      R('Visualizar la sanación',
+        ['Sintiéndote segura, fuerte y conectada a tu cuerpo, imagina que estás curada y sin dolores.','Visualiza tu senda de sanación y todas las decisiones positivas que adoptarás junto a ella.','Deja marchar cualquier estrés reprimido; mereces estar libre de esto.',
+          {key:'debajoNariz', phrase:'Al liberarte del ayer y de la ansiedad por el mañana, tu cuerpo sana con mayor intensidad.'},
+          {key:'debajoNariz', phrase:'Siente eso ahora.'},
+          {key:'barbilla', phrase:'Has puesto en marcha los extraordinarios poderes curativos de tu organismo.'},
+          {key:'barbilla', phrase:'Percíbelo.'},
+          {key:'clavicula', phrase:'Ten la certeza de que cuanto más frecuentes este estado de expansión, seguridad, confianza y alegría, más sanará tu cuerpo.'},
+          {key:'clavicula', phrase:'Ya se está curando ahora mismo.'},
+          {key:'brazo', phrase:'Haciendo tapping suavemente y respirando con facilidad, todo está en orden.'},
+          {key:'coronilla', phrase:'Sintiéndote segura y enraizada ahora.'},
+        ]),
+    ],
+    apertura:[],
+    cierre:[],
+    audio:{file:'dolor_de_cabeza.MP3', duration:495.595, hasIntro:true, hasOutro:true, introAsksRating:true, outroAsksRating:true, timestamps:[0,6.02,15.58,25.43,33.87,53.45,57.88,62.90,68.38,75.75,86.05,90.18,93.64,97.49,101.75,106.08,110.56,116.00,121.39,126.05,130.70,135.36,139.58,144.91,149.26,153.94,157.55,160.53,165.85,173.71,179.83,190.39,197.06,202.85,207.06,212.69,217.71,223.76,226.85,232.70,235.67,240.94,248.46,252.75,255.83,262.86,274.94,278.12,288.89,293.14,296.07,299.29,305.12,313.13,323.78,332.51,338.17,357.55,362.97,371.05,374.67,379.44,383.12,390.84,398.37,405.33,412.97,415.63,422.36,424.33,434.16,437.38,444.73,449.65,455.67,459.28,462.00,466.01,471.93,476.73,482.42,491.61]},
+  },
 ];
 
 function estimateMinutes(cat, seconds){
@@ -705,12 +796,14 @@ function resolveRoundStep(round, item, idx){
   return {phase:'round', roundTitle:round.title, key:item.key||null, name: meta?meta.name:round.title, where: meta?meta.where:'', phrase:item.phrase};
 }
 
+function karateText(cat){ return Array.isArray(cat.karate) ? cat.karate.join(' ') : cat.karate; }
+
 function buildSequence(cat){
   if(cat.segments){ return buildFreeformSteps(cat); }
   const steps = [];
   // karate phase: 4 reps
   for(let i=0;i<4;i++){
-    steps.push({phase:'karate', repIndex:i, repTotal:4, key:KARATE_META.key, name:KARATE_META.name, where:KARATE_META.where, phrase:cat.karate});
+    steps.push({phase:'karate', repIndex:i, repTotal:4, key:KARATE_META.key, name:KARATE_META.name, where:KARATE_META.where, phrase:karateText(cat)});
   }
   cat.rounds.forEach((round)=>{
     if(round.transition){
@@ -735,7 +828,7 @@ function buildExtraSequence(phrases, phaseLabel){
 function buildQuickSequence(cat){
   const steps = [];
   for(let i=0;i<2;i++){
-    steps.push({phase:'karate', repIndex:i, repTotal:2, key:KARATE_META.key, name:KARATE_META.name, where:KARATE_META.where, phrase:cat.karate});
+    steps.push({phase:'karate', repIndex:i, repTotal:2, key:KARATE_META.key, name:KARATE_META.name, where:KARATE_META.where, phrase:karateText(cat)});
   }
   const round = cat.rounds[0];
   round.phrases.forEach((phrase, idx)=>{
@@ -752,12 +845,15 @@ function buildAudioSteps(cat){
   if(cat.segments){ return buildFreeformSteps(cat); }
   const steps = [];
   if(cat.audio && cat.audio.hasIntro && cat.introScript){
-    steps.push({phase:'intro', key:'intro', name:'Introducción', where:'', phrase:cat.introScript});
+    const intros = Array.isArray(cat.introScript) ? cat.introScript : [cat.introScript];
+    intros.forEach(s => steps.push({phase:'intro', key:'intro', name:'Introducción', where:'', phrase:s}));
   }
-  steps.push({phase:'karate', key:KARATE_META.key, name:KARATE_META.name, where:KARATE_META.where, phrase:cat.karate});
+  const karateArr = Array.isArray(cat.karate) ? cat.karate : [cat.karate];
+  karateArr.forEach(s => steps.push({phase:'karate', key:KARATE_META.key, name:KARATE_META.name, where:KARATE_META.where, phrase:s}));
   cat.rounds.forEach((round)=>{
     if(round.transition){
-      steps.push({phase:'transition', key:null, name:round.title, where:'', phrase:round.transition});
+      const transitions = Array.isArray(round.transition) ? round.transition : [round.transition];
+      transitions.forEach(t => steps.push({phase:'transition', key:null, name:round.title, where:'', phrase:t}));
     }
     round.phrases.forEach((item, idx)=>{
       steps.push(resolveRoundStep(round, item, idx));
@@ -766,7 +862,8 @@ function buildAudioSteps(cat){
   steps.push(...buildExtraSequence(cat.apertura,'apertura'));
   steps.push(...buildExtraSequence(cat.cierre,'cierre'));
   if(cat.audio && cat.audio.hasOutro && cat.outroScript){
-    steps.push({phase:'outro', key:'outro', name:'Cierre de la sesión', where:'', phrase:cat.outroScript});
+    const outros = Array.isArray(cat.outroScript) ? cat.outroScript : [cat.outroScript];
+    outros.forEach(s => steps.push({phase:'outro', key:'outro', name:'Cierre de la sesión', where:'', phrase:s}));
   }
   return steps;
 }
