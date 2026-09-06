@@ -234,6 +234,32 @@ const CATEGORIES = [
     cierre:[],
   },
   {
+    id:'recibir', name:'Abrirte a recibir', color:'#4A2442', photo:'recibir.jpg',
+    audio:{file:'ABRIRTE_A_RECIBIR.mp3', hasIntro:true, hasOutro:true, timestamps:[0,27.9992,46.7342,52.4894,57.313,62.9782,67.9655,73.7818,79.2248,85.6044,93.6363,102.384,108.243,113.307,122.622,128.353,135.885,146.659,154.557,160.896,171.65,177.718,194.501,209.093,221.197]},
+    intro:'A veces pedimos abundancia con la mente, pero una parte de nosotras se incomoda en cuanto empieza a llegar. Esta sesión trabaja justo esa resistencia a recibir.',
+    desc:'Para la parte de ti que se incomoda al recibir lo bueno.',
+    introScript:'Cierra los ojos y lleva toda la atención a tu respiración, observando el cuerpo y sintiendo cómo entra y sale el aire con total naturalidad. Permítete contemplar las sensaciones tal cual son, sin juzgar, sin intentar intervenir ni controlar nada. Estas prácticas nos permiten desprendernos del ego, experimentar la verdadera libertad y dar forma a nuestra mejor realidad. Así que respira con calma y ábrete a este espacio sagrado de liberación y manifestación.',
+    karate:'Comenzamos en el punto kárate. Aunque existe en ti un deseo profundo de atraer abundancia, es probable que otra parte de tu ser experimente incomodidad al recibir. A pesar de que conscientemente buscas esa prosperidad, quizás por algún motivo haya un mecanismo interno que se resiste y la rechaza.',
+    outroScript:'Permítete recrearte en estas sensaciones y emociones, relajando el cuerpo para que tanto tu organismo como tu mente se habitúen a esta nueva realidad de abundancia. Por tanto, ahora detenemos los golpecitos de tapping y realizamos una respiración profunda. Nos quedamos unos instantes disfrutando de este espacio de relajación, paz y serenidad. Nota lo bien que te sienta experimentar que has recibido, sintiendo que es algo totalmente seguro, positivo y que te hace sentir una excelente persona. Te sientes de maravilla y, al instalarte en esa frecuencia de seguridad y tranquilidad, es cuando comienzas a atraer todavía más cosas buenas. Gracias, gracias, gracias.',
+    rounds:[
+      R('Reconocer la resistencia a recibir',
+        ['Empezamos en el inicio de la ceja con esa parte de ti que rechaza la abundancia.','Al lado del ojo, con aquello que tal vez la esté frenando.','Debajo del ojo, con las creencias que hacen que apartes lo bueno que te llega.','Bajo la nariz, con todos esos pensamientos limitantes.','En la barbilla, con la idea de que al ser algo nuevo, prefieres rechazarlo.','En la clavícula, con esa resistencia a salir de tu zona de confort.','Debajo del brazo, con la sensación de que te sientes más segura quedándote donde estás.','Y en la coronilla, con la posibilidad de que recibir abundancia te resulte tan desconocido que hasta lo percibas como un peligro.']),
+      R('Liberar la resistencia',
+        [
+          {key:'ceja', phrase:'Comenzamos en el inicio de la ceja decidiendo liberar todas estas limitaciones.'},
+          {key:'ladoOjo', phrase:'Al lado del ojo, soltando estos pensamientos repetitivos.'},
+          {key:'debajoOjo', phrase:'Debajo del ojo, desprendiéndote de cualquier miedo interno que te susurre que recibir es peligroso, de mala educación, incorrecto o inadecuado.'},
+          {key:'barbilla', phrase:'En la barbilla, dándote el permiso de cuestionar cada una de esas ideas.'},
+          {key:null, phrase:'Y al avanzar por el resto de los puntos, simplemente obsérvalas con atención para liberarte por completo de ellas.'},
+        ],
+        'Segunda ronda. Aquí vamos a cambiar más o menos una frase en cada punto, recuerda que puedes ir a tu propio ritmo.'),
+      R('Abrirte a lo nuevo',
+        ['Tal vez recibir abundancia no sea tan negativo como creías; de hecho, al tener más, posees mayores recursos para ayudar a los demás, ser más generoso y sentirte mejor.','Quizás contar con esa prosperidad te permita hacer felices a otras personas y facilitar tanto tu vida como la de tu entorno.','Date la oportunidad de abrirte a nuevas perspectivas que resulten igual o incluso más seguras.','Imagina por un instante que ya estás ahí, en ese escenario donde disfrutas de plena abundancia, de infinitas posibilidades y de tener más que suficiente para todo lo que deseas.','Conéctate con esa profunda sensación de tranquilidad, de paz y de total apertura.','Y si te llegan cosas buenas, ya sean grandes o pequeñas, las recibes con agrado, te sientes a gusto con ellas, das las gracias si te apetece y experimentas la certeza de que te lo mereces, disfrutando de una profunda sensación de abundancia y comodidad porque es algo positivo.','La abundancia es completamente natural, forma parte de nuestra verdadera esencia y es beneficiosa para todos; nos permite dar, recibir y compartir, y cuando se utiliza con buen criterio, resulta saludable y enriquecedora para cualquier persona.','Por eso decides abrirte por completo a todo lo positivo que llegue a tu vida, disfrutando plenamente de ello y sabiendo que cuentas con la capacidad de gestionarlo, administrarlo, gozarlo y compartirlo.']),
+    ],
+    apertura:[],
+    cierre:[],
+  },
+  {
     id:'abundancia', name:'Abundancia', color:'#8F2F0E', photo:'abundancia.jpg',
     intro:'El dinero puede convertirse en una fuente constante de miedo sin que nos demos cuenta. Esta sesión te acompaña a soltar esa tensión, punto a punto, hasta que la idea de la abundancia deje de sentirse como una batalla.',
     desc:'Miedo y creencias alrededor del dinero.',
@@ -535,6 +561,15 @@ function goto(screen, patch={}){
 }
 
 /* =================== Build full step sequence for a category =================== */
+function resolveRoundStep(round, item, idx){
+  if(typeof item === 'string'){
+    const meta = POINT_META[idx];
+    return {phase:'round', roundTitle:round.title, key:meta.key, name:meta.name, where:meta.where, phrase:item};
+  }
+  const meta = item.key ? POINT_META.find(p=>p.key===item.key) : null;
+  return {phase:'round', roundTitle:round.title, key:item.key||null, name: meta?meta.name:round.title, where: meta?meta.where:'', phrase:item.phrase};
+}
+
 function buildSequence(cat){
   if(cat.segments){ return buildFreeformSteps(cat); }
   const steps = [];
@@ -546,8 +581,8 @@ function buildSequence(cat){
     if(round.transition){
       steps.push({phase:'transition', key:null, name:round.title, where:'', phrase:round.transition});
     }
-    round.phrases.forEach((phrase, idx)=>{
-      steps.push({phase:'round', roundTitle:round.title, pointIndex:idx, key:POINT_META[idx].key, name:POINT_META[idx].name, where:POINT_META[idx].where, phrase});
+    round.phrases.forEach((item, idx)=>{
+      steps.push(resolveRoundStep(round, item, idx));
     });
   });
   if(cat.apertura && cat.apertura.length){
@@ -589,8 +624,8 @@ function buildAudioSteps(cat){
     if(round.transition){
       steps.push({phase:'transition', key:null, name:round.title, where:'', phrase:round.transition});
     }
-    round.phrases.forEach((phrase, idx)=>{
-      steps.push({phase:'round', roundTitle:round.title, key:POINT_META[idx].key, name:POINT_META[idx].name, where:POINT_META[idx].where, phrase});
+    round.phrases.forEach((item, idx)=>{
+      steps.push(resolveRoundStep(round, item, idx));
     });
   });
   steps.push(...buildExtraSequence(cat.apertura,'apertura'));
