@@ -196,9 +196,26 @@
   .hist-item .l span{font-size:14px;color:var(--ink-soft);}
   .hist-item .r{font-size:17px;font-weight:700;color:var(--sienna-deep);}
   .empty-hist{color:var(--ink-soft);font-size:16px;padding:30px 4px;text-align:center;}
+  #splash{position:fixed;inset:0;z-index:9999;display:flex;align-items:center;justify-content:center;background:#141210 url('primera_sesion.jpg') center/cover;transition:opacity 0.6s ease;}
+  #splash.hide{opacity:0;pointer-events:none;}
+  .splash-overlay{position:absolute;inset:0;background:rgba(20,18,16,0.62);}
+  .splash-content{position:relative;display:flex;flex-direction:column;align-items:center;text-align:center;gap:6px;}
+  .splash-icon{width:88px;height:88px;border-radius:22px;box-shadow:0 8px 30px rgba(0,0,0,0.4);opacity:0;transform:scale(0.75);animation:splashIconIn 0.7s ease forwards 0.1s;}
+  .splash-title{color:#fff;font-size:24px;font-weight:700;margin-top:18px;opacity:0;animation:splashFadeUp 0.7s ease forwards 0.5s;}
+  .splash-sub{color:rgba(255,255,255,0.85);font-size:15px;letter-spacing:0.04em;opacity:0;animation:splashFadeUp 0.7s ease forwards 0.8s;}
+  @keyframes splashIconIn{from{opacity:0;transform:scale(0.75);}to{opacity:1;transform:scale(1);}}
+  @keyframes splashFadeUp{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:translateY(0);}}
 </style>
 </head>
 <body>
+<div id="splash">
+  <div class="splash-overlay"></div>
+  <div class="splash-content">
+    <img class="splash-icon" src="app-icon.png" alt="">
+    <h1 class="splash-title">Centro · Tapping</h1>
+    <p class="splash-sub">Bienvenida</p>
+  </div>
+</div>
 <div id="app"></div>
 
 <script>
@@ -1500,6 +1517,13 @@ function render(){
 }
 
 render();
+const splashEl = document.getElementById('splash');
+if(splashEl){
+  setTimeout(()=>{
+    splashEl.classList.add('hide');
+    setTimeout(()=>{ splashEl.remove(); }, 650);
+  }, 2200);
+}
 </script>
 </body>
 </html>
