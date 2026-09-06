@@ -270,14 +270,20 @@ const PRIMERA_SESION = {
   audio:{file:'p_20362219_820.mp3', duration:227.424, hasIntro:true, hasOutro:true, timestamps:[0,25.009,52.2886,58.9505,65.4731,69.6972,75.2631,80.9816,86.0461,91.1531,98.3956,103.825,112.915,118.707,124.176,129.671,135.582,141.505,148.585,155.516,161.413,170.034,176.187,181.105,186.644,192.126,197.669,202.561,209.491,215.84]},
 };
 
+function catGroups(cat){
+  if(!cat.group) return [];
+  return Array.isArray(cat.group) ? cat.group : [cat.group];
+}
+
 const GROUP_META = [
+  {name:'Abundancia', photo:'abundancia.jpg'},
   {name:'Dormir', photo:'dormir.jpg'},
   {name:'Aliviar dolores físicos', photo:'dolores%20de%20cabeza.jpg', note:'Esta app es un apoyo para acompañar el malestar físico y no sustituye la atención médica o psicológica profesional. No diagnostica ni trata ninguna condición médica.'},
 ];
 
 const CATEGORIES = [
   {
-    id:'resistencias', name:'Liberar resistencias', color:'#354A24', photo:'desbordada.jpg',
+    id:'resistencias', name:'Liberar resistencias', color:'#354A24', photo:'desbordada.jpg', group:'Abundancia',
     audio:{file:'LIBERAR_RESISTENCIAS.mp3', duration:276.912, hasIntro:true, hasOutro:true, timestamps:[0,31.0141,62.8974,68.1661,73.6587,78.6494,82.8272,87.533,92.9078,98.4016,104.482,109.287,117.534,122.711,126.601,131.833,137.021,141.771,148.009,154.485,159.953,178.318,182.038,186.752,190.955,194.322,197.683,200.984,206.069,210.333,213.774,216.627,220.011,224.382,227.927,231.222,235.566,239.195]},
     intro:'A veces hay una parte nuestra que se resiste, casi sin darnos cuenta, a recibir lo bueno que queremos. Esta sesión es un espacio para soltar esa resistencia interna y abrirte a la abundancia con más calma.',
     desc:'Para soltar bloqueos internos y abrirte a la abundancia.',
@@ -299,7 +305,7 @@ const CATEGORIES = [
     cierre:['Vamos notando esta liberación.','El cuerpo se relaja.','Ya no tienes tanta preocupación.','Ya no te fijas tanto en lo que hacen otras personas.','Estás en un estado más positivo.','Puedes disfrutar más de la vida.','Empiezas a ver posibilidades que antes no veías.','Las cosas empiezan a fluir mejor.'],
   },
   {
-    id:'escasez', name:'Salir de la escasez', color:'#8F2F0E', photo:'confianza_en_mi.jpg',
+    id:'escasez', name:'Salir de la escasez', color:'#8F2F0E', photo:'confianza_en_mi.jpg', group:'Abundancia',
     audio:{file:'Escases.mp3', duration:266.76, hasIntro:true, hasOutro:true, timestamps:[0,12.9882,41.0575,45.9182,52.6107,57.747,63.3633,69.8689,77.2358,84.0029,88.9543,93.4923,102.238,106.68,110.718,116.765,120.385,124.388,130.735,143.063,152.396,171.005,179.159,186.341,193.369,200.185,208.679,214.755,221.46]},
     intro:'Cuando la sensación de que algo falta se vuelve constante, cuesta disfrutar lo que ya tienes. Esta sesión es un espacio para soltar esa creencia y conectar con la sensación de plenitud.',
     desc:'Para soltar la creencia de que siempre falta algo.',
@@ -320,7 +326,7 @@ const CATEGORIES = [
     cierre:[],
   },
   {
-    id:'recibir', name:'Abrirte a recibir', color:'#4A2442', photo:'recibir.jpg',
+    id:'recibir', name:'Abrirte a recibir', color:'#4A2442', photo:'recibir.jpg', group:'Abundancia',
     audio:{file:'ABRIRTE_A_RECIBIR.mp3', duration:261.168, hasIntro:true, hasOutro:true, timestamps:[0,27.9992,46.7342,52.4894,57.313,62.9782,67.9655,73.7818,79.2248,85.6044,93.6363,102.384,108.243,113.307,122.622,128.353,135.885,146.659,154.557,160.896,171.65,177.718,194.501,209.093,221.197]},
     intro:'A veces pedimos abundancia con la mente, pero una parte de nosotras se incomoda en cuanto empieza a llegar. Esta sesión trabaja justo esa resistencia a recibir.',
     desc:'Para la parte de ti que se incomoda al recibir lo bueno.',
@@ -346,7 +352,7 @@ const CATEGORIES = [
     cierre:[],
   },
   {
-    id:'merecimiento', name:'Abrirte al merecimiento', color:'#4A2442', photo:'preocupacion.jpg',
+    id:'merecimiento', name:'Abrirte al merecimiento', color:'#4A2442', photo:'preocupacion.jpg', group:'Abundancia',
     intro:'A veces nos ponemos condiciones invisibles para permitirnos disfrutar o recibir: "primero tengo que lograr esto", "primero merecerlo". Esta sesión suelta esas condiciones internas.',
     desc:'Para soltar las condiciones que te pones antes de permitirte recibir.',
     introScript:'Comenzamos cerrando los ojos y conectando con la respiración. Con cada exhalación, imagina que liberas cualquier obstáculo interno; puedes visualizar esa energía densa ubicada en lo más profundo de tu cuerpo, entre tus órganos y entrañas, que tal vez te haya mantenido bloqueada. Así que imagínate que al exhalar dejas marchar por completo esa energía estancada y te vas liberando.',
@@ -366,7 +372,7 @@ const CATEGORIES = [
     audio:{file:'Merecimiento.mp3', duration:217.488, hasIntro:true, hasOutro:true, timestamps:[0,23.2232,52.4173,57.0757,62.8557,68.0892,75.1462,81.3896,87.1498,92.3049,99.4566,104.292,113.04,119.233,126.432,140.522,153.865,160.904,167.45,173.166,176.357,184.513,190.596]},
   },
   {
-    id:'abundancia', name:'Abundancia', color:'#8F2F0E', photo:'abundancia.jpg',
+    id:'abundancia', name:'Abundancia', color:'#8F2F0E', photo:'abundancia.jpg', group:'Abundancia',
     intro:'El dinero puede convertirse en una fuente constante de miedo sin que nos demos cuenta. Esta sesión te acompaña a soltar esa tensión, punto a punto, hasta que la idea de la abundancia deje de sentirse como una batalla.',
     desc:'Miedo y creencias alrededor del dinero.',
     karate:'Aunque siento este miedo a no tener suficiente, aunque a veces me cuesta sentirme segura con el dinero, me acepto completamente y acepto todo lo que estoy sintiendo ahora mismo.',
@@ -537,7 +543,7 @@ const CATEGORIES = [
     audio:{file:'miedo.mp3', duration:222.552, hasIntro:true, hasOutro:true, timestamps:[0,28.8781,63.8841,68.2622,73.0357,78.5044,83.0664,88.9024,94.5656,99.9608,105.457,111.396,121.681,126.839,134.084,137.977,144.649,151.039,160.326,165.174,170.139,174.505,178.956,187.633,193.597,196.974]},
   },
   {
-    id:'sincronias', name:'Sincronías y señales', color:'#354A24', photo:'agotamiento.jpg',
+    id:'sincronias', name:'Sincronías y señales', color:'#354A24', photo:'agotamiento.jpg', group:'Abundancia',
     intro:'Cuando sueltas el control, empiezas a notar cosas que antes se te pasaban por alto. Esta sesión trabaja esa necesidad de controlarlo todo para abrirte a que las cosas se acomoden solas.',
     desc:'Para soltar el control y abrirte a lo que se acomoda por sí solo.',
     introScript:'Vas a regalarte estos minutos exclusivamente para ti, solo para ti. En este preciso instante no existen responsabilidades ni obligaciones de ningún tipo; simplemente permítete abrirte y disfrutar de estos momentos en los que vamos a dejar ir los temores y la necesidad de control, preparándote para acoger tu mejor realidad.',
@@ -1185,7 +1191,7 @@ function renderHome(){
   }
 
   const groupNames = GROUP_META.map(g=>g.name);
-  const ungrouped = CATEGORIES.filter(cat=>!cat.group || !groupNames.includes(cat.group));
+  const ungrouped = CATEGORIES.filter(cat=> catGroups(cat).every(g=>!groupNames.includes(g)) );
 
   const sections = [];
   if(GROUP_META.length){
@@ -1223,7 +1229,7 @@ function renderCategories(){
   wrap.appendChild(el('h2',{},'Categorías'));
   const grid = el('div',{class:'grid'});
   GROUP_META.forEach(g=>{
-    const cats = CATEGORIES.filter(c=>c.group===g.name);
+    const cats = CATEGORIES.filter(c=>catGroups(c).includes(g.name));
     const photo = g.photo || (cats.find(c=>c.photo) ? cats.find(c=>c.photo).photo : null);
     const overlay = el('div',{class:'cat-overlay'});
     const text = el('div',{class:'cat-text'},[ el('h3',{},g.name), el('span',{},`${cats.length} sesión${cats.length===1?'':'es'}`) ]);
@@ -1237,7 +1243,7 @@ function renderCategories(){
 function renderCategoryDetail(){
   const groupName = state.activeGroup;
   const groupMeta = GROUP_META.find(g=>g.name===groupName) || {};
-  const cats = CATEGORIES.filter(c=>c.group===groupName);
+  const cats = CATEGORIES.filter(c=>catGroups(c).includes(groupName));
   const wrap = el('div',{class:'session-wrap'});
   wrap.appendChild(topBar(()=>goto('categories')));
   wrap.appendChild(el('h2',{}, groupName));
