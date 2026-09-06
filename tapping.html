@@ -314,17 +314,27 @@ const CATEGORIES = [
     audio:{file:'Empezar_tu_Di_a_con_Energi_a_Positiva.mp3', hasIntro:true, hasOutro:true, timestamps:[0,20.1901,39.4281,43.8074,52.7557,63.9315,71.0208,81.1259,90.0311,97.8272,104.377,109.668,119.963,124.302,131.81,138.125,145.298,151.946,161.139,166.802,174.281]},
   },
   {
-    id:'jornada', name:'Fin de jornada', color:'#8F2F0E', photo:'fin%20de%20jornada.jpg',
-    intro:'El cuerpo termina el día mucho antes de que la cabeza se entere. Esta sesión es el puente entre las dos: un ritual corto para cerrar lo de hoy y dejar espacio al descanso.',
-    desc:'Soltar el cansancio al terminar de trabajar.',
-    karate:'Aunque termino el día cargada de cansancio y de tensión, y aunque siento que no he podido soltar todavía, me acepto completamente y me permito empezar a soltar ahora.',
+    id:'jornada', name:'Amor propio', color:'#8F2F0E', photo:'fin%20de%20jornada.jpg',
+    intro:'El amor propio no es algo que se decreta una vez, es algo que se practica. Esta sesión te lleva a reconocerte con más ternura y menos exigencia.',
+    desc:'Para practicar el amor propio, sin exigencia.',
+    introScript:'Vas a centrarte en lo que sientes, en tu cuerpo, en tu propio ser. No respondas a los estímulos de fuera, sino que te regalas este espacio y este tiempo para ti, para soltar, sanar y conectarte con el amor hacia ti misma. Cierra los ojos, inhala profundo y exhala suavemente, regalándote este instante de presencia.',
+    karate:'Empezamos haciendo tapping en el punto kárate. Aunque a veces me cueste reconocerme con ternura, aunque cargue con exigencias o dudas sobre mi propio valor, elijo abrazarme exactamente tal y como soy hoy. Aunque en ocasiones olvide mi propia valía y me cueste habitarme desde la compasión, decido aceptarme de forma completa, con mis luces y mis sombras. Y a pesar de cualquier juicio del pasado, elijo amarme, perdonarme y darme el permiso de empezar a tratarme con el cuidado y el respeto que merezco.',
+    outroScript:'Me permito pedir ayuda cuando lo necesito y me creo capaz de merecerlo. Me siento merecedora de recibir el amor y comprensión mío y de los demás. Cada día el amor que siento por mí, el reconocimiento y la admiración crece a cada paso. Perfecto, ahora vamos a detener el tapping y a permanecer unos instantes disfrutando de esta sensación. Inhala y exhala. Una vez más, inhala y exhala. Quédate con esta certeza en tu interior y llénate de todo el amor que habita en ti.',
     rounds:[
-      R('El cansancio', ['Todo el cansancio del día.','Toda la tensión acumulada.','Todo lo que hice hoy.','Todo lo que tuve que sostener.','Todo este agotamiento.','Todo este peso del día.','Toda esta carga.','Todo lo que todavía llevo encima.']),
-      R('Lo que no he soltado', ['Todo lo que me quedó pendiente.','Todo lo que no salió como esperaba.','Todo lo que sigo pensando aunque el día terminó.','Toda la tensión que sigue en mi cuerpo.','Toda la actividad que no para en mi cabeza.','Todo esto que quiero dejar atrás.','Todo lo que necesito soltar hoy.','Todo lo que puedo dejar aquí.']),
-      R('Cerrar el día', ['Elijo cerrar el día aquí.','Elijo soltar lo que ya pasó.','Elijo descansar mi mente.','Elijo descansar mi cuerpo.','Mañana seguirá lo que tenga que seguir.','Ahora me permito parar.','Me permito desconectar.','Me permito descansar.']),
+      R('Merecer amor',
+        ['Empezamos en el inicio de la ceja con merezco amor y recibirlo todos los días.','Al lado del ojo, soy digna de ser amada.','Debajo del ojo, mi amor propio es inquebrantable.','Bajo la nariz, mi amor propio me guía a tomar decisiones saludables.','En la barbilla, me amo y espero un trato digno y con respeto de los demás.','En la clavícula, me permito liberar cualquier pensamiento negativo acerca de quién soy, cómo me veo o cómo pienso.','Debajo del brazo, soy una persona valiosa y merezco todas las bondades de la vida.','Y en la coronilla, me permito ser vulnerable e incluso amarme con todos mis defectos.'],
+        'Muy bien, ahora recorremos todos los puntos.'),
+      R('Confiar en mí',
+        ['Mi valor no depende de la aprobación de los demás.','Confío en mí misma y en mi intuición.','Me permito disfrutar de quién soy, de cómo pienso y de mis gustos.','Creo en mi capacidad para superar cualquier acontecimiento que pueda ponerme a prueba.','Confío en mis capacidades y en mis habilidades.','Confío en que cuando cometo errores y fallo, también estoy aprendiendo y es parte de la vida.','Soy capaz de perdonarme y liberarme de cualquier culpa o remordimiento del pasado.','Me amo lo suficiente como para cuidar mi bienestar y mi cuerpo.'],
+        'Pasamos a la segunda ronda, comenzando en el inicio de la ceja y recorriendo cada punto a tu propio ritmo, recordando que no existen normas fijas y que todo está bien.'),
+      R('Brillar sin miedo',
+        ['Soy un ser único e irrepetible.','Cada día me siento más segura y confiada conmigo misma.','Soy merecedora de todas las cosas buenas que la vida me brinda.','Me permito brillar y ser admirada.','Me permito brillar sin miedo al juicio.','Mi amor propio me impulsa a buscar oportunidades de crecimiento.','Me amo tanto a mí misma que soy capaz de soltar a aquellos que no saben amar.','Mi amor propio no depende de ninguna circunstancia externa.']),
+      R('Cuidarme con compasión',
+        ['Me permito celebrar mis éxitos y aprender de mis errores.','Acepto, valoro y admiro cada parte de mí sin importar sus defectos.','Merezco tratarme con cuidado y con compasión.','Me siento merecedora de recibir cosas buenas.','Merezco amarme y ser amada.','Mi amor propio me impulsa a establecer metas y confiar en que puedo lograrlas.','Me permito expresar mis necesidades y deseos sin culpa.','Mi amor propio me protege en las situaciones difíciles.']),
     ],
-    apertura:['Quizás pueda soltar un poco más el día.','Me permito desconectar de verdad.','Me permito descansar sin pendientes en la cabeza.','Me permito estar en paz esta noche.','Me permito parar sin culpa.','Me permito recargar energía.','Me permito sentirme más ligera.','Me permito cerrar el día en calma.'],
-    cierre:['Puedo cerrar el día aquí.','Puedo soltar lo que ya pasó.','Puedo descansar mi mente.','Puedo descansar mi cuerpo.','Puedo desconectar sin culpa.','Puedo recargar energía para mañana.','Ya no tengo que sostener el día.','Me permito descansar en paz.'],
+    apertura:[],
+    cierre:[],
+    audio:{file:'amor_propio.mp3', hasIntro:true, hasOutro:true, timestamps:[0,20.8621,51.2361,55.6143,61.3945,65.4253,69.9889,75.4617,81.0058,88.7772,94.897,101.22,111.507,115.794,119.28,124.578,130.314,134.418,140.773,146.546,151.37,154.732,159.266,164.061,167.496,171.125,176.091,181.495,186.383,191.136,196.632,200.643,204.835,208.111,213.791,218.479,222.986]},
   },
   {
     id:'accion', name:'Acción inspirada', color:'#4A2442', photo:'estres.jpg',
@@ -930,7 +940,7 @@ function renderHome(){
   const quickList = [
     {label:'Empezar mi día', id:'ansiedad'},
     {label:'Necesito soltar bloqueos', id:'resistencias'},
-    {label:'Necesito desconectar', id:'jornada'},
+    {label:'Practicar amor propio', id:'jornada'},
   ];
   const quickRow = el('div',{class:'quick-row'});
   quickList.forEach(q=>{
