@@ -125,7 +125,7 @@
   .rep-count{font-size:15px;color:var(--ink);letter-spacing:0.03em;font-weight:600;}
   .point-name{font-size:34px;font-weight:700;margin-top:6px;color:var(--ink);}
   .point-where{font-size:17px;color:var(--ink-soft);margin-top:4px;}
-  .point-phrase{font-size:23px;color:var(--sienna-deep);font-weight:600;line-height:1.5;margin-top:22px;max-width:26ch;}
+  .point-phrase{font-size:18px;color:var(--sienna-deep);font-weight:600;line-height:1.5;margin-top:22px;width:100%;text-align:left;align-self:stretch;}
 
   .timer-ring{width:64px;height:64px;border-radius:50%;border:3px solid var(--line);display:flex;align-items:center;justify-content:center;position:relative;margin-bottom:6px;}
   .timer-ring span{font-size:17px;font-weight:700;}
@@ -832,19 +832,41 @@ function renderCatDetail(){
     toast.textContent = nowActive ? 'Añadida a favoritos' : 'Quitada de favoritos';
     setTimeout(()=>{ toast.textContent=''; }, 3000);
   }},[ el('span',{class:'icon'},'★'), el('span',{class:'label'},'Favorito') ]);
-  const shareItem = el('button',{class:'action-item', onclick:async ()=>{
-    const shareData = { title: cat.name, text: `Prueba la sesión de "${cat.name}" en Centro Tapping`, url: location.href };
-    try{
-      if(navigator.share){ await navigator.share(shareData); }
-      else { await navigator.clipboard.writeText(location.href); toast.textContent='Enlace copiado'; setTimeout(()=>{ toast.textContent=''; }, 3000); }
-    }catch(e){}
-  }},[ el('span',{class:'icon'},'↗'), el('span',{class:'label'},'Compartir') ]);
-  const actionRow = el('div',{class:'action-row'},[favItem, shareItem]);
+  const actionRow = el('div',{class:'action-row'},[favItem]);
   body.appendChild(actionRow);
   body.appendChild(toast);
 
   body.appendChild(el('p',{class:'detail-desc'}, cat.intro || cat.desc || ''));
-  body.appendChild(el('button',{class:'btn btn-primary',onclick:()=>{ state.quickMode=false; goto('sud-before',{category:cat, sudBefore:5}); }},'Comenzar'));
+
+  if(cat.audio && state.audioOn===undefined) state.audioOn = true;
+  const skipRatingHere = !!(cat.audio && cat.audio.introAsksRating && state.audioOn);
+
+  if(!skipRatingHere){
+    const thermoContainer = el('div',{style:'margin:6px 0 20px;'});
+    body.appendChild(thermoContainer);
+    renderThermometerHorizontal(thermoContainer, state.sudBefore, (v)=>{ state.sudBefore = v; });
+  } else {
+    body.appendChild(el('p',{class:'stage-copy'},'Al empezar, la propia sesión te va a pedir que valores del 0 al 10 cuánto te está afectando esto.'));
+  }
+
+  if(cat.note) body.appendChild(el('p',{class:'stage-copy',style:'font-size:13.5px;'}, cat.note));
+
+  if(cat.audio){
+    const audioRow = el('div',{class:'settings-row'});
+    audioRow.appendChild(el('span',{}, '🔊 Escuchar con audio'));
+    const seg = el('div',{class:'seg'});
+    const onBtn = el('button',{class: state.audioOn?'active':'', onclick:()=>{ state.audioOn=true; renderCatDetail(); }}, 'Sí');
+    const offBtn = el('button',{class: !state.audioOn?'active':'', onclick:()=>{ state.audioOn=false; renderCatDetail(); }}, 'Solo texto');
+    seg.appendChild(onBtn); seg.appendChild(offBtn);
+    audioRow.appendChild(seg);
+    body.appendChild(audioRow);
+  }
+
+  body.appendChild(el('button',{class:'btn btn-primary',style:'margin-top:16px;',onclick:()=>{
+    state.quickMode=false;
+    ensureAudio();
+    goto('player-main');
+  }},'Empezar sesión'));
   wrap.appendChild(body);
 
   app.replaceChildren(wrap);
@@ -887,7 +909,7 @@ function renderHome(){
     const mins = estimateMinutes(cat, settings.seconds);
     const overlay = el('div',{class:'cat-overlay'});
     const text = el('div',{class:'cat-text'},[ el('h3',{},cat.name), el('span',{},`${mins} min · ${cat.desc}`) ]);
-    const card = el('div',{class:'cat-card', style:`background:${cat.photo?`url('${cat.photo}') center/cover`:`linear-gradient(135deg, ${cat.color}, ${cat.color}CC)`}`, onclick:()=>{ state.quickMode=false; goto('cat-detail',{category:cat}); }},[overlay, text]);
+    const card = el('div',{class:'cat-card', style:`background:${cat.photo?`url('${cat.photo}') center/cover`:`linear-gradient(135deg, ${cat.color}, ${cat.color}CC)`}`, onclick:()=>{ state.quickMode=false; goto('cat-detail',{category:cat, sudBefore:5}); }},[overlay, text]);
     return card;
   });
 
@@ -948,16 +970,14 @@ function renderSudBefore(){
   const wrap = el('div',{class:'session-wrap'});
   wrap.appendChild(topBar(()=>goto('home')));
   wrap.appendChild(el('div',{class:'cat-tag'},cat.name));
-  wrap.appendChild(el('h2',{},'Antes de empezar'));
 
   if(cat.audio && state.audioOn===undefined) state.audioOn = true;
   const skipRatingHere = !!(cat.audio && cat.audio.introAsksRating && state.audioOn);
 
   if(!skipRatingHere){
-    wrap.appendChild(el('p',{class:'stage-copy'},'¿Cuánto te está afectando esto ahora mismo?'));
-    const thermoContainer = el('div',{style:'margin-bottom:20px;'});
+    const thermoContainer = el('div',{style:'margin:10px 0 24px;'});
     wrap.appendChild(thermoContainer);
-    renderThermometer(thermoContainer, state.sudBefore, (v)=>{ state.sudBefore = v; });
+    renderThermometerHorizontal(thermoContainer, state.sudBefore, (v)=>{ state.sudBefore = v; });
   } else {
     wrap.appendChild(el('p',{class:'stage-copy'},'Al empezar, la propia sesión te va a pedir que valores del 0 al 10 cuánto te está afectando esto.'));
   }
@@ -974,9 +994,6 @@ function renderSudBefore(){
     audioRow.appendChild(seg);
     wrap.appendChild(audioRow);
   }
-
-  wrap.appendChild(el('div',{class:'phrase-box'}, el('p',{}, cat.karate)));
-  wrap.appendChild(el('p',{class:'stage-copy',style:'margin-top:-10px;'},'Esta es la frase de preparación para el canto de la mano.'));
 
   wrap.appendChild(el('div',{class:'spacer'}));
   wrap.appendChild(el('button',{class:'btn btn-primary',onclick:()=>{
@@ -1055,7 +1072,7 @@ function renderDone(){
   else diffText = 'La intensidad se mantuvo igual esta vez.';
   wrap.appendChild(el('p',{class:'stage-copy',style:'text-align:center;'}, diffText));
   wrap.appendChild(el('p',{class:'stage-copy',style:'text-align:center;font-size:15px;'},'¿Quieres hacer otra ronda?'));
-  wrap.appendChild(el('button',{class:'btn btn-primary',onclick:()=>goto('sud-before',{category:cat, sudBefore:state.sudAfter})},'Hacer otra ronda'));
+  wrap.appendChild(el('button',{class:'btn btn-primary',onclick:()=>goto('cat-detail',{category:cat, sudBefore:state.sudAfter})},'Hacer otra ronda'));
   wrap.appendChild(el('button',{class:'btn btn-ghost',onclick:()=>goto('home')},'Volver al inicio'));
   wrap.appendChild(el('div',{class:'spacer'}));
   app.replaceChildren(wrap);
