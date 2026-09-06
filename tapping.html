@@ -859,6 +859,11 @@ function renderPlayerFrame(isFirst){
     mid.appendChild(scaleHolder);
     renderThermometerHorizontal(scaleHolder, state.sudBefore, (v)=>{ state.sudBefore = v; });
   }
+  if(step.phase==='outro' && cat.audio && cat.audio.outroAsksRating){
+    const scaleHolder = el('div',{});
+    mid.appendChild(scaleHolder);
+    renderThermometerHorizontal(scaleHolder, state.sudAfter, (v)=>{ state.sudAfter = v; });
+  }
   wrap.appendChild(mid);
 
   const controls = el('div',{class:'player-controls'});
@@ -1153,14 +1158,15 @@ function renderSudAfter(){
   wrap.appendChild(topBar(()=>goto('home')));
   wrap.appendChild(el('div',{class:'cat-tag'},cat.name));
 
-  if(!cat.noRating){
+  const askedInAudio = !!(cat.audio && cat.audio.outroAsksRating && state.audioOn);
+  if(!cat.noRating && !askedInAudio){
     wrap.appendChild(el('h2',{},'¿Cómo te sientes ahora?'));
     const thermoContainer = el('div',{style:'margin-bottom:20px;'});
     wrap.appendChild(thermoContainer);
     renderThermometer(thermoContainer, state.sudAfter, (v)=>{ state.sudAfter = v; });
   } else {
     wrap.appendChild(el('h2',{},'Bien hecho'));
-    wrap.appendChild(el('p',{class:'stage-copy'},'Has terminado tu primera sesión de tapping.'));
+    wrap.appendChild(el('p',{class:'stage-copy'}, cat.noRating ? 'Has terminado tu primera sesión de tapping.' : 'Sesión terminada.'));
   }
 
   wrap.appendChild(el('div',{class:'spacer'}));
