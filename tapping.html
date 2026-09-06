@@ -213,7 +213,7 @@ const CATEGORIES = [
     cierre:['Vamos notando esta liberación.','El cuerpo se relaja.','Ya no tienes tanta preocupación.','Ya no te fijas tanto en lo que hacen otras personas.','Estás en un estado más positivo.','Puedes disfrutar más de la vida.','Empiezas a ver posibilidades que antes no veías.','Las cosas empiezan a fluir mejor.'],
   },
   {
-    id:'escasez', name:'Salir de la escasez', color:'#8F2F0E',
+    id:'escasez', name:'Salir de la escasez', color:'#8F2F0E', photo:'confianza_en_mi.jpg',
     audio:{file:'Escases.mp3', hasIntro:true, hasOutro:true, timestamps:[0,12.9882,41.0575,45.9182,52.6107,57.747,63.3633,69.8689,77.2358,84.0029,88.9543,93.4923,102.238,106.68,110.718,116.765,120.385,124.388,130.735,143.063,152.396,171.005,179.159,186.341,193.369,200.185,208.679,214.755,221.46]},
     intro:'Cuando la sensación de que algo falta se vuelve constante, cuesta disfrutar lo que ya tienes. Esta sesión es un espacio para soltar esa creencia y conectar con la sensación de plenitud.',
     desc:'Para soltar la creencia de que siempre falta algo.',
@@ -421,21 +421,6 @@ const CATEGORIES = [
     audio:{file:'miedo.mp3', hasIntro:true, hasOutro:true, timestamps:[0,28.8781,63.8841,68.2622,73.0357,78.5044,83.0664,88.9024,94.5656,99.9608,105.457,111.396,121.681,126.839,134.084,137.977,144.649,151.039,160.326,165.174,170.139,174.505,178.956,187.633,193.597,196.974]},
   },
   {
-    id:'repetitivos', name:'Pensamientos repetitivos', color:'#4A2442', photo:'repetidos.jpg',
-    intro:'Hay ideas que insisten en repetirse como una canción atascada, sin que decidas ponerlas ahí. Vamos a trabajar en soltar ese bucle, un punto a la vez.',
-    desc:'Para cuando una idea da vueltas sin parar.',
-    karate:'Aunque tengo este pensamiento que se repite una y otra vez, aunque no logro sacármelo de la cabeza, me acepto completamente y acepto todo lo que estoy sintiendo ahora mismo.',
-    rounds:[
-      R('Reconocer', ['Reconozco este pensamiento que se repite.','Reconozco que vuelve una y otra vez.','Reconozco que me cuesta soltarlo.','Reconozco este bucle en mi cabeza.','Reconozco que esto me cansa.','Reconozco todo este ruido mental.','Reconozco que necesito descansar de esto.','Reconozco cómo me siento, ahora mismo.']),
-      R('Profundizar', ['Este pensamiento que insiste en volver.','Esta necesidad de repasarlo una y otra vez.','Esta sensación de no llegar a ninguna conclusión.','Este miedo a que si dejo de pensarlo, algo se me escape.','Esta dificultad para ocupar la mente en otra cosa.','Todo este cansancio mental.','Todo este espacio que ocupa en mi cabeza.','Todo lo que este pensamiento se lleva de mí.']),
-      R('Permitir', ['Me permito notar este pensamiento sin pelear con él.','Me permito no tener que resolverlo ahora mismo.','Me permito dejarlo pasar, aunque vuelva.','Me permito descansar la mente un momento.','Me permito no tener el control total de mis pensamientos.','Me permito soltar la exigencia de resolverlo ya.','Me permito ocupar mi mente en otra cosa.','Me permito estar en paz, aunque el pensamiento siga ahí.']),
-      R('Regular', ['Elijo notar el pensamiento y dejarlo pasar.','Elijo dirigir mi atención a otra cosa.','Elijo darle menos peso a este pensamiento.','Elijo una mente más tranquila.','Elijo enfocarme en el presente.','Elijo soltar la repetición.','Elijo descansar mi mente.','Elijo sentir más calma mental, ahora.']),
-      R('Nueva dirección', ['Puedo notar el pensamiento sin quedarme atrapada en él.','Puedo volver mi atención al presente, una y otra vez si hace falta.','Puedo confiar en que no necesito pensarlo todo el tiempo.','Puedo darle un descanso a mi mente.','Puedo ocupar mi cabeza en algo que sí ayuda.','Puedo soltar este pensamiento, un poco más cada vez.','Puedo sentir más espacio en mi mente.','Me abro a una mente más despejada.']),
-    ],
-    apertura:['Me permito soltar este pensamiento un poco más.','Me permito una mente más tranquila.','Me permito ocuparme de otras cosas.','Me permito confiar en que esto va perdiendo fuerza.','Me permito descansar de pensar en esto.','Me permito sentir más espacio en mi cabeza.','Me permito estar presente en otras cosas.','Me permito sentirme más en paz.'],
-    cierre:['Puedo notar el pensamiento sin quedarme atrapada.','Puedo volver al presente cuando lo necesite.','Puedo darle un descanso a mi mente.','Puedo confiar en que esto pierde fuerza con el tiempo.','Puedo ocupar mi mente en algo que me haga bien.','Puedo sentir más calma mental.','Ya no necesito repasar esto una y otra vez.','Elijo una mente más tranquila y despejada.'],
-  },
-  {
     id:'sincronias', name:'Sincronías y señales', color:'#354A24', photo:'agotamiento.jpg',
     intro:'Cuando sueltas el control, empiezas a notar cosas que antes se te pasaban por alto. Esta sesión trabaja esa necesidad de controlarlo todo para abrirte a que las cosas se acomoden solas.',
     desc:'Para soltar el control y abrirte a lo que se acomoda por sí solo.',
@@ -454,36 +439,6 @@ const CATEGORIES = [
     apertura:[],
     cierre:[],
     audio:{file:'SINCRONI_AS_Y_SEN_ALES.mp3', hasIntro:true, hasOutro:true, timestamps:[0,19.5356,49.5386,55.4426,61.2246,67.6823,73.7096,79.3212,84.7688,90.907,95.5087,105.361,109.201,116.514,120.86,134.658,140.791,157.254,160.853,166.748,173.404,182.688,195.912,203.129,212.028]},
-  },
-  {
-    id:'confianza', name:'Confianza en mí', color:'#8F2F0E', photo:'confianza_en_mi.jpg',
-    intro:'La voz que más duro nos juzga casi siempre es la propia. Esta sesión trabaja justo ahí, en esa exigencia constante, para dejar espacio a un poco más de amabilidad contigo misma.',
-    desc:'Para cuando cuesta confiar en las propias capacidades.',
-    karate:'Aunque a veces dudo de mí misma, aunque me cuesta confiar en mis propias capacidades, me acepto completamente y acepto todo lo que estoy sintiendo ahora mismo.',
-    rounds:[
-      R('Reconocer', ['Reconozco que a veces dudo de mí.','Reconozco esta inseguridad.','Reconozco que me comparo con otros.','Reconozco que me cuesta confiar en mis capacidades.','Reconozco este miedo a equivocarme.','Reconozco toda esta autoexigencia.','Reconozco que esto me pesa.','Reconozco cómo me siento conmigo misma, ahora.']),
-      R('Profundizar', ['Este miedo a no ser suficiente.','Este miedo a que me juzguen.','Esta voz interna que me exige demasiado.','Esta dificultad para reconocer lo que sí logro.','Esta inseguridad que aparece en momentos importantes.','Todo este peso de la autoexigencia.','Todo este esfuerzo por demostrar algo.','Todo lo que esta inseguridad me cuesta.']),
-      R('Permitir', ['Me permito no ser perfecta.','Me permito equivocarme y aprender.','Me permito reconocer lo que sí logro.','Me permito hablarme con más amabilidad.','Me permito confiar un poco más en mí.','Me permito soltar la comparación con otros.','Me permito ser suficiente, tal como soy.','Me permito estar en paz conmigo misma.']),
-      R('Regular', ['Elijo hablarme con más amabilidad.','Elijo reconocer mis logros, aunque sean pequeños.','Elijo confiar un poco más en mi criterio.','Elijo soltar la necesidad de ser perfecta.','Elijo tratarme como trataría a alguien que quiero.','Elijo sentirme más segura de mí misma.','Elijo confiar en mi proceso.','Elijo sentirme más en paz conmigo, hoy.']),
-      R('Nueva dirección', ['Puedo confiar más en mí, poco a poco.','Puedo reconocer mi propio valor.','Puedo aprender de mis errores sin castigarme.','Puedo confiar en mi capacidad de resolver las cosas.','Puedo hablarme con más amabilidad cada día.','Puedo sentirme segura, aunque no sea perfecta.','Puedo construir más confianza en mí misma.','Me abro a confiar más en quien soy.']),
-    ],
-    apertura:['Me permito reconocer mi propio valor.','Me permito confiar más en mi criterio.','Me permito aprender sin juzgarme tan duro.','Me permito hablarme con más amabilidad.','Me permito sentirme segura tal como soy.','Me permito soltar la comparación.','Me permito confiar en mi proceso.','Me permito sentirme más en paz conmigo misma.'],
-    cierre:['Puedo confiar más en mí cada día.','Puedo reconocer lo que sí logro.','Puedo aprender de mis errores con amabilidad.','Puedo hablarme con más cariño.','Puedo sentirme segura, tal como soy.','Puedo soltar la exigencia de ser perfecta.','Ya no necesito compararme con nadie.','Elijo confiar más en mí misma, cada día.'],
-  },
-  {
-    id:'relaciones', name:'Relaciones', color:'#4A2442', photo:'relaciones.jpg',
-    intro:'Sentirse distanciada de alguien importante pesa distinto a cualquier otra preocupación. Esta sesión te da espacio para procesar eso, sin necesidad de tener la relación resuelta hoy.',
-    desc:'Para dificultades o distancia en una relación importante.',
-    karate:'Aunque tengo esta dificultad en mis relaciones, aunque a veces me siento incomprendida o distanciada de alguien importante, me acepto completamente y acepto todo lo que estoy sintiendo ahora mismo.',
-    rounds:[
-      R('Reconocer', ['Reconozco esta dificultad en mi relación.','Reconozco que me siento incomprendida.','Reconozco esta distancia que siento.','Reconozco esta frustración.','Reconozco que esto me duele.','Reconozco todo lo que esto me hace sentir.','Reconozco que necesito claridad.','Reconozco cómo me siento, ahora mismo.']),
-      R('Profundizar', ['Este miedo a no ser entendida.','Este miedo a que la distancia crezca.','Esta dificultad para comunicar lo que siento.','Esta sensación de dar más de lo que recibo.','Esta necesidad de sentirme valorada en esta relación.','Todo este peso de lo que no se ha dicho.','Todo este cansancio de esta situación.','Todo lo que esta relación me está costando ahora.']),
-      R('Permitir', ['Me permito sentir esta dificultad sin negarla.','Me permito expresar lo que siento, cuando pueda.','Me permito no tener la relación resuelta hoy.','Me permito cuidar de mí en medio de esto.','Me permito soltar lo que no depende solo de mí.','Me permito pedir lo que necesito.','Me permito sentirme en paz, aunque esto no esté resuelto.','Me permito aceptar cómo están las cosas hoy.']),
-      R('Regular', ['Elijo comunicarme con más claridad.','Elijo cuidar de mí en esta relación.','Elijo soltar lo que no puedo controlar.','Elijo poner límites cuando los necesito.','Elijo sentirme en calma conmigo misma.','Elijo confiar en que puedo manejar esto.','Elijo soltar el resentimiento, poco a poco.','Elijo sentirme más en paz con esta relación, hoy.']),
-      R('Nueva dirección', ['Puedo comunicarme desde un lugar más tranquilo.','Puedo poner límites sanos cuando lo necesito.','Puedo cuidar de mí sin dejar de cuidar la relación.','Puedo aceptar lo que no puedo cambiar de otra persona.','Puedo construir una relación más sana, un paso a la vez.','Puedo confiar en mi capacidad de manejar esto.','Puedo soltar lo que ya no me sirve cargar.','Me abro a relaciones más sanas y tranquilas.']),
-    ],
-    apertura:['Me permito comunicarme con más claridad.','Me permito poner límites cuando los necesito.','Me permito cuidar de mí en esta relación.','Me permito aceptar lo que no puedo cambiar.','Me permito construir algo más sano, paso a paso.','Me permito soltar el resentimiento.','Me permito sentirme en paz con esto.','Me permito relaciones más tranquilas.'],
-    cierre:['Puedo comunicarme desde la calma.','Puedo poner límites sanos.','Puedo cuidar de mí en cualquier relación.','Puedo aceptar lo que no depende de mí.','Puedo construir relaciones más sanas.','Puedo soltar lo que ya no me sirve.','Ya no necesito cargar con esto sola.','Elijo relaciones más tranquilas y sanas.'],
   },
 ];
 
