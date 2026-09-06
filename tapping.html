@@ -253,6 +253,11 @@ const PRIMERA_SESION = {
   audio:{file:'p_20362219_820.mp3', duration:227.424, hasIntro:true, hasOutro:true, timestamps:[0,25.009,52.2886,58.9505,65.4731,69.6972,75.2631,80.9816,86.0461,91.1531,98.3956,103.825,112.915,118.707,124.176,129.671,135.582,141.505,148.585,155.516,161.413,170.034,176.187,181.105,186.644,192.126,197.669,202.561,209.491,215.84]},
 };
 
+const GROUP_META = [
+  {name:'Dormir', photo:'dormir.jpg'},
+  {name:'Aliviar dolores físicos', photo:'dolores%20de%20cabeza.jpg', note:'Esta app es un apoyo para acompañar el malestar físico y no sustituye la atención médica o psicológica profesional. No diagnostica ni trata ninguna condición médica.'},
+];
+
 const CATEGORIES = [
   {
     id:'resistencias', name:'Liberar resistencias', color:'#354A24', photo:'desbordada.jpg',
@@ -664,6 +669,22 @@ let settings = loadSettings();
 applyTheme(settings.theme);
 let timerHandle = null; // interval id for the running player
 let playerCtx = null;   // holds current sequence/index/paused/etc
+const BG_MUSIC_FILE = 'background_music.mp3';
+const BG_MUSIC_VOLUME = 0.16;
+let bgMusicEl = null;
+function startBgMusic(){
+  if(!bgMusicEl){
+    bgMusicEl = new Audio(BG_MUSIC_FILE);
+    bgMusicEl.loop = true;
+    bgMusicEl.volume = BG_MUSIC_VOLUME;
+  }
+  bgMusicEl.currentTime = 0;
+  const p = bgMusicEl.play();
+  if(p && p.catch) p.catch(()=>{});
+}
+function pauseBgMusic(){ if(bgMusicEl) bgMusicEl.pause(); }
+function resumeBgMusic(){ if(bgMusicEl){ const p=bgMusicEl.play(); if(p && p.catch) p.catch(()=>{}); } }
+function stopBgMusic(){ if(bgMusicEl){ bgMusicEl.pause(); bgMusicEl.currentTime = 0; } }
 
 function clearTimer(){ if(timerHandle){ clearInterval(timerHandle); timerHandle=null; } }
 
@@ -777,6 +798,7 @@ function startAudioSlice(cat, startIdx, endIdxExclusive, onFinish){
   };
   audioEl.onended = ()=>{ if(playerCtx && playerCtx.audioEl===audioEl) playerCtx.onFinish(); };
   audioEl.play();
+  startBgMusic();
 }
 
 function updateAudioProgressBar(){
@@ -796,6 +818,7 @@ function startPlayer(steps, onFinish){
   playerCtx = { steps, index:0, paused:false, secondsLeft:settings.seconds, onFinish };
   renderPlayerFrame(true);
   runTick();
+  startBgMusic();
 }
 function runTick(){
   clearTimer();
@@ -826,9 +849,10 @@ function advancePlayer(){
 function togglePause(){
   if(!playerCtx) return;
   if(playerCtx.mode==='audio'){
-    if(playerCtx.audioEl.paused){ playerCtx.audioEl.play(); } else { playerCtx.audioEl.pause(); }
+    if(playerCtx.audioEl.paused){ playerCtx.audioEl.play(); resumeBgMusic(); } else { playerCtx.audioEl.pause(); pauseBgMusic(); }
   } else {
     playerCtx.paused = !playerCtx.paused;
+    if(playerCtx.paused) pauseBgMusic(); else resumeBgMusic();
   }
   const btn = document.getElementById('pauseBtn');
   const isPaused = playerCtx.mode==='audio' ? playerCtx.audioEl.paused : playerCtx.paused;
@@ -855,6 +879,7 @@ function exitPlayer(){
     playerCtx.audioEl.onended = null;
     playerCtx.audioEl.pause();
   }
+  stopBgMusic();
   playerCtx=null;
   goto('home');
 }
@@ -1045,22 +1070,13 @@ function renderHome(){
     return el('div',{class:'cat-card', style:`background:${cat.photo?`url('${cat.photo}') center/cover`:`linear-gradient(135deg, ${cat.color}, ${cat.color}CC)`}`, onclick:()=>{ state.quickMode=false; goto('cat-detail',{category:cat, sudBefore:5}); }},[overlay, text]);
   }
 
-  const groups = [];
-  const groupIndex = {};
-  const ungrouped = [];
-  CATEGORIES.forEach(cat=>{
-    if(cat.group){
-      if(!(cat.group in groupIndex)){ groupIndex[cat.group] = groups.length; groups.push({name:cat.group, cats:[]}); }
-      groups[groupIndex[cat.group]].cats.push(cat);
-    } else {
-      ungrouped.push(cat);
-    }
-  });
+  const groupNames = GROUP_META.map(g=>g.name);
+  const ungrouped = CATEGORIES.filter(cat=>!cat.group || !groupNames.includes(cat.group));
 
   const sections = [];
-  if(groups.length){
+  if(GROUP_META.length){
     const catsBtn = el('button',{class:'guide-cta', style:'background:var(--sage-deep);', onclick:()=>goto('categories')},[
-      el('span',{},`🗂 Categorías · ${groups.length}`),
+      el('span',{},`🗂 Categorías · ${GROUP_META.length}`),
       el('span',{},'›'),
     ]);
     sections.push(catsBtn);
@@ -1091,18 +1107,12 @@ function renderCategories(){
   const wrap = el('div',{class:'session-wrap'});
   wrap.appendChild(topBar(()=>goto('home')));
   wrap.appendChild(el('h2',{},'Categorías'));
-  const groups = [];
-  const groupIndex = {};
-  CATEGORIES.forEach(cat=>{
-    if(!cat.group) return;
-    if(!(cat.group in groupIndex)){ groupIndex[cat.group] = groups.length; groups.push({name:cat.group, cats:[]}); }
-    groups[groupIndex[cat.group]].cats.push(cat);
-  });
   const grid = el('div',{class:'grid'});
-  groups.forEach(g=>{
-    const photo = g.cats.find(c=>c.photo) ? g.cats.find(c=>c.photo).photo : null;
+  GROUP_META.forEach(g=>{
+    const cats = CATEGORIES.filter(c=>c.group===g.name);
+    const photo = g.photo || (cats.find(c=>c.photo) ? cats.find(c=>c.photo).photo : null);
     const overlay = el('div',{class:'cat-overlay'});
-    const text = el('div',{class:'cat-text'},[ el('h3',{},g.name), el('span',{},`${g.cats.length} sesión${g.cats.length===1?'':'es'}`) ]);
+    const text = el('div',{class:'cat-text'},[ el('h3',{},g.name), el('span',{},`${cats.length} sesión${cats.length===1?'':'es'}`) ]);
     const card = el('div',{class:'cat-card', style:`background:${photo?`url('${photo}') center/cover`:'linear-gradient(135deg, #8F2F0E, #8F2F0ECC)'}`, onclick:()=>goto('category-detail',{activeGroup:g.name})},[overlay, text]);
     grid.appendChild(card);
   });
@@ -1112,10 +1122,15 @@ function renderCategories(){
 
 function renderCategoryDetail(){
   const groupName = state.activeGroup;
+  const groupMeta = GROUP_META.find(g=>g.name===groupName) || {};
   const cats = CATEGORIES.filter(c=>c.group===groupName);
   const wrap = el('div',{class:'session-wrap'});
   wrap.appendChild(topBar(()=>goto('categories')));
   wrap.appendChild(el('h2',{}, groupName));
+  if(groupMeta.note) wrap.appendChild(el('p',{class:'stage-copy',style:'margin-bottom:14px;'}, groupMeta.note));
+  if(!cats.length){
+    wrap.appendChild(el('p',{class:'stage-copy'},'Todavía no hay sesiones aquí. Muy pronto añadiremos las primeras.'));
+  }
   const grid = el('div',{class:'grid'});
   cats.forEach(cat=>{
     const mins = estimateMinutes(cat, settings.seconds);
@@ -1249,17 +1264,18 @@ function renderSudBefore(){
 
 function renderPlayerMain(){
   const cat = state.category;
+  const finishAndGo = ()=>{ stopBgMusic(); goto('breath'); };
   if(state.quickMode){
     const seq = buildQuickSequence(cat);
-    startPlayer(seq, ()=> goto('breath'));
+    startPlayer(seq, finishAndGo);
     return;
   }
   if(cat.audio && state.audioOn){
     const totalSteps = buildAudioSteps(cat).length;
-    startAudioSlice(cat, 0, totalSteps, ()=> goto('breath'));
+    startAudioSlice(cat, 0, totalSteps, finishAndGo);
   } else {
     const seq = buildSequence(cat);
-    startPlayer(seq, ()=> goto('breath'));
+    startPlayer(seq, finishAndGo);
   }
 }
 
