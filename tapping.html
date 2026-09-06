@@ -1255,11 +1255,6 @@ function render(){
   }
 }
 
-const SEEN_GUIDE_KEY = 'tapping_seen_guide_v1';
-if(!localStorage.getItem(SEEN_GUIDE_KEY)){
-  localStorage.setItem(SEEN_GUIDE_KEY, '1');
-  state.screen = 'points-guide';
-}
 render();
 </script>
 </body>
