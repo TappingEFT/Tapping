@@ -571,33 +571,9 @@ const CATEGORIES = [
     intro:'Cuando el estrés se acumula, muchas veces se instala directo en la cabeza. Esta sesión trabaja ese dolor punto por punto, reconociendo lo que hay detrás de él.',
     desc:'Para liberar el dolor de cabeza y el estrés que lo alimenta.',
     note:'Si se trata de un dolor nuevo, intenso y sin causa evidente, acude al médico. Esta app es un apoyo y no sustituye la atención médica profesional.',
-    introScript:[
-      'Te damos la bienvenida a esta sesión de tapping para liberar el dolor de cabeza.',
-      'En esta práctica, nos ocuparemos de cualquier molestia que sientas en la cabeza y examinaremos cómo el estrés puede estar alimentando ese malestar.',
-      'Hacer tapping ayuda a disminuir los niveles de cortisol y otras hormonas del estrés en el organismo, abriendo el camino hacia el alivio y la recuperación.',
-      'Un apunte importante: si se trata de un dolor nuevo, intenso y sin una causa evidente, acude al médico.',
-      {text:'Comenzamos evaluando el nivel de dolor en una escala del cero al diez, donde el diez es el grado más alto de dolor y el cero equivale a la ausencia total del mismo.', askRating:true},
-      {text:'Identifícalo ahora y registra tu número en la aplicación.', askRating:true},
-      'Toma una suave y profunda inspiración y exhala despacio.',
-    ],
-    karate:[
-      'Empieza a realizar el tapping en el lateral de la mano.',
-      'Repite después de mí, ya sea en voz alta o de manera mental.',
-      'A pesar de que siento este dolor de cabeza, elijo relajarme ahora.',
-      'Siguiendo en el lateral de la mano: aunque tengo este dolor y no desaparece, me permito relajarme.',
-      'Y una vez más en el lateral de la mano: a pesar de experimentar frustración con mi cuerpo y con esta molestia, me acepto y acepto lo que estoy sintiendo.',
-    ],
-    outroScript:[
-      'Detén con suavidad los golpecitos, respira hondo y deja marchar la tensión.',
-      'Revisa tu cuerpo y el dolor de cabeza.',
-      '¿Cómo te encuentras ahora?',
-      {text:'¿Qué número le das en la escala del cero al diez?', askRating:true},
-      {text:'Si te sientes mejor, la cifra será menor; regístrala en la aplicación.', askRating:true},
-      'Cualquier descenso indica que avanzas en el sentido correcto.',
-      'Si el número sigue alto, repite esta meditación cuando lo necesites.',
-      'En solo unos minutos has reducido las hormonas del estrés, generando calma y confianza para que tu cuerpo sane y descanse cada vez mejor.',
-      'Sigue adelante, sé que puedes recuperarte.',
-    ],
+    introScript:'Te damos la bienvenida a esta sesión de tapping para liberar el dolor de cabeza. En esta práctica, nos ocuparemos de cualquier molestia que sientas en la cabeza y examinaremos cómo el estrés puede estar alimentando ese malestar. Hacer tapping ayuda a disminuir los niveles de cortisol y otras hormonas del estrés en el organismo, abriendo el camino hacia el alivio y la recuperación. Un apunte importante: si se trata de un dolor nuevo, intenso y sin una causa evidente, acude al médico. Comenzamos evaluando el nivel de dolor en una escala del cero al diez, donde el diez es el grado más alto de dolor y el cero equivale a la ausencia total del mismo. Identifícalo ahora y registra tu número en la aplicación. Toma una suave y profunda inspiración y exhala despacio.',
+    karate:'Empieza a realizar el tapping en el lateral de la mano. Repite después de mí, ya sea en voz alta o de manera mental. A pesar de que siento este dolor de cabeza, elijo relajarme ahora. Siguiendo en el lateral de la mano: aunque tengo este dolor y no desaparece, me permito relajarme. Y una vez más en el lateral de la mano: a pesar de experimentar frustración con mi cuerpo y con esta molestia, me acepto y acepto lo que estoy sintiendo.',
+    outroScript:'Detén con suavidad los golpecitos, respira hondo y deja marchar la tensión. Revisa tu cuerpo y el dolor de cabeza. ¿Cómo te encuentras ahora? ¿Qué número le das en la escala del cero al diez? Si te sientes mejor, la cifra será menor; regístrala en la aplicación. Cualquier descenso indica que avanzas en el sentido correcto. Si el número sigue alto, repite esta meditación cuando lo necesites. En solo unos minutos has reducido las hormonas del estrés, generando calma y confianza para que tu cuerpo sane y descanse cada vez mejor. Sigue adelante, sé que puedes recuperarte.',
     rounds:[
       R('Reconocer el dolor',
         ['Este dolor de cabeza.','Se siente tan incómodo.','Y parece que está atascado.','Resulta muy frustrante.','Es estresante encontrarse así.','Reconozco este dolor de cabeza y lo que me hace sentir.','E incluso antes de que se produzca un cambio.','Puedo elegir relajarme y respirar.'],
@@ -640,7 +616,8 @@ const CATEGORIES = [
           {key:'ladoOjo', phrase:'Cada vez que tomamos la decisión consciente de sentirnos bien, de soltar y de liberar el estrés corporal y vital, impulsamos nuestra recuperación.'},
           {key:'debajoOjo', phrase:'La pregunta es qué puedes hacer para potenciar esos momentos y apoyar el proceso natural de sanación de tu cuerpo.'},
           {key:'debajoNariz', phrase:'Recuerda que rara vez se trata de un único factor.'},
-          {key:'barbilla', phrase:'Los mejores resultados llegan al sumar acciones físicas, como caminar o hacer ejercicio, medidas biológicas, como las pautas del médico, suplementos y nutrición adecuada, y respuestas emocionales, como expresar lo que sentimos y dejar ir los miedos o dolores del pasado.'},
+          {key:'barbilla', phrase:'Los mejores resultados llegan al sumar acciones físicas, como caminar o hacer ejercicio, medidas biológicas, como las pautas del médico, suplementos y nutrición adecuada,'},
+          {key:'barbilla', phrase:'y respuestas emocionales, como expresar lo que sentimos y dejar ir los miedos o dolores del pasado.'},
           {key:'barbilla', phrase:'Al combinar todo esto, dotamos al cuerpo de la capacidad de sanar.'},
           {key:'brazo', phrase:'Comienza a imaginar ahora la posibilidad real de liberarte por completo de este dolor de cabeza.'},
           {key:'coronilla', phrase:'¿Estás lista para que esta molestia desaparezca del todo y tu cuerpo se cure?'},
@@ -661,7 +638,7 @@ const CATEGORIES = [
     ],
     apertura:[],
     cierre:[],
-    audio:{file:'dolor_de_cabeza.MP3', duration:495.595, hasIntro:true, hasOutro:true, introAsksRating:true, outroAsksRating:true, timestamps:[0,6.0177,15.5789,25.4306,33.8687,44.1206,48.8302,53.4526,57.8829,62.9015,68.3758,75.7491,86.05,90.1794,93.6425,97.4943,101.745,106.079,110.563,115.999,121.389,126.053,130.701,135.359,139.579,144.905,149.264,153.943,157.552,160.534,165.847,173.712,179.834,190.394,197.059,202.848,207.062,212.689,217.71,223.764,226.846,232.702,235.669,240.94,248.46,252.752,255.831,262.864,274.944,278.115,288.892,293.14,296.072,299.291,305.117,313.131,323.776,332.508,357.548,362.966,371.047,374.672,379.441,383.124,390.839,398.366,405.326,412.974,415.632,422.36,424.326,434.164,437.376,444.727,449.649,455.666,459.277,462.002,466.015,471.934,476.728,482.418,491.606]},
+    audio:{file:'dolor_de_cabeza.MP3', duration:495.595, hasIntro:true, hasOutro:true, introRatingRange:[33.8687,48.8302], outroRatingRange:[459.277,466.015], timestamps:[0,53.4526,86.05,90.1794,93.6425,97.4943,101.745,106.079,110.563,115.999,121.389,126.053,130.701,135.359,139.579,144.905,149.264,153.943,157.552,160.534,165.847,173.712,179.834,190.394,197.059,202.848,207.062,212.689,217.71,223.764,226.846,232.702,235.669,240.94,248.46,252.752,255.831,262.864,274.944,278.115,288.892,293.14,296.072,299.291,305.117,313.131,323.776,332.508,338.168,357.548,362.966,371.047,374.672,379.441,383.124,390.839,398.366,405.326,412.974,415.632,422.36,424.326,434.164,437.376,444.727,449.649]},
   },
 ];
 
@@ -922,6 +899,7 @@ function startAudioSlice(cat, startIdx, endIdxExclusive, onFinish){
   playerCtx = { mode:'audio', steps, timestamps, index:0, paused:false, audioEl, onFinish, sliceEndTime };
   audioEl.currentTime = timestamps[0];
   renderPlayerFrame(true);
+  updateRatingVisibility(cat, timestamps[0]);
   audioEl.ontimeupdate = ()=>{
     if(!playerCtx || playerCtx.audioEl!==audioEl) return;
     const t = audioEl.currentTime;
@@ -936,6 +914,7 @@ function startAudioSlice(cat, startIdx, endIdxExclusive, onFinish){
     if(ni!==playerCtx.index){ playerCtx.index=ni; renderPlayerFrame(false); }
     updateAudioProgressBar();
     updateSeekBar();
+    updateRatingVisibility(cat, t);
   };
   audioEl.onended = ()=>{ if(playerCtx && playerCtx.audioEl===audioEl) playerCtx.onFinish(); };
   audioEl.play();
@@ -947,6 +926,15 @@ function formatTime(t){
   const m = Math.floor(t/60);
   const s = Math.floor(t%60);
   return `${m}:${String(s).padStart(2,'0')}`;
+}
+
+function updateRatingVisibility(cat, t){
+  const el2 = document.getElementById('ratingScale');
+  if(!el2) return;
+  const step = playerCtx.steps[playerCtx.index];
+  const range = step.phase==='intro' ? cat.audio.introRatingRange : step.phase==='outro' ? cat.audio.outroRatingRange : null;
+  if(!range){ el2.style.display='none'; return; }
+  el2.style.display = (t>=range[0] && t<range[1]) ? '' : 'none';
 }
 
 function updateSeekBar(){
@@ -1108,6 +1096,18 @@ function renderPlayerFrame(isFirst){
     mid.appendChild(scaleHolder);
     renderThermometerHorizontal(scaleHolder, state.sudAfter, (v)=>{ state.sudAfter = v; });
   }
+  if(playerCtx.mode==='audio' && step.phase==='intro' && cat.audio.introRatingRange){
+    const scaleHolder = el('div',{id:'ratingScale'});
+    mid.appendChild(scaleHolder);
+    renderThermometerHorizontal(scaleHolder, state.sudBefore, (v)=>{ state.sudBefore = v; });
+    scaleHolder.style.display = 'none';
+  }
+  if(playerCtx.mode==='audio' && step.phase==='outro' && cat.audio.outroRatingRange){
+    const scaleHolder = el('div',{id:'ratingScale'});
+    mid.appendChild(scaleHolder);
+    renderThermometerHorizontal(scaleHolder, state.sudAfter, (v)=>{ state.sudAfter = v; });
+    scaleHolder.style.display = 'none';
+  }
   wrap.appendChild(mid);
 
   if(playerCtx.mode==='audio'){
@@ -1120,6 +1120,7 @@ function renderPlayerFrame(isFirst){
       let ni = 0;
       while(ni+1 < playerCtx.timestamps.length && t >= playerCtx.timestamps[ni+1]) ni++;
       if(ni !== playerCtx.index){ playerCtx.index = ni; renderPlayerFrame(false); }
+      updateRatingVisibility(cat, t);
     });
     seekWrap.appendChild(seekInput);
     const seekTime = el('div',{class:'seek-time'}, `${formatTime(playerCtx.audioEl.currentTime)} / ${formatTime(totalDur)}`);
@@ -1172,7 +1173,7 @@ function renderCatDetail(){
   body.appendChild(el('p',{class:'detail-desc'}, cat.intro || cat.desc || ''));
 
   if(cat.audio && state.audioOn===undefined) state.audioOn = true;
-  const skipRatingHere = !!(cat.audio && cat.audio.introAsksRating && state.audioOn);
+  const skipRatingHere = !!(cat.audio && (cat.audio.introAsksRating || cat.audio.introRatingRange) && state.audioOn);
 
   if(!skipRatingHere){
     const thermoContainer = el('div',{style:'margin:6px 0 4px;'});
@@ -1408,7 +1409,7 @@ function renderSudBefore(){
   wrap.appendChild(el('div',{class:'cat-tag'},cat.name));
 
   if(cat.audio && state.audioOn===undefined) state.audioOn = true;
-  const skipRatingHere = !!(cat.audio && cat.audio.introAsksRating && state.audioOn);
+  const skipRatingHere = !!(cat.audio && (cat.audio.introAsksRating || cat.audio.introRatingRange) && state.audioOn);
 
   if(!skipRatingHere){
     const thermoContainer = el('div',{style:'margin:10px 0 24px;'});
@@ -1474,7 +1475,7 @@ function renderSudAfter(){
   wrap.appendChild(topBar(()=>goto('home')));
   wrap.appendChild(el('div',{class:'cat-tag'},cat.name));
 
-  const askedInAudio = !!(cat.audio && cat.audio.outroAsksRating && state.audioOn);
+  const askedInAudio = !!(cat.audio && (cat.audio.outroAsksRating || cat.audio.outroRatingRange) && state.audioOn);
   if(!cat.noRating && !askedInAudio){
     wrap.appendChild(el('h2',{},'¿Cómo te sientes ahora?'));
     const thermoContainer = el('div',{style:'margin-bottom:20px;'});
