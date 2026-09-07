@@ -1582,6 +1582,12 @@ function renderHistory(){
         el('div',{class:'r'},`${h.before} → ${h.after}`)
       ]));
     });
+    wrap.appendChild(el('button',{class:'btn btn-ghost', style:'margin-top:20px;', onclick:()=>{
+      if(confirm('¿Borrar todo el historial? Esto no se puede deshacer.')){
+        saveHistory([]);
+        renderHistory();
+      }
+    }},'Borrar historial'));
   }
   app.replaceChildren(wrap);
 }
