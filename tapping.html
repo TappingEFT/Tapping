@@ -600,7 +600,12 @@ const CATEGORIES = [
         ['Este dolor de cabeza.','Se siente tan incómodo.','Y parece que está atascado.','Resulta muy frustrante.','Es estresante encontrarse así.','Reconozco este dolor de cabeza y lo que me hace sentir.','E incluso antes de que se produzca un cambio.','Puedo elegir relajarme y respirar.'],
         'Realizando el tapping a través de los puntos.'),
       R('Abrirse a sanar',
-        ['Elijo relajarme aún más en este momento.','Es seguro para mí reconocer este dolor.','Y empezar a dejarlo marchar.','Es seguro para mí admitir cualquier estrés.','Presente en mi cuerpo y en mi vida.','No sé por qué mi organismo tarda en sanar.','Pero me abro a la sanación ahora mismo.','Sintiendo seguridad y relajación en mi interior.']),
+        [
+          'Elijo relajarme aún más en este momento.','Es seguro para mí reconocer este dolor.','Y empezar a dejarlo marchar.','Es seguro para mí admitir cualquier estrés.','Presente en mi cuerpo y en mi vida.','No sé por qué mi organismo tarda en sanar.',
+          {key:'brazo', phrase:'Pero me abro a la sanación'},
+          {key:'brazo', phrase:'ahora mismo.'},
+          {key:'coronilla', phrase:'Sintiendo seguridad y relajación en mi interior.'},
+        ]),
       R('Explorar en silencio',
         [
           {key:'ceja', phrase:'Pon tu atención en el dolor de cabeza y pregúntate qué emoción se esconde en esa zona.'},
@@ -632,8 +637,7 @@ const CATEGORIES = [
           {key:'ladoOjo', phrase:'Cada vez que tomamos la decisión consciente de sentirnos bien, de soltar y de liberar el estrés corporal y vital, impulsamos nuestra recuperación.'},
           {key:'debajoOjo', phrase:'La pregunta es qué puedes hacer para potenciar esos momentos y apoyar el proceso natural de sanación de tu cuerpo.'},
           {key:'debajoNariz', phrase:'Recuerda que rara vez se trata de un único factor.'},
-          {key:'barbilla', phrase:'En la barbilla: los mejores resultados llegan al sumar acciones físicas, como caminar o hacer ejercicio,'},
-          {key:'barbilla', phrase:'medidas biológicas, como las pautas del médico, suplementos y nutrición adecuada,'},
+          {key:'barbilla', phrase:'Los mejores resultados llegan al sumar acciones físicas, como caminar o hacer ejercicio, medidas biológicas, como las pautas del médico, suplementos y nutrición adecuada,'},
           {key:'barbilla', phrase:'y respuestas emocionales, como expresar lo que sentimos y dejar ir los miedos o dolores del pasado.'},
           {key:'barbilla', phrase:'Al combinar todo esto, dotamos al cuerpo de la capacidad de sanar.'},
           {key:'brazo', phrase:'Comienza a imaginar ahora la posibilidad real de liberarte por completo de este dolor de cabeza.'},
@@ -641,7 +645,8 @@ const CATEGORIES = [
           {key:'coronilla', phrase:'Toma esa elección en este instante.'},
         ]),
       R('Visualizar la sanación',
-        ['Sintiéndote segura, fuerte y conectada a tu cuerpo, imagina que estás curada y sin dolores.','Visualiza tu senda de sanación y todas las decisiones positivas que adoptarás junto a ella.','Deja marchar cualquier estrés reprimido; mereces estar libre de esto.',
+        [
+          'Sintiéndote segura, fuerte y conectada a tu cuerpo, imagina que estás curada y sin dolores.','Visualiza tu senda de sanación y todas las decisiones positivas que adoptarás junto a ella.','Deja marchar cualquier estrés reprimido; mereces estar libre de esto.',
           {key:'debajoNariz', phrase:'Al liberarte del ayer y de la ansiedad por el mañana, tu cuerpo sana con mayor intensidad.'},
           {key:'debajoNariz', phrase:'Siente eso ahora.'},
           {key:'barbilla', phrase:'Has puesto en marcha los extraordinarios poderes curativos de tu organismo.'},
@@ -654,7 +659,7 @@ const CATEGORIES = [
     ],
     apertura:[],
     cierre:[],
-    audio:{file:'dolor_de_cabeza.MP3', duration:495.595, hasIntro:true, hasOutro:true, introAsksRating:true, outroAsksRating:true, timestamps:[0,6.01773,15.5789,25.4306,33.8687,44.1206,48.8302,53.4526,57.8829,62.9015,68.3758,75.7491,86.05,90.1794,93.6425,97.4943,101.745,106.079,110.563,115.999,121.389,126.053,130.701,135.359,139.579,144.905,149.264,153.943,157.552,160.534,165.847,173.712,179.834,190.394,197.059,202.848,207.062,212.689,217.71,223.764,226.846,232.702,235.669,240.94,248.46,252.752,255.831,262.864,274.944,278.115,288.892,293.14,296.072,299.291,305.117,313.131,323.776,332.508,338.168,357.548,362.966,371.047,374.672,379.441,383.124,390.839,398.366,405.326,412.974,415.632,422.36,424.326,434.164,437.376,444.727,449.649,455.666,459.277,462.002,466.015,471.934,476.728,482.418,491.606]},
+    audio:{file:'dolor_de_cabeza.MP3', duration:495.595, hasIntro:true, hasOutro:true, introAsksRating:true, outroAsksRating:true, timestamps:[0,6.0177,15.5789,25.4306,33.8687,44.1206,48.8302,53.4526,57.8829,62.9015,68.3758,75.7491,86.05,90.1794,93.6425,97.4943,101.745,106.079,110.563,115.999,121.389,126.053,130.701,135.359,139.579,144.905,149.264,153.943,157.552,160.534,165.847,173.712,179.834,190.394,197.059,202.848,207.062,212.689,217.71,223.764,226.846,232.702,235.669,240.94,248.46,252.752,255.831,262.864,274.944,278.115,288.892,293.14,296.072,299.291,305.117,313.131,323.776,332.508,338.168,357.548,362.966,371.047,374.672,379.441,383.124,390.839,398.366,405.326,412.974,415.632,422.36,424.326,434.164,437.376,444.727,449.649,455.666,459.277,462.002,466.015,471.934,476.728,482.418,491.606]},
   },
 ];
 
