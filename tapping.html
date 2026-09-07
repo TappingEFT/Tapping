@@ -157,6 +157,9 @@
   .player-top .phase-label{font-size:15px;color:var(--sienna-deep);font-weight:600;}
 
   .progress-track{height:6px;background:var(--stone-deep);border:1px solid var(--line);border-radius:3px;overflow:hidden;margin:10px 0 30px;}
+  .seek-wrap{margin-top:16px;}
+  .seek-bar{width:100%;accent-color:var(--sienna);height:6px;}
+  .seek-time{text-align:center;font-size:12.5px;color:var(--ink-soft);margin-top:4px;}
   .progress-fill{height:100%;background:var(--sienna);width:0%;transition:none;}
 
   .player-mid{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:10px;}
@@ -637,8 +640,7 @@ const CATEGORIES = [
           {key:'ladoOjo', phrase:'Cada vez que tomamos la decisión consciente de sentirnos bien, de soltar y de liberar el estrés corporal y vital, impulsamos nuestra recuperación.'},
           {key:'debajoOjo', phrase:'La pregunta es qué puedes hacer para potenciar esos momentos y apoyar el proceso natural de sanación de tu cuerpo.'},
           {key:'debajoNariz', phrase:'Recuerda que rara vez se trata de un único factor.'},
-          {key:'barbilla', phrase:'Los mejores resultados llegan al sumar acciones físicas, como caminar o hacer ejercicio, medidas biológicas, como las pautas del médico, suplementos y nutrición adecuada,'},
-          {key:'barbilla', phrase:'y respuestas emocionales, como expresar lo que sentimos y dejar ir los miedos o dolores del pasado.'},
+          {key:'barbilla', phrase:'Los mejores resultados llegan al sumar acciones físicas, como caminar o hacer ejercicio, medidas biológicas, como las pautas del médico, suplementos y nutrición adecuada, y respuestas emocionales, como expresar lo que sentimos y dejar ir los miedos o dolores del pasado.'},
           {key:'barbilla', phrase:'Al combinar todo esto, dotamos al cuerpo de la capacidad de sanar.'},
           {key:'brazo', phrase:'Comienza a imaginar ahora la posibilidad real de liberarte por completo de este dolor de cabeza.'},
           {key:'coronilla', phrase:'¿Estás lista para que esta molestia desaparezca del todo y tu cuerpo se cure?'},
@@ -659,7 +661,7 @@ const CATEGORIES = [
     ],
     apertura:[],
     cierre:[],
-    audio:{file:'dolor_de_cabeza.MP3', duration:495.595, hasIntro:true, hasOutro:true, introAsksRating:true, outroAsksRating:true, timestamps:[0,6.0177,15.5789,25.4306,33.8687,44.1206,48.8302,53.4526,57.8829,62.9015,68.3758,75.7491,86.05,90.1794,93.6425,97.4943,101.745,106.079,110.563,115.999,121.389,126.053,130.701,135.359,139.579,144.905,149.264,153.943,157.552,160.534,165.847,173.712,179.834,190.394,197.059,202.848,207.062,212.689,217.71,223.764,226.846,232.702,235.669,240.94,248.46,252.752,255.831,262.864,274.944,278.115,288.892,293.14,296.072,299.291,305.117,313.131,323.776,332.508,338.168,357.548,362.966,371.047,374.672,379.441,383.124,390.839,398.366,405.326,412.974,415.632,422.36,424.326,434.164,437.376,444.727,449.649,455.666,459.277,462.002,466.015,471.934,476.728,482.418,491.606]},
+    audio:{file:'dolor_de_cabeza.MP3', duration:495.595, hasIntro:true, hasOutro:true, introAsksRating:true, outroAsksRating:true, timestamps:[0,6.0177,15.5789,25.4306,33.8687,44.1206,48.8302,53.4526,57.8829,62.9015,68.3758,75.7491,86.05,90.1794,93.6425,97.4943,101.745,106.079,110.563,115.999,121.389,126.053,130.701,135.359,139.579,144.905,149.264,153.943,157.552,160.534,165.847,173.712,179.834,190.394,197.059,202.848,207.062,212.689,217.71,223.764,226.846,232.702,235.669,240.94,248.46,252.752,255.831,262.864,274.944,278.115,288.892,293.14,296.072,299.291,305.117,313.131,323.776,332.508,357.548,362.966,371.047,374.672,379.441,383.124,390.839,398.366,405.326,412.974,415.632,422.36,424.326,434.164,437.376,444.727,449.649,455.666,459.277,462.002,466.015,471.934,476.728,482.418,491.606]},
   },
 ];
 
@@ -933,10 +935,30 @@ function startAudioSlice(cat, startIdx, endIdxExclusive, onFinish){
     while(ni+1<playerCtx.timestamps.length && t>=playerCtx.timestamps[ni+1]) ni++;
     if(ni!==playerCtx.index){ playerCtx.index=ni; renderPlayerFrame(false); }
     updateAudioProgressBar();
+    updateSeekBar();
   };
   audioEl.onended = ()=>{ if(playerCtx && playerCtx.audioEl===audioEl) playerCtx.onFinish(); };
   audioEl.play();
   startBgMusic();
+}
+
+function formatTime(t){
+  if(!isFinite(t) || t<0) t=0;
+  const m = Math.floor(t/60);
+  const s = Math.floor(t%60);
+  return `${m}:${String(s).padStart(2,'0')}`;
+}
+
+function updateSeekBar(){
+  if(!playerCtx || playerCtx.mode!=='audio') return;
+  const bar = document.getElementById('seekBar');
+  const label = document.querySelector('.seek-time');
+  if(!bar || !label) return;
+  if(document.activeElement === bar) return;
+  const t = playerCtx.audioEl.currentTime;
+  bar.value = String(t);
+  const totalDur = playerCtx.audioEl.duration || (playerCtx.sliceEndTime!==null ? playerCtx.sliceEndTime : playerCtx.timestamps[playerCtx.timestamps.length-1]+30);
+  label.textContent = `${formatTime(t)} / ${formatTime(totalDur)}`;
 }
 
 function updateAudioProgressBar(){
@@ -1087,6 +1109,23 @@ function renderPlayerFrame(isFirst){
     renderThermometerHorizontal(scaleHolder, state.sudAfter, (v)=>{ state.sudAfter = v; });
   }
   wrap.appendChild(mid);
+
+  if(playerCtx.mode==='audio'){
+    const totalDur = playerCtx.audioEl.duration || (playerCtx.sliceEndTime!==null ? playerCtx.sliceEndTime : playerCtx.timestamps[playerCtx.timestamps.length-1]+30);
+    const seekWrap = el('div',{class:'seek-wrap'});
+    const seekInput = el('input',{type:'range', min:'0', max:String(totalDur), step:'0.1', value:String(playerCtx.audioEl.currentTime), class:'seek-bar', id:'seekBar'});
+    seekInput.addEventListener('input', ()=>{
+      const t = parseFloat(seekInput.value);
+      playerCtx.audioEl.currentTime = t;
+      let ni = 0;
+      while(ni+1 < playerCtx.timestamps.length && t >= playerCtx.timestamps[ni+1]) ni++;
+      if(ni !== playerCtx.index){ playerCtx.index = ni; renderPlayerFrame(false); }
+    });
+    seekWrap.appendChild(seekInput);
+    const seekTime = el('div',{class:'seek-time'}, `${formatTime(playerCtx.audioEl.currentTime)} / ${formatTime(totalDur)}`);
+    seekWrap.appendChild(seekTime);
+    wrap.appendChild(seekWrap);
+  }
 
   const controls = el('div',{class:'player-controls'});
   controls.appendChild(el('button',{class:'ctrl-btn',onclick:togglePause,id:'pauseBtn'}, '❚❚'));
