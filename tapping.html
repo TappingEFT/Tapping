@@ -1644,8 +1644,7 @@ function render(){
 
 const LICENSE_API = 'https://tapping-licencias.ellegajooficial.workers.dev/validate';
 const LICENSE_KEY = 'tapping_license_v1';
-const LICENSE_CACHE_DAYS = 7;
-const LICENSE_OFFLINE_GRACE_DAYS = 30;
+const LICENSE_OFFLINE_GRACE_HOURS = 12;
 
 function getSavedLicense(){
   try{ return JSON.parse(localStorage.getItem(LICENSE_KEY)); }catch(e){ return null; }
@@ -1722,12 +1721,7 @@ async function checkLicenseAndStart(){
   const saved = getSavedLicense();
   const now = Date.now();
   if(saved && saved.code){
-    const ageDays = (now - saved.validatedAt) / (1000*60*60*24);
-    if(ageDays < LICENSE_CACHE_DAYS){
-      startApp();
-      return;
-    }
-    // cache stale: re-validate in background/foreground
+    // Siempre revalidamos contra el servidor (en silencio, sin pedir el código de nuevo).
     try{
       const ok = await validateCode(saved.code);
       if(ok){
@@ -1738,7 +1732,9 @@ async function checkLicenseAndStart(){
         renderLockScreen('Tu acceso ya no está activo. Si crees que es un error, escríbenos.');
       }
     }catch(e){
-      if(ageDays < LICENSE_OFFLINE_GRACE_DAYS){
+      // Sin conexión: solo damos un margen corto (horas), no días.
+      const ageHours = (now - saved.validatedAt) / (1000*60*60);
+      if(ageHours < LICENSE_OFFLINE_GRACE_HOURS){
         startApp();
       } else {
         renderLockScreen('No se pudo confirmar tu acceso. Conéctate a internet para continuar.');
