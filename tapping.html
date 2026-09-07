@@ -44,7 +44,7 @@
   .bottom-nav{position:fixed;left:0;right:0;bottom:0;display:flex;background:var(--stone-deep);border-top:1px solid var(--line);padding:8px 6px calc(8px + env(safe-area-inset-bottom));z-index:500;}
   .bottom-nav-btn{flex:1;display:flex;flex-direction:column;align-items:center;gap:2px;background:none;border:none;padding:8px 2px;border-radius:8px;color:var(--ink-soft);font-family:'Source Sans 3',Arial,sans-serif;cursor:pointer;}
   .bottom-nav-btn.active{color:var(--sienna);}
-  .bottom-nav-icon{font-size:19px;line-height:1;}
+  .bottom-nav-icon{display:inline-flex;line-height:1;}
   .bottom-nav-label{font-size:11px;}
   body{background:var(--stone);color:var(--ink);font-family:'Source Sans 3',Arial,sans-serif;font-size:18px;min-height:100vh;-webkit-font-smoothing:antialiased;}
   h1,h2,h3{font-family:'Source Sans 3',Arial,sans-serif;font-weight:700;margin:0;letter-spacing:0;}
@@ -63,8 +63,8 @@
 
   .grid{padding:16px 20px 8px;display:grid;grid-template-columns:1fr 1fr;gap:12px;}
   .group-title{padding:14px 20px 2px;font-size:15px;font-weight:700;color:var(--ink);}
-  .cat-card{position:relative;border-radius:10px;overflow:hidden;height:150px;cursor:pointer;display:flex;align-items:flex-end;border:1px solid var(--line);}
-  .cat-card:active{transform:scale(0.98);}
+  .cat-card{position:relative;border-radius:10px;overflow:hidden;height:150px;cursor:pointer;display:flex;align-items:flex-end;border:1px solid var(--line);transition:box-shadow 0.15s ease;}
+  .cat-card:active{transform:scale(0.98);box-shadow:0 0 0 2px var(--sienna) inset;}
   .cat-card .cat-overlay{position:absolute;inset:0;background:linear-gradient(0deg, rgba(0,0,0,0.68) 0%, rgba(0,0,0,0.2) 55%, rgba(0,0,0,0.05) 100%);}
   .cat-card .cat-text{position:relative;padding:12px 12px;color:#fff;width:100%;}
   .cat-card .cat-text h3{font-size:16px;color:#fff;margin-bottom:2px;line-height:1.15;}
@@ -77,8 +77,10 @@
   .detail-body{padding:22px 24px 30px;}
   .detail-body h1{font-size:26px;margin-bottom:0;}
   .detail-title-row{display:flex;align-items:center;justify-content:space-between;gap:12px;}
-  .fav-icon-btn{background:none;border:none;font-size:24px;line-height:1;color:var(--line);cursor:pointer;padding:4px;flex-shrink:0;}
-  .fav-icon-btn.active{color:var(--sienna-deep);}
+  .fav-icon-btn{background:none;border:none;line-height:1;color:var(--ink-soft);cursor:pointer;padding:4px;flex-shrink:0;display:flex;}
+  .fav-icon-btn.active{color:var(--sienna);}
+  @keyframes favPop{0%{transform:scale(1);}45%{transform:scale(1.35);}100%{transform:scale(1);}}
+  .fav-icon-btn.pop{animation:favPop 0.32s ease;}
   .points-guide-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
   .points-guide-item{border-radius:10px;overflow:hidden;border:1px solid var(--line);background:var(--card);}
   .points-guide-item img{width:100%;height:130px;object-fit:cover;display:block;}
@@ -107,7 +109,6 @@
   .intro-card h3{font-size:17px;margin-bottom:2px;}
   .intro-card span{font-size:14px;color:var(--ink-soft);}
   .intro-card .badge{display:inline-block;margin-bottom:4px;padding:2px 8px;border-radius:5px;background:var(--sienna);color:#fff;font-size:11px;font-weight:600;}
-  .cat-card{position:relative;}
   .cat-fav{position:absolute;top:8px;right:8px;width:24px;height:24px;border-radius:50%;background:rgba(20,18,16,0.45);display:flex;align-items:center;justify-content:center;color:var(--sienna);font-size:13px;z-index:2;}
 
   .quick-block{margin:14px 0 4px;padding-left:20px;}
@@ -147,6 +148,11 @@
 
   .hist-link{margin:6px 20px 0;padding:16px 18px;border:2px dashed var(--line);border-radius:6px;display:flex;justify-content:space-between;align-items:center;cursor:pointer;color:var(--ink);font-size:16.5px;}
   .hist-link:active{opacity:0.6;}
+  .legal-note{margin:0 0 14px;padding:12px 14px;border:1px solid var(--line);border-radius:8px;background:var(--card);}
+  .legal-note summary{cursor:pointer;font-size:14px;font-weight:600;color:var(--ink-soft);list-style:none;}
+  .legal-note summary::-webkit-details-marker{display:none;}
+  .legal-note summary::after{content:' ›'; }
+  .legal-note[open] summary::after{content:' ⌄';}
   .footer-note{padding:16px 26px 34px;font-size:14.5px;color:var(--ink-soft);line-height:1.6;}
 
   .session-wrap{flex:1;display:flex;flex-direction:column;padding:0 24px 30px;}
@@ -164,7 +170,7 @@
   /* --- Player screen (hands-free) --- */
   .player{flex:1;display:flex;flex-direction:column;padding:0 24px 30px;}
   .player-top{display:flex;justify-content:space-between;align-items:center;padding:20px 0 4px;}
-  .player-top .exit{background:none;border:none;color:var(--ink-soft);font-size:22px;cursor:pointer;line-height:1;}
+  .player-top .exit{background:none;border:none;color:var(--ink-soft);cursor:pointer;line-height:1;display:flex;align-items:center;justify-content:center;}
   .player-top .phase-label{font-size:15px;color:var(--sienna-deep);font-weight:600;}
 
   .progress-track{height:6px;background:var(--stone-deep);border:1px solid var(--line);border-radius:3px;overflow:hidden;margin:10px 0 30px;}
@@ -833,6 +839,29 @@ function el(tag, attrs={}, children=[]){
   return e;
 }
 
+/* =================== Iconos lineales (consistentes, un solo lenguaje visual) =================== */
+const ICON_PATHS = {
+  home: '<path d="M4 11.5 12 4l8 7.5"/><path d="M6 10v9a1 1 0 0 0 1 1h3v-6h4v6h3a1 1 0 0 0 1-1v-9"/>',
+  grid: '<rect x="4" y="4" width="7" height="7" rx="1.5"/><rect x="13" y="4" width="7" height="7" rx="1.5"/><rect x="4" y="13" width="7" height="7" rx="1.5"/><rect x="13" y="13" width="7" height="7" rx="1.5"/>',
+  clock: '<circle cx="12" cy="12" r="8.3"/><path d="M12 7.5V12l3 2"/>',
+  sliders: '<line x1="4" y1="6" x2="20" y2="6"/><circle cx="9" cy="6" r="2" fill="var(--stone)"/><line x1="4" y1="12" x2="20" y2="12"/><circle cx="15" cy="12" r="2" fill="var(--stone)"/><line x1="4" y1="18" x2="20" y2="18"/><circle cx="7" cy="18" r="2" fill="var(--stone)"/>',
+  pin: '<path d="M12 21s7-7.2 7-12a7 7 0 1 0-14 0c0 4.8 7 12 7 12z"/><circle cx="12" cy="9" r="2.3"/>',
+  bolt: '<path d="M13 3 5 13.5h5.5L11 21l8-11h-5.5L13 3z"/>',
+  chevronLeft: '<path d="M15 5l-7 7 7 7"/>',
+  chevronRight: '<path d="M9 5l7 7-7 7"/>',
+  close: '<path d="M6 6l12 12M18 6 6 18"/>',
+  play: '<path fill="currentColor" stroke="none" d="M8 5.5v13l11-6.5-11-6.5z"/>',
+  pause: '<rect fill="currentColor" stroke="none" x="7" y="5" width="4" height="14" rx="1"/><rect fill="currentColor" stroke="none" x="14" y="5" width="4" height="14" rx="1"/>',
+  skip: '<path fill="currentColor" stroke="none" d="M6 5v14l9-7-9-7z"/><rect fill="currentColor" stroke="none" x="16" y="5" width="2.3" height="14" rx="0.5"/>',
+  star: '<path d="M12 3.5l2.5 5.6 6 .6-4.5 4 1.3 6-5.3-3.1L6.7 19.7l1.3-6-4.5-4 6-.6L12 3.5z"/>',
+  starFilled: '<path fill="currentColor" stroke="none" d="M12 3.5l2.5 5.6 6 .6-4.5 4 1.3 6-5.3-3.1L6.7 19.7l1.3-6-4.5-4 6-.6L12 3.5z"/>',
+  trash: '<path d="M4 7h16"/><path d="M9 7V5a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"/><path d="M6 7l1 13a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1l1-13"/>',
+};
+function iconSvg(name, size){
+  size = size || 20;
+  return `<svg width="${size}" height="${size}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">${ICON_PATHS[name]||''}</svg>`;
+}
+
 /* =================== Audio cues =================== */
 let actx = null;
 function ensureAudio(){ if(!actx){ try{ actx = new (window.AudioContext||window.webkitAudioContext)(); }catch(e){} } }
@@ -1088,7 +1117,7 @@ function togglePause(){
   }
   const btn = document.getElementById('pauseBtn');
   const isPaused = playerCtx.mode==='audio' ? playerCtx.audioEl.paused : playerCtx.paused;
-  if(btn) btn.textContent = isPaused ? '▶' : '❚❚';
+  if(btn) btn.innerHTML = isPaused ? iconSvg('play',20) : iconSvg('pause',20);
 }
 function skipPoint(){
   if(!playerCtx) return;
@@ -1129,7 +1158,7 @@ function renderPlayerFrame(isFirst){
   const wrap = el('div',{class:'player'});
 
   const top = el('div',{class:'player-top'});
-  top.appendChild(el('button',{class:'exit',onclick:exitPlayer},'×'));
+  top.appendChild(el('button',{class:'exit',onclick:exitPlayer,html:iconSvg('close',20)}));
   const phaseLabel = step.phase==='intro' ? 'Introducción'
     : step.phase==='karate' ? 'Preparación'
     : step.phase==='transition' ? step.name
@@ -1194,8 +1223,8 @@ function renderPlayerFrame(isFirst){
   }
 
   const controls = el('div',{class:'player-controls'});
-  controls.appendChild(el('button',{class:'ctrl-btn',onclick:togglePause,id:'pauseBtn'}, '❚❚'));
-  controls.appendChild(el('button',{class:'ctrl-btn',onclick:skipPoint}, '⏭'));
+  controls.appendChild(el('button',{class:'ctrl-btn',onclick:togglePause,id:'pauseBtn',html:iconSvg('pause',20)}));
+  controls.appendChild(el('button',{class:'ctrl-btn',onclick:skipPoint,html:iconSvg('skip',20)}));
   wrap.appendChild(controls);
 
   if(step.phase==='intro'){
@@ -1216,20 +1245,22 @@ function renderCatDetail(){
   } else {
     hero.appendChild(el('div',{class:'hero-fallback', style:`background:linear-gradient(135deg, ${cat.color}, ${cat.color}CC)`}));
   }
-  hero.appendChild(el('button',{class:'hero-back', onclick:()=>goto('home')},'‹'));
+  hero.appendChild(el('button',{class:'hero-back', onclick:()=>goto('home'), html:iconSvg('chevronLeft',18)}));
   wrap.appendChild(hero);
 
   const body = el('div',{class:'detail-body'});
 
   const toast = el('div',{class:'action-toast'});
   const favActive = isFavorite(cat.id);
-  const favBtn = el('button',{class:'fav-icon-btn'+(favActive?' active':''), onclick:(e)=>{
+  const favBtn = el('button',{class:'fav-icon-btn'+(favActive?' active':''), html: iconSvg(favActive?'starFilled':'star', 22), onclick:(e)=>{
     toggleFavorite(cat.id);
     const nowActive = isFavorite(cat.id);
     e.currentTarget.classList.toggle('active', nowActive);
+    e.currentTarget.innerHTML = iconSvg(nowActive?'starFilled':'star', 22);
+    e.currentTarget.classList.remove('pop'); void e.currentTarget.offsetWidth; e.currentTarget.classList.add('pop');
     toast.textContent = nowActive ? 'Añadida a favoritos' : 'Quitada de favoritos';
     setTimeout(()=>{ toast.textContent=''; }, 3000);
-  }}, '★');
+  }});
   const titleRow = el('div',{class:'detail-title-row'},[ el('h1',{}, cat.name), favBtn ]);
   body.appendChild(titleRow);
   body.appendChild(el('div',{class:'detail-meta'}, `${mins} min · sesión guiada`));
@@ -1263,19 +1294,19 @@ function renderCatDetail(){
 
 function renderHome(){
   const header = el('div',{class:'home-header'},[
-    el('button',{class:'settings-btn', onclick:()=>goto('settings'), 'aria-label':'Ajustes'}, '⚙'),
+    el('button',{class:'settings-btn', onclick:()=>goto('settings'), 'aria-label':'Ajustes', html: iconSvg('sliders',22)}),
     el('div',{class:'eyebrow'},'Tu práctica diaria'),
     el('h1',{},'Tapping'),
     el('p',{},'Elige qué te está pidiendo atención ahora mismo. La app avanza sola por los puntos — tú solo golpetea.'),
   ]);
 
   const guideBtn = el('button',{class:'guide-cta',onclick:()=>goto('points-guide')},[
-    el('span',{},'📍 Cómo funciona · dónde están los puntos'),
-    el('span',{},'›'),
+    el('span',{style:'display:flex;align-items:center;gap:8px;'},[el('span',{html:iconSvg('pin',16)}), el('span',{},'Cómo funciona · dónde están los puntos')]),
+    el('span',{html:iconSvg('chevronRight',16)}),
   ]);
 
   const primera = el('div',{class:'intro-card',onclick:()=>{ state.quickMode=true; goto('cat-detail',{category:PRIMERA_SESION, sudBefore:5}); }},[
-    el('div',{class:'dot'},'★'),
+    el('div',{class:'dot', html: iconSvg('starFilled',18)}),
     el('div',{},[el('span',{class:'badge'},'Para empezar'),el('h3',{},'Tu primera sesión'),el('span',{},'No necesitas saber tapping. Te guiamos paso a paso · 3 min')]),
   ]);
 
@@ -1302,7 +1333,7 @@ function renderHome(){
     (i%2===0 ? rowA : rowB).appendChild(btn);
   });
   const quickBlock = el('div',{class:'quick-block'},[
-    el('div',{class:'quick-title'},'⚡ Necesito algo rápido'),
+    el('div',{class:'quick-title', style:'display:flex;align-items:center;gap:8px;'},[el('span',{html:iconSvg('bolt',16)}), el('span',{},'Necesito algo rápido')]),
     rowA, rowB,
   ]);
 
@@ -1311,7 +1342,7 @@ function renderHome(){
     const overlay = el('div',{class:'cat-overlay'});
     const text = el('div',{class:'cat-text'},[ el('h3',{},cat.name), el('span',{},`${mins} min`) ]);
     const children = [overlay, text];
-    if(isFavorite(cat.id)) children.push(el('div',{class:'cat-fav'},'★'));
+    if(isFavorite(cat.id)) children.push(el('div',{class:'cat-fav', html: iconSvg('starFilled',13)}));
     return el('div',{class:'cat-card', style:`background:${cat.photo?`url('${cat.photo}') center/cover`:`linear-gradient(135deg, ${cat.color}, ${cat.color}CC)`}`, onclick:()=>{ state.quickMode=false; goto('cat-detail',{category:cat, sudBefore:5}); }},children);
   }
 
@@ -1354,7 +1385,10 @@ function renderCategoryDetail(){
   const wrap = el('div',{class:'session-wrap'});
   wrap.appendChild(topBar(()=>goto('categories')));
   wrap.appendChild(el('h2',{}, groupName));
-  if(groupMeta.note) wrap.appendChild(el('p',{class:'stage-copy',style:'margin-bottom:14px;'}, groupMeta.note));
+  if(groupMeta.note) wrap.appendChild(el('details',{class:'legal-note'},[
+    el('summary',{},'Aviso importante'),
+    el('p',{class:'stage-copy',style:'margin:8px 0 14px;'}, groupMeta.note),
+  ]));
   if(!cats.length){
     wrap.appendChild(el('p',{class:'stage-copy'},'Todavía no hay sesiones aquí. Muy pronto añadiremos las primeras.'));
   }
@@ -1364,7 +1398,7 @@ function renderCategoryDetail(){
     const overlay = el('div',{class:'cat-overlay'});
     const text = el('div',{class:'cat-text'},[ el('h3',{},cat.name), el('span',{},`${mins} min`) ]);
     const children = [overlay, text];
-    if(isFavorite(cat.id)) children.push(el('div',{class:'cat-fav'},'★'));
+    if(isFavorite(cat.id)) children.push(el('div',{class:'cat-fav', html: iconSvg('starFilled',13)}));
     const card = el('div',{class:'cat-card', style:`background:${cat.photo?`url('${cat.photo}') center/cover`:`linear-gradient(135deg, ${cat.color}, ${cat.color}CC)`}`, onclick:()=>{ state.quickMode=false; goto('cat-detail',{category:cat, sudBefore:5}); }},children);
     grid.appendChild(card);
   });
@@ -1437,7 +1471,7 @@ function renderIntro(){
 }
 
 function topBar(onBack){
-  return el('div',{class:'topbar'},[ el('button',{class:'back-btn',onclick:onBack},'‹ Atrás'), el('span',{}) ]);
+  return el('div',{class:'topbar'},[ el('button',{class:'back-btn',onclick:onBack},[el('span',{html:iconSvg('chevronLeft',15),style:'display:inline-flex;vertical-align:-3px;margin-right:2px;'}), 'Atrás']), el('span',{}) ]);
 }
 
 function renderSudBefore(){
@@ -1554,7 +1588,8 @@ function renderFavorites(){
   wrap.appendChild(topBar(()=>goto('home')));
   wrap.appendChild(el('h2',{style:'margin-bottom:16px;'},'Favoritos'));
   const favIds = loadFavorites();
-  const favCats = CATEGORIES.filter(c=>favIds.includes(c.id));
+  // Más recientemente añadida primero (toggleFavorite añade al final del array).
+  const favCats = favIds.slice().reverse().map(id=>CATEGORIES.find(c=>c.id===id)).filter(Boolean);
   if(favCats.length===0){
     wrap.appendChild(el('div',{class:'empty-hist'},'Todavía no tienes sesiones guardadas. Guarda tus sesiones favoritas para tenerlas siempre a mano.'));
     wrap.appendChild(el('button',{class:'btn btn-ghost', style:'margin-top:14px;', onclick:()=>goto('categories')},'Explorar sesiones'));
@@ -1613,17 +1648,17 @@ function renderHistory(){
 const BOTTOM_NAV_SCREENS = ['home','categories','favorites','history','settings'];
 function renderBottomNav(){
   const tabs = [
-    {id:'home', icon:'🏠', label:'Inicio'},
-    {id:'categories', icon:'🗂', label:'Categorías'},
-    {id:'favorites', icon:'★', label:'Favoritos'},
-    {id:'history', icon:'🕘', label:'Historial'},
-    {id:'settings', icon:'⚙', label:'Ajustes'},
+    {id:'home', icon:'home', label:'Inicio'},
+    {id:'categories', icon:'grid', label:'Categorías'},
+    {id:'favorites', icon:'star', label:'Favoritos'},
+    {id:'history', icon:'clock', label:'Historial'},
+    {id:'settings', icon:'sliders', label:'Ajustes'},
   ];
   const bar = el('div',{class:'bottom-nav'});
   tabs.forEach(t=>{
     const active = state.screen===t.id;
     const btn = el('button',{class:'bottom-nav-btn'+(active?' active':''), onclick:()=>{ if(!active) goto(t.id); }},[
-      el('span',{class:'bottom-nav-icon'}, t.icon),
+      el('span',{class:'bottom-nav-icon', html: iconSvg(t.icon==='star' && active ? 'starFilled' : t.icon, 19)}),
       el('span',{class:'bottom-nav-label'}, t.label),
     ]);
     bar.appendChild(btn);
