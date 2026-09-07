@@ -61,14 +61,14 @@
   .home-header h1{font-size:36px;}
   .home-header p{color:var(--ink-soft);font-size:18px;line-height:1.55;margin-top:10px;max-width:34ch;}
 
-  .grid{padding:16px 20px 8px;display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+  .grid{padding:16px 20px 8px;display:grid;grid-template-columns:1fr 1fr;gap:14px;}
   .group-title{padding:14px 20px 2px;font-size:15px;font-weight:700;color:var(--ink);}
-  .cat-card{position:relative;border-radius:10px;overflow:hidden;height:150px;cursor:pointer;display:flex;align-items:flex-end;border:1px solid var(--line);transition:box-shadow 0.15s ease;}
+  .cat-card{position:relative;border-radius:10px;overflow:hidden;height:200px;cursor:pointer;display:flex;align-items:flex-end;border:1px solid var(--line);transition:box-shadow 0.15s ease;}
   .cat-card:active{transform:scale(0.98);box-shadow:0 0 0 2px var(--sienna) inset;}
   .cat-card .cat-overlay{position:absolute;inset:0;background:linear-gradient(0deg, rgba(0,0,0,0.68) 0%, rgba(0,0,0,0.2) 55%, rgba(0,0,0,0.05) 100%);}
-  .cat-card .cat-text{position:relative;padding:12px 12px;color:#fff;width:100%;}
-  .cat-card .cat-text h3{font-size:16px;color:#fff;margin-bottom:2px;line-height:1.15;}
-  .cat-card .cat-text span{font-size:12.5px;color:rgba(255,255,255,0.88);}
+  .cat-card .cat-text{position:relative;padding:14px 14px;color:#fff;width:100%;}
+  .cat-card .cat-text h3{font-size:18px;color:#fff;margin-bottom:3px;line-height:1.2;}
+  .cat-card .cat-text span{font-size:13.5px;color:rgba(255,255,255,0.88);}
 
   .hero-wrap{position:relative;width:100%;height:260px;overflow:hidden;}
   .hero-wrap img{width:100%;height:100%;object-fit:cover;display:block;}
@@ -1334,7 +1334,7 @@ function renderHome(){
   const primera = el('div',{class:'intro-card',onclick:()=>{ state.quickMode=true; goto('cat-detail',{category:PRIMERA_SESION, sudBefore:5}); }},[
     el('div',{class:'thumb'},[
       el('img',{src:PRIMERA_SESION.photo, alt:'Tu primera sesión'}),
-      el('span',{class:'premium-badge'},'Premium'),
+      el('span',{class:'premium-badge'},'Para empezar'),
     ]),
     el('div',{},[el('h3',{},'Tu primera sesión: guía de inicio rápido'),el('span',{},'No necesitas saber tapping. Te guiamos paso a paso · 3 min')]),
   ]);
