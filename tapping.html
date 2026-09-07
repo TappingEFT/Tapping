@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<meta name="color-scheme" content="light">
-<meta name="theme-color" content="#FFFFFF">
+<meta name="color-scheme" content="dark">
+<meta name="theme-color" content="#1B1A18">
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
@@ -20,29 +20,30 @@
 <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root{
-    color-scheme: light;
-    --stone:#FFFFFF; --stone-deep:#EDE7DC; --ink:#141210; --ink-soft:#4A4438;
-    --sienna:#B23D14; --sienna-deep:#8F2F0E; --sage:#3E5A2E; --sage-deep:#2F4522;
-    --plum:#5A2E52; --card:#FAF6EE; --line:rgba(20,18,16,0.28);
-  }
-  body.theme-dark{
+    /* Grafito oscuro — tema por defecto */
     color-scheme: dark;
-    --stone:#1C1A17; --stone-deep:#141210; --ink:#F2EEE6; --ink-soft:#C9C2B4;
-    --sienna:#E2703A; --sienna-deep:#F0895A; --sage:#7FA365; --sage-deep:#96B87E;
-    --plum:#B784AC; --card:#26221D; --line:rgba(242,238,230,0.22);
+    --stone:#1B1A18; --stone-deep:#141312; --ink:#F4EFE6; --ink-soft:#9C9488;
+    --sienna:#B5714A; --sienna-deep:#C98457; --sage:#7FA365; --sage-deep:#96B87E;
+    --plum:#B784AC; --card:#242220; --line:rgba(244,239,230,0.12);
+  }
+  body.theme-light{
+    color-scheme: light;
+    --stone:#FAF7F2; --stone-deep:#F0EBE2; --ink:#201D1A; --ink-soft:#6B6255;
+    --sienna:#B5714A; --sienna-deep:#9C5B38; --sage:#3E5A2E; --sage-deep:#2F4522;
+    --plum:#5A2E52; --card:#FFFFFF; --line:rgba(32,29,26,0.14);
   }
   body.theme-sepia{
     color-scheme: light;
     --stone:#F3E9D6; --stone-deep:#E8DABE; --ink:#2E2417; --ink-soft:#5C4E38;
-    --sienna:#A8431A; --sienna-deep:#8A360F; --sage:#3E5A2E; --sage-deep:#2F4522;
-    --plum:#5A2E52; --card:#FAF1DD; --line:rgba(46,36,23,0.28);
+    --sienna:#A85A34; --sienna-deep:#8C4526; --sage:#3E5A2E; --sage-deep:#2F4522;
+    --plum:#5A2E52; --card:#FAF1DD; --line:rgba(46,36,23,0.22);
   }
   *{box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
   html{background:var(--stone);}
   html,body{margin:0;padding:0;}
-  .bottom-nav{position:fixed;left:14px;right:14px;bottom:calc(14px + env(safe-area-inset-bottom));display:flex;background:var(--card);border-radius:999px;padding:8px 6px;z-index:500;box-shadow:0 6px 20px rgba(0,0,0,0.22);}
-  .bottom-nav-btn{flex:1;display:flex;flex-direction:column;align-items:center;gap:2px;background:none;border:none;padding:8px 2px;border-radius:999px;color:var(--ink-soft);font-family:'Source Sans 3',Arial,sans-serif;cursor:pointer;}
-  .bottom-nav-btn.active{color:var(--sienna);background:var(--stone-deep);}
+  .bottom-nav{position:fixed;left:0;right:0;bottom:0;display:flex;background:var(--stone-deep);border-top:1px solid var(--line);padding:8px 6px calc(8px + env(safe-area-inset-bottom));z-index:500;}
+  .bottom-nav-btn{flex:1;display:flex;flex-direction:column;align-items:center;gap:2px;background:none;border:none;padding:8px 2px;border-radius:8px;color:var(--ink-soft);font-family:'Source Sans 3',Arial,sans-serif;cursor:pointer;}
+  .bottom-nav-btn.active{color:var(--sienna);}
   .bottom-nav-icon{font-size:19px;line-height:1;}
   .bottom-nav-label{font-size:11px;}
   body{background:var(--stone);color:var(--ink);font-family:'Source Sans 3',Arial,sans-serif;font-size:18px;min-height:100vh;-webkit-font-smoothing:antialiased;}
@@ -105,6 +106,9 @@
   .intro-card .dot{width:40px;height:40px;border-radius:50%;background:var(--sienna);color:#fff;display:flex;align-items:center;justify-content:center;font-size:18px;flex:none;}
   .intro-card h3{font-size:17px;margin-bottom:2px;}
   .intro-card span{font-size:14px;color:var(--ink-soft);}
+  .intro-card .badge{display:inline-block;margin-bottom:4px;padding:2px 8px;border-radius:5px;background:var(--sienna);color:#fff;font-size:11px;font-weight:600;}
+  .cat-card{position:relative;}
+  .cat-fav{position:absolute;top:8px;right:8px;width:24px;height:24px;border-radius:50%;background:rgba(20,18,16,0.45);display:flex;align-items:center;justify-content:center;color:var(--sienna);font-size:13px;z-index:2;}
 
   .quick-block{margin:14px 0 4px;padding-left:20px;}
   .quick-title{font-size:15px;font-weight:700;margin-bottom:10px;padding-right:20px;}
@@ -804,11 +808,11 @@ function toggleFavorite(id){
 }
 function loadHistory(){ try{ return JSON.parse(localStorage.getItem(STORAGE_KEY)) || []; }catch(e){ return []; } }
 function saveHistory(list){ localStorage.setItem(STORAGE_KEY, JSON.stringify(list)); }
-function loadSettings(){ try{ return {...{seconds:9, theme:'light'}, ...JSON.parse(localStorage.getItem(SETTINGS_KEY))}; }catch(e){ return {seconds:9, theme:'light'}; } }
+function loadSettings(){ try{ return {...{seconds:9, theme:'dark'}, ...JSON.parse(localStorage.getItem(SETTINGS_KEY))}; }catch(e){ return {seconds:9, theme:'dark'}; } }
 function saveSettings(s){ localStorage.setItem(SETTINGS_KEY, JSON.stringify(s)); }
 function applyTheme(theme){
-  document.body.classList.remove('theme-dark','theme-sepia');
-  if(theme==='dark') document.body.classList.add('theme-dark');
+  document.body.classList.remove('theme-light','theme-sepia');
+  if(theme==='light') document.body.classList.add('theme-light');
   else if(theme==='sepia') document.body.classList.add('theme-sepia');
 }
 
@@ -1251,7 +1255,7 @@ function renderCatDetail(){
     state.quickMode=false;
     ensureAudio();
     goto('player-main');
-  }},'Empezar sesión'));
+  }},`Empezar sesión · ${mins} min`));
   wrap.appendChild(body);
 
   app.replaceChildren(wrap);
@@ -1272,7 +1276,7 @@ function renderHome(){
 
   const primera = el('div',{class:'intro-card',onclick:()=>{ state.quickMode=true; goto('cat-detail',{category:PRIMERA_SESION, sudBefore:5}); }},[
     el('div',{class:'dot'},'★'),
-    el('div',{},[el('h3',{},'Tu primera sesión'),el('span',{},'No necesitas saber tapping. Te guiamos paso a paso · 3 min')]),
+    el('div',{},[el('span',{class:'badge'},'Para empezar'),el('h3',{},'Tu primera sesión'),el('span',{},'No necesitas saber tapping. Te guiamos paso a paso · 3 min')]),
   ]);
 
   const quickList = [
@@ -1306,7 +1310,9 @@ function renderHome(){
     const mins = estimateMinutes(cat, settings.seconds);
     const overlay = el('div',{class:'cat-overlay'});
     const text = el('div',{class:'cat-text'},[ el('h3',{},cat.name), el('span',{},`${mins} min`) ]);
-    return el('div',{class:'cat-card', style:`background:${cat.photo?`url('${cat.photo}') center/cover`:`linear-gradient(135deg, ${cat.color}, ${cat.color}CC)`}`, onclick:()=>{ state.quickMode=false; goto('cat-detail',{category:cat, sudBefore:5}); }},[overlay, text]);
+    const children = [overlay, text];
+    if(isFavorite(cat.id)) children.push(el('div',{class:'cat-fav'},'★'));
+    return el('div',{class:'cat-card', style:`background:${cat.photo?`url('${cat.photo}') center/cover`:`linear-gradient(135deg, ${cat.color}, ${cat.color}CC)`}`, onclick:()=>{ state.quickMode=false; goto('cat-detail',{category:cat, sudBefore:5}); }},children);
   }
 
   const groupNames = GROUP_META.map(g=>g.name);
@@ -1357,7 +1363,9 @@ function renderCategoryDetail(){
     const mins = estimateMinutes(cat, settings.seconds);
     const overlay = el('div',{class:'cat-overlay'});
     const text = el('div',{class:'cat-text'},[ el('h3',{},cat.name), el('span',{},`${mins} min`) ]);
-    const card = el('div',{class:'cat-card', style:`background:${cat.photo?`url('${cat.photo}') center/cover`:`linear-gradient(135deg, ${cat.color}, ${cat.color}CC)`}`, onclick:()=>{ state.quickMode=false; goto('cat-detail',{category:cat, sudBefore:5}); }},[overlay, text]);
+    const children = [overlay, text];
+    if(isFavorite(cat.id)) children.push(el('div',{class:'cat-fav'},'★'));
+    const card = el('div',{class:'cat-card', style:`background:${cat.photo?`url('${cat.photo}') center/cover`:`linear-gradient(135deg, ${cat.color}, ${cat.color}CC)`}`, onclick:()=>{ state.quickMode=false; goto('cat-detail',{category:cat, sudBefore:5}); }},children);
     grid.appendChild(card);
   });
   wrap.appendChild(grid);
@@ -1389,7 +1397,6 @@ function renderSettings(){
   const wrap = el('div',{class:'session-wrap'});
   wrap.appendChild(topBar(()=>goto('home')));
   wrap.appendChild(el('h2',{},'Ajustes'));
-  wrap.appendChild(secRowBuilder());
   wrap.appendChild(themeRowBuilder());
   const guideLink = el('div',{class:'hist-link',onclick:()=>goto('points-guide')},[
     el('span',{},'Cómo funciona'),
@@ -1399,24 +1406,12 @@ function renderSettings(){
   app.replaceChildren(wrap);
 }
 
-function secRowBuilder(){
-  const secRow = el('div',{class:'settings-row'});
-  secRow.appendChild(el('span',{}, 'Segundos por punto'));
-  const seg = el('div',{class:'seg'});
-  [[6,'Rápida'],[9,'Normal'],[12,'Profunda']].forEach(([sec,label])=>{
-    const b = el('button',{class: settings.seconds===sec?'active':'', onclick:()=>{ settings.seconds=sec; saveSettings(settings); renderSettings(); }}, label);
-    seg.appendChild(b);
-  });
-  secRow.appendChild(seg);
-  return secRow;
-}
-
 function themeRowBuilder(){
   const row = el('div',{class:'settings-row'});
   row.appendChild(el('span',{}, 'Color de la app'));
   const seg = el('div',{class:'seg'});
   [['light','Claro'],['sepia','Sepia'],['dark','Oscuro']].forEach(([theme,label])=>{
-    const b = el('button',{class: (settings.theme||'light')===theme?'active':'', onclick:()=>{ settings.theme=theme; saveSettings(settings); applyTheme(theme); renderSettings(); }}, label);
+    const b = el('button',{class: (settings.theme||'dark')===theme?'active':'', onclick:()=>{ settings.theme=theme; saveSettings(settings); applyTheme(theme); renderSettings(); }}, label);
     seg.appendChild(b);
   });
   row.appendChild(seg);
@@ -1561,7 +1556,8 @@ function renderFavorites(){
   const favIds = loadFavorites();
   const favCats = CATEGORIES.filter(c=>favIds.includes(c.id));
   if(favCats.length===0){
-    wrap.appendChild(el('div',{class:'empty-hist'},'Aún no has marcado ninguna sesión como favorita. Entra a una sesión y toca la estrella.'));
+    wrap.appendChild(el('div',{class:'empty-hist'},'Todavía no tienes sesiones guardadas. Guarda tus sesiones favoritas para tenerlas siempre a mano.'));
+    wrap.appendChild(el('button',{class:'btn btn-ghost', style:'margin-top:14px;', onclick:()=>goto('categories')},'Explorar sesiones'));
   } else {
     favCats.forEach(cat=>{
       wrap.appendChild(el('div',{class:'hist-item', style:'cursor:pointer;', onclick:()=>goto('cat-detail',{category:cat})},[
@@ -1579,13 +1575,28 @@ function renderHistory(){
   wrap.appendChild(el('h2',{style:'margin-bottom:16px;'},'Historial'));
   const hist = loadHistory();
   if(hist.length===0){
-    wrap.appendChild(el('div',{class:'empty-hist'},'Aún no has guardado ninguna sesión.'));
+    wrap.appendChild(el('div',{class:'empty-hist'},'Todavía no has realizado ninguna sesión.'));
+    wrap.appendChild(el('button',{class:'btn btn-ghost', style:'margin-top:14px;', onclick:()=>goto('categories')},'Explorar sesiones'));
   } else {
+    function dayLabel(d){
+      const today = new Date(); today.setHours(0,0,0,0);
+      const yesterday = new Date(today); yesterday.setDate(yesterday.getDate()-1);
+      const dd = new Date(d); dd.setHours(0,0,0,0);
+      if(dd.getTime()===today.getTime()) return 'Hoy';
+      if(dd.getTime()===yesterday.getTime()) return 'Ayer';
+      return dd.toLocaleDateString('es-ES',{day:'numeric',month:'long',year:'numeric'});
+    }
+    let lastLabel = null;
     hist.forEach(h=>{
       const d = new Date(h.date);
-      const dateStr = d.toLocaleDateString('es-ES',{day:'numeric',month:'short',year:'numeric'}) + ' · ' + d.toLocaleTimeString('es-ES',{hour:'2-digit',minute:'2-digit'});
+      const label = dayLabel(d);
+      if(label !== lastLabel){
+        wrap.appendChild(el('div',{class:'group-title',style:'padding:14px 2px 4px;'}, label));
+        lastLabel = label;
+      }
+      const timeStr = d.toLocaleTimeString('es-ES',{hour:'2-digit',minute:'2-digit'});
       wrap.appendChild(el('div',{class:'hist-item'},[
-        el('div',{class:'l'},[el('strong',{},h.category), el('span',{},dateStr)]),
+        el('div',{class:'l'},[el('strong',{},h.category), el('span',{},timeStr)]),
         el('div',{class:'r'},`${h.before} → ${h.after}`)
       ]));
     });
@@ -1644,6 +1655,7 @@ function render(){
 
 const LICENSE_API = 'https://tapping-licencias.ellegajooficial.workers.dev/validate';
 const LICENSE_KEY = 'tapping_license_v1';
+const LAST_CODE_KEY = 'tapping_last_code_v1';
 const DEVICE_ID_KEY = 'tapping_device_id_v1';
 const LICENSE_OFFLINE_GRACE_HOURS = 12;
 
@@ -1679,6 +1691,7 @@ async function validateCode(code){
 
 function licenseErrorMessage(error){
   if(error === 'device_mismatch') return 'Este código ya está activado en otro dispositivo. Escríbenos si crees que es un error.';
+  if(error === 'too_many_devices') return 'Este código se ha activado en demasiados dispositivos. Escríbenos para revisarlo.';
   if(error === 'revoked') return 'Este código no tiene acceso activo. Escríbenos si crees que es un error.';
   return 'Este código no es válido. Revísalo e inténtalo de nuevo.';
 }
@@ -1714,9 +1727,16 @@ function renderLockScreen(errorMsg){
   const btn = document.getElementById('lockSubmitBtn');
   const input = document.getElementById('lockCodeInput');
   const errorEl = document.getElementById('lockError');
+  const lastCode = localStorage.getItem(LAST_CODE_KEY);
+  if(lastCode){
+    input.value = lastCode;
+    input.focus();
+    input.select();
+  }
   btn.onclick = async ()=>{
     const code = (input.value||'').trim().toUpperCase();
     if(!code){ errorEl.textContent = 'Ingresa tu código de compra.'; return; }
+    localStorage.setItem(LAST_CODE_KEY, code);
     btn.disabled = true; btn.textContent = 'Comprobando…';
     try{
       const result = await validateCode(code);
