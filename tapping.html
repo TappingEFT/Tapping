@@ -1644,7 +1644,17 @@ function render(){
 
 const LICENSE_API = 'https://tapping-licencias.ellegajooficial.workers.dev/validate';
 const LICENSE_KEY = 'tapping_license_v1';
+const DEVICE_ID_KEY = 'tapping_device_id_v1';
 const LICENSE_OFFLINE_GRACE_HOURS = 12;
+
+function getDeviceId(){
+  let id = localStorage.getItem(DEVICE_ID_KEY);
+  if(!id){
+    id = (crypto.randomUUID ? crypto.randomUUID() : 'dev-'+Date.now()+'-'+Math.random().toString(16).slice(2));
+    localStorage.setItem(DEVICE_ID_KEY, id);
+  }
+  return id;
+}
 
 function getSavedLicense(){
   try{ return JSON.parse(localStorage.getItem(LICENSE_KEY)); }catch(e){ return null; }
@@ -1656,14 +1666,21 @@ function clearLicense(){
   localStorage.removeItem(LICENSE_KEY);
 }
 
+// Devuelve {valid, error} en vez de solo un booleano, para poder mostrar el motivo exacto.
 async function validateCode(code){
   const res = await fetch(LICENSE_API, {
     method: 'POST',
     headers: {'Content-Type':'application/json'},
-    body: JSON.stringify({ code }),
+    body: JSON.stringify({ code, deviceId: getDeviceId() }),
   });
   const data = await res.json();
-  return !!data.valid;
+  return { valid: !!data.valid, error: data.error || null };
+}
+
+function licenseErrorMessage(error){
+  if(error === 'device_mismatch') return 'Este código ya está activado en otro dispositivo. Escríbenos si crees que es un error.';
+  if(error === 'revoked') return 'Este código no tiene acceso activo. Escríbenos si crees que es un error.';
+  return 'Este código no es válido. Revísalo e inténtalo de nuevo.';
 }
 
 function startApp(){
@@ -1702,12 +1719,12 @@ function renderLockScreen(errorMsg){
     if(!code){ errorEl.textContent = 'Ingresa tu código de compra.'; return; }
     btn.disabled = true; btn.textContent = 'Comprobando…';
     try{
-      const ok = await validateCode(code);
-      if(ok){
+      const result = await validateCode(code);
+      if(result.valid){
         saveLicense(code);
         startApp();
       } else {
-        errorEl.textContent = 'Este código no es válido o ya no tiene acceso activo.';
+        errorEl.textContent = licenseErrorMessage(result.error);
         btn.disabled = false; btn.textContent = 'Activar';
       }
     }catch(e){
@@ -1723,13 +1740,13 @@ async function checkLicenseAndStart(){
   if(saved && saved.code){
     // Siempre revalidamos contra el servidor (en silencio, sin pedir el código de nuevo).
     try{
-      const ok = await validateCode(saved.code);
-      if(ok){
+      const result = await validateCode(saved.code);
+      if(result.valid){
         saveLicense(saved.code);
         startApp();
       } else {
         clearLicense();
-        renderLockScreen('Tu acceso ya no está activo. Si crees que es un error, escríbenos.');
+        renderLockScreen(licenseErrorMessage(result.error));
       }
     }catch(e){
       // Sin conexión: solo damos un margen corto (horas), no días.
