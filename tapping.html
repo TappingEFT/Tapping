@@ -40,9 +40,14 @@
   *{box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
   html{background:var(--stone);}
   html,body{margin:0;padding:0;}
+  .bottom-nav{position:fixed;left:14px;right:14px;bottom:calc(14px + env(safe-area-inset-bottom));display:flex;background:var(--card);border-radius:999px;padding:8px 6px;z-index:500;box-shadow:0 6px 20px rgba(0,0,0,0.22);}
+  .bottom-nav-btn{flex:1;display:flex;flex-direction:column;align-items:center;gap:2px;background:none;border:none;padding:8px 2px;border-radius:999px;color:var(--ink-soft);font-family:'Source Sans 3',Arial,sans-serif;cursor:pointer;}
+  .bottom-nav-btn.active{color:var(--sienna);background:var(--stone-deep);}
+  .bottom-nav-icon{font-size:19px;line-height:1;}
+  .bottom-nav-label{font-size:11px;}
   body{background:var(--stone);color:var(--ink);font-family:'Source Sans 3',Arial,sans-serif;font-size:18px;min-height:100vh;-webkit-font-smoothing:antialiased;}
   h1,h2,h3{font-family:'Source Sans 3',Arial,sans-serif;font-weight:700;margin:0;letter-spacing:0;}
-  #app{max-width:480px;margin:0 auto;min-height:100vh;display:flex;flex-direction:column;position:relative;background:var(--stone);}
+  #app{max-width:480px;margin:0 auto;min-height:100vh;display:flex;flex-direction:column;position:relative;background:var(--stone);padding-bottom:88px;}
 
   .topbar{display:flex;align-items:center;justify-content:space-between;padding:20px 20px 6px;}
   .back-btn{background:none;border:none;color:var(--ink-soft);font-size:15px;font-family:'Source Sans 3',sans-serif;padding:6px 0;cursor:pointer;}
@@ -101,9 +106,11 @@
   .intro-card h3{font-size:17px;margin-bottom:2px;}
   .intro-card span{font-size:14px;color:var(--ink-soft);}
 
-  .quick-block{margin:14px 20px 4px;}
-  .quick-title{font-size:15px;font-weight:700;margin-bottom:10px;}
-  .quick-row{display:flex;flex-wrap:wrap;gap:8px;}
+  .quick-block{margin:14px 0 4px;padding-left:20px;}
+  .quick-title{font-size:15px;font-weight:700;margin-bottom:10px;padding-right:20px;}
+  .quick-row{display:flex;flex-wrap:nowrap;gap:8px;overflow-x:auto;-webkit-overflow-scrolling:touch;padding-bottom:8px;padding-right:20px;}
+  .quick-row::-webkit-scrollbar{display:none;}
+  .quick-pill{flex:0 0 auto;white-space:nowrap;}
   .quick-pill{border:2px solid var(--line);background:var(--card);border-radius:20px;padding:9px 14px;font-size:14px;color:var(--ink);cursor:pointer;font-family:'Source Sans 3',Arial,sans-serif;}
   .quick-pill:active{background:var(--stone-deep);}
 
@@ -1262,19 +1269,30 @@ function renderHome(){
   ]);
 
   const quickList = [
-    {label:'Empezar mi día', id:'ansiedad'},
-    {label:'Necesito soltar bloqueos', id:'resistencias'},
-    {label:'Practicar amor propio', id:'jornada'},
+    {label:'Ansiedad', id:'centro'},
+    {label:'Miedo', id:'miedo'},
+    {label:'Dormir', id:'dormir'},
+    {label:'Dolor', id:'dolor_general'},
+    {label:'Energía', id:'ansiedad'},
+    {label:'Amor propio', id:'jornada'},
+    {label:'Abundancia', id:'abundancia'},
+    {label:'Merecimiento', id:'merecimiento'},
+    {label:'Escasez', id:'escasez'},
+    {label:'Recibir', id:'recibir'},
+    {label:'Acción inspirada', id:'accion'},
+    {label:'Sincronías', id:'sincronias'},
   ];
-  const quickRow = el('div',{class:'quick-row'});
-  quickList.forEach(q=>{
+  const rowA = el('div',{class:'quick-row'});
+  const rowB = el('div',{class:'quick-row'});
+  quickList.forEach((q,i)=>{
     const cat = CATEGORIES.find(c=>c.id===q.id);
     if(!cat) return;
-    quickRow.appendChild(el('button',{class:'quick-pill', onclick:()=>{ state.quickMode=false; goto('cat-detail',{category:cat, sudBefore:5}); }}, q.label));
+    const btn = el('button',{class:'quick-pill', onclick:()=>{ state.quickMode=false; goto('cat-detail',{category:cat, sudBefore:5}); }}, q.label);
+    (i%2===0 ? rowA : rowB).appendChild(btn);
   });
   const quickBlock = el('div',{class:'quick-block'},[
     el('div',{class:'quick-title'},'⚡ Necesito algo rápido'),
-    quickRow,
+    rowA, rowB,
   ]);
 
   function buildCard(cat){
@@ -1288,33 +1306,15 @@ function renderHome(){
   const ungrouped = CATEGORIES.filter(cat=> catGroups(cat).every(g=>!groupNames.includes(g)) );
 
   const sections = [];
-  if(GROUP_META.length){
-    const catsBtn = el('button',{class:'guide-cta', style:'background:var(--sage-deep);', onclick:()=>goto('categories')},[
-      el('span',{},`🗂 Categorías · ${GROUP_META.length}`),
-      el('span',{},'›'),
-    ]);
-    sections.push(catsBtn);
-  }
   if(ungrouped.length){
     sections.push(el('div',{class:'grid'}, ungrouped.map(buildCard)));
   }
-
-  const hist = loadHistory();
-  const histLink = el('div',{class:'hist-link',onclick:()=>goto('history')},[
-    el('span',{},`Historial · ${hist.length} sesión${hist.length===1?'':'es'}`),
-    el('span',{},'›')
-  ]);
-  const favCount = loadFavorites().length;
-  const favLink = el('div',{class:'hist-link',onclick:()=>goto('favorites')},[
-    el('span',{},`★ Favoritos · ${favCount}`),
-    el('span',{},'›')
-  ]);
 
   const footer = el('div',{class:'footer-note'},[
     'Esta app es un apoyo personal de autoayuda, no sustituye la atención médica o psicológica profesional. No diagnostica ni trata ninguna condición médica o psicológica. ',
     el('a',{href:'legal.html', style:'color:var(--sienna-deep);'}, 'Privacidad y términos'),
   ]);
-  app.replaceChildren(header, guideBtn, primera, quickBlock, ...sections, favLink, histLink, footer);
+  app.replaceChildren(header, guideBtn, primera, quickBlock, ...sections, footer);
 }
 
 function renderCategories(){
@@ -1586,23 +1586,47 @@ function renderHistory(){
   app.replaceChildren(wrap);
 }
 
+const BOTTOM_NAV_SCREENS = ['home','categories','favorites','history','settings'];
+function renderBottomNav(){
+  const tabs = [
+    {id:'home', icon:'🏠', label:'Inicio'},
+    {id:'categories', icon:'🗂', label:'Categorías'},
+    {id:'favorites', icon:'★', label:'Favoritos'},
+    {id:'history', icon:'🕘', label:'Historial'},
+    {id:'settings', icon:'⚙', label:'Ajustes'},
+  ];
+  const bar = el('div',{class:'bottom-nav'});
+  tabs.forEach(t=>{
+    const active = state.screen===t.id;
+    const btn = el('button',{class:'bottom-nav-btn'+(active?' active':''), onclick:()=>{ if(!active) goto(t.id); }},[
+      el('span',{class:'bottom-nav-icon'}, t.icon),
+      el('span',{class:'bottom-nav-label'}, t.label),
+    ]);
+    bar.appendChild(btn);
+  });
+  document.body.appendChild(bar);
+}
+
 function render(){
+  const oldNav = document.querySelector('.bottom-nav');
+  if(oldNav) oldNav.remove();
   switch(state.screen){
-    case 'home': return renderHome();
-    case 'settings': return renderSettings();
-    case 'points-guide': return renderPointsGuide();
-    case 'categories': return renderCategories();
-    case 'category-detail': return renderCategoryDetail();
-    case 'cat-detail': return renderCatDetail();
-    case 'intro': return renderIntro();
-    case 'sud-before': return renderSudBefore();
-    case 'player-main': return renderPlayerMain();
-    case 'breath': return renderBreath();
-    case 'sud-after': return renderSudAfter();
-    case 'done': return renderDone();
-    case 'favorites': return renderFavorites();
-    case 'history': return renderHistory();
+    case 'home': renderHome(); break;
+    case 'settings': renderSettings(); break;
+    case 'points-guide': renderPointsGuide(); break;
+    case 'categories': renderCategories(); break;
+    case 'category-detail': renderCategoryDetail(); break;
+    case 'cat-detail': renderCatDetail(); break;
+    case 'intro': renderIntro(); break;
+    case 'sud-before': renderSudBefore(); break;
+    case 'player-main': renderPlayerMain(); break;
+    case 'breath': renderBreath(); break;
+    case 'sud-after': renderSudAfter(); break;
+    case 'done': renderDone(); break;
+    case 'favorites': renderFavorites(); break;
+    case 'history': renderHistory(); break;
   }
+  if(BOTTOM_NAV_SCREENS.includes(state.screen)) renderBottomNav();
 }
 
 render();
