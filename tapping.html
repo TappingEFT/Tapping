@@ -1123,7 +1123,7 @@ function renderPlayerFrame(isFirst){
   top.appendChild(el('span',{style:'width:22px'}));
   wrap.appendChild(top);
 
-  wrap.appendChild(el('div',{class:'progress-track'}, el('div',{class:'progress-fill',id:'progFill'})));
+
 
   const mid = el('div',{class:'player-mid'});
   if(step.phase==='karate' && step.repIndex!==undefined && step.repTotal!==undefined){
@@ -1133,25 +1133,6 @@ function renderPlayerFrame(isFirst){
   mid.appendChild(diagramHolder);
   mid.appendChild(el('div',{class:'point-name'}, step.name));
   mid.appendChild(el('div',{class:'point-where'}, step.where));
-  const phraseText = `"${step.phrase}"`;
-  const TRUNC_LEN = 130;
-  if(phraseText.length > TRUNC_LEN){
-    const phraseEl = el('div',{class:'point-phrase'});
-    const short = phraseText.slice(0, TRUNC_LEN).trim() + '…';
-    let expanded = false;
-    const textSpan = el('span',{}, short);
-    const toggleBtn = el('button',{class:'phrase-more-btn', onclick:()=>{
-      expanded = !expanded;
-      textSpan.textContent = expanded ? phraseText : short;
-      toggleBtn.textContent = expanded ? 'menos' : 'más';
-    }}, 'más');
-    phraseEl.appendChild(textSpan);
-    phraseEl.appendChild(el('span',{},' '));
-    phraseEl.appendChild(toggleBtn);
-    mid.appendChild(phraseEl);
-  } else {
-    mid.appendChild(el('div',{class:'point-phrase'}, phraseText));
-  }
   if(step.askRating && step.phase==='intro'){
     const scaleHolder = el('div',{});
     mid.appendChild(scaleHolder);
@@ -1251,17 +1232,6 @@ function renderCatDetail(){
   }
 
   if(cat.note) body.appendChild(el('p',{class:'stage-copy',style:'font-size:13.5px;'}, cat.note));
-
-  if(cat.audio){
-    const audioRow = el('div',{class:'settings-row'});
-    audioRow.appendChild(el('span',{}, 'Audio'));
-    const seg = el('div',{class:'seg'});
-    const onBtn = el('button',{class: state.audioOn?'active':'', onclick:()=>{ state.audioOn=true; renderCatDetail(); }}, 'On');
-    const offBtn = el('button',{class: !state.audioOn?'active':'', onclick:()=>{ state.audioOn=false; renderCatDetail(); }}, 'Off');
-    seg.appendChild(onBtn); seg.appendChild(offBtn);
-    audioRow.appendChild(seg);
-    body.appendChild(audioRow);
-  }
 
   body.appendChild(el('button',{class:'btn btn-primary',style:'margin-top:16px;',onclick:()=>{
     state.quickMode=false;
@@ -1486,17 +1456,6 @@ function renderSudBefore(){
   }
 
   if(cat.note) wrap.appendChild(el('p',{class:'stage-copy',style:'font-size:13.5px;'}, cat.note));
-
-  if(cat.audio){
-    const audioRow = el('div',{class:'settings-row'});
-    audioRow.appendChild(el('span',{}, '🔊 Escuchar con audio'));
-    const seg = el('div',{class:'seg'});
-    const onBtn = el('button',{class: state.audioOn?'active':'', onclick:()=>{ state.audioOn=true; renderSudBefore(); }}, 'Sí');
-    const offBtn = el('button',{class: !state.audioOn?'active':'', onclick:()=>{ state.audioOn=false; renderSudBefore(); }}, 'Solo texto');
-    seg.appendChild(onBtn); seg.appendChild(offBtn);
-    audioRow.appendChild(seg);
-    wrap.appendChild(audioRow);
-  }
 
   wrap.appendChild(el('div',{class:'spacer'}));
   wrap.appendChild(el('button',{class:'btn btn-primary',onclick:()=>{
