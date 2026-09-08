@@ -1,6 +1,6 @@
 {
   "name": "Centro Tapping",
-  "short_name": "Tapping",
+  "short_name": "Centro Tapping",
   "description": "Sesiones guiadas de EFT / tapping en español.",
   "start_url": "./tapping.html",
   "scope": "./",
