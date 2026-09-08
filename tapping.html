@@ -236,7 +236,7 @@
   .lock-card{max-width:380px;width:100%;text-align:center;}
   .lock-card h2{margin-bottom:10px;}
   .lock-card p{color:var(--ink-soft);font-size:15px;margin-bottom:18px;}
-  .lock-card input{width:100%;padding:14px;border-radius:12px;border:1px solid var(--line);background:var(--card);color:var(--ink);font-size:16px;text-align:center;margin-bottom:14px;font-family:'Source Sans 3',Arial,sans-serif;}
+  .lock-card input{width:100%;padding:14px;border-radius:12px;border:1px solid var(--line);background:var(--card);color:var(--ink);font-size:16px;text-align:center;margin-bottom:14px;font-family:'Source Sans 3',Arial,sans-serif;text-transform:uppercase;}
   .lock-error{color:var(--sienna);font-size:14px;margin-top:12px;min-height:18px;}
   .lock-help{margin-top:24px;font-size:13px;}
 </style>
@@ -1842,7 +1842,7 @@ function renderLockScreen(errorMsg){
     <div class="lock-card">
       <h2>Activar Centro Tapping</h2>
       <p>Ingresa el número de compra de tu email de confirmación de Hotmart (empieza con "HP").</p>
-      <input type="text" id="lockCodeInput" placeholder="HP12345678901234" autocomplete="off" autocapitalize="characters">
+      <input type="text" id="lockCodeInput" placeholder="HP12345678901234" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false">
       <button id="lockSubmitBtn" class="btn btn-primary">Activar</button>
       <div id="lockError" class="lock-error">${errorMsg||''}</div>
       <p class="lock-help">¿Problemas para activar? Escríbenos a ellegajooficial@gmail.com</p>
