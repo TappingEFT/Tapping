@@ -84,10 +84,10 @@
   .pill{border:1.5px solid var(--line);border-radius:20px;padding:9px 16px;font-size:14.5px;color:var(--ink);}
 
   /* IMG BAND */
-  .img-band{width:100%;height:340px;object-fit:cover;border-radius:14px;}
+  .img-band{width:100%;aspect-ratio:4/5;height:auto;object-fit:cover;object-position:center 18%;border-radius:14px;}
   .img-pair{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
-  .img-pair img{width:100%;height:280px;object-fit:cover;border-radius:14px;}
-  @media (max-width:700px){ .img-pair{grid-template-columns:1fr;} .img-band{height:220px;} .img-pair img{height:220px;} }
+  .img-pair img{width:100%;aspect-ratio:4/5;height:auto;object-fit:cover;object-position:center 18%;border-radius:14px;}
+  @media (max-width:700px){ .img-pair{grid-template-columns:1fr;} }
 
   /* PRECIO */
   .price-card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:40px;text-align:center;max-width:460px;margin:0 auto;}
@@ -141,16 +141,7 @@
     </div>
     <div class="phone-mock">
       <div class="phone-screen">
-        <div class="phone-card">
-          <div class="phone-eyebrow">Tu práctica diaria</div>
-          <div class="phone-h1">Tapping</div>
-          <div class="phone-p">Elige qué te está pidiendo atención ahora mismo.</div>
-          <div class="phone-btn">📍 Cómo funciona · dónde están los puntos</div>
-          <div class="phone-row">
-            <img src="primera_sesion.jpg" alt="">
-            <div class="phone-row-text"><strong>Tu primera sesión</strong>Guía de inicio rápido · 3 min</div>
-          </div>
-        </div>
+        <img src="screens/screen-inicio.jpg" alt="Pantalla de inicio de Centro Tapping">
       </div>
     </div>
   </div>
@@ -230,7 +221,29 @@
           <div><h3>Termina</h3><p>Registra cómo te sientes y consulta tu historial cuando quieras.</p></div>
         </div>
       </div>
-      <img class="img-band" style="height:100%;min-height:320px;" src="agotamiento.jpg" alt="">
+      <img class="img-band" src="agotamiento.jpg" alt="">
+    </div>
+  </div>
+</section>
+
+<!-- GALERIA DE CAPTURAS REALES -->
+<section>
+  <div class="wrap">
+    <div class="eyebrow">Así es Centro Tapping por dentro</div>
+    <h2 class="section-title">La app real, tal como la vas a usar.</h2>
+    <div class="grid-4 mt24">
+      <div class="phone-mock" style="max-width:none;">
+        <div class="phone-screen"><img src="screens/screen-inicio.jpg" alt="Inicio de Centro Tapping"></div>
+      </div>
+      <div class="phone-mock" style="max-width:none;">
+        <div class="phone-screen"><img src="screens/screen-categoria.jpg" alt="Categoría Abundancia"></div>
+      </div>
+      <div class="phone-mock" style="max-width:none;">
+        <div class="phone-screen"><img src="screens/screen-sesion.jpg" alt="Detalle de una sesión"></div>
+      </div>
+      <div class="phone-mock" style="max-width:none;">
+        <div class="phone-screen"><img src="screens/screen-reproductor.jpg" alt="Reproductor guiado"></div>
+      </div>
     </div>
   </div>
 </section>
@@ -397,7 +410,7 @@
     <div class="eyebrow">Una sola compra</div>
     <h2 class="section-title">Centro Tapping</h2>
     <div class="price-card mt24">
-      <div class="price-value">[PRECIO] €</div>
+      <div class="price-value">19,99 €</div>
       <div class="price-note">Pago único · Sin suscripción</div>
       <ul class="price-includes">
         <li><span>✓</span>Acceso a Centro Tapping</li>
