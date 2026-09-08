@@ -22,7 +22,8 @@
   img{max-width:100%;display:block;}
   .wrap{max-width:1080px;margin:0 auto;padding:0 24px;}
   .narrow{max-width:640px;margin:0 auto;padding:0 24px;}
-  section{padding:64px 0;}
+  section{padding:60px 0;}
+  section.alt{background:var(--stone-deep);}
   .eyebrow{color:var(--sienna);font-size:15px;font-weight:600;margin-bottom:10px;}
   h2.section-title{font-size:32px;margin-bottom:16px;}
   p.lead{font-size:19px;color:var(--ink-soft);max-width:56ch;}
@@ -36,60 +37,55 @@
   .grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;}
   @media (max-width:760px){
     .grid-2,.grid-3,.grid-4{grid-template-columns:1fr;}
-    section{padding:44px 0;}
-    h2.section-title{font-size:26px;}
+    section{padding:40px 0;}
+    h2.section-title{font-size:25px;}
     body{font-size:17px;}
   }
 
-  /* HERO */
-  .hero{padding:56px 0 48px;}
-  .hero-grid{display:grid;grid-template-columns:1.1fr 0.9fr;gap:48px;align-items:center;}
+  .hero{padding:52px 0 44px;}
+  .hero-grid{display:grid;grid-template-columns:1.05fr 0.95fr;gap:44px;align-items:center;}
   @media (max-width:900px){ .hero-grid{grid-template-columns:1fr;} }
-  .hero h1{font-size:42px;margin-bottom:20px;}
-  @media (max-width:600px){ .hero h1{font-size:30px;} }
-  .phone-mock{background:var(--stone-deep);border:6px solid #100F0E;border-radius:36px;padding:14px;max-width:300px;margin:0 auto;box-shadow:0 20px 60px rgba(0,0,0,0.5);}
+  .preheader{color:var(--sienna);font-size:14px;font-weight:700;letter-spacing:0.02em;margin-bottom:14px;}
+  .hero h1{font-size:38px;margin-bottom:18px;}
+  @media (max-width:600px){ .hero h1{font-size:28px;} }
+  .keyword-line{color:var(--ink-soft);font-size:16px;margin:16px 0 0;}
+  .price-inline{font-size:15px;color:var(--ink-soft);margin-top:6px;}
+  .guarantee-note{font-size:13.5px;color:var(--ink-soft);font-style:italic;margin-top:4px;}
+
+  .phone-mock{background:var(--stone-deep);border:6px solid #100F0E;border-radius:36px;padding:10px;max-width:300px;margin:0 auto;box-shadow:0 20px 60px rgba(0,0,0,0.5);}
   .phone-screen{border-radius:22px;overflow:hidden;background:var(--stone);}
   .phone-screen img{width:100%;display:block;}
-  .phone-card{padding:16px;}
-  .phone-eyebrow{color:var(--sienna);font-size:11px;font-weight:600;margin-bottom:4px;}
-  .phone-h1{font-size:22px;margin-bottom:6px;}
-  .phone-p{font-size:12px;color:var(--ink-soft);margin-bottom:14px;}
-  .phone-btn{background:var(--sienna);color:#fff;border-radius:8px;padding:10px 12px;font-size:12.5px;font-weight:600;margin-bottom:14px;}
-  .phone-row{display:flex;gap:8px;background:var(--card);border-radius:10px;overflow:hidden;border:1px solid var(--line);}
-  .phone-row img{width:64px;height:64px;object-fit:cover;flex:none;}
-  .phone-row-text{padding:8px;font-size:11.5px;}
-  .phone-row-text strong{display:block;font-size:12.5px;}
 
-  /* PROBLEMA */
-  .problem-item{border-top:1px solid var(--line);padding:20px 0;}
-  .problem-item h3{font-size:18px;margin-bottom:6px;}
-  .problem-item p{color:var(--ink-soft);margin:0;font-size:16px;}
+  .problem-item{border-top:1px solid var(--line);padding:16px 0;}
+  .problem-item p{margin:0;font-size:17px;color:var(--ink-soft);}
+  .punch-line{font-size:20px;font-weight:600;margin:0;}
 
-  /* PASOS */
   .step{display:flex;gap:16px;align-items:flex-start;padding:18px 0;border-top:1px solid var(--line);}
   .step:first-child{border-top:none;}
   .step-num{flex:none;width:36px;height:36px;border-radius:50%;border:1.5px solid var(--sienna);color:var(--sienna);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:15px;}
   .step h3{font-size:17px;margin-bottom:4px;}
   .step p{color:var(--ink-soft);margin:0;font-size:15.5px;}
 
-  /* CATEGORIAS */
-  .cat-block{margin-bottom:28px;}
-  .cat-block h3{font-size:19px;margin-bottom:10px;color:var(--sienna);}
-  .cat-list{list-style:none;padding:0;margin:0;display:grid;grid-template-columns:1fr 1fr;gap:6px 20px;}
-  .cat-list li{color:var(--ink-soft);font-size:16px;padding:4px 0;border-bottom:1px dashed var(--line);}
-  @media (max-width:600px){ .cat-list{grid-template-columns:1fr;} }
+  .compare{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
+  @media (max-width:700px){ .compare{grid-template-columns:1fr;} }
+  .compare .card h3{font-size:18px;margin-bottom:14px;}
+  .compare ul{list-style:none;padding:0;margin:0;}
+  .compare li{padding:8px 0;border-top:1px solid var(--line);font-size:15.5px;color:var(--ink-soft);}
+  .compare li:first-child{border-top:none;}
+  .compare.no h3{color:var(--ink-soft);}
+  .compare.yes{border:1.5px solid var(--sienna);}
+  .compare.yes h3{color:var(--sienna);}
 
-  /* PILLS */
+  .cat-block{margin-bottom:24px;}
+  .cat-block h3{font-size:18px;margin-bottom:8px;}
+  .cat-list{list-style:none;padding:0;margin:0;display:grid;grid-template-columns:1fr 1fr;gap:6px 20px;}
+  .cat-list li{color:var(--ink-soft);font-size:15.5px;padding:3px 0;}
+
   .pill-row{display:flex;flex-wrap:wrap;gap:10px;}
   .pill{border:1.5px solid var(--line);border-radius:20px;padding:9px 16px;font-size:14.5px;color:var(--ink);}
 
-  /* IMG BAND */
   .img-band{width:100%;aspect-ratio:4/5;height:auto;object-fit:cover;object-position:center 18%;border-radius:14px;}
-  .img-pair{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
-  .img-pair img{width:100%;aspect-ratio:4/5;height:auto;object-fit:cover;object-position:center 18%;border-radius:14px;}
-  @media (max-width:700px){ .img-pair{grid-template-columns:1fr;} }
 
-  /* PRECIO */
   .price-card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:40px;text-align:center;max-width:460px;margin:0 auto;}
   .price-value{font-size:52px;font-weight:700;margin:6px 0;}
   .price-note{color:var(--ink-soft);font-size:15px;margin-bottom:24px;}
@@ -97,8 +93,8 @@
   .price-includes li{padding:8px 0;border-top:1px solid var(--line);font-size:15.5px;}
   .price-includes li:first-child{border-top:none;}
   .price-includes li span{color:var(--sienna);margin-right:8px;}
+  .guarantee-badge{display:inline-block;margin-top:20px;padding:10px 18px;border:1px solid var(--line);border-radius:8px;font-size:14px;color:var(--ink-soft);}
 
-  /* FAQ */
   details.faq{border-top:1px solid var(--line);padding:16px 0;}
   details.faq summary{cursor:pointer;font-size:17px;font-weight:600;list-style:none;display:flex;justify-content:space-between;align-items:center;}
   details.faq summary::-webkit-details-marker{display:none;}
@@ -106,17 +102,14 @@
   details.faq[open] summary::after{content:'–';}
   details.faq p{color:var(--ink-soft);margin:12px 0 0;font-size:16px;}
 
-  /* PARA QUIEN */
   .who-list{list-style:none;padding:0;margin:0;}
   .who-list li{padding:10px 0 10px 28px;position:relative;color:var(--ink-soft);font-size:16.5px;border-top:1px solid var(--line);}
   .who-list li:first-child{border-top:none;}
   .who-list.yes li::before{content:'✓';position:absolute;left:0;color:var(--sienna);font-weight:700;}
   .who-list.no li::before{content:'–';position:absolute;left:2px;color:var(--ink-soft);}
 
-  /* LEGAL */
   .legal-box{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:20px 22px;font-size:14.5px;color:var(--ink-soft);}
 
-  /* FOOTER */
   footer{border-top:1px solid var(--line);padding:36px 0;text-align:center;color:var(--ink-soft);font-size:14px;}
   footer a{color:var(--ink-soft);text-decoration:underline;}
 
@@ -132,320 +125,288 @@
 <section class="hero">
   <div class="wrap hero-grid">
     <div>
-      <h1>El tapping ya lo conoces. Ahora tenlo todo a mano.</h1>
-      <p class="lead">Centro Tapping reúne tus sesiones guiadas en un solo lugar para que puedas elegir lo que necesitas, empezar y dejar que la app te acompañe por cada punto.</p>
+      <div class="preheader">Tu práctica de tapping, más sencilla</div>
+      <h1>Deja de buscar una sesión cada vez que necesitas hacer tapping.</h1>
+      <p class="lead">Centro Tapping reúne tus sesiones de tapping guiadas en un solo lugar para que puedas elegir qué quieres trabajar, empezar y seguir tu práctica sin tener que buscar entre vídeos.</p>
+      <p class="keyword-line"><strong style="color:var(--ink);">Ansiedad · miedo · dormir · amor propio · abundancia · energía</strong> y más.</p>
       <div class="mt24">
         <a href="#precio" class="btn btn-primary">Quiero Centro Tapping</a>
-        <p class="cta-note">Compra única · Sin suscripción<br>Acceso desde móvil, tablet u ordenador.</p>
+        <p class="price-inline">19,99 € · Pago único · Sin suscripción</p>
+        <p class="guarantee-note">7 días de garantía.</p>
       </div>
     </div>
     <div class="phone-mock">
-      <div class="phone-screen">
-        <img src="screen-inicio.jpg" alt="Pantalla de inicio de Centro Tapping">
-      </div>
+      <div class="phone-screen"><img src="screen-inicio.jpg" alt="Pantalla de inicio de Centro Tapping"></div>
     </div>
   </div>
 </section>
 
-<!-- 2. PROBLEMA -->
-<section>
+<!-- 2. EL PROBLEMA -->
+<section class="alt">
   <div class="narrow">
-    <div class="eyebrow">¿Te suena esto?</div>
-    <h2 class="section-title">Sabes qué es el tapping. Incluso sabes que quieres practicarlo.</h2>
-    <p class="lead mb0">Pero muchas veces el problema empieza antes de la propia sesión.</p>
+    <div class="eyebrow">El problema</div>
+    <h2 class="section-title">Quizás te ha pasado.</h2>
+    <p class="lead">Quieres hacer tapping. Pero antes de empezar…</p>
   </div>
   <div class="wrap mt24">
-    <div class="problem-item">
-      <h3>Buscar una sesión cada vez</h3>
-      <p>Entrar en YouTube y empezar a buscar qué sesión hacer.</p>
-    </div>
-    <div class="problem-item">
-      <h3>Elegir entre cientos de vídeos</h3>
-      <p>Voces diferentes, duraciones diferentes, estilos diferentes.</p>
-    </div>
-    <div class="problem-item">
-      <h3>Perder tiempo antes de empezar</h3>
-      <p>Cuando realmente solo querías parar un momento y hacer tu práctica.</p>
-    </div>
-    <div class="problem-item">
-      <h3>Tenerlo todo disperso</h3>
-      <p>Sesiones guardadas aquí, otras allá y ninguna organización clara.</p>
-    </div>
+    <div class="problem-item"><p>Tienes que buscar una sesión.</p></div>
+    <div class="problem-item"><p>Después elegir entre diferentes vídeos.</p></div>
+    <div class="problem-item"><p>Quizás probar una voz.</p></div>
+    <div class="problem-item"><p>Recordar dónde estaba aquella sesión que te gustó.</p></div>
+    <div class="problem-item"><p>Y cuando finalmente encuentras algo… ya has perdido parte de las ganas de empezar.</p></div>
   </div>
-  <p class="narrow mt24" style="color:var(--ink-soft);">Centro Tapping nace precisamente para solucionar esa parte.</p>
+  <div class="narrow mt24">
+    <p class="punch-line">El problema no es que no existan sesiones.<br>El problema es encontrarlas cuando las necesitas.</p>
+    <p style="color:var(--ink-soft);">Centro Tapping nace para hacer esa parte más sencilla.</p>
+  </div>
 </section>
 
-<!-- 3. SOLUCION -->
+<!-- 3. EL MECANISMO -->
 <section>
   <div class="wrap">
-    <div class="grid-2" style="align-items:center;">
+    <div class="eyebrow">Cómo funciona</div>
+    <h2 class="section-title">Buscar no debería ser el primer paso de tu práctica.</h2>
+    <p class="lead">En lugar de buscar → comparar → elegir → volver a buscar, con Centro Tapping haces esto:</p>
+    <div class="grid-2 mt24" style="gap:48px;align-items:center;">
       <div>
-        <div class="eyebrow">La solución</div>
-        <h2 class="section-title">Todo en un mismo lugar.</h2>
-        <p class="lead">Abres Centro Tapping, eliges qué quieres trabajar y empiezas.</p>
-        <ul class="who-list yes mt24">
-          <li>Sesiones organizadas por categorías</li>
-          <li>Sesiones rápidas para momentos concretos</li>
-          <li>Sesiones guiadas, paso a paso</li>
-          <li>Favoritos e historial</li>
-          <li>Guía de los puntos</li>
-          <li>Distintas duraciones según la sesión</li>
-        </ul>
+        <div class="step"><div class="step-num">1</div><div><h3>Elige</h3><p>Busca una sesión según lo que quieres trabajar en ese momento.</p></div></div>
+        <div class="step"><div class="step-num">2</div><div><h3>Empieza</h3><p>Abre la sesión y sigue las indicaciones.</p></div></div>
+        <div class="step"><div class="step-num">3</div><div><h3>Practica</h3><p>La aplicación te acompaña durante la sesión y te guía por los puntos.</p></div></div>
+        <div class="step"><div class="step-num">4</div><div><h3>Vuelve cuando quieras</h3><p>Guarda tus sesiones favoritas y consulta tu historial.</p></div></div>
       </div>
-      <img class="img-band" src="dormir.jpg" alt="">
+      <img class="img-band" src="screen-sesion.jpg" alt="Detalle de una sesión guiada">
     </div>
+    <p class="center" style="font-weight:600;margin-top:24px;">Menos tiempo buscando. Más facilidad para empezar.</p>
+    <div class="center mt24"><a href="#precio" class="btn btn-primary">Quiero probar Centro Tapping</a></div>
   </div>
 </section>
 
-<!-- 4. COMO FUNCIONA -->
+<!-- 4. POR QUE NO YOUTUBE -->
+<section class="alt">
+  <div class="wrap">
+    <div class="eyebrow">Una alternativa a buscar en YouTube</div>
+    <h2 class="section-title">Puedes seguir buscando sesiones en YouTube.</h2>
+    <p class="lead">Pero cada vez que quieras practicar tendrás que volver a empezar el proceso: buscar, comparar, elegir, volver a encontrar una sesión, y repetir.</p>
+    <div class="compare mt24">
+      <div class="card compare no">
+        <h3>Buscar en YouTube</h3>
+        <ul>
+          <li>Buscar cada vez que quieres practicar</li>
+          <li>Comparar entre vídeos y voces</li>
+          <li>Anuncios antes y durante</li>
+          <li>Volver a encontrar la sesión que te gustó</li>
+        </ul>
+      </div>
+      <div class="card compare yes">
+        <h3>Centro Tapping</h3>
+        <ul>
+          <li>Abrir la app</li>
+          <li>Elegir según lo que sientes</li>
+          <li>Sin anuncios, sin buscar</li>
+          <li>Tus sesiones guardadas, siempre a mano</li>
+        </ul>
+      </div>
+    </div>
+    <p style="color:var(--ink-soft);margin-top:20px;">No necesitas sustituir YouTube. Tienes una alternativa creada específicamente para tu práctica de tapping.</p>
+  </div>
+</section>
+
+<!-- 5. CONOCE CENTRO TAPPING -->
 <section>
   <div class="wrap">
-    <div class="eyebrow">Así de sencillo</div>
-    <h2 class="section-title">De la idea a la sesión, en segundos.</h2>
-    <div class="grid-2 mt24" style="gap:48px;">
+    <div class="eyebrow">Conoce Centro Tapping</div>
+    <h2 class="section-title">Una biblioteca de sesiones guiadas para tu práctica personal.</h2>
+    <div class="grid-2 mt24" style="gap:40px;align-items:start;">
       <div>
-        <div class="step">
-          <div class="step-num">1</div>
-          <div><h3>Elige</h3><p>Encuentra una sesión según lo que quieres trabajar en ese momento.</p></div>
+        <div class="cat-block">
+          <h3>Bienestar emocional</h3>
+          <ul class="cat-list">
+            <li>Empezar el día con energía positiva</li><li>Amor propio</li>
+            <li>Acción inspirada</li><li>Ansiedad</li>
+          </ul>
         </div>
-        <div class="step">
-          <div class="step-num">2</div>
-          <div><h3>Empieza</h3><p>Pulsa "Empezar sesión" y sigue las indicaciones.</p></div>
+        <div class="cat-block">
+          <h3>Dormir y relajarte</h3>
+          <ul class="cat-list">
+            <li>Dormir</li><li>Liberación de la tensión nerviosa y el estrés</li>
+          </ul>
         </div>
-        <div class="step">
-          <div class="step-num">3</div>
-          <div><h3>Sigue los puntos</h3><p>La aplicación avanza por los puntos mientras la sesión está guiada.</p></div>
+        <div class="cat-block">
+          <h3>Miedos y bloqueos</h3>
+          <ul class="cat-list">
+            <li>Miedo</li><li>Liberar resistencias</li>
+            <li>Salir de la escasez</li><li>Abrirte al merecimiento</li>
+          </ul>
         </div>
-        <div class="step">
-          <div class="step-num">4</div>
-          <div><h3>Termina</h3><p>Registra cómo te sientes y consulta tu historial cuando quieras.</p></div>
+        <div class="cat-block">
+          <h3>Abundancia</h3>
+          <ul class="cat-list">
+            <li>Abundancia</li><li>Abrirte a recibir</li><li>Sincronías y señales</li>
+          </ul>
         </div>
+        <div class="cat-block">
+          <h3>Para empezar</h3>
+          <ul class="cat-list">
+            <li>Tu primera sesión</li><li>Guía de puntos</li>
+          </ul>
+        </div>
+        <p style="color:var(--ink-soft);font-size:15px;">También encontrarás sesiones sobre dolor de cabeza, dolor de espalda, energía, merecimiento, recibir, acción inspirada y más.</p>
       </div>
-      <img class="img-band" src="agotamiento.jpg" alt="">
-    </div>
-  </div>
-</section>
-
-<!-- GALERIA DE CAPTURAS REALES -->
-<section>
-  <div class="wrap">
-    <div class="eyebrow">Así es Centro Tapping por dentro</div>
-    <h2 class="section-title">La app real, tal como la vas a usar.</h2>
-    <div class="grid-4 mt24">
-      <div class="phone-mock" style="max-width:none;">
-        <div class="phone-screen"><img src="screen-inicio.jpg" alt="Inicio de Centro Tapping"></div>
-      </div>
-      <div class="phone-mock" style="max-width:none;">
-        <div class="phone-screen"><img src="screen-categoria.jpg" alt="Categoría Abundancia"></div>
-      </div>
-      <div class="phone-mock" style="max-width:none;">
-        <div class="phone-screen"><img src="screen-sesion.jpg" alt="Detalle de una sesión"></div>
-      </div>
-      <div class="phone-mock" style="max-width:none;">
-        <div class="phone-screen"><img src="screen-reproductor.jpg" alt="Reproductor guiado"></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- 5. QUE ENCONTRARAS DENTRO -->
-<section>
-  <div class="wrap">
-    <div class="eyebrow">Dentro de la app</div>
-    <h2 class="section-title">Sesiones para diferentes momentos.</h2>
-    <div class="grid-2 mt24" style="gap:32px;">
-      <div class="cat-block">
-        <h3>Abundancia</h3>
-        <ul class="cat-list">
-          <li>Liberar resistencias</li><li>Salir de la escasez</li>
-          <li>Abrirte a recibir</li><li>Abrirte al merecimiento</li>
-          <li>Abundancia</li><li>Sincronías y señales</li>
-        </ul>
-      </div>
-      <div class="cat-block">
-        <h3>Bienestar emocional</h3>
-        <ul class="cat-list">
-          <li>Empezar el día con energía positiva</li><li>Amor propio</li>
-          <li>Acción inspirada</li><li>Ansiedad</li>
-        </ul>
-      </div>
-      <div class="cat-block">
-        <h3>Dormir</h3>
-        <ul class="cat-list">
-          <li>Dormir</li><li>Liberación de la tensión nerviosa y el estrés</li>
-        </ul>
-      </div>
-      <div class="cat-block">
-        <h3>Aliviar dolores físicos</h3>
-        <ul class="cat-list">
-          <li>Dolor de cabeza</li><li>Dolor de espalda</li><li>Libera el dolor</li>
-        </ul>
-      </div>
-      <div class="cat-block">
-        <h3>Y más</h3>
-        <ul class="cat-list">
-          <li>Miedo</li><li>Tu primera sesión</li>
-        </ul>
-      </div>
+      <img class="img-band" src="screen-categoria.jpg" alt="Categoría Abundancia en Centro Tapping">
     </div>
   </div>
 </section>
 
 <!-- 6. NECESITO ALGO RAPIDO -->
-<section>
+<section class="alt">
   <div class="wrap">
     <div class="eyebrow">¿Solo tienes unos minutos?</div>
-    <h2 class="section-title">También puedes ir directamente a lo que necesitas ahora.</h2>
+    <h2 class="section-title">Ve directamente a lo que quieres trabajar.</h2>
     <div class="pill-row mt24">
       <span class="pill">Ansiedad</span><span class="pill">Miedo</span><span class="pill">Dormir</span>
       <span class="pill">Dolor</span><span class="pill">Energía</span><span class="pill">Amor propio</span>
       <span class="pill">Abundancia</span><span class="pill">Merecimiento</span><span class="pill">Escasez</span>
       <span class="pill">Recibir</span><span class="pill">Acción inspirada</span><span class="pill">Sincronías</span>
     </div>
+    <p style="color:var(--ink-soft);margin-top:20px;">No necesitas recordar el nombre exacto de una sesión. Empieza por lo que estás viviendo ahora.</p>
   </div>
 </section>
 
-<!-- 7. LA EXPERIENCIA -->
+<!-- 7. FAVORITOS + HISTORIAL -->
 <section>
   <div class="wrap">
-    <div class="grid-2" style="align-items:center;">
-      <img class="img-band" src="recibir.jpg" alt="">
-      <div>
-        <div class="eyebrow">La experiencia</div>
-        <h2 class="section-title">Menos buscar. Más practicar.</h2>
-        <p class="lead">No necesitas decidir qué vídeo buscar. No necesitas saltar entre canales. No necesitas recordar dónde estaba aquella sesión que te gustó.</p>
-        <p class="lead mb0">Simplemente eliges y empiezas.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- 8. FAVORITOS + HISTORIAL -->
-<section>
-  <div class="wrap">
-    <div class="grid-2">
+    <div class="eyebrow">Tus sesiones favoritas, siempre a mano</div>
+    <h2 class="section-title">Guarda lo que te funciona para volver fácilmente.</h2>
+    <div class="grid-2 mt24">
       <div class="card">
         <h3 style="font-size:20px;margin-bottom:8px;">Favoritos</h3>
-        <p style="color:var(--ink-soft);margin:0;">Guarda las sesiones que más utilizas para encontrarlas rápidamente.</p>
+        <p style="color:var(--ink-soft);margin:0;">Cuando encuentres una sesión que quieras repetir, guárdala. Así podrás volver a ella sin tener que buscarla otra vez.</p>
       </div>
       <div class="card">
         <h3 style="font-size:20px;margin-bottom:8px;">Historial</h3>
-        <p style="color:var(--ink-soft);margin:0;">Consulta las sesiones realizadas y tus registros anteriores.</p>
+        <p style="color:var(--ink-soft);margin:0;">Consulta las sesiones que ya has realizado y tus registros anteriores.</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- 9. TU PRIMERA SESION -->
-<section>
+<!-- 8. NUNCA HAS HECHO TAPPING -->
+<section class="alt">
   <div class="wrap">
     <div class="grid-2" style="align-items:center;">
       <div>
         <div class="eyebrow">¿Nunca has hecho tapping?</div>
         <h2 class="section-title">También puedes empezar desde cero.</h2>
-        <p class="lead">Centro Tapping incluye una sesión especial, "Tu primera sesión", y una guía donde puedes consultar cuáles son los puntos, dónde están y cómo identificarlos.</p>
+        <p class="lead">Centro Tapping incluye una sesión especial llamada "Tu primera sesión", y además tienes una guía para consultar los puntos de tapping, dónde están y cómo identificarlos.</p>
+        <p class="lead mb0">No necesitas llegar sabiendo utilizar la aplicación. Puedes empezar poco a poco y familiarizarte con la práctica.</p>
       </div>
-      <img class="img-band" src="preocupacion.jpg" alt="">
+      <img class="img-band" src="primera_sesion.jpg" alt="Tu primera sesión">
     </div>
   </div>
 </section>
 
-<!-- 10. GUIA DE PUNTOS -->
+<!-- 9. GUIA DE PUNTOS -->
 <section>
   <div class="wrap">
     <div class="eyebrow">¿No recuerdas dónde está cada punto?</div>
-    <h2 class="section-title">Tienes la guía dentro de la propia aplicación.</h2>
-    <div class="img-pair mt24">
-      <img src="dolores%20de%20cabeza.jpg" alt="">
-      <img src="dolores%20de%20espalda.jpg" alt="">
+    <h2 class="section-title">No necesitas salir de la aplicación para buscarlo.</h2>
+    <p class="lead">Centro Tapping incluye una guía donde puedes consultar los puntos y su ubicación.</p>
+    <div class="grid-2 mt24">
+      <img class="img-band" src="dolores%20de%20cabeza.jpg" alt="">
+      <img class="img-band" src="dolores%20de%20espalda.jpg" alt="">
     </div>
+    <p style="color:var(--ink-soft);margin-top:16px;">Todo lo necesario para orientarte está dentro de la propia experiencia.</p>
   </div>
 </section>
 
-<!-- 11. PARA QUIEN ES / NO ES -->
-<section>
+<!-- 10 / 11. PARA QUIEN ES / NO ES -->
+<section class="alt">
   <div class="wrap grid-2">
     <div>
       <h2 class="section-title" style="font-size:24px;">Centro Tapping es para ti si…</h2>
       <ul class="who-list yes mt24">
         <li>Ya conoces el tapping o quieres empezar a practicarlo</li>
-        <li>Quieres tener las sesiones organizadas</li>
-        <li>No quieres perder tiempo buscando vídeos</li>
-        <li>Prefieres una experiencia sencilla</li>
-        <li>Quieres poder practicar desde el móvil</li>
-        <li>Te gusta tener tus sesiones favoritas a mano</li>
+        <li>Te cansa buscar sesiones cada vez que quieres hacer tapping</li>
+        <li>Quieres tener tus sesiones organizadas</li>
+        <li>Prefieres elegir directamente según lo que quieres trabajar</li>
+        <li>Quieres practicar desde el móvil, tablet u ordenador</li>
+        <li>Te gusta guardar tus sesiones favoritas</li>
       </ul>
     </div>
     <div>
-      <h2 class="section-title" style="font-size:24px;">Quizás no sea para ti si…</h2>
+      <h2 class="section-title" style="font-size:24px;">Probablemente no es para ti si…</h2>
       <ul class="who-list no mt24">
         <li>Buscas un tratamiento médico</li>
-        <li>Esperas resultados garantizados</li>
         <li>Buscas terapia psicológica</li>
         <li>Quieres formación profesional para ser terapeuta</li>
-        <li>Buscas un programa con clases, directos o acompañamiento personal</li>
+        <li>Esperas resultados garantizados</li>
+        <li>Buscas clases en directo o acompañamiento personal</li>
       </ul>
       <p style="color:var(--ink-soft);font-size:15px;margin-top:16px;">Centro Tapping es una herramienta de práctica personal.</p>
     </div>
   </div>
 </section>
 
-<!-- 12. HISTORIA -->
+<!-- 12. LA HISTORIA -->
 <section>
   <div class="wrap grid-2" style="align-items:center;">
     <img class="img-band" src="volver%20a%20mi%20centro.jpg" alt="">
     <div>
-      <div class="eyebrow">Por qué existe</div>
-      <h2 class="section-title">Una molestia muy sencilla</h2>
-      <p class="lead">Conocía el tapping desde hacía años, pero no fue hasta hacer un curso sobre abundancia y mi relación con el dinero que empecé a practicarlo de forma habitual.</p>
-      <p class="lead">Cada vez que quería hacer una sesión, tenía que entrar en YouTube, buscar, elegir una voz que me gustara y decidir cuánto tiempo dedicarle.</p>
-      <p class="lead mb0">De ahí nació la pregunta: ¿y si simplemente tuviera todas mis sesiones en un mismo lugar? Y quería, además, que fuera fácil de usar para las mujeres de mi familia. Así nació Centro Tapping.</p>
+      <div class="eyebrow">La historia</div>
+      <h2 class="section-title">Centro Tapping nació de una necesidad muy sencilla.</h2>
+      <p class="lead">Conocía el tapping desde hacía años. Pero cuando empecé a practicarlo con más frecuencia, me encontré con algo que probablemente también te resulte familiar: cada vez que quería hacer una sesión tenía que entrar en YouTube, buscar, elegir una voz que me gustara y decidir qué sesión hacer.</p>
+      <p class="lead" style="font-weight:600;color:var(--ink);">Y pensé: ¿y si simplemente tuviera mis sesiones en un mismo lugar?</p>
+      <p class="lead">Además, quería que fuera fácil de utilizar para las mujeres de mi familia. De ahí nació Centro Tapping.</p>
+      <p class="lead mb0">No es un curso. No pretende sustituir a un profesional. Es una herramienta creada para hacer que tu práctica de tapping sea más sencilla de empezar y más fácil de mantener.</p>
     </div>
   </div>
 </section>
 
 <!-- 13. PRECIO -->
-<section id="precio">
+<section class="alt" id="precio">
   <div class="wrap center">
-    <div class="eyebrow">Una sola compra</div>
-    <h2 class="section-title">Centro Tapping</h2>
+    <div class="eyebrow">Lo que recibes</div>
+    <h2 class="section-title">Todo Centro Tapping por 19,99 €</h2>
+    <p class="lead" style="margin:0 auto;">Una sola compra. Sin suscripción.</p>
     <div class="price-card mt24">
       <div class="price-value">19,99 €</div>
-      <div class="price-note">Pago único · Sin suscripción</div>
+      <div class="price-note">Pago único · Sin pagos mensuales</div>
       <ul class="price-includes">
-        <li><span>✓</span>Acceso a Centro Tapping</li>
+        <li><span>✓</span>Centro Tapping</li>
         <li><span>✓</span>Todas las sesiones disponibles actualmente</li>
-        <li><span>✓</span>Categorías, favoritos e historial</li>
+        <li><span>✓</span>Sesiones organizadas por categorías</li>
+        <li><span>✓</span>Favoritos</li>
+        <li><span>✓</span>Historial</li>
         <li><span>✓</span>Guía de puntos</li>
-        <li><span>✓</span>Sesión de introducción</li>
+        <li><span>✓</span>"Tu primera sesión"</li>
         <li><span>✓</span>Acceso desde móvil, tablet y ordenador</li>
       </ul>
       <a href="#" class="btn btn-primary" style="width:100%;">Quiero Centro Tapping</a>
-      <p class="cta-note">Después de comprar recibirás tu código de activación por email.</p>
+      <div class="guarantee-badge">7 días de garantía · Consulta las condiciones de devolución antes de completar tu compra</div>
     </div>
   </div>
 </section>
 
-<!-- 14. ACTIVACION -->
+<!-- 14. QUE PASA DESPUES DE COMPRAR -->
 <section>
   <div class="wrap">
-    <div class="eyebrow">Después de comprar</div>
-    <h2 class="section-title">Cómo recibir y activar tu acceso.</h2>
+    <div class="eyebrow">¿Qué pasa después de comprar?</div>
+    <h2 class="section-title">Tu acceso se activa en pocos pasos.</h2>
     <div class="grid-2 mt24" style="gap:48px;">
       <div>
-        <div class="step"><div class="step-num">1</div><div><p style="margin:0;">Realizas tu compra.</p></div></div>
-        <div class="step"><div class="step-num">2</div><div><p style="margin:0;">Recibes tu código de activación por email.</p></div></div>
-        <div class="step"><div class="step-num">3</div><div><p style="margin:0;">Abres Centro Tapping.</p></div></div>
-        <div class="step"><div class="step-num">4</div><div><p style="margin:0;">Introduces el código.</p></div></div>
-        <div class="step"><div class="step-num">5</div><div><p style="margin:0;">Accedes a la aplicación.</p></div></div>
+        <div class="step"><div class="step-num">1</div><div><h3>Realizas tu compra</h3><p>Completa el proceso de pago.</p></div></div>
+        <div class="step"><div class="step-num">2</div><div><h3>Recibes la información de acceso</h3><p>Recibirás por email lo necesario para activar Centro Tapping.</p></div></div>
+        <div class="step"><div class="step-num">3</div><div><h3>Abres Centro Tapping</h3><p>Accede desde tu dispositivo.</p></div></div>
+        <div class="step"><div class="step-num">4</div><div><h3>Introduces tu código</h3><p>Utiliza el código de activación recibido.</p></div></div>
+        <div class="step"><div class="step-num">5</div><div><h3>Empiezas</h3><p>Ya puedes acceder a Centro Tapping y comenzar tu práctica.</p></div></div>
       </div>
       <div class="phone-mock" style="max-width:260px;">
         <div class="phone-screen">
-          <div class="phone-card" style="text-align:center;padding:32px 16px;">
-            <div class="phone-h1" style="font-size:18px;">Activar Centro Tapping</div>
-            <p class="phone-p">Ingresa el número de compra de tu email de confirmación (empieza con "HP").</p>
+          <div style="text-align:center;padding:32px 16px;">
+            <div style="font-size:18px;font-weight:700;margin-bottom:8px;">Activar Centro Tapping</div>
+            <p style="font-size:12px;color:var(--ink-soft);margin-bottom:14px;">Ingresa el número de compra de tu email de confirmación (empieza con "HP").</p>
             <div style="border:1px solid var(--line);border-radius:8px;padding:10px;font-size:12px;color:var(--ink-soft);margin-bottom:10px;">HP••••••••••••</div>
-            <div class="phone-btn" style="margin-bottom:0;">Activar</div>
+            <div style="background:var(--sienna);color:#fff;border-radius:8px;padding:10px 12px;font-size:12.5px;font-weight:600;">Activar</div>
           </div>
         </div>
       </div>
@@ -453,50 +414,68 @@
   </div>
 </section>
 
-<!-- 15. FAQ -->
+<!-- 15. UNA ULTIMA COSA -->
+<section class="alt center">
+  <div class="narrow">
+    <h2 class="section-title">No necesitas comprar un curso.</h2>
+    <p class="lead" style="margin:0 auto;">No necesitas comprometerte con una suscripción mensual. No necesitas aprender a utilizar una plataforma complicada.</p>
+    <p class="lead" style="margin:16px auto;">Centro Tapping tiene una propuesta mucho más sencilla: tener tus sesiones de tapping organizadas para que puedas acceder a ellas cuando quieras practicar.</p>
+    <p style="font-weight:600;font-size:20px;margin-bottom:20px;">Por 19,99 €, tienes acceso mediante una única compra.</p>
+    <a href="#precio" class="btn btn-primary">Quiero Centro Tapping</a>
+    <p class="cta-note">Pago único · Sin suscripción · 7 días de garantía</p>
+  </div>
+</section>
+
+<!-- 16. FAQ -->
 <section>
   <div class="narrow">
     <div class="eyebrow">Preguntas frecuentes</div>
     <h2 class="section-title">Lo que quizás te preguntes.</h2>
     <div class="mt24">
+      <details class="faq"><summary>¿Qué estoy comprando exactamente?</summary><p>Estás comprando acceso a Centro Tapping, una aplicación web/PWA con sesiones de tapping guiadas organizadas por categorías, además de funciones como favoritos, historial y guía de puntos.</p></details>
       <details class="faq"><summary>¿Es una aplicación?</summary><p>Sí. Centro Tapping funciona como una aplicación web/PWA y puedes utilizarla desde móvil, tablet u ordenador.</p></details>
-      <details class="faq"><summary>¿Tengo que instalar algo?</summary><p>No es obligatorio. La experiencia está diseñada para usarse fácilmente desde el navegador, y también puede funcionar como app instalada (PWA).</p></details>
-      <details class="faq"><summary>¿Hay suscripción?</summary><p>No. Es una compra única.</p></details>
-      <details class="faq"><summary>¿Qué recibo después de comprar?</summary><p>Recibirás la información necesaria para activar Centro Tapping.</p></details>
+      <details class="faq"><summary>¿Tengo que instalar algo?</summary><p>No es obligatorio. Puedes utilizarla desde el navegador y, cuando sea compatible con tu dispositivo, también puedes utilizarla como aplicación instalada.</p></details>
+      <details class="faq"><summary>¿Hay suscripción?</summary><p>No. El acceso se ofrece mediante una compra única de 19,99 €.</p></details>
+      <details class="faq"><summary>¿Necesito saber tapping para utilizarla?</summary><p>No necesariamente. Centro Tapping incluye "Tu primera sesión" y una guía de puntos para ayudarte a comenzar.</p></details>
+      <details class="faq"><summary>¿Las sesiones son vídeos?</summary><p>No. Las sesiones están planteadas como sesiones guiadas dentro de la aplicación.</p></details>
+      <details class="faq"><summary>¿Puedo guardar mis sesiones favoritas?</summary><p>Sí. Puedes añadir sesiones a Favoritos para encontrarlas fácilmente después.</p></details>
+      <details class="faq"><summary>¿Puedo consultar mi historial?</summary><p>Sí. Centro Tapping incluye un historial de sesiones realizadas y registros anteriores.</p></details>
       <details class="faq"><summary>¿Puedo utilizarla desde el móvil?</summary><p>Sí.</p></details>
       <details class="faq"><summary>¿Puedo utilizarla desde un ordenador?</summary><p>Sí.</p></details>
-      <details class="faq"><summary>¿Necesito saber tapping para utilizarla?</summary><p>No necesariamente. Existe una sección "Tu primera sesión" y una guía de los puntos para ayudarte a comenzar.</p></details>
-      <details class="faq"><summary>¿Las sesiones son vídeos?</summary><p>No. Las sesiones están planteadas como sesiones guiadas dentro de la aplicación.</p></details>
-      <details class="faq"><summary>¿Puedo guardar sesiones?</summary><p>Sí. Puedes añadir sesiones a Favoritos.</p></details>
-      <details class="faq"><summary>¿La aplicación sustituye a un profesional sanitario?</summary><p>No. Centro Tapping es una herramienta de práctica personal y no sustituye atención médica, psicológica o profesional.</p></details>
-      <details class="faq"><summary>¿Qué hago si tengo un problema con mi activación?</summary><p>Escríbenos a <a href="mailto:ellegajooficial@gmail.com">ellegajooficial@gmail.com</a>.</p></details>
+      <details class="faq"><summary>¿Qué recibo después de comprar?</summary><p>Recibirás por email la información necesaria para activar tu acceso a Centro Tapping.</p></details>
+      <details class="faq"><summary>¿Qué ocurre si tengo problemas con la activación?</summary><p>Puedes escribirnos a <a href="mailto:ellegajooficial@gmail.com">ellegajooficial@gmail.com</a> para recibir ayuda.</p></details>
+      <details class="faq"><summary>¿Centro Tapping sustituye a un profesional sanitario?</summary><p>No. Centro Tapping es una herramienta de práctica personal y no sustituye atención médica, psicológica ni profesional.</p></details>
+      <details class="faq"><summary>¿Puedo solicitar un reembolso?</summary><p>Centro Tapping ofrece una garantía de 7 días, de acuerdo con las condiciones aplicables a la compra.</p></details>
     </div>
   </div>
 </section>
 
-<!-- 16. AVISO -->
-<section>
+<!-- 17. AVISO -->
+<section class="alt">
   <div class="narrow">
     <div class="legal-box">
-      <strong style="color:var(--ink);">Aviso importante:</strong> Centro Tapping está diseñado como herramienta de bienestar y práctica personal. No constituye atención médica, psicológica ni terapéutica, y no pretende diagnosticar, tratar o curar ninguna enfermedad o condición médica. Si tienes un problema de salud, consulta con un profesional sanitario cualificado.
+      <strong style="color:var(--ink);">Una herramienta de práctica personal.</strong> Centro Tapping está diseñado como herramienta de bienestar y práctica personal. No constituye atención médica, psicológica ni terapéutica y no pretende diagnosticar, tratar o curar ninguna enfermedad o condición médica. Si tienes un problema de salud, consulta con un profesional sanitario cualificado.
     </div>
   </div>
 </section>
 
-<!-- 17. CTA FINAL -->
+<!-- 18. CTA FINAL -->
 <section class="center">
   <div class="narrow">
-    <h2 class="section-title">Tu práctica empieza aquí.</h2>
-    <p class="lead" style="margin:0 auto 24px;">Deja de buscar cada vez que quieras hacer tapping. Ten tus sesiones a mano y empieza cuando quieras.</p>
-    <a href="#precio" class="btn btn-primary">Quiero Centro Tapping</a>
-    <p class="cta-note">Compra única · Sin suscripción</p>
+    <h2 class="section-title">Deja de buscar cada vez que quieras hacer tapping.</h2>
+    <p class="lead" style="margin:0 auto 8px;">Tus sesiones pueden estar organizadas. Tus favoritas pueden estar a mano. Y cuando quieras practicar, puedes entrar directamente en Centro Tapping.</p>
+    <p style="font-weight:700;font-size:22px;margin:20px 0 6px;">19,99 €</p>
+    <p class="cta-note mb0">Pago único · Sin suscripción · 7 días de garantía</p>
+    <div class="mt24"><a href="#precio" class="btn btn-primary">Quiero Centro Tapping</a></div>
+    <p class="cta-note">Después de comprar recibirás por email la información necesaria para activar tu acceso.</p>
   </div>
 </section>
 
-<!-- 18. FOOTER -->
+<!-- FOOTER -->
 <footer>
   <div class="wrap">
-    Centro Tapping · <a href="mailto:ellegajooficial@gmail.com">ellegajooficial@gmail.com</a> · <a href="legal.html">Privacidad y términos</a>
+    Centro Tapping · Herramienta de bienestar y práctica personal<br>
+    <a href="mailto:ellegajooficial@gmail.com">ellegajooficial@gmail.com</a> · <a href="legal.html">Privacidad y términos</a>
   </div>
 </footer>
 
