@@ -1455,11 +1455,41 @@ function renderSettings(){
   wrap.appendChild(topBar(()=>goto('home')));
   wrap.appendChild(el('h2',{},'Ajustes'));
   wrap.appendChild(themeRowBuilder());
-  const guideLink = el('div',{class:'hist-link',onclick:()=>goto('points-guide')},[
-    el('span',{},'Cómo funciona'),
+  const installLink = el('div',{class:'hist-link',onclick:()=>goto('install-guide')},[
+    el('span',{},'Usar sin conexión'),
     el('span',{},'›')
   ]);
-  wrap.appendChild(guideLink);
+  wrap.appendChild(installLink);
+  app.replaceChildren(wrap);
+}
+
+function renderInstallGuide(){
+  const wrap = el('div',{class:'session-wrap'});
+  wrap.appendChild(topBar(()=>goto('settings')));
+  wrap.appendChild(el('h2',{style:'margin-bottom:16px;'},'Usar sin conexión'));
+  wrap.appendChild(el('p',{class:'stage-copy'},'Centro Tapping funciona sin wifi ni datos, pero para que esto sea fiable te recomendamos instalar la app en tu pantalla de inicio, no solo guardarla como acceso directo al navegador.'));
+
+  wrap.appendChild(el('h3',{style:'font-size:16px;margin:22px 0 8px;'},'En iPhone (Safari)'));
+  [
+    'Abre Centro Tapping en Safari.',
+    'Pulsa el botón de compartir (el cuadrado con la flecha hacia arriba).',
+    'Elige "Añadir a pantalla de inicio".',
+    'Abre siempre la app desde ese icono, no desde el navegador.',
+  ].forEach((s,i)=>wrap.appendChild(el('p',{class:'stage-copy',style:'font-size:15.5px;'},`${i+1}. ${s}`)));
+
+  wrap.appendChild(el('h3',{style:'font-size:16px;margin:22px 0 8px;'},'En Android (Chrome)'));
+  [
+    'Abre Centro Tapping en Chrome.',
+    'Toca el menú (los tres puntos, arriba a la derecha).',
+    'Elige "Añadir a pantalla de inicio" o "Instalar app".',
+    'Abre siempre la app desde ese icono.',
+  ].forEach((s,i)=>wrap.appendChild(el('p',{class:'stage-copy',style:'font-size:15.5px;'},`${i+1}. ${s}`)));
+
+  wrap.appendChild(el('h3',{style:'font-size:16px;margin:22px 0 8px;'},'Para que una sesión funcione sin conexión'));
+  wrap.appendChild(el('p',{class:'stage-copy',style:'font-size:15.5px;'},'La primera vez que abres cada sesión necesitas conexión — a partir de ahí queda guardada en tu móvil. Si tienes wifi, abrir la app un momento y dejarla un rato en marcha basta para que se vayan guardando todas solas.'));
+
+  wrap.appendChild(el('p',{class:'stage-copy',style:'font-size:13.5px;margin-top:18px;'},'Si notas que dejó de funcionar sin conexión después de varios días sin abrir la app en iPhone, vuelve a abrirla una vez con wifi — es normal, algunos teléfonos liberan espacio de apps que llevan tiempo sin usarse si no están instaladas en la pantalla de inicio.'));
+
   app.replaceChildren(wrap);
 }
 
@@ -1695,6 +1725,7 @@ function render(){
   switch(state.screen){
     case 'home': renderHome(); break;
     case 'settings': renderSettings(); break;
+    case 'install-guide': renderInstallGuide(); break;
     case 'points-guide': renderPointsGuide(); break;
     case 'categories': renderCategories(); break;
     case 'category-detail': renderCategoryDetail(); break;
