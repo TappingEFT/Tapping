@@ -1847,6 +1847,32 @@ if('serviceWorker' in navigator){
     navigator.serviceWorker.register('sw.js').catch(()=>{});
   });
 }
+
+// Precarga en segundo plano: sin bloquear el uso de la app, va guardando
+// todas las imágenes y audios de todas las sesiones para que funcionen
+// sin conexión aunque nunca las hayas abierto antes.
+function prefetchAllSessionsInBackground(){
+  const urls = new Set();
+  if(PRIMERA_SESION.photo) urls.add(PRIMERA_SESION.photo);
+  if(PRIMERA_SESION.audio && PRIMERA_SESION.audio.file) urls.add(PRIMERA_SESION.audio.file);
+  CATEGORIES.forEach(cat=>{
+    if(cat.photo) urls.add(cat.photo);
+    if(cat.audio && cat.audio.file) urls.add(cat.audio.file);
+  });
+  const list = Array.from(urls);
+  let i = 0;
+  function next(){
+    if(i >= list.length) return;
+    const url = list[i++];
+    fetch(url).catch(()=>{}).finally(()=>{
+      setTimeout(next, 400); // una a una, para no saturar la conexión de golpe
+    });
+  }
+  next();
+}
+window.addEventListener('load', () => {
+  setTimeout(prefetchAllSessionsInBackground, 4000); // deja que la app arranque primero
+});
 </script>
 </body>
 </html>
