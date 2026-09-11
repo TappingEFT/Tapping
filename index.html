@@ -58,6 +58,7 @@
   .phone-screen img{width:100%;display:block;}
 
   .problem-item{border-top:1px solid var(--line);padding:16px 0;}
+  .problem-item:first-child{border-top:none;}
   .problem-item p{margin:0;font-size:17px;color:var(--ink-soft);}
   .punch-line{font-size:20px;font-weight:600;margin:0;}
 
@@ -77,10 +78,12 @@
   .compare.yes{border:1.5px solid var(--sienna);}
   .compare.yes h3{color:var(--sienna);}
 
-  .cat-block{margin-bottom:24px;}
-  .cat-block h3{font-size:18px;margin-bottom:8px;}
-  .cat-list{list-style:none;padding:0;margin:0;display:grid;grid-template-columns:1fr 1fr;gap:6px 20px;}
-  .cat-list li{color:var(--ink-soft);font-size:15.5px;padding:3px 0;}
+  .cat-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
+  @media (max-width:760px){ .cat-grid{grid-template-columns:1fr;} }
+  .cat-block{margin-bottom:0;}
+  .cat-block h3{font-size:18px;margin-bottom:8px;color:var(--sienna);}
+  .cat-list{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:12px;}
+  .cat-list li{color:var(--ink-soft);font-size:16px;padding:0;}
 
   .pill-row{display:flex;flex-wrap:wrap;gap:10px;}
   .pill{border:1.5px solid var(--line);border-radius:20px;padding:9px 16px;font-size:14.5px;color:var(--ink);}
@@ -97,6 +100,7 @@
   .guarantee-badge{display:inline-block;margin-top:20px;padding:10px 18px;border:1px solid var(--line);border-radius:8px;font-size:14px;color:var(--ink-soft);}
 
   details.faq{border-top:1px solid var(--line);padding:16px 0;}
+  .card details.faq:first-child{border-top:none;}
   details.faq summary{cursor:pointer;font-size:17px;font-weight:600;list-style:none;display:flex;justify-content:space-between;align-items:center;}
   details.faq summary::-webkit-details-marker{display:none;}
   details.faq summary::after{content:'+';color:var(--sienna);font-size:22px;font-weight:400;}
@@ -118,19 +122,6 @@
   .mt8{margin-top:8px;}
   .mt24{margin-top:24px;}
   .mb0{margin-bottom:0;}
-
-  #back-to-top{
-    position:fixed; right:20px; bottom:20px; z-index:999;
-    width:48px; height:48px; border-radius:50%;
-    background:var(--sienna); color:var(--stone-deep);
-    display:flex; align-items:center; justify-content:center;
-    border:none; cursor:pointer; text-decoration:none;
-    box-shadow:0 4px 14px rgba(0,0,0,0.35);
-    opacity:0; visibility:hidden; transform:translateY(10px);
-    transition:opacity .25s ease, transform .25s ease, visibility .25s ease;
-  }
-  #back-to-top.show{opacity:1; visibility:visible; transform:translateY(0);}
-  #back-to-top svg{width:22px; height:22px;}
 </style>
 </head>
 <body>
@@ -162,12 +153,14 @@
     <h2 class="section-title">Quizás te ha pasado.</h2>
     <p class="lead">Quieres hacer tapping. Pero antes de empezar…</p>
   </div>
-  <div class="wrap mt24">
-    <div class="problem-item"><p>Tienes que buscar una sesión.</p></div>
-    <div class="problem-item"><p>Después elegir entre diferentes vídeos.</p></div>
-    <div class="problem-item"><p>Quizás probar una voz.</p></div>
-    <div class="problem-item"><p>Recordar dónde estaba aquella sesión que te gustó.</p></div>
-    <div class="problem-item"><p>Y cuando finalmente encuentras algo… ya has perdido parte de las ganas de empezar.</p></div>
+  <div class="narrow mt24">
+    <div class="card" style="padding:8px 24px;">
+      <div class="problem-item"><p>Tienes que buscar una sesión.</p></div>
+      <div class="problem-item"><p>Después elegir entre diferentes vídeos.</p></div>
+      <div class="problem-item"><p>Quizás probar una voz.</p></div>
+      <div class="problem-item"><p>Recordar dónde estaba aquella sesión que te gustó.</p></div>
+      <div class="problem-item"><p>Y cuando finalmente encuentras algo… ya has perdido parte de las ganas de empezar.</p></div>
+    </div>
   </div>
   <div class="narrow mt24">
     <p class="punch-line">El problema no es que no existan sesiones.<br>El problema es encontrarlas cuando las necesitas.</p>
@@ -182,7 +175,7 @@
     <h2 class="section-title">Buscar no debería ser el primer paso de tu práctica.</h2>
     <p class="lead">En lugar de buscar → comparar → elegir → volver a buscar, con Centro Tapping haces esto:</p>
     <div class="grid-2 mt24" style="gap:48px;align-items:center;">
-      <div>
+      <div class="card" style="padding:8px 24px;">
         <div class="step"><div class="step-num">1</div><div><h3>Elige</h3><p>Busca una sesión según lo que quieres trabajar en ese momento.</p></div></div>
         <div class="step"><div class="step-num">2</div><div><h3>Empieza</h3><p>Abre la sesión y sigue las indicaciones.</p></div></div>
         <div class="step"><div class="step-num">3</div><div><h3>Practica</h3><p>La aplicación te acompaña durante la sesión y te guía por los puntos.</p></div></div>
@@ -232,46 +225,44 @@
   <div class="wrap">
     <div class="eyebrow">Conoce Centro Tapping</div>
     <h2 class="section-title">Una biblioteca de sesiones guiadas para tu práctica personal.</h2>
-    <div class="grid-2 mt24" style="gap:40px;align-items:start;">
-      <div>
-        <div class="cat-block">
-          <h3>Bienestar emocional</h3>
-          <ul class="cat-list">
-            <li>Empezar el día con energía positiva</li><li>Amor propio</li>
-            <li>Acción inspirada</li><li>Ansiedad</li>
-          </ul>
-        </div>
-        <div class="cat-block">
-          <h3>Dormir y relajarte</h3>
-          <ul class="cat-list">
-            <li>Dormir</li><li>Liberación de la tensión nerviosa y el estrés</li>
-          </ul>
-        </div>
-        <div class="cat-block">
-          <h3>Miedos y bloqueos</h3>
-          <ul class="cat-list">
-            <li>Miedo</li><li>Liberar resistencias</li>
-            <li>Salir de la escasez</li><li>Abrirte al merecimiento</li>
-          </ul>
-        </div>
-        <div class="cat-block">
-          <h3>Abundancia</h3>
-          <ul class="cat-list">
-            <li>Abundancia</li><li>Abrirte a recibir</li><li>Sincronías y señales</li>
-          </ul>
-        </div>
-        <div class="cat-block">
-          <h3>Para empezar</h3>
-          <ul class="cat-list">
-            <li>Tu primera sesión</li><li>Guía de puntos</li>
-          </ul>
-        </div>
-        <p style="color:var(--ink-soft);font-size:15px;">También encontrarás sesiones sobre dolor de cabeza, dolor de espalda, energía, merecimiento, recibir, acción inspirada y más.</p>
+    <div class="cat-grid mt24">
+      <div class="card cat-block">
+        <h3>Bienestar emocional</h3>
+        <ul class="cat-list">
+          <li>Empezar el día con energía positiva</li><li>Amor propio</li>
+          <li>Acción inspirada</li><li>Ansiedad</li>
+        </ul>
       </div>
-      <div class="phone-mock" style="max-width:280px;">
+      <div class="card cat-block">
+        <h3>Dormir y relajarte</h3>
+        <ul class="cat-list">
+          <li>Dormir</li><li>Liberación de la tensión nerviosa y el estrés</li>
+        </ul>
+      </div>
+      <div class="card cat-block">
+        <h3>Miedos y bloqueos</h3>
+        <ul class="cat-list">
+          <li>Miedo</li><li>Liberar resistencias</li>
+          <li>Salir de la escasez</li><li>Abrirte al merecimiento</li>
+        </ul>
+      </div>
+      <div class="card cat-block">
+        <h3>Abundancia</h3>
+        <ul class="cat-list">
+          <li>Abundancia</li><li>Abrirte a recibir</li><li>Sincronías y señales</li>
+        </ul>
+      </div>
+      <div class="card cat-block">
+        <h3>Para empezar</h3>
+        <ul class="cat-list">
+          <li>Tu primera sesión</li><li>Guía de puntos</li>
+        </ul>
+      </div>
+      <div class="phone-mock" style="max-width:240px;margin:0 auto;">
         <div class="phone-screen"><img src="screen-categoria.jpg" alt="Categoría Abundancia en Centro Tapping"></div>
       </div>
     </div>
+    <p style="color:var(--ink-soft);font-size:15px;margin-top:24px;">También encontrarás sesiones sobre dolor de cabeza, dolor de espalda, energía, merecimiento, recibir, acción inspirada y más.</p>
   </div>
 </section>
 
@@ -281,11 +272,13 @@
     <div>
       <div class="eyebrow">¿Solo tienes unos minutos?</div>
       <h2 class="section-title">Ve directamente a lo que quieres trabajar.</h2>
-      <div class="pill-row mt24">
-        <span class="pill">Ansiedad</span><span class="pill">Miedo</span><span class="pill">Dormir</span>
-        <span class="pill">Dolor</span><span class="pill">Energía</span><span class="pill">Amor propio</span>
-        <span class="pill">Abundancia</span><span class="pill">Merecimiento</span><span class="pill">Escasez</span>
-        <span class="pill">Recibir</span><span class="pill">Acción inspirada</span><span class="pill">Sincronías</span>
+      <div class="card mt24">
+        <div class="pill-row">
+          <span class="pill">Ansiedad</span><span class="pill">Miedo</span><span class="pill">Dormir</span>
+          <span class="pill">Dolor</span><span class="pill">Energía</span><span class="pill">Amor propio</span>
+          <span class="pill">Abundancia</span><span class="pill">Merecimiento</span><span class="pill">Escasez</span>
+          <span class="pill">Recibir</span><span class="pill">Acción inspirada</span><span class="pill">Sincronías</span>
+        </div>
       </div>
       <p style="color:var(--ink-soft);margin-top:20px;">No necesitas recordar el nombre exacto de una sesión. Empieza por lo que estás viviendo ahora.</p>
     </div>
@@ -358,24 +351,28 @@
   <div class="wrap grid-2">
     <div>
       <h2 class="section-title" style="font-size:24px;">Centro Tapping es para ti si…</h2>
-      <ul class="who-list yes mt24">
-        <li>Ya conoces el tapping o quieres empezar a practicarlo</li>
-        <li>Te cansa buscar sesiones cada vez que quieres hacer tapping</li>
-        <li>Quieres tener tus sesiones organizadas</li>
-        <li>Prefieres elegir directamente según lo que quieres trabajar</li>
-        <li>Quieres practicar desde el móvil, tablet u ordenador</li>
-        <li>Te gusta guardar tus sesiones favoritas</li>
-      </ul>
+      <div class="card mt24">
+        <ul class="who-list yes">
+          <li>Ya conoces el tapping o quieres empezar a practicarlo</li>
+          <li>Te cansa buscar sesiones cada vez que quieres hacer tapping</li>
+          <li>Quieres tener tus sesiones organizadas</li>
+          <li>Prefieres elegir directamente según lo que quieres trabajar</li>
+          <li>Quieres practicar desde el móvil, tablet u ordenador</li>
+          <li>Te gusta guardar tus sesiones favoritas</li>
+        </ul>
+      </div>
     </div>
     <div>
       <h2 class="section-title" style="font-size:24px;">Probablemente no es para ti si…</h2>
-      <ul class="who-list no mt24">
-        <li>Buscas un tratamiento médico</li>
-        <li>Buscas terapia psicológica</li>
-        <li>Quieres formación profesional para ser terapeuta</li>
-        <li>Esperas resultados garantizados</li>
-        <li>Buscas clases en directo o acompañamiento personal</li>
-      </ul>
+      <div class="card mt24">
+        <ul class="who-list no">
+          <li>Buscas un tratamiento médico</li>
+          <li>Buscas terapia psicológica</li>
+          <li>Quieres formación profesional para ser terapeuta</li>
+          <li>Esperas resultados garantizados</li>
+          <li>Buscas clases en directo o acompañamiento personal</li>
+        </ul>
+      </div>
       <p style="color:var(--ink-soft);font-size:15px;margin-top:16px;">Centro Tapping es una herramienta de práctica personal.</p>
     </div>
   </div>
@@ -415,7 +412,7 @@
         <li><span>✓</span>"Tu primera sesión"</li>
         <li><span>✓</span>Acceso desde móvil, tablet y ordenador</li>
       </ul>
-      <a href="https://pay.hotmart.com/H107528390L" class="btn btn-primary" style="width:100%;">Quiero Centro Tapping</a>
+      <a href="#" class="btn btn-primary" style="width:100%;">Quiero Centro Tapping</a>
       <div class="guarantee-badge">15 días de garantía · Consulta las condiciones de devolución antes de completar tu compra</div>
     </div>
   </div>
@@ -443,7 +440,7 @@
     <div class="eyebrow">¿Qué pasa después de comprar?</div>
     <h2 class="section-title">Tu acceso se activa en pocos pasos.</h2>
     <div class="grid-2 mt24" style="gap:48px;align-items:start;">
-      <div>
+      <div class="card" style="padding:8px 24px;">
         <div class="step"><div class="step-num">1</div><div><h3>Realizas tu compra</h3><p>Completa el proceso de pago.</p></div></div>
         <div class="step"><div class="step-num">2</div><div><h3>Recibes la información de acceso</h3><p>Recibirás por email lo necesario para activar Centro Tapping.</p></div></div>
         <div class="step"><div class="step-num">3</div><div><h3>Abres Centro Tapping</h3><p>Accede desde tu dispositivo.</p></div></div>
@@ -481,7 +478,7 @@
   <div class="narrow">
     <div class="eyebrow">Preguntas frecuentes</div>
     <h2 class="section-title">Lo que quizás te preguntes.</h2>
-    <div class="mt24">
+    <div class="card mt24" style="padding:6px 24px;">
       <details class="faq"><summary>¿Qué estoy comprando exactamente?</summary><p>Estás comprando acceso a Centro Tapping: entras desde un enlace en tu navegador (como cuando visitas cualquier página web), sin descargar nada de una tienda de aplicaciones. Dentro tienes sesiones de tapping guiadas organizadas por categorías, además de favoritos, historial y guía de puntos.</p></details>
       <details class="faq"><summary>¿Es una aplicación?</summary><p>Sí, funciona como una aplicación, pero no la descargas de la App Store ni de Google Play. Se abre directamente desde un enlace en tu navegador (Safari, Chrome...), y si quieres, puedes añadirla a la pantalla de inicio de tu móvil para que se abra con un toque, como una app cualquiera. Te recomendamos añadirla para acceder a ella con mucha más comodidad.</p></details>
       <details class="faq"><summary>¿Tengo que instalar algo?</summary><p>No hace falta. La abres directamente desde el enlace, como una web. Si quieres, también puedes añadir su icono a la pantalla de inicio de tu móvil (te explicamos cómo) para abrirla más rápido, igual que cualquier otra app.</p></details>
@@ -528,17 +525,6 @@
     <a href="mailto:ellegajooficial@gmail.com">ellegajooficial@gmail.com</a> · <a href="legal.html">Privacidad y términos</a>
   </div>
 </footer>
-
-<a href="#top" id="back-to-top" aria-label="Volver arriba">
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5"/><path d="M5 12l7-7 7 7"/></svg>
-</a>
-<script>
-  var backToTop = document.getElementById('back-to-top');
-  window.addEventListener('scroll', function(){
-    if (window.scrollY > 500) { backToTop.classList.add('show'); }
-    else { backToTop.classList.remove('show'); }
-  });
-</script>
 
 </body>
 </html>
