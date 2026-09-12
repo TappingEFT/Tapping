@@ -311,12 +311,15 @@ const PRIMERA_SESION = {
 const MINI_SESSION = {
   id:'mini-racha', name:'Ronda exprés', color:'#8F2F0E', photo:'primera_sesion.jpg',
   desc:'Una ronda corta para los días sin tiempo, solo para mantener la racha.',
-  karate:'Aunque hoy tenga poco tiempo, elijo dedicarme este minuto igualmente. Aunque no pueda hacer una sesión completa, elijo que esto cuente. Y aunque mañana quizá tenga más tiempo, hoy elijo esto, tal como es.',
+  introScript:'Esta es tu ronda exprés: un solo recorrido por los puntos, pensado para los días en los que no llegas a una sesión completa. Sigue el punto que te vaya marcando la pantalla y ve repitiendo la frase mientras haces tapping ahí, a tu ritmo. No hace falta nada más. Comenzamos.',
+  karate:'Empieza el tapping en el canto de la mano, bajo el meñique. Aunque hoy tenga poco tiempo, elijo dedicarme este minuto igualmente. Aunque no pueda hacer una sesión completa, elijo que esto cuente. Y aunque mañana quizá tenga más tiempo, hoy elijo esto, tal como es.',
   rounds:[
     R('Reconocer cómo estoy',
       ['Empezamos en el inicio de la ceja: reconozco cómo me siento ahora mismo, sea lo que sea.','Al lado del ojo: me permito sentir esto sin juzgarlo.','Debajo del ojo: hoy tengo poco tiempo, y aun así elijo dedicarme este minuto.','Bajo la nariz: no necesito hacerlo perfecto ni completo.','En la barbilla: con esto que siento ahora, elijo darme este espacio.','En la clavícula: respiro y bajo el ritmo, aunque sea un momento.','Debajo del brazo: esto cuenta igual que una sesión larga.','Y en la coronilla: me doy permiso para seguir con mi día después de esto.']),
   ],
   apertura:[], cierre:[],
+  outroScript:'Ya está, con esto es suficiente por hoy. Cierra los ojos un momento si quieres, respira, y sigue con tu día. Has mantenido tu práctica.',
+  audio:{file:'p_20699633_997.mp3', duration:89.136, hasIntro:true, hasOutro:true, timestamps:[0,17.8318,35.5929,42.3867,47.2543,53.5885,58.5575,64.2235,69.7183,74.7125,80.282]},
 };
 
 function catGroups(cat){
@@ -1474,7 +1477,7 @@ function renderHome(){
     el('div',{},[el('h3',{},'Tu primera sesión: guía de inicio rápido'),el('span',{},'No necesitas saber tapping. Te guiamos paso a paso · 3 min')]),
   ]);
 
-  const miniCard = el('div',{class:'intro-card',onclick:()=>{ state.quickMode=true; goto('cat-detail',{category:MINI_SESSION, sudBefore:5}); }},[
+  const miniCard = el('div',{class:'intro-card',onclick:()=>{ state.quickMode=false; goto('cat-detail',{category:MINI_SESSION, sudBefore:5}); }},[
     el('div',{class:'thumb'},[
       el('img',{src:MINI_SESSION.photo, alt:'Ronda exprés'}),
     ]),
