@@ -1688,15 +1688,14 @@ function renderSudAfter(){
   wrap.appendChild(topBar(()=>goto('home')));
   wrap.appendChild(el('div',{class:'cat-tag'},cat.name));
 
-  const askedInAudio = !!(cat.audio && (cat.audio.outroAsksRating || cat.audio.outroRatingRange) && state.audioOn);
-  if(!cat.noRating && !askedInAudio){
-    wrap.appendChild(el('h2',{},'¿Cómo te sientes ahora?'));
+  if(!cat.noRating){
+    wrap.appendChild(el('h2',{},'Ahora, del 0 al 10, ¿cuánto te afecta esto?'));
     const thermoContainer = el('div',{style:'margin-bottom:20px;'});
     wrap.appendChild(thermoContainer);
     renderThermometer(thermoContainer, state.sudAfter, (v)=>{ state.sudAfter = v; });
   } else {
     wrap.appendChild(el('h2',{},'Bien hecho'));
-    wrap.appendChild(el('p',{class:'stage-copy'}, cat.noRating ? 'Has terminado tu primera sesión de tapping.' : 'Sesión terminada.'));
+    wrap.appendChild(el('p',{class:'stage-copy'}, 'Has terminado tu primera sesión de tapping.'));
   }
 
   wrap.appendChild(el('div',{class:'spacer'}));
