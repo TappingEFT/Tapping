@@ -313,7 +313,7 @@ const GROUP_META = [
   {name:'Abundancia', photo:'abundancia.jpg', icon:'leaf', desc:'Dinero, escasez y prosperidad.'},
   {name:'Bienestar emocional', photo:'ansiedad.jpg', icon:'heartPulse', desc:'Ansiedad, amor propio y energía diaria.'},
   {name:'Dormir', photo:'dormir.jpg', icon:'moon', desc:'Para desconectar y descansar mejor.'},
-  {name:'Aliviar dolores físicos', photo:'dolores%20de%20cabeza.jpg', icon:'bandage', desc:'Apoyo para el dolor físico y la tensión.', note:'Esta app es un apoyo para acompañar el malestar físico y no sustituye la atención médica o psicológica profesional. No diagnostica ni trata ninguna condición médica.'},
+  {name:'Autocuidado físico', photo:'dolores%20de%20cabeza.jpg', icon:'bandage', desc:'Sesiones de relajación para acompañar sensaciones físicas. No sustituyen la atención médica.', note:'Esta app es un apoyo para acompañar el malestar físico y no sustituye la atención médica o psicológica profesional. No diagnostica ni trata ninguna condición médica.'},
 ];
 
 function buildGroupRow(g){
@@ -610,7 +610,7 @@ const CATEGORIES = [
     audio:{file:'SINCRONI_AS_Y_SEN_ALES.mp3', duration:242.616, hasIntro:true, hasOutro:true, timestamps:[0,19.5356,49.5386,55.4426,61.2246,67.6823,73.7096,79.3212,84.7688,90.907,95.5087,105.361,109.201,116.514,120.86,134.658,140.791,157.254,160.853,166.748,173.404,182.688,195.912,203.129,212.028]},
   },
   {
-    id:'dolor_cabeza', name:'Dolor de cabeza', color:'#8F2F0E', photo:'dolores%20de%20cabeza.jpg', group:'Aliviar dolores físicos',
+    id:'dolor_cabeza', name:'Acompañar el malestar de cabeza', color:'#8F2F0E', photo:'dolores%20de%20cabeza.jpg', group:'Autocuidado físico',
     intro:'Cuando el estrés se acumula, muchas veces se instala directo en la cabeza. Esta sesión trabaja ese dolor punto por punto, reconociendo lo que hay detrás de él.',
     desc:'Para liberar el dolor de cabeza y el estrés que lo alimenta.',
     note:'Si se trata de un dolor nuevo, intenso y sin causa evidente, acude al médico. Esta app es un apoyo y no sustituye la atención médica profesional.',
@@ -664,7 +664,7 @@ const CATEGORIES = [
     audio:{file:'dolor_de_cabeza.MP3', duration:495.595, hasIntro:true, hasOutro:true, introRatingRange:[33.8687,48.8302], outroRatingRange:[459.277,466.015], timestamps:[0,53.4526,86.05,90.1794,93.6425,97.4943,101.745,106.079,110.563,115.999,121.389,126.053,130.701,135.359,139.579,144.905,149.264,153.943,160.534,165.847,190.394,207.062,217.71,226.846,240.94,262.864,288.892,299.291,305.117,313.131,323.776,332.508,338.168,362.966,371.047,383.124,390.839,398.366,405.326,415.632,424.326,437.376,444.727,449.649]},
   },
   {
-    id:'dolor_espalda', name:'Dolor de espalda', color:'#8F2F0E', photo:'dolores%20de%20espalda.jpg', group:'Aliviar dolores físicos',
+    id:'dolor_espalda', name:'Relajar la tensión de espalda', color:'#8F2F0E', photo:'dolores%20de%20espalda.jpg', group:'Autocuidado físico',
     intro:'La espalda suele cargar con más tensión de la que nos damos cuenta. Esta sesión trabaja ese dolor punto por punto, reconociendo lo que hay detrás de él.',
     desc:'Para liberar el dolor de espalda y el estrés que lo alimenta.',
     note:'Si se trata de un dolor agudo y nuevo sin causa evidente, consulta a un médico. Esta app es un apoyo y no sustituye la atención médica profesional.',
@@ -716,7 +716,7 @@ const CATEGORIES = [
     audio:{file:'tapping_dolor_de_espalda.MP3', duration:526.733, hasIntro:true, hasOutro:true, introRatingRange:[41.71,58.78], outroRatingRange:[481.19,489.79], timestamps:[0,60.85,110.79,114.35,116.73,119.5,123.56,127.62,132.84,136.32,139.8,146.76,148.5,153.46,157.42,162.87,168.32,171.79,177.24,182.41,209.33,224.15,234.47,241.98,254.26,272.56,299.2,307.51,313.37,322.16,336.32,346.46,352.38,382.55,389.62,401.32,408.81,418.64,424.57,434.09,444.07,456.72,463.48,468.79]},
   },
   {
-    id:'dolor_general', name:'Libera el dolor (general)', color:'#8F2F0E', photo:'dolor_general.jpg', group:'Aliviar dolores físicos',
+    id:'dolor_general', name:'Autocuidado ante el malestar físico', color:'#8F2F0E', photo:'dolor_general.jpg', group:'Autocuidado físico',
     intro:'Una secuencia básica de tapping para disipar cualquier molestia física, sea cual sea su origen.',
     desc:'Para liberar cualquier dolor físico y el estrés que lo alimenta.',
     note:'Si se trata de un dolor agudo y nuevo sin causa evidente, consulta a un médico. Esta app es un apoyo y no sustituye la atención médica profesional.',
@@ -1214,6 +1214,11 @@ function skipPoint(){
   }
 }
 function exitPlayer(){
+  if(playerCtx){
+    const step = playerCtx.steps[playerCtx.index];
+    const sessionStarted = playerCtx.index > 0 || (step && step.phase !== 'intro');
+    if(sessionStarted && !confirm('¿Seguro que quieres salir? Se perderá el progreso de esta sesión.')) return;
+  }
   clearTimer();
   if(playerCtx && playerCtx.mode==='audio' && playerCtx.audioEl){
     playerCtx.audioEl.ontimeupdate = null;
@@ -1266,6 +1271,9 @@ function renderPlayerFrame(isFirst){
   mid.appendChild(diagramHolder);
   mid.appendChild(el('div',{class:'point-name'}, step.name));
   mid.appendChild(el('div',{class:'point-where'}, step.where));
+  const pointOrder = [KARATE_META.key, ...POINT_META.map(p=>p.key)];
+  const pointNum = step.key ? pointOrder.indexOf(step.key)+1 : 0;
+  if(pointNum>0) mid.appendChild(el('div',{class:'point-where', style:'opacity:0.7;'}, `Punto ${pointNum} de ${pointOrder.length}`));
   if(step.askRating && step.phase==='intro'){
     const scaleHolder = el('div',{});
     mid.appendChild(scaleHolder);
@@ -1378,6 +1386,12 @@ function renderCatDetail(){
     ensureAudio();
     goto('player-main');
   }},`Empezar sesión · ${mins} min`));
+  if(cat.id==='primera-sesion'){
+    body.appendChild(el('div',{class:'hist-link', style:'margin-top:14px;', onclick:()=>goto('about',{aboutFrom:'cat-detail'})},[
+      el('span',{},'Sobre Centro Tapping (bienestar y privacidad)'),
+      el('span',{},'›')
+    ]));
+  }
   wrap.appendChild(body);
 
   app.replaceChildren(wrap);
@@ -1407,7 +1421,7 @@ function renderHome(){
     {label:'Ansiedad', id:'centro'},
     {label:'Miedo', id:'miedo'},
     {label:'Dormir', id:'dormir'},
-    {label:'Dolor', id:'dolor_general'},
+    {label:'Malestar físico', id:'dolor_general'},
     {label:'Energía', id:'ansiedad'},
     {label:'Amor propio', id:'jornada'},
     {label:'Abundancia', id:'abundancia'},
@@ -1526,6 +1540,25 @@ function renderSettings(){
     el('span',{},'›')
   ]);
   wrap.appendChild(installLink);
+  const aboutLink = el('div',{class:'hist-link',onclick:()=>goto('about')},[
+    el('span',{},'Sobre Centro Tapping'),
+    el('span',{},'›')
+  ]);
+  wrap.appendChild(aboutLink);
+  app.replaceChildren(wrap);
+}
+
+function renderAbout(){
+  const wrap = el('div',{class:'session-wrap'});
+  wrap.appendChild(topBar(()=>goto(state.aboutFrom||'settings')));
+  wrap.appendChild(el('h2',{style:'margin-bottom:16px;'},'Sobre Centro Tapping'));
+  wrap.appendChild(el('p',{class:'stage-copy'},'Centro Tapping es una herramienta de bienestar y autocuidado. Sus sesiones guiadas no constituyen diagnóstico, tratamiento médico ni psicoterapia, y no sustituyen la atención de un profesional sanitario.'));
+  wrap.appendChild(el('p',{class:'stage-copy'},'Utiliza las sesiones únicamente dentro de lo que te resulte cómodo. Si una sesión aumenta mucho tu malestar, detente, orienta tu atención al presente y busca apoyo profesional si lo necesitas.'));
+  wrap.appendChild(el('p',{class:'stage-copy'},'No utilices la app como sustituto de atención urgente, médica o psicológica.'));
+  wrap.appendChild(el('h3',{style:'font-size:16px;margin:22px 0 8px;'},'Privacidad'));
+  wrap.appendChild(el('p',{class:'stage-copy'},'Tu historial y tus favoritos se guardan localmente en este dispositivo. No se envían a un servidor para crear un perfil personal. Si borras los datos del navegador, desinstalas la app o cambias de dispositivo, podrías perder esta información.'));
+  wrap.appendChild(el('h3',{style:'font-size:16px;margin:22px 0 8px;'},'Contacto y soporte'));
+  wrap.appendChild(el('p',{class:'stage-copy'},'Para cualquier duda sobre tu compra, tu código de acceso o la app, escribe a ellegajooficial@gmail.com.'));
   app.replaceChildren(wrap);
 }
 
@@ -1792,6 +1825,7 @@ function render(){
     case 'home': renderHome(); break;
     case 'settings': renderSettings(); break;
     case 'install-guide': renderInstallGuide(); break;
+    case 'about': renderAbout(); break;
     case 'points-guide': renderPointsGuide(); break;
     case 'categories': renderCategories(); break;
     case 'category-detail': renderCategoryDetail(); break;
@@ -1875,6 +1909,7 @@ function renderLockScreen(errorMsg){
       <input type="text" id="lockCodeInput" placeholder="HP12345678901234" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false">
       <button id="lockSubmitBtn" class="btn btn-primary">Activar</button>
       <div id="lockError" class="lock-error">${errorMsg||''}</div>
+      <p class="lock-help">Compra única de 19,99 €. Sin suscripciones.</p>
       <p class="lock-help">¿Problemas para activar? Escríbenos a ellegajooficial@gmail.com</p>
     </div>
   `;
