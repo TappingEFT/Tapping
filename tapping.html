@@ -437,6 +437,47 @@ const CATEGORIES = [
     audio:{file:'Merecimiento.mp3', duration:217.488, hasIntro:true, hasOutro:true, timestamps:[0,23.2232,52.4173,57.0757,62.8557,68.0892,75.1462,81.3896,87.1498,92.3049,99.4566,104.292,113.04,119.233,126.432,140.522,153.865,160.904,167.45,173.166,176.357,184.513,190.596]},
   },
   {
+    id:'herencia_dinero', name:'Liberar creencias heredadas sobre el dinero', color:'#354A24', photo:'creencias_heredadas.jpg', group:'Abundancia',
+    intro:'A veces repetimos con el dinero miedos y límites que vienen de nuestra familia: de una abuela, de unos padres, de generaciones anteriores. Esta sesión es un espacio para reconocerlos, honrarlos y dejar que terminen contigo.',
+    desc:'Para soltar miedos y límites con el dinero que vienen de tu familia.',
+    introScript:'Busca una posición cómoda. Cierra los ojos si te apetece. Respira lentamente. No necesitas buscar nada. No necesitas recordar nada. No necesitas saber de dónde viene. Simplemente permite que tu mente y tu cuerpo estén aquí. Piensa en tu relación con el dinero. Quizá recuerdas frases que escuchabas en casa. Quizá notas un miedo, una tensión o un límite que se repite, aunque no sepas de dónde viene. Observa cuánto lo sientes ahora mismo, del cero al diez. No necesitas cambiar nada todavía. Solo observa. Toma una respiración profunda. Y comenzamos.',
+    karate:[
+      'Aunque puede que haya en mí miedos o límites con el dinero que no empezaron conmigo, me acepto profundamente tal como soy.',
+      'Aunque no sepa de dónde vienen ni cuándo comenzaron, me permito observarlos sin miedo y sin juicio.',
+      'Aunque en mi familia el dinero haya sido una preocupación, hoy me permito empezar a soltar lo que ya no necesito cargar.',
+    ],
+    outroScript:'Respira profundamente. Y mientras respiras, permite que tu mente y tu cuerpo integren solamente aquello que te resulte útil. Lo demás puede irse. Ya no necesitas buscar. Ya no necesitas entender. Solo necesitas permitir, respirar y avanzar. Vuelve a pensar en tu relación con el dinero. Del cero al diez, ¿cuánto sientes ahora esa tensión o ese límite? No necesitas llegar a cero. Simplemente observa qué ha cambiado. Estás aquí. Estás presente. Y estás abierta a nuevas posibilidades. Toma una última respiración profunda. Y cuando estés preparada, abre los ojos.',
+    rounds:[
+      R('Observar sin juicio',
+        ['Hoy me permito observar mi relación con el dinero.','Sin miedo y sin juicio.','Cualquier patrón que pueda estar influyendo en mi vida.','Aunque yo no sea consciente de él.','Aunque no sepa cuándo comenzó.','Aunque no haya comenzado conmigo.','No necesito recordar nada.','Solo me permito observar.'],
+        'Pasamos a los puntos.'),
+      R('Reconocer',
+        ['Si existe en mí algún miedo relacionado con el dinero.','Algún bloqueo.','Alguna resistencia a recibir.','Me permito reconocerlo.','Sin luchar contra él.','Sin analizarlo.','Sin buscar una explicación.','Permito que lo que ya no necesito empiece a soltarse.'],
+        'Miramos lo que pueda haber ahí, sin luchar contra ello.'),
+      R('Lo que viene de mi familia',
+        ['Quizá en mi familia el dinero nunca alcanzaba.','Quizá el dinero siempre costaba sufrimiento.','Quizá la misma dificultad se repitió una y otra vez.','Una forma de pensar sobre el dinero.','Una forma de sentirlo.','Una forma de reaccionar ante él.','Que pasó de una generación a otra.','Hoy permito que esa historia termine conmigo.'],
+        'Llevamos la atención hacia atrás. Hacia las personas que estuvieron antes que tú. Tus padres, tus abuelos, las generaciones anteriores.'),
+      R('Honrar sin repetir',
+        ['Honro a las personas que estuvieron antes que yo.','Honro sus historias.','Honro sus dificultades.','Hicieron lo que pudieron con lo que tenían.','Pero no necesito repetirlas.','No necesito cargar con lo que pertenece al pasado.','Puedo pertenecer a mi familia sin repetir su historia con el dinero.','Puedo elegir algo diferente.'],
+        'Es momento de honrar esa historia, sin tener que cargarla.'),
+      R('Soltar resistencias',
+        ['Si hay en mí resistencia a recibir más de lo que estoy acostumbrada.','Permito que se disuelva.','Si hay resistencia a cobrar lo que valgo.','Permito que se libere.','Si hay resistencia a crecer económicamente.','Permito que deje de tener poder sobre mí.','Si ganar más me hace sentir culpa.','Permito que esa culpa se suelte.'],
+        'Toca trabajar las resistencias que pueden aparecer cuando el dinero empieza a llegar.'),
+      R('Sin sufrir para merecer',
+        ['No necesito demostrar nada.','No necesito sufrir para merecer.','No necesito agotarme para recibir más.','El dinero no tiene que costarme la salud.','Puedo permitir que lleguen nuevas oportunidades.','Puedo reconocerlas.','Puedo aprovecharlas.','Puedo crear nuevas formas de generar ingresos.'],
+        'Muchas veces aprendimos que el dinero se gana sufriendo. Vamos a soltar esa idea.'),
+      R('Una relación nueva',
+        ['Me permito construir una relación diferente con el dinero.','Una relación basada en tranquilidad.','En seguridad.','En libertad.','Me permito recibir.','Me permito ganar y conservar el dinero.','Me permito hacer crecer mis ingresos.','Y me permito hacerlo sin culpa.'],
+        'Abrimos espacio para una relación nueva con el dinero.'),
+      R('Elijo',
+        ['Todo lo que ya no necesito cargar puede irse.','Lo que pertenece al pasado puede quedarse en el pasado.','Yo puedo elegir una historia diferente.','Elijo avanzar.','Elijo abrirme a recibir.','Elijo construir seguridad económica.','Elijo una vida con más libertad.','La historia de mi familia no decide la mía.'],
+        'Por último, dejamos el pasado en el pasado, y elegimos.'),
+    ],
+    apertura:[],
+    cierre:[],
+    audio:{file:'herencia.mp3', duration:583.56, hasIntro:true, hasOutro:true, introRatingRange:[39.1,48.7], outroRatingRange:[547.1,557.3], timestamps:[0,63.098,73.215,80.463,88.375,91.515,97.723,103.159,109.917,116.103,121.52,127.158,133.133,138.421,142.827,149.155,154.087,160.077,165.927,170.912,175.758,181.709,188.359,200.619,206.611,213.127,220.149,226.551,231.752,237.342,243.629,249.857,254.787,260.827,266.311,272.061,278.535,284.048,290.574,298.325,303.677,309.459,316.291,321.799,328.077,333.639,339.776,345.774,352.085,357.759,365.283,370.531,376.519,382.989,389.463,395.792,400.95,406.541,412.891,417.435,424.051,430.063,435.021,440.079,445.064,451.014,457.517,463.051,468.195,474.163,481.087,487.293,492.639,497.888,503.91,510.053,516.08]},
+  },
+  {
     id:'abundancia', name:'Abundancia', color:'#8F2F0E', photo:'abundancia.jpg', group:'Abundancia',
     intro:'El dinero puede convertirse en una fuente constante de miedo sin que nos demos cuenta. Esta sesión te acompaña a soltar esa tensión, punto a punto, hasta que la idea de la abundancia deje de sentirse como una batalla.',
     desc:'Miedo y creencias alrededor del dinero.',
@@ -1342,6 +1383,7 @@ function renderPlayerFrame(isFirst){
     : step.phase==='round' ? step.roundTitle
     : step.phase==='apertura' ? 'Ronda de apertura'
     : step.phase==='outro' ? 'Cierre de la sesión'
+    : step.phase==='freeform' ? 'Sesión guiada'
     : 'Cierre';
   top.appendChild(el('span',{class:'phase-label'}, phaseLabel));
   top.appendChild(el('span',{style:'width:22px'}));
@@ -1358,7 +1400,7 @@ function renderPlayerFrame(isFirst){
   if(!isFirst && existingDiagram){
     diagramHolder = existingDiagram; // se reutiliza el mismo nodo: la imagen no se vuelve a cargar
   } else {
-    diagramHolder = el('div',{html: buildDiagramHTML(step.key)});
+    diagramHolder = el('div',{html: step.phase==='freeform' ? `<div class="diagram-wrap" id="diagramWrap"><img src="${cat.photo}" alt=""></div>` : buildDiagramHTML(step.key)});
   }
   mid.appendChild(diagramHolder);
   mid.appendChild(el('div',{class:'point-name'}, step.name));
@@ -1551,6 +1593,7 @@ function renderHome(){
     {label:'Merecimiento', id:'merecimiento'},
     {label:'Escasez', id:'escasez'},
     {label:'Recibir', id:'recibir'},
+    {label:'Herencia familiar', id:'herencia_dinero'},
     {label:'Acción inspirada', id:'accion'},
     {label:'Procrastinación', id:'procrastinacion'},
     {label:'Sincronías', id:'sincronias'},
