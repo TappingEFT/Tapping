@@ -12,7 +12,7 @@
 // Esos datos viven en localStorage, no en esta caché, y no se tocan nunca
 // desde aquí.
 
-const CACHE_NAME = 'tapping-cache-v2';
+const CACHE_NAME = 'tapping-cache-v3';
 
 const CORE_ASSETS = [
   './tapping.html',
@@ -51,12 +51,17 @@ self.addEventListener('fetch', (event) => {
   if (request.method !== 'GET') return;
   if (request.url.includes('/validate')) return;
 
-  // Cascarón de la app: red primero (sin caché HTTP), caché como respaldo.
-  if (isCoreAsset(request.url)) {
+  // Páginas (landing, app, legal) y cascarón de la app: red primero
+  // (sin caché HTTP), caché como respaldo. Así la landing nunca se queda
+  // en una versión antigua para quien ya tiene la app instalada.
+  const esPagina = request.mode === 'navigate';
+  if (esPagina || isCoreAsset(request.url)) {
     event.respondWith(
       fetch(request, { cache: 'no-store' })
         .then((fresh) => {
-          if (fresh && fresh.ok) {
+          // Solo se guarda copia del cascarón de la app, no de cada visita
+          // a la landing con enlaces distintos (?utm_source=...).
+          if (fresh && fresh.ok && isCoreAsset(request.url)) {
             const copy = fresh.clone();
             caches.open(CACHE_NAME).then((cache) => cache.put(request, copy));
           }
