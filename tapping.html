@@ -2,6 +2,47 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
+<script>
+// Paso de GitHub Pages a Cloudflare Pages (centrotapping.pages.dev).
+// En la direccion antigua: redirige a la nueva llevandose historial, favoritos,
+// ajustes y activacion. En la nueva: importa esos datos sin borrar los que ya haya.
+(function(){
+  var KEYS=['tapping_settings_v1','tapping_history_v1','tapping_favorites_v1','tapping_license_v1','tapping_last_code_v1','tapping_device_id_v1'];
+  var NUEVA='https://centrotapping.pages.dev/tapping.html';
+  if(location.hostname==='tappingeft.github.io'){
+    var h='';
+    try{
+      var d={}, n=0;
+      KEYS.forEach(function(k){ var v=localStorage.getItem(k); if(v!==null){ d[k]=v; n++; } });
+      if(n) h='#migrar='+encodeURIComponent(JSON.stringify(d));
+    }catch(e){}
+    location.replace(NUEVA+location.search+h);
+    return;
+  }
+  if(location.hash.indexOf('#migrar=')===0){
+    try{
+      var data=JSON.parse(decodeURIComponent(location.hash.slice(8)));
+      KEYS.forEach(function(k){
+        if(!(k in data)) return;
+        var cur=localStorage.getItem(k);
+        if(cur===null){ localStorage.setItem(k,data[k]); return; }
+        if(k==='tapping_history_v1'){
+          var visto={}, todo=(JSON.parse(cur)||[]).concat(JSON.parse(data[k])||[]).filter(function(x){
+            var id=x.date+'|'+x.category; if(visto[id]) return false; visto[id]=1; return true; });
+          todo.sort(function(a,b){ return a.date<b.date?1:-1; });
+          localStorage.setItem(k, JSON.stringify(todo.slice(0,200)));
+        } else if(k==='tapping_favorites_v1'){
+          var fa=JSON.parse(cur)||[];
+          (JSON.parse(data[k])||[]).forEach(function(x){ if(fa.indexOf(x)===-1) fa.push(x); });
+          localStorage.setItem(k, JSON.stringify(fa));
+        }
+      });
+    }catch(e){}
+    history.replaceState(null,'',location.pathname+location.search);
+  }
+})();
+</script>
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <meta name="color-scheme" content="dark">
 <meta name="theme-color" content="#242220">

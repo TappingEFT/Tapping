@@ -2,6 +2,16 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
+<script>
+// Paso a Cloudflare Pages: la direccion antigua redirige a la nueva conservando los UTM.
+(function(){
+  if(location.hostname==='tappingeft.github.io'){
+    var p=location.pathname.replace(/^\/Tapping/,'')||'/';
+    location.replace('https://centrotapping.pages.dev'+p+location.search+location.hash);
+  }
+})();
+</script>
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="color-scheme" content="dark">
 <meta name="theme-color" content="#242220">

@@ -12,7 +12,7 @@
 // Esos datos viven en localStorage, no en esta caché, y no se tocan nunca
 // desde aquí.
 
-const CACHE_NAME = 'tapping-cache-v3';
+const CACHE_NAME = 'tapping-cache-v4';
 
 const CORE_ASSETS = [
   './tapping.html',
@@ -22,7 +22,17 @@ const CORE_ASSETS = [
 
 // Rutas que siempre van "red primero": el cascarón de la app.
 function isCoreAsset(url) {
-  return CORE_ASSETS.some((asset) => url.endsWith(asset.replace('./', '')));
+  const path = new URL(url).pathname;
+  if (path.endsWith('/tapping')) return true; // Cloudflare sirve tapping.html como /tapping
+  return CORE_ASSETS.some((asset) => path.endsWith(asset.replace('./', '')));
+}
+
+// Copia de respaldo sin conexión. Se reconstruye la respuesta para que el
+// navegador la acepte aunque venga de una redirección (/tapping.html -> /tapping).
+function respaldo(request) {
+  return caches.match(request)
+    .then((r) => r || caches.match('./tapping.html'))
+    .then((r) => r ? new Response(r.body, { status: r.status, headers: r.headers }) : r);
 }
 
 self.addEventListener('install', (event) => {
@@ -67,7 +77,7 @@ self.addEventListener('fetch', (event) => {
           }
           return fresh;
         })
-        .catch(() => caches.match(request))
+        .catch(() => respaldo(request))
     );
     return;
   }
