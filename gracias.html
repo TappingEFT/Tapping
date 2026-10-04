@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex">
+<meta name="color-scheme" content="dark">
+<meta name="theme-color" content="#242220">
+<title>Gracias por tu compra — Centro Tapping</title>
+<link rel="icon" type="image/png" href="app-icon.png">
+<link rel="apple-touch-icon" href="app-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --stone:#242220; --stone-deep:#1A1917; --ink:#F4EFE6; --ink-soft:#9C9488;
+    --sienna:#B58874; --sienna-deep:#9C6C54; --card:#332F2C; --line:rgba(244,239,230,0.12);
+  }
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+  html,body{margin:0;padding:0;background:var(--stone);}
+  body{color:var(--ink);font-family:'Source Sans 3',Arial,sans-serif;font-size:18px;line-height:1.6;-webkit-font-smoothing:antialiased;}
+  h1,h2,h3{font-weight:700;margin:0;line-height:1.2;}
+  a{color:var(--sienna);}
+  img{max-width:100%;display:block;}
+  .narrow{max-width:620px;margin:0 auto;padding:0 24px;}
+  section{padding:48px 0;}
+  section.alt{background:var(--stone-deep);}
+  .hero{padding:56px 0 40px;text-align:center;}
+  .hero img{width:72px;height:72px;border-radius:18px;margin:0 auto 22px;}
+  .hero h1{font-size:34px;margin-bottom:14px;}
+  .lead{font-size:19px;color:var(--ink-soft);margin:0 auto;max-width:48ch;}
+  h2{font-size:26px;margin-bottom:8px;}
+  .step{display:flex;gap:16px;align-items:flex-start;padding:22px 0;border-top:1px solid var(--line);}
+  .step:first-of-type{border-top:none;}
+  .step-num{flex:none;width:36px;height:36px;border-radius:50%;border:1.5px solid var(--sienna);color:var(--sienna);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:15px;}
+  .step h3{font-size:19px;margin-bottom:4px;}
+  .step p{margin:0;color:var(--ink-soft);}
+  .step p + p{margin-top:8px;}
+  .btn{display:inline-block;border:none;border-radius:10px;padding:16px 28px;font-size:18px;font-weight:700;font-family:inherit;cursor:pointer;text-decoration:none;text-align:center;background:var(--sienna);color:#fff;margin-top:14px;}
+  .btn:hover{background:var(--sienna-deep);}
+  .btn:focus-visible,button:focus-visible{outline:3px solid var(--ink);outline-offset:3px;}
+  .code-box{display:none;margin-top:12px;background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px 16px;}
+  .code-box.show{display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap;}
+  .code-box span{font-weight:700;letter-spacing:0.04em;word-break:break-all;}
+  .code-box button{background:none;border:1px solid var(--sienna);color:var(--sienna);border-radius:8px;padding:8px 14px;font-family:inherit;font-size:15px;font-weight:600;cursor:pointer;}
+  .devices{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:12px;}
+  .device{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px;font-size:16px;color:var(--ink-soft);}
+  .device strong{display:block;color:var(--ink);margin-bottom:4px;}
+  @media (max-width:560px){ .devices{grid-template-columns:1fr;} .hero h1{font-size:28px;} body{font-size:17px;} }
+  .help{text-align:center;color:var(--ink-soft);font-size:16px;}
+  footer{padding:28px 0 40px;text-align:center;color:var(--ink-soft);font-size:14px;border-top:1px solid var(--line);}
+</style>
+</head>
+<body>
+
+<section class="hero">
+  <div class="narrow">
+    <img src="app-icon.png" alt="">
+    <h1>Gracias. Centro Tapping ya es tuyo.</h1>
+    <p class="lead">Ahora vamos a activarlo. Son cuatro pasos y te llevan un par de minutos.</p>
+  </div>
+</section>
+
+<section class="alt">
+  <div class="narrow">
+    <div class="step">
+      <div class="step-num">1</div>
+      <div>
+        <h3>Busca tu email de confirmación</h3>
+        <p>Hotmart te ha enviado un email con los datos de tu compra. Dentro está tu número de compra, que empieza por <strong style="color:var(--ink);">HP</strong>.</p>
+        <p>Si no lo ves en unos minutos, mira en spam o en la pestaña de promociones.</p>
+        <div class="code-box" id="codeBox">
+          <div>Tu número de compra: <span id="codeText"></span></div>
+          <button type="button" id="copyBtn">Copiar</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">2</div>
+      <div>
+        <h3>Abre Centro Tapping</h3>
+        <p>Se abre en tu navegador, como una web. No tienes que descargar nada de ninguna tienda.</p>
+        <a class="btn" href="tapping.html" data-goatcounter-click="gracias-abrir-app">Abrir Centro Tapping</a>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">3</div>
+      <div>
+        <h3>Escribe tu número de compra y pulsa Activar</h3>
+        <p>Solo tienes que hacerlo la primera vez.</p>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">4</div>
+      <div>
+        <h3>Añádela a la pantalla de inicio</h3>
+        <p>Así la abres con un toque, como cualquier app, y no tienes que volver a buscar el enlace.</p>
+        <div class="devices">
+          <div class="device"><strong>iPhone</strong>En Safari, pulsa el botón de compartir y elige «Añadir a pantalla de inicio».</div>
+          <div class="device"><strong>Android</strong>En Chrome, pulsa los tres puntos de arriba y elige «Añadir a pantalla de inicio» o «Instalar aplicación».</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="narrow">
+    <h2>¿Por dónde empiezo?</h2>
+    <p style="color:var(--ink-soft);margin:0;">Si es tu primera vez con el tapping, empieza por «Tu primera sesión». Si ya lo practicas, elige lo que estás viviendo hoy en «Necesito algo rápido». Y los días que vayas justa de tiempo, la ronda exprés te ayuda a no romper tu racha.</p>
+  </div>
+</section>
+
+<section class="alt">
+  <div class="narrow help">
+    <p style="margin:0;">¿Algún problema con la activación? Escríbeme a <a href="mailto:ellegajooficial@gmail.com">ellegajooficial@gmail.com</a> y te ayudo.</p>
+  </div>
+</section>
+
+<footer>
+  Centro Tapping · Herramienta de bienestar y práctica personal · <a href="legal.html">Privacidad y términos</a>
+</footer>
+
+<script>
+(function(){
+  try{
+    var p=new URLSearchParams(window.location.search);
+    var code=p.get('transaction')||p.get('hp')||'';
+    if(!/^HP/i.test(code)) return;
+    document.getElementById('codeText').textContent=code;
+    document.getElementById('codeBox').classList.add('show');
+    var btn=document.getElementById('copyBtn');
+    btn.addEventListener('click',function(){
+      navigator.clipboard.writeText(code).then(function(){ btn.textContent='Copiado'; },function(){ btn.textContent='Cópialo a mano'; });
+    });
+  }catch(e){}
+})();
+</script>
+<!-- GoatCounter: visitas y clics -->
+<script data-goatcounter="https://centrotapping.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>
