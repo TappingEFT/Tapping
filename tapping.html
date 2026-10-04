@@ -1958,7 +1958,20 @@ function renderSudBefore(){
 
 function renderPlayerMain(){
   const cat = state.category;
-  const finishAndGo = ()=>{ scheduleStopBgMusic(BG_MUSIC_TAIL_SECONDS); goto('breath'); };
+  // Si el audio ya pidió la valoración final dentro de la sesión, no se vuelve a pedir:
+  // se guarda directamente el último número marcado y se pasa al resumen.
+  const audioAskedAfter = !!(cat.audio && state.audioOn && !state.quickMode && (cat.audio.outroRatingRange || cat.audio.outroAsksRating));
+  const finishAndGo = ()=>{
+    scheduleStopBgMusic(BG_MUSIC_TAIL_SECONDS);
+    if(audioAskedAfter){
+      const hist = loadHistory();
+      hist.unshift({date:new Date().toISOString(), category:cat.name, before:state.sudBefore, after:(cat.noRating?state.sudBefore:state.sudAfter)});
+      saveHistory(hist.slice(0,200));
+      goto('done');
+    } else {
+      goto('breath');
+    }
+  };
   if(state.quickMode){
     const seq = buildQuickSequence(cat);
     startPlayer(seq, finishAndGo);
