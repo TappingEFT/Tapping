@@ -936,6 +936,32 @@ const CATEGORIES = [
     cierre:[],
     audio:{file:'Dolor_General_Tapping.MP3', duration:450.429, hasIntro:true, hasOutro:true, introRatingRange:[31.17,46.36], outroRatingRange:[399.3,413.66], timestamps:[0,50.26,94.29,98.57,100.71,104.46,109.29,114.11,117.32,120.0,125.0,129.09,134.55,139.09,143.18,147.27,150.0,152.21,157.5,161.91,187.7,198.24,215.07,229.86,249.26,285.42,308.57,319.48,332.38,352.38,355.24,358.1,362.54,367.12,372.2,374.75,379.83,386.95]},
   },
+  {
+    id:'dolor_menstrual', name:'Acompañar el dolor menstrual', color:'#8F2F0E', photo:'dolor_menstrual.jpg', group:'Autocuidado físico',
+    intro:'Para esos días del mes en los que los calambres, la pesadez y el cansancio te quitan las ganas de todo. Una sesión para tratarte con cariño y ayudar a tu cuerpo a relajarse.',
+    desc:'Para acompañar los calambres y el malestar de la regla.',
+    note:'Si el dolor es muy fuerte, distinto al habitual o no te deja hacer tu vida, consulta con un profesional de la salud. Esta app es un apoyo y no sustituye la atención médica.',
+    introScript:'Busca una posición cómoda. Puedes hacer esta sesión sentada o recostada, y si tienes las piernas cruzadas, descrúzalas. Cierra los ojos y respira profundo. Inhala… y exhala despacio. Pon tu mano derecha sobre el corazón y la izquierda sobre la parte baja del vientre. Lleva tu atención a esa zona. Quizá notas calambres, presión, pesadez, o el cuerpo cansado. Observa dónde lo sientes y cómo es. Ahora valora en la pantalla cuánto te molesta, del cero al diez. No necesitas cambiar nada todavía. Solo observa. Esta sesión es un apoyo para acompañarte y no sustituye la atención médica. Toma una respiración profunda. Cuando estés lista, abre los ojos. Y comenzamos.',
+    karate:[
+      'Empieza el tapping en el canto de la mano, bajo el meñique. Aunque tengo este dolor y estos calambres en el vientre, me acepto profunda y completamente.',
+      'Aunque me enfada sentir tanto dolor en algo tan natural como mi ciclo, y siento que mi cuerpo está en mi contra, me acepto tal como soy.',
+      'Aunque este dolor me quita las ganas de todo y solo quiero meterme en la cama, me trato con cariño.',
+    ],
+    outroScript:'Deja de golpear. Cierra los ojos y respira profundo. Vuelve a poner tu mano derecha sobre el corazón y la izquierda sobre el vientre. Siente el calor de tu mano. Deja que el vientre se relaje un poco más. Cuando estés lista, abre los ojos y valora en la pantalla cuánto te molesta ahora, del cero al diez. Puedes repetir esta sesión las veces que necesites durante estos días, y descansar si tu cuerpo lo pide. Si el dolor es muy fuerte, distinto al de siempre, o no te deja hacer tu vida, consulta con un profesional de la salud.',
+    rounds:[
+      R('El dolor',
+        ['Este dolor en mi vientre.','Estos calambres que aprietan.','Esta presión que no se va.','Este cansancio en todo el cuerpo.','Solo quiero esconderme y quedarme en la cama.','Me impide hacer lo que quiero hacer.','Me complica tanto estos días.','Todo este dolor, en este momento del mes.']),
+      R('Lo que siento',
+        ['Sé que mi ciclo es algo natural.','Y aun así, me duele.','Me enfada tener que pasar por esto cada mes.','Me pone triste sentirme así.','A veces no es solo el dolor. También el bajón, las náuseas, el agotamiento.','Me pregunto por qué tiene que doler tanto.','Reconozco todo lo que siento, sin juzgarme.','Me doy permiso para estar cansada.']),
+      R('Mi cuerpo no me ataca',
+        ['Mi cuerpo no me está atacando.','Mi cuerpo está haciendo su trabajo.','Está soltando lo que ya no necesita.','Estoy a salvo.','Me permito respirar y soltar la tensión del vientre.','Dejo que los músculos se aflojen un poco.','Con cada golpecito, mi cuerpo se calma.','Me permito sentir más alivio.']),
+      R('Cuidarme',
+        ['Honro a mi cuerpo en este momento.','Escucho lo que me pide.','Si necesita descanso, descanso.','No necesito que el dolor me obligue a parar.','Puedo cuidarme antes de llegar al límite.','Confío en mi cuerpo. Sabe lo que hace.','Mi cuerpo y yo estamos en el mismo equipo.','Elijo vivir estos días con más calma y más cariño hacia mí.']),
+    ],
+    apertura:[],
+    cierre:[],
+    audio:{file:'dolor_menstrual.mp3', duration:306.864, hasIntro:true, hasOutro:true, introRatingRange:[47.5,57.14], outroRatingRange:[286.82,294.41], timestamps:[0,80.472,90.767,98.903,105.407,109.178,113.754,118.23,123.264,128.103,132.511,137.462,142.559,146.69,151.002,156.438,161.28,168.951,173.887,179.702,184.223,188.354,193.242,198.39,202.776,208.119,213.007,218.558,222.911,227.09,231.234,236.574,241.992,246.759,252.007,257.366,262.969]},
+  },
 ];
 
 function estimateMinutes(cat, seconds){
@@ -1671,6 +1697,7 @@ function renderHome(){
     {label:'Ruptura', id:'ruptura'},
     {label:'Dormir', id:'dormir'},
     {label:'Malestar físico', id:'dolor_general'},
+    {label:'Dolor menstrual', id:'dolor_menstrual'},
     {label:'Energía', id:'ansiedad'},
     {label:'Amor propio', id:'jornada'},
     {label:'Abundancia', id:'abundancia'},
