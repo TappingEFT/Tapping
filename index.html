@@ -134,8 +134,8 @@
   footer a{color:var(--ink-soft);text-decoration:underline;}
 
 
-  .testi-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:stretch;margin-top:32px;}
-  @media (max-width:760px){ .testi-grid{grid-template-columns:1fr;} }
+  .testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;align-items:stretch;margin-top:32px;}
+  @media (max-width:980px){ .testi-grid{grid-template-columns:1fr;max-width:560px;margin-left:auto;margin-right:auto;} }
   .testi{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px;display:flex;flex-direction:column;}
   .testi-body{flex:1;display:flex;align-items:center;}
   .testi-quote{font-size:22px;font-weight:700;color:var(--ink);margin:0 0 16px;line-height:1.3;}
@@ -464,6 +464,11 @@
         <p class="testi-quote">Muy fácil de utilizar</p>
         <div class="testi-body"><div class="testi-shot"><img src="resena-rosita.jpg" alt="Mensaje de WhatsApp de Rosita: La aplicación Centro Tapping me resulta muy fácil de utilizar, las categorías que más he empleado son las de bienestar emocional y para dormir" loading="lazy"></div></div>
         <p class="testi-name"><strong>Rosita</strong> · usa Centro Tapping</p>
+      </div>
+      <div class="testi">
+        <p class="testi-quote">Todo en un mismo lugar</p>
+        <div class="testi-body"><div class="testi-shot"><img src="resena-miss.jpg" alt="Mensaje de WhatsApp de Miss: Me encanta esta página de Tapping. El modo sepia es uno de mis favoritos porque hace que todo se sienta más agradable y relajante. Pero lo que más me gusta es poder encontrar varios tapping en un mismo lugar y elegir fácilmente el que necesito en cada momento. ¡Súper práctico y cómodo de usar!" loading="lazy"></div></div>
+        <p class="testi-name"><strong>Miss</strong> · usa Centro Tapping</p>
       </div>
     </div>
     <p class="testi-note center">Mensajes reales de WhatsApp. Fotos de perfil difuminadas por privacidad.</p>
