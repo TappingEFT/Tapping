@@ -61,6 +61,24 @@ self.addEventListener('fetch', (event) => {
   if (request.method !== 'GET') return;
   if (request.url.includes('/validate')) return;
 
+  // Audios: el reproductor pide trozos del archivo (cabecera Range) para poder
+  // saltar a otro punto. Si respondemos con el archivo entero, Safari/iPhone
+  // vuelve el audio al principio. Por eso:
+  // - si el audio ya está guardado, servimos exactamente el trozo pedido (206);
+  // - si no, dejamos que vaya directo a la red y lo guardamos entero en
+  //   segundo plano para poder usarlo sin conexión la próxima vez.
+  const range = request.headers.get('range');
+  if (range) {
+    event.respondWith(
+      caches.match(request.url).then((cached) => {
+        if (cached) return trozoDeAudio(cached, range);
+        event.waitUntil(guardarAudioEntero(request.url));
+        return fetch(request);
+      })
+    );
+    return;
+  }
+
   // Páginas (landing, app, legal) y cascarón de la app: red primero
   // (sin caché HTTP), caché como respaldo. Así la landing nunca se queda
   // en una versión antigua para quien ya tiene la app instalada.
@@ -105,3 +123,39 @@ self.addEventListener('fetch', (event) => {
     })
   );
 });
+
+// Devuelve solo el trozo del audio que pide el reproductor (respuesta 206).
+function trozoDeAudio(cached, range) {
+  return cached.arrayBuffer().then((buf) => {
+    const total = buf.byteLength;
+    const m = /bytes=(\d*)-(\d*)/.exec(range) || [];
+    let start = m[1] ? parseInt(m[1], 10) : 0;
+    let end = m[2] ? parseInt(m[2], 10) : total - 1;
+    if (!m[1] && m[2]) { start = Math.max(0, total - parseInt(m[2], 10)); end = total - 1; }
+    end = Math.min(end, total - 1);
+    if (start >= total || start > end) {
+      return new Response('', { status: 416, headers: { 'Content-Range': `bytes */${total}` } });
+    }
+    return new Response(buf.slice(start, end + 1), {
+      status: 206,
+      statusText: 'Partial Content',
+      headers: {
+        'Content-Type': cached.headers.get('Content-Type') || 'audio/mpeg',
+        'Content-Range': `bytes ${start}-${end}/${total}`,
+        'Content-Length': String(end - start + 1),
+        'Accept-Ranges': 'bytes',
+      },
+    });
+  });
+}
+
+// Guarda el audio completo (sin Range) para usarlo sin conexión.
+function guardarAudioEntero(url) {
+  return fetch(url, { cache: 'no-store' })
+    .then((res) => {
+      if (res && res.status === 200) {
+        return caches.open(CACHE_NAME).then((cache) => cache.put(url, res));
+      }
+    })
+    .catch(() => {});
+}
