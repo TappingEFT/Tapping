@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#1A1917">
+<title>Cuando algo te ha sentado mal · Centro Tapping</title>
+<link rel="icon" href="app-icon.png">
+<meta property="og:title" content="Cuando algo te ha sentado mal · Sesión de regalo">
+<meta property="og:image" content="https://centrotapping.pages.dev/soltar.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --stone:#242220; --stone-deep:#1A1917; --ink:#F4EFE6; --ink-soft:#9C9488;
+    --sienna:#B58874; --sienna-deep:#9C6C54; --card:#332F2C; --line:rgba(244,239,230,0.12);
+  }
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+  html,body{margin:0;padding:0;background:var(--stone-deep);}
+  body{color:var(--ink);font-family:'Source Sans 3',Arial,sans-serif;font-size:18px;line-height:1.6;-webkit-font-smoothing:antialiased;}
+  main{max-width:520px;margin:0 auto;padding:28px 20px 56px;}
+  .hero{width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:16px;display:block;margin:0 0 26px;border:1px solid var(--line);}
+  .eyebrow{color:var(--sienna);font-size:14px;font-weight:700;letter-spacing:0.03em;margin:0 0 10px;}
+  h1{font-size:30px;line-height:1.2;margin:0 0 14px;font-weight:700;}
+  .intro{color:var(--ink-soft);margin:0 0 28px;}
+  .player{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:22px 18px;}
+  .player p{margin:0 0 14px;font-size:16px;color:var(--ink-soft);}
+  audio{width:100%;display:block;}
+  .tips{margin:22px 0 0;padding:0;list-style:none;color:var(--ink-soft);font-size:16px;}
+  .tips li{padding:6px 0 6px 18px;position:relative;}
+  .tips li::before{content:"·";position:absolute;left:4px;color:var(--sienna);font-weight:700;}
+  hr{border:none;border-top:1px solid var(--line);margin:40px 0;}
+  h2{font-size:22px;margin:0 0 12px;line-height:1.3;}
+  .more{color:var(--ink-soft);margin:0 0 24px;}
+  .btn{display:block;width:100%;background:var(--sienna);color:#fff;border-radius:10px;padding:17px 20px;font-size:18px;font-weight:700;text-align:center;text-decoration:none;}
+  .btn:hover{background:var(--sienna-deep);}
+  .note{color:var(--ink-soft);font-size:14px;margin:12px 0 0;text-align:center;}
+  footer{color:var(--ink-soft);font-size:13px;margin-top:48px;text-align:center;}
+  footer a{color:var(--ink-soft);}
+</style>
+</head>
+<body>
+<main>
+  <img class="hero" src="soltar.jpg" alt="Mujer tumbada, tranquila, con la mano en la clavícula">
+  <p class="eyebrow">SESIÓN DE REGALO</p>
+  <h1>Cuando algo te ha sentado mal y no te lo puedes quitar de la cabeza</h1>
+  <p class="intro">Una ronda de unos 4 minutos. Para ese comentario, esa discusión o ese mensaje que se te ha quedado dando vueltas.</p>
+
+  <div class="player">
+    <p>Dale al play y sigue la voz.</p>
+    <audio controls preload="metadata" src="sesion-soltar.mp3"></audio>
+  </div>
+
+  <ul class="tips">
+    <li>Puedes hacerla en cualquier sitio: en casa, en un descanso del trabajo, o encerrada un momento en el baño.</li>
+    <li>Guarda esta página para tenerla a mano la próxima vez.</li>
+  </ul>
+
+  <hr>
+
+  <h2>Esta es una. Dentro de Centro Tapping tienes muchas más.</h2>
+  <p class="more">Sesiones para perdonar, soltar el pasado, rupturas, dormir, miedo, amor propio, abundancia, ingresos, dolor de cabeza, espalda, dolor menstrual y más. Todas en un mismo sitio, con la misma voz, para el momento en que las necesitas.</p>
+
+  <a class="btn" href="index.html?p=regalo-soltar" data-goatcounter-click="clic-regalo-a-ventas" data-goatcounter-title="Regalo soltar → página de ventas">Ver todas las sesiones</a>
+  <p class="note">Pago único · Sin suscripción · 15 días de garantía</p>
+
+  <footer>
+    Centro Tapping · Herramienta de bienestar y práctica personal. No sustituye atención médica ni psicológica.<br>
+    <a href="legal.html">Privacidad y términos</a>
+  </footer>
+</main>
+
+<script>
+  // Cuenta un play solo la primera vez que se pulsa
+  (function(){
+    var a=document.querySelector('audio'), done=false;
+    a.addEventListener('play',function(){
+      if(done) return; done=true;
+      try{ if(window.goatcounter && window.goatcounter.count){ window.goatcounter.count({path:'play-regalo-soltar',title:'Play sesión regalo soltar',event:true}); } }catch(e){}
+    });
+  })();
+</script>
+<!-- GoatCounter: visitas y clics -->
+<script data-goatcounter="https://centrotapping.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>
