@@ -57,13 +57,11 @@
   </ul>
 
   <form id="f" novalidate>
-    <label class="f" for="nombre">Tu nombre</label>
-    <input type="text" id="nombre" name="FIRSTNAME" autocomplete="given-name" required>
-    <label class="f" for="email">Tu correo</label>
+    <label class="f" for="email">Tu correo, para enviarte la sesión</label>
     <input type="email" id="email" name="EMAIL" autocomplete="email" inputmode="email" required>
     <input type="text" name="email_address_check" value="" class="hp" tabindex="-1" autocomplete="off">
     <input type="hidden" name="locale" value="es">
-    <label class="consent"><input type="checkbox" id="ok" name="OPT_IN" value="1"><span>Quiero recibir la sesión y correos de Centro Tapping. Puedo darme de baja cuando quiera. <a href="legal.html" target="_blank">Privacidad</a>.</span></label>
+    <label class="consent"><input type="checkbox" id="ok"><span>Quiero recibir la sesión y correos de Centro Tapping. Puedo darme de baja cuando quiera. <a href="legal.html" target="_blank">Privacidad</a>.</span></label>
     <button class="btn" type="submit" id="b">Quiero la sesión</button>
     <p class="err" id="e" role="alert"></p>
   </form>
@@ -77,14 +75,13 @@
 
 <script>
   // Dirección del formulario de Brevo (se pega cuando esté creado el formulario).
-  var BREVO_URL = 'PEGAR_AQUI_URL_FORMULARIO_BREVO';
+  var BREVO_URL = 'https://7500c6dc.sibforms.com/serve/MUIFAAOMTQpb_QWuLKxx9wx519Itnc5ocFtLpUSm_NSVur0OBS69LMhQQ3UWe5r79vQTX0d6MJjuUrKhB-ioo8wy6z0ZAV0zFbfASzcmwlBfQclxccw9ngONZuwpJ0LNFuV6hLsEElJaK3vRIB-OAz1fNzNDbt3vk9zMg6RxWQocPWzD-6_c31Fe6zDOimsXYeEg8q-gg24W4zjgWQ==';
   var DESTINO = 'soltar.html';
 
   var f=document.getElementById('f'), e=document.getElementById('e'), b=document.getElementById('b');
   f.addEventListener('submit', function(ev){
     ev.preventDefault(); e.textContent='';
-    var n=f.FIRSTNAME.value.trim(), m=f.EMAIL.value.trim();
-    if(!n){ e.textContent='Escribe tu nombre.'; return; }
+    var m=f.EMAIL.value.trim();
     if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(m)){ e.textContent='Revisa tu correo, parece que falta algo.'; return; }
     if(!document.getElementById('ok').checked){ e.textContent='Marca la casilla para poder enviarte la sesión.'; return; }
     if(f.email_address_check.value){ return; }
