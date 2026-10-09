@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="robots" content="noindex, nofollow">
-<meta name="theme-color" content="#1A1917">
+<meta name="theme-color" content="#F4EFE6">
 <title>Sesión de regalo · Centro Tapping</title>
 <link rel="icon" href="app-icon.png">
 <meta property="og:title" content="Cuando algo te ha sentado mal · Sesión de regalo">
@@ -13,8 +13,8 @@
 <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
   :root{
-    --stone:#242220; --stone-deep:#1A1917; --ink:#F4EFE6; --ink-soft:#9C9488;
-    --sienna:#B58874; --sienna-deep:#9C6C54; --card:#332F2C; --line:rgba(244,239,230,0.12);
+    --stone-deep:#F4EFE6; --ink:#2B2522; --ink-soft:#6F655C;
+    --sienna:#9C6C54; --sienna-deep:#7F543F; --card:#FFFFFF; --line:rgba(43,37,34,0.13);
   }
   *{box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
   html,body{margin:0;padding:0;background:var(--stone-deep);}
@@ -29,7 +29,7 @@
   .list li::before{content:"";position:absolute;left:4px;top:16px;width:9px;height:9px;border-radius:50%;background:var(--sienna);}
   form{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:22px 18px;}
   label.f{display:block;font-size:15px;font-weight:600;margin:0 0 6px;}
-  input[type=text],input[type=email]{width:100%;font:inherit;font-size:17px;color:var(--ink);background:var(--stone-deep);border:1px solid var(--line);border-radius:10px;padding:13px 14px;margin:0 0 16px;outline:none;}
+  input[type=text],input[type=email]{width:100%;font:inherit;font-size:17px;color:var(--ink);background:#FBF8F3;border:1px solid rgba(43,37,34,0.22);border-radius:10px;padding:13px 14px;margin:0 0 16px;outline:none;}
   input[type=text]:focus,input[type=email]:focus{border-color:var(--sienna);}
   .consent{display:flex;gap:10px;align-items:flex-start;font-size:14.5px;color:var(--ink-soft);margin:2px 0 18px;line-height:1.45;}
   .consent input{width:20px;height:20px;flex:0 0 20px;margin:1px 0 0;accent-color:var(--sienna);}
@@ -37,7 +37,7 @@
   .btn{display:block;width:100%;border:none;cursor:pointer;font:inherit;background:var(--sienna);color:#fff;border-radius:10px;padding:17px 20px;font-size:18px;font-weight:700;text-align:center;}
   .btn:hover{background:var(--sienna-deep);}
   .btn[disabled]{opacity:0.6;cursor:default;}
-  .err{color:#E7A58C;font-size:14.5px;margin:12px 0 0;min-height:1em;}
+  .err{color:#B3412E;font-size:14.5px;margin:12px 0 0;min-height:1em;}
   .note{color:var(--ink-soft);font-size:14px;margin:14px 0 0;text-align:center;}
   .hp{position:absolute;left:-9999px;}
   footer{color:var(--ink-soft);font-size:13px;margin-top:44px;text-align:center;}
@@ -53,7 +53,7 @@
   <ul class="list">
     <li>Una sesión guiada de tapping de unos 4 minutos.</li>
     <li>Para hacerla en el momento, en casa o en un descanso.</li>
-    <li>La escuchas al momento, sin descargar nada.</li>
+    <li>Te llega a tu correo al momento, para tenerla siempre a mano.</li>
   </ul>
 
   <form id="f" novalidate>
@@ -76,7 +76,7 @@
 <script>
   // Dirección del formulario de Brevo (se pega cuando esté creado el formulario).
   var BREVO_URL = 'https://7500c6dc.sibforms.com/serve/MUIFAAOMTQpb_QWuLKxx9wx519Itnc5ocFtLpUSm_NSVur0OBS69LMhQQ3UWe5r79vQTX0d6MJjuUrKhB-ioo8wy6z0ZAV0zFbfASzcmwlBfQclxccw9ngONZuwpJ0LNFuV6hLsEElJaK3vRIB-OAz1fNzNDbt3vk9zMg6RxWQocPWzD-6_c31Fe6zDOimsXYeEg8q-gg24W4zjgWQ==';
-  var DESTINO = 'soltar.html';
+  var DESTINO = 'revisa-tu-correo.html';
 
   var f=document.getElementById('f'), e=document.getElementById('e'), b=document.getElementById('b');
   f.addEventListener('submit', function(ev){
