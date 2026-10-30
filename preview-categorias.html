@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<style>
+  :root{
+    --stone:#242220; --stone-deep:#1A1917; --ink:#F4EFE6; --ink-soft:#9C9488;
+    --sienna:#B58874; --sienna-deep:#9C6C54; --card:#332F2C; --line:rgba(244,239,230,0.12);
+  }
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+  html,body{margin:0;padding:0;background:var(--stone);}
+  body{color:var(--ink);font-family:'Source Sans 3',Arial,sans-serif;font-size:18px;line-height:1.6;-webkit-font-smoothing:antialiased;}
+  h1,h2,h3{font-family:'Source Sans 3',Arial,sans-serif;font-weight:700;margin:0;line-height:1.2;}
+  a{color:var(--sienna);}
+  img{max-width:100%;display:block;}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 24px;}
+  .narrow{max-width:640px;margin:0 auto;padding:0 24px;}
+  section{padding:60px 0;}
+  section.alt{background:var(--stone-deep);}
+  .eyebrow{color:var(--sienna);font-size:15px;font-weight:600;margin-bottom:10px;}
+  h2.section-title{font-size:32px;margin-bottom:16px;}
+  p.lead{font-size:19px;color:var(--ink-soft);max-width:56ch;}
+  .btn{display:inline-block;border:none;border-radius:10px;padding:18px 32px;font-size:18px;font-weight:700;font-family:inherit;cursor:pointer;text-decoration:none;text-align:center;}
+  .btn-primary{background:var(--sienna);color:#fff;}
+  .btn-primary:hover{background:var(--sienna-deep);}
+  .cta-note{color:var(--ink-soft);font-size:14.5px;margin-top:12px;}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:24px;}
+  .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
+  .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+  .grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;}
+  @media (max-width:760px){
+    .grid-2,.grid-3,.grid-4{grid-template-columns:1fr;}
+    section{padding:40px 0;}
+    h2.section-title{font-size:25px;}
+    body{font-size:17px;}
+  }
+
+  .hero{padding:52px 0 44px;}
+  .hero-grid{display:grid;grid-template-columns:1.05fr 0.95fr;gap:44px;align-items:center;}
+  @media (max-width:900px){ .hero-grid{grid-template-columns:1fr;} }
+  .preheader{color:var(--sienna);font-size:14px;font-weight:700;letter-spacing:0.02em;margin-bottom:14px;}
+  .hero h1{font-size:38px;margin-bottom:18px;}
+  @media (max-width:600px){ .hero h1{font-size:28px;} }
+  .keyword-line{color:var(--ink-soft);font-size:16px;margin:16px 0 0;}
+  .price-inline{font-size:15px;color:var(--ink-soft);margin-top:6px;}
+  .guarantee-note{font-size:13.5px;color:var(--ink-soft);font-style:italic;margin-top:4px;}
+
+  .phone-mock{background:var(--stone-deep);border:6px solid #100F0E;border-radius:36px;padding:10px;max-width:300px;margin:0 auto;box-shadow:0 20px 60px rgba(0,0,0,0.5);}
+  .phone-screen{border-radius:22px;overflow:hidden;background:var(--stone);}
+  .phone-screen img{width:100%;display:block;}
+
+  .problem-item{border-top:1px solid var(--line);padding:16px 0;}
+  .problem-item:first-child{border-top:none;}
+  .problem-item p{margin:0;font-size:17px;color:var(--ink-soft);}
+  .punch-line{font-size:20px;font-weight:600;margin:0;}
+
+  .step{display:flex;gap:16px;align-items:flex-start;padding:18px 0;border-top:1px solid var(--line);}
+  .step:first-child{border-top:none;padding-top:0;}
+  .step-num{flex:none;width:36px;height:36px;border-radius:50%;border:1.5px solid var(--sienna);color:var(--sienna);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:15px;}
+  .step h3{font-size:17px;margin-bottom:4px;}
+  .step p{color:var(--ink-soft);margin:0;font-size:15.5px;}
+
+  .compare{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
+  @media (max-width:700px){ .compare{grid-template-columns:1fr;} }
+  .compare .card h3{font-size:18px;margin-bottom:14px;}
+  .compare ul{list-style:none;padding:0;margin:0;}
+  .compare li{padding:8px 0;border-top:1px solid var(--line);font-size:15.5px;color:var(--ink-soft);}
+  .compare li:first-child{border-top:none;}
+  .compare.no h3{color:var(--ink-soft);}
+  .compare.yes{border:1.5px solid var(--sienna);}
+  .compare.yes h3{color:var(--sienna);}
+
+  .cat-layout{display:flex;gap:24px;align-items:center;}
+  .cat-layout .cat-grid{flex:1;min-width:0;}
+  .cat-phone{flex:none;width:200px;align-self:center;}
+  @media (max-width:900px){ .cat-layout{flex-direction:column;} .cat-phone{width:200px;margin:0 auto;order:-1;} }
+  .cat-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+  @media (max-width:600px){ .cat-grid{grid-template-columns:1fr;} }
+  .cat-block{margin-bottom:0;padding:18px 20px;}
+  .cat-block h3{font-size:16px;margin-bottom:6px;color:var(--sienna);}
+  .cat-list{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:8px;}
+  .cat-list li{color:var(--ink-soft);font-size:14.5px;padding:0;}
+
+  .pill-row{display:flex;flex-wrap:wrap;gap:10px;}
+  .pill{border:1.5px solid var(--line);border-radius:20px;padding:9px 16px;font-size:14.5px;color:var(--ink);}
+
+  .img-band{width:100%;aspect-ratio:4/5;height:auto;object-fit:cover;object-position:center 18%;border-radius:14px;}
+
+  .price-card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:40px;text-align:center;max-width:460px;margin:0 auto;}
+  .price-value{font-size:52px;font-weight:700;margin:6px 0;}
+  .price-note{color:var(--ink-soft);font-size:15px;margin-bottom:24px;}
+  .price-includes{list-style:none;padding:0;margin:0 0 28px;text-align:left;}
+  .price-includes li{padding:8px 0;border-top:1px solid var(--line);font-size:15.5px;}
+  .price-includes li:first-child{border-top:none;}
+  .price-includes li span{color:var(--sienna);margin-right:8px;}
+  .guarantee-badge{display:inline-block;margin-top:20px;padding:10px 18px;border:1px solid var(--line);border-radius:8px;font-size:14px;color:var(--ink-soft);}
+
+  details.faq{border-top:1px solid var(--line);padding:16px 0;}
+  .card details.faq:first-child{border-top:none;}
+  details.faq summary{cursor:pointer;font-size:17px;font-weight:600;list-style:none;display:flex;justify-content:space-between;align-items:center;}
+  details.faq summary::-webkit-details-marker{display:none;}
+  details.faq summary::after{content:'+';color:var(--sienna);font-size:22px;font-weight:400;}
+  details.faq[open] summary::after{content:'–';}
+  details.faq p{color:var(--ink-soft);margin:12px 0 0;font-size:16px;}
+
+  .who-list{list-style:none;padding:0;margin:0;}
+  .who-list li{padding:10px 0 10px 28px;position:relative;color:var(--ink-soft);font-size:16.5px;border-top:1px solid var(--line);}
+  .who-list li:first-child{border-top:none;}
+  .who-list.yes li::before{content:'✓';position:absolute;left:0;color:var(--sienna);font-weight:700;}
+  .who-list.no li::before{content:'–';position:absolute;left:2px;color:var(--ink-soft);}
+
+  .legal-box{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:20px 22px;font-size:14.5px;color:var(--ink-soft);}
+
+  footer{border-top:1px solid var(--line);padding:36px 0;text-align:center;color:var(--ink-soft);font-size:14px;}
+  footer a{color:var(--ink-soft);text-decoration:underline;}
+
+  .center{text-align:center;}
+  .mt8{margin-top:8px;}
+  .mt24{margin-top:24px;}
+  .mb0{margin-bottom:0;}
+</style>
+</style>
+</head>
+<body>
+<!-- 5. CONOCE CENTRO TAPPING -->
+<section>
+  <div class="wrap">
+    <div class="eyebrow">Conoce Centro Tapping</div>
+    <h2 class="section-title">Una biblioteca de sesiones guiadas para tu práctica personal.</h2>
+    <div class="cat-layout mt24">
+      <div class="cat-grid">
+        <div class="card cat-block">
+          <h3>Bienestar emocional</h3>
+          <ul class="cat-list">
+            <li>Empezar el día con energía positiva</li><li>Amor propio</li>
+            <li>Acción inspirada</li><li>Ansiedad</li>
+          </ul>
+        </div>
+        <div class="card cat-block">
+          <h3>Dormir y relajarte</h3>
+          <ul class="cat-list">
+            <li>Dormir</li><li>Liberación de la tensión nerviosa y el estrés</li>
+          </ul>
+        </div>
+        <div class="card cat-block">
+          <h3>Miedos y bloqueos</h3>
+          <ul class="cat-list">
+            <li>Miedo</li><li>Liberar resistencias</li>
+            <li>Salir de la escasez</li><li>Abrirte al merecimiento</li>
+          </ul>
+        </div>
+        <div class="card cat-block">
+          <h3>Abundancia</h3>
+          <ul class="cat-list">
+            <li>Abundancia</li><li>Abrirte a recibir</li><li>Sincronías y señales</li>
+          </ul>
+        </div>
+        <div class="card cat-block" style="grid-column:1 / -1;">
+          <h3>Para empezar</h3>
+          <ul class="cat-list">
+            <li>Tu primera sesión</li><li>Guía de puntos</li>
+          </ul>
+        </div>
+      </div>
+      <div class="phone-mock cat-phone">
+        <div class="phone-screen"><img src="screen-categoria.jpg" alt="Categoría Abundancia en Centro Tapping"></div>
+      </div>
+    </div>
+    <p style="color:var(--ink-soft);font-size:15px;margin-top:24px;">También encontrarás sesiones sobre dolor de cabeza, dolor de espalda, energía, merecimiento, recibir, acción inspirada y más.</p>
+  </div>
+</section>
+
+</body>
+</html>
